@@ -1,0 +1,5 @@
+name: Cogito
+description: A web based tool for planing and design
+dependencies:
+  angular: 0.9.10
+  browser: any
