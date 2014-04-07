@@ -1,8 +1,11 @@
 import 'package:angular/angular.dart';
 import 'package:logging/logging.dart';
 
+import 'package:cogito/cogito.dart';
+
 class WebModule extends Module {
     WebModule() {
+        type(PageComponent);
     }
 }
 

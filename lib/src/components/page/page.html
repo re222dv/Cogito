@@ -1,0 +1,9 @@
+<svg width="1000px" height="600px"
+     xmlns="http://www.w3.org/2000/svg">
+    <g ng-repeat="node in cmp.page.nodes">
+        <text fill="{{ node.color }}" ng-attr-x="{{ node.x }}" ng-attr-y="{{ node.y }}"
+              style="font-size: {{ node.size }};">
+              {{ node.text }}
+        </text>
+    </g>
+</svg>
