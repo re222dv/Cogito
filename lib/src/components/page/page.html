@@ -2,7 +2,7 @@
      xmlns="http://www.w3.org/2000/svg">
     <g ng-repeat="node in cmp.page.paths">
         <path ng-attr-x="{{ node.x }}" ng-attr-y="{{ node.y }}"
-              stroke="{{ node.color }}" stroke-width="{{ node.width }}"
+              stroke="{{ node.color }}" stroke-width="{{ node.width }}" fill="none"
               ng-attr-d="{{ node.path }}" />
     </g>
     <g ng-repeat="node in cmp.page.texts">

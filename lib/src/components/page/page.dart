@@ -29,6 +29,8 @@ class PageComponent {
         });
         element.onMouseUp.listen((_) {
             drawing = false;
+            print(simplify.simplify(freehand));
+            page.paths.add(new Path()..color='blue'..path=simplify.simplify(freehand)..width=10..x=0..y=0);
             freehand = '';
         });
     }
