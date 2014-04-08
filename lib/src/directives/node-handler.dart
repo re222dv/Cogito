@@ -8,7 +8,7 @@ class NodeHandlerDirective {
     Node node;
 
     NodeHandlerDirective(this.element) {
-        element.onMouseDown.listen((MouseEvent e) {
+        element.onMouseDown.where((_) => !node.editing).listen((MouseEvent e) {
             var offsetX = node.x - e.offset.x;
             var offsetY = node.y - e.offset.y;
 
@@ -27,5 +27,14 @@ class NodeHandlerDirective {
             e.preventDefault();
             e.stopPropagation();
         });
+        
+        element.onDoubleClick.where((_) => node.editable).listen((_) {
+            node.editing = true;
+
+            element.parent.onClick.first.then((_) => node.editing = false);
+        });
+        ['click', 'mousedown'].forEach((event) => element.on[event].where((_) => node.editing)
+                .listen((Event e) => e.stopPropagation())
+        );
     }
 }
