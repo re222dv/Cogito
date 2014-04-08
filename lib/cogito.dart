@@ -6,3 +6,4 @@ import 'simplify/simplify.dart' as simplify;
 
 part 'src/model.dart';
 part 'src/components/page/page.dart';
+part 'src/directives/bind-html.dart';

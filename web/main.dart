@@ -6,6 +6,7 @@ import 'package:cogito/cogito.dart';
 class WebModule extends Module {
     WebModule() {
         type(PageComponent);
+        type(BindHtmlDirective);
     }
 }
 
