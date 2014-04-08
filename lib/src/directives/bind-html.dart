@@ -1,18 +1,18 @@
 part of cogito;
 
 /**
- * A custom 
+ * A custom
  */
 @NgDirective(selector: '[bind-html]')
 class BindHtmlDirective {
     static NodeValidator validator;
 
-    Element _element;
-    Compiler _compiler;
-    Injector _injector;
-    DirectiveMap _directiveMap;
+    Element element;
+    Compiler compiler;
+    Injector injector;
+    DirectiveMap directiveMap;
 
-    BindHtmlDirective(this._element, this._injector, this._compiler, this._directiveMap) {
+    BindHtmlDirective(this.element, this.injector, this.compiler, this.directiveMap) {
         validator = new NodeValidatorBuilder.common()
             ..allowSvg();
     }
@@ -20,12 +20,12 @@ class BindHtmlDirective {
     @NgOneWay('bind-html')
     set value(value) {
         if (value == null) {
-            _element.nodes.clear();
+            element.nodes.clear();
             return;
         }
-        _element.setInnerHtml((value == null ? '' : value), validator: validator);
+        element.setInnerHtml((value == null ? '' : value), validator: validator);
         if (value != null) {
-            _compiler(_element.childNodes, _directiveMap)(_injector, _element.childNodes);
+            compiler(element.childNodes, directiveMap)(injector, element.childNodes);
         }
     }
 }

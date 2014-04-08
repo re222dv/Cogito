@@ -1,5 +1,6 @@
 <svg width="1000px" height="600px"
      xmlns="http://www.w3.org/2000/svg">
-    <g ng-repeat="node in cmp.page.nodes" bind-html="node.svg"></g>
+    <svg ng-repeat="node in cmp.page.nodes" bind-html="node.svg"
+         ng-attr-x="{{ node.x }}" ng-attr-y="{{ node.y }}" node-handler="node"></svg>
     <polyline ng-attr-points="{{ cmp.freehand }}" fill="none" stroke="black" stroke-width="10" />
 </svg>
