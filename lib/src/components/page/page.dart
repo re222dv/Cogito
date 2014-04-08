@@ -29,7 +29,14 @@ class PageComponent {
         });
         element.onMouseUp.listen((_) {
             drawing = false;
-            page.nodes.add(new Path()..color='blue'..path=simplify.simplify(freehand.trim())..width=10..x=0..y=0);
+            if (freehand.length > 4) {
+                page.nodes.add(new Path()
+                                   ..color='blue'
+                                   ..path=simplify.simplify(freehand.trim())
+                                   ..width=10
+                                   ..x=0
+                                   ..y=0);
+            }
             freehand = '';
         });
     }
