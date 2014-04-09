@@ -71,3 +71,21 @@ class Text extends Node {
                 </text>
                 """;
 }
+
+class BasicList extends Node {
+    List<String> rows;
+    
+    String get row =>
+            """
+            <li ng-repeat="row in node.rows">{{ row }}</li>
+            """;
+    
+    String get svg =>
+            """
+            <foreignobject height="100%" width="100%">
+                <ul>
+                    $row
+                </ul>
+            </foreignobject>
+            """;
+}
