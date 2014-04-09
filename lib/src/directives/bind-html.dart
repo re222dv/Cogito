@@ -15,7 +15,7 @@ class BindHtmlDirective {
     BindHtmlDirective(this.element, this.injector, this.compiler, this.directiveMap) {
         validator = new NodeValidatorBuilder.common()
             ..allowSvg()
-            ..allowElement('input', attributes: ['ng-model']);
+            ..allowElement('input', attributes: ['ng-model', 'style']);
     }
 
     @NgOneWay('bind-html')

@@ -14,10 +14,19 @@ class PageComponent {
     PageComponent(Element element) {
         page = new Page();
 
-        page.nodes.add(new Text()..color='red'..text='Hello, World!'..x=50..y=50..size=20);
+        var hel = new Text()..color='red'..text='Hello, World!'..x=50..y=50..size=20;
+        page.nodes.add(hel);
         page.nodes.add(new Text()..color='green'..text='Test'..x=160..y=160..size=50);
 
         page.nodes.add(new Path()..color='blue'..path='M 55 22 L 272 99'..width=20..x=50..y=50);
+
+        page.raise(hel);
+        page.raise(hel);
+        page.lower(hel);
+        page.raise(hel);
+        page.lower(hel);
+        page.lower(hel);
+        page.lower(hel);
 
         element.onMouseDown.listen((_) => drawing = true);
         element.onMouseMove.where((_) => drawing).listen((MouseEvent e) {

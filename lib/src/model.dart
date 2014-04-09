@@ -7,7 +7,7 @@ class Page {
 abstract class Node {
     final bool editable = false;
     bool editing = false;
-    
+
     int x;
     int y;
 
@@ -28,17 +28,19 @@ class Path extends Node {
 
 class Text extends Node {
     bool editable = true;
-    
+
     String color;
     int size;
     String text;
 
     String get svg =>
-            editing ? 
+            editing ?
                 """
-                <foreignobject ng-attr-height="{{ node.size }}" ng-attr-width="{{ node.size * node.text.length }}">
-                    <input type="text" ng-model="node.text"></input>
-                </foreignobject>
+                <svg transform="translate(-7,0)">
+                    <foreignobject ng-attr-height="{{ node.size + 10 }}" ng-attr-width="{{ node.size * node.text.length }}">
+                        <input type="text" ng-model="node.text" style="color: {{ node.color }};font-size: {{ node.size }}px;"></input>
+                    </foreignobject>
+                </svg>
                 """
             :
                 """"
