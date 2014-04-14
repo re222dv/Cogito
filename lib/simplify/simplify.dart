@@ -131,13 +131,13 @@ List<Point> simplifyDouglasPeucker(List<Point> points, num sqTolerance) {
 }
 
 /**
- * Simplify a polyline  to a path by removing unnecicary points.
+ * Simplify a polyline  to a path by removing unnecessary points.
  */
 String simplify(String svgPoints, [tolerance = 2.5]) {
     List<Point> points = [];
 
     var coords = svgPoints.replaceAll(',', '') .split(' ');
-    
+
     if (coords.length == 1) {
         return '';
     }
