@@ -25,9 +25,8 @@ class BindHtmlDirective {
             element.nodes.clear();
             return;
         }
-        element.setInnerHtml((value == null ? '' : value), validator: validator);
-        if (value != null) {
-            compiler(element.childNodes, directiveMap)(injector, element.childNodes);
-        }
+
+        element.setInnerHtml(value, validator: validator);
+        compiler(element.childNodes, directiveMap)(injector, element.childNodes);
     }
 }
