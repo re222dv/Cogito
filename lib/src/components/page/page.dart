@@ -20,7 +20,8 @@ class PageComponent {
 
         page.nodes.add(new Path()..color='blue'..path='M 55 22 L 272 99'..width=20..x=50..y=50);
 
-        page.nodes.add(new BasicList()..x=400..y=50..rows=['Row 1', 'Row 2', 'Row 3']);
+        page.nodes.add(new BasicList()..x=400..y=50..textSize=32..rows=['Row 1', 'Row 2', 'Row 1']);
+        page.nodes.add(new BasicList()..x=400..y=250..textSize=10..rows=['Row 1', 'Row 2', 'Row 1']);
 
         page.raise(hel);
         page.raise(hel);

@@ -43,8 +43,7 @@ class Path extends Node {
 
     String get svg =>
         """
-        <path stroke="{{ node.color }}" stroke-width="{{ node.width }}" fill="none"
-              ng-attr-d="{{ node.path }}" />
+        <path stroke="{{ node.color }}" stroke-width="{{ node.width }}" fill="none" ng-attr-d="{{ node.path }}" />
         """;
 }
 
@@ -66,7 +65,7 @@ class Text extends Node {
                 """
             :
                 """"
-                <text fill="{{ node.color }}" style="font-size: {{ node.size }};" ng-attr-y="{{ node.size }}">
+                <text fill="{{ node.color }}" font-size="{{ node.size }}" ng-attr-y="{{ node.size }}">
                     {{ node.text }}
                 </text>
                 """;
@@ -74,18 +73,22 @@ class Text extends Node {
 
 class BasicList extends Node {
     List<String> rows;
-    
+    int textSize;
+
     String get row =>
             """
-            <li ng-repeat="row in node.rows">{{ row }}</li>
+            <g ng-repeat="row in node.rows track by \$index">
+                <circle ng-attr-r="{{ node.textSize * 0.2 }}" ng-attr-cx="{{ node.textSize * 0.2 }}"
+                        ng-attr-cy="{{ node.textSize * (1 + \$index) - node.textSize * 0.33 }}" />
+                <text fill="black" ng-attr-font-size="{{ node.textSize }}"
+                      ng-attr-x="{{ node.textSize * 0.55 }}" ng-attr-y="{{ node.textSize * (1 + \$index) }}">{{ row }}</text>
+            </g>
             """;
-    
+
     String get svg =>
             """
-            <foreignobject height="100%" width="100%">
-                <ul>
-                    $row
-                </ul>
-            </foreignobject>
+            <g>
+                $row
+            </g>
             """;
 }
