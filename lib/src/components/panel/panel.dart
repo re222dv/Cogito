@@ -16,6 +16,8 @@ class PanelComponent extends NgShadowRootAware {
         print(value);
     }
 
+    List<int> get textSizes => [12, 14, 16, 18, 20, 22, 24, 26, 28, 30];
+
     PanelComponent(Element element) {
     }
 

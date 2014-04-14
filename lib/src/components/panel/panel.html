@@ -6,23 +6,22 @@
         <button>Text</button>
     </div>
     <div ng-if="cmp.position == 'top'">
-
+        <label for="textSize">Text Size:</label>
+        <select id="textSize">
+            <option ng-repeat="size in cmp.textSizes">{{ size }}</option>
+        </select>
         <button>Select</button>
         <button>Draw</button>
         <p></p>
         <button>Text</button>
     </div>
     <div ng-if="cmp.position == 'left'">
-
         <button>Select</button>
         <button>Draw</button>
         <p></p>
         <button>Text</button>
-
     </div>
     <div ng-if="cmp.position == 'bottom'">
-
-
         <button>Select</button>
         <button>Draw</button>
         <p></p>

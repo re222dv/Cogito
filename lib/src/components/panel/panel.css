@@ -2,7 +2,6 @@
     display: flex;
 
     justify-content: center;
-    align-content: flex-start;
 }
 
 [data-position]>div {
@@ -92,6 +91,31 @@
 [data-position="top"]>div>button, [data-position="bottom"]>div>button {
     position: relative;
     bottom: 14px;
+}
+
+[data-position="top"]>div>label {
+    position: relative;
+    bottom: 14px;
+
+    padding: 4px;
+
+    color: white;
+
+    font-family: Arial, sans-serif;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-shadow: 0 0 2px black;
+}
+
+[data-position="top"]>div>select {
+    position: relative;
+    bottom: 14px;
+
+    padding: 4px;
+
+    background: rgba(0, 0, 0, 0.2);
+    border: #333;
+    border-radius: 5px;
 }
 
 [data-position="bottom"]>div>button {
