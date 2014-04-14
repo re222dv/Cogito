@@ -137,6 +137,10 @@ String simplify(String svgPoints, [tolerance = 2.5]) {
     List<Point> points = [];
 
     var coords = svgPoints.replaceAll(',', '') .split(' ');
+    
+    if (coords.length == 1) {
+        return '';
+    }
 
     for (int i = 0, length = coords.length; i < length; i += 2) {
         points.add(new Point()
