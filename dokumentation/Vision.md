@@ -19,7 +19,8 @@ klassdiagram.
 ## Användargrupper
 Användare som vill planera och utveckla idéer genom skisser och beskrivningar,
 och som ser nyttan i att använda en surfplatta istället för penna och papper
-genom att enkelt kunna dela och presentera sitt arbete.
+genom att enkelt kunna dela och presentera sitt arbete. Användaren är ensam
+eller i små team liknande SCRUM.
 
 ## Liknade system
 ### Sketch Notes
