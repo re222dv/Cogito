@@ -79,7 +79,7 @@ List<Point> simplifyRadialDist(List<Point> points, num sqTolerance) {
 }
 
 /**
- * simplification using optimized Douglas-Peucker algorithm with recursion elimination.
+ * Simplification using optimized Douglas-Peucker algorithm with recursion elimination.
  */
 List<Point> simplifyDouglasPeucker(List<Point> points, num sqTolerance) {
 
