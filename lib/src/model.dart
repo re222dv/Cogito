@@ -37,10 +37,6 @@ abstract class Node {
     String get svg;
 
     noSuchMethod(Invocation invocation) => null;
-
-
-    String color;
-    String size;
 }
 
 class Path extends Node {
