@@ -7,8 +7,8 @@ class NodeHandlerDirective {
     @NgOneWay('node-handler')
     Node node;
 
-    NodeHandlerDirective(this.element) {
-        element.onMouseDown.where((_) => !node.editing).listen((MouseEvent e) {
+    NodeHandlerDirective(this.element, ToolController tool) {
+        element.onMouseDown.where((_) => tool.selectedTool == 'select' && !node.editing).listen((MouseEvent e) {
             var offsetX = node.x - e.offset.x;
             var offsetY = node.y - e.offset.y;
 
@@ -27,8 +27,8 @@ class NodeHandlerDirective {
             e.preventDefault();
             e.stopPropagation();
         });
-        
-        element.onDoubleClick.where((_) => node.editable).listen((_) {
+
+        element.onDoubleClick.where((_) => tool.selectedTool == 'select' && node.editable).listen((_) {
             node.editing = true;
 
             element.parent.onClick.first.then((_) => node.editing = false);

@@ -6,7 +6,8 @@ part of cogito;
     cssUrl: '../lib/src/components/panel/panel.css',
     publishAs: 'cmp'
 )
-class PanelComponent extends NgShadowRootAware {
+class PanelComponent extends NgAttachAware {
+    final TemplateLoader templateLoader;
 
     String position;
 
@@ -16,14 +17,18 @@ class PanelComponent extends NgShadowRootAware {
         print(value);
     }
 
-    List<int> get textSizes => [12, 14, 16, 18, 20, 22, 24, 26, 28, 30];
+    List<int> textSizes = [12, 14, 16, 18, 20, 22, 24, 26, 28, 30];
+    List<String> colors = ['black', 'white', 'red', 'green', 'blue', 'yellow'];
 
-    PanelComponent(Element element) {
-    }
+    PanelComponent(this.templateLoader);
 
-    void onShadowRoot(ShadowRoot shadowRoot) {
-        var panel = shadowRoot.querySelector('[data-position]>div');
+    attach() {
+        templateLoader.template.then((ShadowRoot shadowRoot) {
+            List<Element> panels = shadowRoot.querySelectorAll('[data-position] > div');
 
-        ['click', 'mousedown'].forEach((event) => panel.on[event].listen((Event e) => e.stopPropagation()));
+            panels.forEach((panel) {
+                ['click', 'mousedown'].forEach((event) => panel.on[event].listen((Event e) => e.stopPropagation()));
+            });
+        });
     }
 }

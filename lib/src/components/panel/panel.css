@@ -1,3 +1,7 @@
+.ng-hide {
+    display: none;
+}
+
 [data-position] {
     display: flex;
 
@@ -95,7 +99,7 @@
 
 [data-position="top"]>div>label {
     position: relative;
-    bottom: 14px;
+    bottom: 0;
 
     padding: 4px;
 
@@ -109,7 +113,7 @@
 
 [data-position="top"]>div>select {
     position: relative;
-    bottom: 14px;
+    bottom: 0;
 
     padding: 4px;
 

@@ -7,6 +7,7 @@ class WebModule extends Module {
     WebModule() {
         type(PageComponent);
         type(PanelComponent);
+        type(ToolController);
         type(BindHtmlDirective);
         type(NodeHandlerDirective);
     }

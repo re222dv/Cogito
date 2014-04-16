@@ -1,27 +1,27 @@
-<div data-position="{{ cmp.position }}">
-    <div ng-if="cmp.position == 'right'">
-        <button>Select</button>
-        <button>Draw</button>
+<div data-position="{{ cmp.position }}" tool-controller>
+    <div ng-show="cmp.position == 'right'">
+        <button ng-click="tool.selectedTool = 'select'">Select</button>
+        <button ng-click="tool.selectedTool = 'draw'">Draw</button>
         <p></p>
         <button>Text</button>
     </div>
-    <div ng-if="cmp.position == 'top'">
+    <div ng-show="cmp.position == 'top' && tool.propertyPanel == 'text'">
         <label for="textSize">Text Size:</label>
         <select id="textSize">
-            <option ng-repeat="size in cmp.textSizes">{{ size }}</option>
+            <option ng-repeat="size in cmp.textSizes" value="{{ size }}">{{ size }}</option>
         </select>
-        <button>Select</button>
-        <button>Draw</button>
-        <p></p>
-        <button>Text</button>
+        <label for="textColor">Text Color:</label>
+        <select id="textColor">
+            <option ng-repeat="size in cmp.colors" value="{{ size }}">{{ size }}</option>
+        </select>
     </div>
     <div ng-if="cmp.position == 'left'">
         <button>Select</button>
         <button>Draw</button>
         <p></p>
-        <button>Text</button>
+        <button>{{tool.selectedTool}}</button>
     </div>
-    <div ng-if="cmp.position == 'bottom'">
+    <div ng-show="cmp.position == 'bottom'">
         <button>Select</button>
         <button>Draw</button>
         <p></p>

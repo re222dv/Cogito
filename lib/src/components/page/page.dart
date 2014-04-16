@@ -11,7 +11,8 @@ class PageComponent {
     String freehand = '';
     bool drawing = false;
 
-    PageComponent(Element element) {
+    PageComponent(Element element, ToolController tool) {
+
         page = new Page();
 
         var hel = new Text()..color='red'..text='Hello, World!'..x=50..y=50..size=20;
@@ -31,7 +32,7 @@ class PageComponent {
         page.lower(hel);
         page.lower(hel);
 
-        element.onMouseDown.listen((_) => drawing = true);
+        element.onMouseDown.where((_) => tool.selectedTool == 'draw').listen((_) => drawing = true);
         element.onMouseMove.where((_) => drawing).listen((MouseEvent e) {
             var x = e.offset.x;
             var y = e.offset.y;
