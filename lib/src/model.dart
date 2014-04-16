@@ -102,5 +102,11 @@ class BasicList extends Node {
             """;
 
 
-    int scale(num times) => int.parse(size) * times;
+    int scale(num times) {
+        if (times != null) {
+            return int.parse(size) * times;
+        } else {
+            return 0;
+        }
+    }
 }
