@@ -8,25 +8,29 @@ class NodeHandlerDirective {
     Node node;
 
     NodeHandlerDirective(this.element, ToolController tool) {
-        element.onMouseDown.where((_) => tool.selectedTool == 'select' && !node.editing).listen((MouseEvent e) {
+        ['touchstart', 'mousedown'].forEach((event) => element.on[event]
+                                   .where((_) => tool.selectedTool == 'select' && !node.editing)
+                                   .listen((MouseEvent e) {
             var offsetX = node.x - e.offset.x;
             var offsetY = node.y - e.offset.y;
 
-            var sub = element.parent.onMouseMove.listen((MouseEvent e) {
+            var events = [];
+
+            ['touchmove', 'mousemove'].forEach((event) => events.add(element.parent.on[event].listen((MouseEvent e) {
                 node.x = e.offset.x + offsetX;
                 node.y = e.offset.y + offsetY;
 
                 e.preventDefault();
                 e.stopPropagation();
-            });
+            })));
 
-            element.parent.onMouseUp.first.then((_) {
-                sub.cancel();
-            });
+            ['touchend', 'mouseup'].forEach((event) => events.add(element.parent.on[event].listen((_) {
+                events.forEach((e) => e.cancel());
+            })));
 
             e.preventDefault();
             e.stopPropagation();
-        });
+        }));
 
         element.onClick.where((_) => tool.selectedTool == 'select').listen((_) {
             tool.selectedNode = node;
@@ -39,7 +43,7 @@ class NodeHandlerDirective {
             element.parent.onClick.first.then((_) => node.editing = false);
         });
 
-        ['mousedown'].forEach((event) => element.on[event].where((_) => node.editing)
+        ['touchstart', 'mousedown'].forEach((event) => element.on[event].where((_) => node.editing)
                 .listen((Event e) => e.stopPropagation())
         );
     }

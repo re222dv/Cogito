@@ -22,7 +22,7 @@ class PageComponent {
         page.nodes.add(new Path()..color='blue'..path='M 55 22 L 272 99'..width=20..x=50..y=50);
 
         page.nodes.add(new BasicList()..x=400..y=50..size='32'..rows=['Row 1', 'Row 2', 'Row 1']..color='black');
-        page.nodes.add(new BasicList()..x=400..y=250..size='12'..rows=['Row 1', 'Row 2', 'Row 1']..color='green');
+        page.nodes.add(new BasicList()..x=400..y=250..size='12'..rows=['Row 1', 'Row 2', 'Row 3']..color='green');
 
         page.raise(hel);
         page.raise(hel);
@@ -32,25 +32,34 @@ class PageComponent {
         page.lower(hel);
         page.lower(hel);
 
-        element.onMouseDown.where((_) => tool.selectedTool == 'draw').listen((_) => drawing = true);
-        element.onMouseMove.where((_) => drawing).listen((MouseEvent e) {
-            var x = e.offset.x;
-            var y = e.offset.y;
-            freehand += "$x, $y ";
-            e.preventDefault();
-            e.stopPropagation();
-        });
-        element.onMouseUp.listen((_) {
-            drawing = false;
-            if (freehand.length > 4) {
-                page.nodes.add(new Path()
-                                   ..color='blue'
-                                   ..path=simplify.simplify(freehand.trim())
-                                   ..width=10
-                                   ..x=0
-                                   ..y=0);
-            }
-            freehand = '';
-        });
+        ['touchstart', 'mousedown'].forEach((event) => element.on[event]
+                                   .where((_) => tool.selectedTool == 'draw').listen((_) {
+            drawing = true;
+
+            var events = [];
+
+            ['touchmove', 'mousemove'].forEach((event) => events.add(element.parent.on[event].listen((MouseEvent e) {
+                var x = e.offset.x;
+                var y = e.offset.y;
+                freehand += "$x, $y ";
+                e.preventDefault();
+                e.stopPropagation();
+            })));
+
+            ['touchend', 'mouseup'].forEach((event) => events.add(element.parent.on[event].listen((_) {
+                events.forEach((e) => e.cancel());
+
+                if (freehand.length > 4) {
+                    page.nodes.add(new Path()
+                        ..color='blue'
+                        ..path=simplify.simplify(freehand.trim())
+                        ..width=10
+                        ..x=0
+                        ..y=0);
+                }
+                freehand = '';
+            })));
+        }));
+
     }
 }
