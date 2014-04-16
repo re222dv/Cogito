@@ -37,6 +37,10 @@ abstract class Node {
     String get svg;
 
     noSuchMethod(Invocation invocation) => null;
+
+
+    String color;
+    String size;
 }
 
 class Path extends Node {
@@ -87,10 +91,10 @@ class BasicList extends Node {
             """
             <g ng-repeat="row in node.rows track by \$index">
                 <circle ng-attr-r="{{ node.scale(0.2) }}" ng-attr-cx="{{ node.scale(0.2) }}"
-                        ng-attr-cy="{{ node.scale((1 + \$index)) - node.scale(0.33) }}"
+                        ng-attr-cy="{{ node.scaleRow(\$index) - node.scale(0.33) }}"
                         fill="{{ node.color }}" />
                 <text fill="{{ node.color }}" font-size="{{ node.size }}"
-                      ng-attr-x="{{ node.scale(0.55) }}" ng-attr-y="{{ node.scale((1 + \$index)) }}">{{ row }}</text>
+                      ng-attr-x="{{ node.scale(0.55) }}" ng-attr-y="{{ node.scaleRow(\$index) }}">{{ row }}</text>
             </g>
             """;
 
@@ -101,12 +105,16 @@ class BasicList extends Node {
             </g>
             """;
 
-
     int scale(num times) {
         if (times != null) {
-            return int.parse(size) * times;
+            return (int.parse(size) * times).round();
         } else {
             return 0;
         }
     }
+
+    /**
+     * Workaround for bug in AngularDart
+     */
+    int scaleRow(num times) => scale(times + 1);
 }
