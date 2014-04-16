@@ -15,14 +15,14 @@ class PageComponent {
 
         page = new Page();
 
-        var hel = new Text()..color='red'..text='Hello, World!'..x=50..y=50..size=20;
+        var hel = new Text()..color='red'..text='Hello, World!'..x=50..y=50..size='20';
         page.nodes.add(hel);
-        page.nodes.add(new Text()..color='green'..text='Test'..x=160..y=160..size=50);
+        page.nodes.add(new Text()..color='green'..text='Test'..x=160..y=160..size='50');
 
         page.nodes.add(new Path()..color='blue'..path='M 55 22 L 272 99'..width=20..x=50..y=50);
 
-        page.nodes.add(new BasicList()..x=400..y=50..textSize=32..rows=['Row 1', 'Row 2', 'Row 1']);
-        page.nodes.add(new BasicList()..x=400..y=250..textSize=10..rows=['Row 1', 'Row 2', 'Row 1']);
+        page.nodes.add(new BasicList()..x=400..y=50..size='32'..rows=['Row 1', 'Row 2', 'Row 1']..color='black');
+        page.nodes.add(new BasicList()..x=400..y=250..size='12'..rows=['Row 1', 'Row 2', 'Row 1']..color='green');
 
         page.raise(hel);
         page.raise(hel);

@@ -7,11 +7,11 @@
     </div>
     <div ng-show="cmp.position == 'top' && tool.propertyPanel == 'text'">
         <label for="textSize">Text Size:</label>
-        <select id="textSize">
+        <select id="textSize" ng-model="tool.selectedNode.size">
             <option ng-repeat="size in cmp.textSizes" value="{{ size }}">{{ size }}</option>
         </select>
         <label for="textColor">Text Color:</label>
-        <select id="textColor">
+        <select id="textColor" ng-model="tool.selectedNode.color">
             <option ng-repeat="size in cmp.colors" value="{{ size }}">{{ size }}</option>
         </select>
     </div>

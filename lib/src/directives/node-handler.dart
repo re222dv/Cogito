@@ -28,12 +28,18 @@ class NodeHandlerDirective {
             e.stopPropagation();
         });
 
+        element.onClick.where((_) => tool.selectedTool == 'select').listen((_) {
+            tool.selectedNode = node;
+            tool.propertyPanel = node.propertyPanel;
+        });
+
         element.onDoubleClick.where((_) => tool.selectedTool == 'select' && node.editable).listen((_) {
             node.editing = true;
 
             element.parent.onClick.first.then((_) => node.editing = false);
         });
-        ['click', 'mousedown'].forEach((event) => element.on[event].where((_) => node.editing)
+
+        ['mousedown'].forEach((event) => element.on[event].where((_) => node.editing)
                 .listen((Event e) => e.stopPropagation())
         );
     }

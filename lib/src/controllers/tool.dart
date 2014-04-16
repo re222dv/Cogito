@@ -5,10 +5,10 @@ part of cogito;
     publishAs: 'tool')
 class ToolController {
     static final ToolController _singleton = new ToolController._internal();
-
-    String propertyPanel = 'text';
     Node selectedNode;
     String selectedTool = 'select';
+
+    String propertyPanel;
 
     factory ToolController() {
         return _singleton;

@@ -29,11 +29,14 @@ class Page {
 abstract class Node {
     final bool editable = false;
     bool editing = false;
+    String propertyPanel = '';
 
     int x;
     int y;
 
     String get svg;
+
+    noSuchMethod(Invocation invocation) => null;
 }
 
 class Path extends Node {
@@ -49,9 +52,10 @@ class Path extends Node {
 
 class Text extends Node {
     bool editable = true;
+    String propertyPanel = 'text';
 
     String color;
-    int size;
+    String size;
     String text;
 
     String get svg =>
@@ -72,16 +76,21 @@ class Text extends Node {
 }
 
 class BasicList extends Node {
+    String propertyPanel = 'text';
+
     List<String> rows;
-    int textSize;
+
+    String color;
+    String size;
 
     String get row =>
             """
             <g ng-repeat="row in node.rows track by \$index">
-                <circle ng-attr-r="{{ node.textSize * 0.2 }}" ng-attr-cx="{{ node.textSize * 0.2 }}"
-                        ng-attr-cy="{{ node.textSize * (1 + \$index) - node.textSize * 0.33 }}" />
-                <text fill="black" ng-attr-font-size="{{ node.textSize }}"
-                      ng-attr-x="{{ node.textSize * 0.55 }}" ng-attr-y="{{ node.textSize * (1 + \$index) }}">{{ row }}</text>
+                <circle ng-attr-r="{{ node.scale(0.2) }}" ng-attr-cx="{{ node.scale(0.2) }}"
+                        ng-attr-cy="{{ node.scale((1 + \$index)) - node.scale(0.33) }}"
+                        fill="{{ node.color }}" />
+                <text fill="{{ node.color }}" font-size="{{ node.size }}"
+                      ng-attr-x="{{ node.scale(0.55) }}" ng-attr-y="{{ node.scale((1 + \$index)) }}">{{ row }}</text>
             </g>
             """;
 
@@ -91,4 +100,7 @@ class BasicList extends Node {
                 $row
             </g>
             """;
+
+
+    int scale(num times) => int.parse(size) * times;
 }

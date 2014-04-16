@@ -17,10 +17,14 @@ class PanelComponent extends NgAttachAware {
         print(value);
     }
 
-    List<int> textSizes = [12, 14, 16, 18, 20, 22, 24, 26, 28, 30];
+    List<int> textSizes = [];
     List<String> colors = ['black', 'white', 'red', 'green', 'blue', 'yellow'];
 
-    PanelComponent(this.templateLoader);
+    PanelComponent(this.templateLoader) {
+        for (var i = 12; i <= 72; i+= 2) {
+            textSizes.add(i);
+        }
+    }
 
     attach() {
         templateLoader.template.then((ShadowRoot shadowRoot) {
