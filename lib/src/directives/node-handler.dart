@@ -11,6 +11,9 @@ class NodeHandlerDirective {
         ['touchstart', 'mousedown'].forEach((event) => element.on[event]
                                    .where((_) => tool.selectedTool == 'select' && !node.editing)
                                    .listen((MouseEvent e) {
+            tool.selectedNode = node;
+            tool.propertyPanel = node.propertyPanel;
+
             var offsetX = node.x - e.offset.x;
             var offsetY = node.y - e.offset.y;
 
@@ -32,18 +35,13 @@ class NodeHandlerDirective {
             e.stopPropagation();
         }));
 
-        element.onClick.where((_) => tool.selectedTool == 'select').listen((_) {
-            tool.selectedNode = node;
-            tool.propertyPanel = node.propertyPanel;
-        });
-
         element.onDoubleClick.where((_) => tool.selectedTool == 'select' && node.editable).listen((_) {
             node.editing = true;
 
             element.parent.onClick.first.then((_) => node.editing = false);
         });
 
-        ['touchstart', 'mousedown'].forEach((event) => element.on[event].where((_) => node.editing)
+        ['touchstart', 'mousedown', 'click'].forEach((event) => element.on[event].where((_) => node.editing)
                 .listen((Event e) => e.stopPropagation())
         );
     }
