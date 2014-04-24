@@ -1,6 +1,6 @@
 part of cogito;
 
-@NgController(
+@Controller(
     selector: '[tool-controller]',
     publishAs: 'tool')
 class ToolController {

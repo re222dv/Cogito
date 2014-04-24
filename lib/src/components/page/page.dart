@@ -1,6 +1,6 @@
 part of cogito;
 
-@NgComponent(
+@Component(
     selector: 'page',
     templateUrl: '../lib/src/components/page/page.html',
     cssUrl: '../lib/src/components/page/page.css',

@@ -3,8 +3,8 @@ part of cogito;
 /**
  * A custom
  */
-@NgDirective(selector: '[bind-html]')
-class BindHtmlDirective {
+@Decorator(selector: '[bind-html]')
+class BindHtmlDecorator {
     static NodeValidator validator;
 
     Element element;
@@ -12,7 +12,7 @@ class BindHtmlDirective {
     Injector injector;
     DirectiveMap directiveMap;
 
-    BindHtmlDirective(this.element, this.injector, this.compiler, this.directiveMap) {
+    BindHtmlDecorator(this.element, this.injector, this.compiler, this.directiveMap) {
         validator = new NodeValidatorBuilder.common()
             ..allowSvg()
             ..allowElement('input', attributes: ['ng-model', 'style'])

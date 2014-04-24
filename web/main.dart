@@ -1,4 +1,5 @@
 import 'package:angular/angular.dart';
+import 'package:angular/application_factory.dart';
 import 'package:logging/logging.dart';
 
 import 'package:cogito/cogito.dart';
@@ -8,8 +9,8 @@ class WebModule extends Module {
         type(PageComponent);
         type(PanelComponent);
         type(ToolController);
-        type(BindHtmlDirective);
-        type(NodeHandlerDirective);
+        type(BindHtmlDecorator);
+        type(NodeHandlerDecorator);
     }
 }
 
@@ -18,5 +19,7 @@ main() {
     Logger.root.onRecord.listen((LogRecord r) {
         print(r.message);
     });
-    ngBootstrap(module: new WebModule());
+    applicationFactory()
+          .addModule(new WebModule())
+          .run();
 }

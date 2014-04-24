@@ -1,13 +1,13 @@
 part of cogito;
 
-@NgDirective(selector: '[node-handler]')
-class NodeHandlerDirective {
+@Decorator(selector: '[node-handler]')
+class NodeHandlerDecorator {
     Element element;
 
     @NgOneWay('node-handler')
     Node node;
 
-    NodeHandlerDirective(this.element, ToolController tool) {
+    NodeHandlerDecorator(this.element, ToolController tool) {
         ['touchstart', 'mousedown'].forEach((event) => element.on[event]
                                    .where((_) => tool.selectedTool == 'select' && !node.editing)
                                    .listen((MouseEvent e) {
