@@ -30,44 +30,36 @@ abstract class Node {
     final bool editable = false;
     bool editing = false;
     String propertyPanel = '';
+    String get type;
 
     int x;
     int y;
-
-    String get svg;
 
     noSuchMethod(Invocation invocation) => null;
 }
 
 class Freehand extends Node {
     String propertyPanel = 'line';
+    String type = 'freehand';
 
     String color;
     String width;
     String freehand = '';
-
-    String get svg =>
-        """
-        <polyline ng-attr-points="{{ node.freehand }}" fill="none" stroke="{{ node.color }}" stroke-width="{{ node.width }}" />
-        """;
 }
 
 class Path extends Node {
     String propertyPanel = 'line';
+    String type = 'path';
 
     String color;
     String path;
     String width;
-
-    String get svg =>
-        """
-        <path stroke="{{ node.color }}" stroke-width="{{ node.width }}" fill="none" ng-attr-d="{{ node.path }}" />
-        """;
 }
 
 class Text extends Node {
     bool editable = true;
     String propertyPanel = 'text';
+    String type = 'text';
 
     String color;
     String size;
@@ -75,26 +67,11 @@ class Text extends Node {
 
     int get textBoxHeight => int.parse(size) + 10;
     int get textBoxWidth => int.parse(size) * text.length;
-
-    String get svg =>
-            editing ?
-                """
-                <svg transform="translate(-7,0)">
-                    <foreignobject ng-attr-height="{{ node.textBoxHeight }}" ng-attr-width="{{ node.textBoxWidth }}">
-                        <input type="text" ng-model="node.text" style="color: {{ node.color }};font-size: {{ node.size }}px;"></input>
-                    </foreignobject>
-                </svg>
-                """
-            :
-                """"
-                <text fill="{{ node.color }}" font-size="{{ node.size }}" ng-attr-y="{{ node.size }}">
-                    {{ node.text }}
-                </text>
-                """;
 }
 
 class BasicList extends Node {
     String propertyPanel = 'text';
+    String type = 'basicList';
 
     List<String> rows;
 

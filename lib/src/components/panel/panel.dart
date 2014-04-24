@@ -2,8 +2,8 @@ part of cogito;
 
 @Component(
     selector: 'panel',
-    templateUrl: '../lib/src/components/panel/panel.html',
-    cssUrl: '../lib/src/components/panel/panel.css',
+    templateUrl: 'lib/src/components/panel/panel.html',
+    cssUrl: 'lib/src/components/panel/panel.css',
     publishAs: 'cmp'
 )
 class PanelComponent extends ShadowRootAware {
@@ -12,7 +12,6 @@ class PanelComponent extends ShadowRootAware {
     @NgAttr('position')
     set value(value) {
         position = value;
-        print(value);
     }
 
     List<int> textSizes = [];

@@ -3,5 +3,8 @@ description: A web based tool for planing and design
 dependencies:
   angular: 0.10.0
   browser: any
+  shadow_dom: any
 dev_dependencies:
   unittest: any
+transformers:
+  - angular

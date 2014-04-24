@@ -2,8 +2,8 @@ part of cogito;
 
 @Component(
     selector: 'page',
-    templateUrl: '../lib/src/components/page/page.html',
-    cssUrl: '../lib/src/components/page/page.css',
+    templateUrl: 'lib/src/components/page/page.html',
+    cssUrl: 'lib/src/components/page/page.css',
     publishAs: 'cmp'
 )
 class PageComponent {
