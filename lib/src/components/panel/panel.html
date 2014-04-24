@@ -15,6 +15,16 @@
             <option ng-repeat="size in cmp.colors" value="{{ size }}">{{ size }}</option>
         </select>
     </div>
+    <div ng-show="cmp.position == 'top' && tool.propertyPanel == 'line'">
+        <label for="textSize">Line Width:</label>
+        <select id="textSize" ng-model="tool.selectedNode.width">
+            <option ng-repeat="size in cmp.textSizes" value="{{ size }}">{{ size }}</option>
+        </select>
+        <label for="textColor">Line Color:</label>
+        <select id="textColor" ng-model="tool.selectedNode.color">
+            <option ng-repeat="size in cmp.colors" value="{{ size }}">{{ size }}</option>
+        </select>
+    </div>
     <div ng-if="cmp.position == 'left'">
         <button>Select</button>
         <button>Draw</button>

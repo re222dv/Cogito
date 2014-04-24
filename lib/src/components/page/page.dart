@@ -8,8 +8,6 @@ part of cogito;
 )
 class PageComponent {
     Page page;
-    String freehand = '';
-    bool drawing = false;
 
     PageComponent(Element element, ToolController tool) {
 
@@ -19,7 +17,7 @@ class PageComponent {
         page.nodes.add(hel);
         page.nodes.add(new Text()..color='green'..text='Test'..x=160..y=160..size='50');
 
-        page.nodes.add(new Path()..color='blue'..path='M 55 22 L 272 99'..width=20..x=50..y=50);
+        page.nodes.add(new Path()..color='blue'..path='M 55 22 L 272 99'..width='20'..x=50..y=50);
 
         page.nodes.add(new BasicList()..x=400..y=50..size='32'..rows=['Row 1', 'Row 2', 'Row 1']..color='black');
         page.nodes.add(new BasicList()..x=400..y=250..size='12'..rows=['Row 1', 'Row 2', 'Row 3']..color='green');
@@ -34,14 +32,21 @@ class PageComponent {
 
         ['touchstart', 'mousedown'].forEach((event) => element.on[event]
                                    .where((_) => tool.selectedTool == 'draw').listen((_) {
-            drawing = true;
+            var path = new Freehand()
+                ..color='black'
+                ..width='12';
 
+            page.nodes.add(path);
+            
+            tool.selectedNode = path;
+            tool.propertyPanel = path.propertyPanel;
+            
             var events = [];
 
             ['touchmove', 'mousemove'].forEach((event) => events.add(element.parent.on[event].listen((MouseEvent e) {
                 var x = e.offset.x;
                 var y = e.offset.y;
-                freehand += "$x, $y ";
+                path.freehand += "$x, $y ";
                 e.preventDefault();
                 e.stopPropagation();
             })));
@@ -49,15 +54,20 @@ class PageComponent {
             ['touchend', 'mouseup'].forEach((event) => events.add(element.parent.on[event].listen((_) {
                 events.forEach((e) => e.cancel());
 
-                if (freehand.length > 4) {
-                    page.nodes.add(new Path()
-                        ..color='blue'
-                        ..path=simplify.simplify(freehand.trim())
-                        ..width=10
+                if (path.freehand.length > 4) {
+                    var node = new Path()
+                        ..color=path.color
+                        ..path=simplify.simplify(path.freehand.trim())
+                        ..width=path.width
                         ..x=0
-                        ..y=0);
+                        ..y=0;
+
+                    page.nodes.add(node);
+                    page.nodes.remove(path);
+
+                    tool.selectedNode = node;
+                    tool.propertyPanel = node.propertyPanel;
                 }
-                freehand = '';
             })));
         }));
 

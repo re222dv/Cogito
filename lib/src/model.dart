@@ -39,10 +39,25 @@ abstract class Node {
     noSuchMethod(Invocation invocation) => null;
 }
 
+class Freehand extends Node {
+    String propertyPanel = 'line';
+
+    String color;
+    String width;
+    String freehand = '';
+
+    String get svg =>
+        """
+        <polyline ng-attr-points="{{ node.freehand }}" fill="none" stroke="{{ node.color }}" stroke-width="{{ node.width }}" />
+        """;
+}
+
 class Path extends Node {
+    String propertyPanel = 'line';
+
     String color;
     String path;
-    int width;
+    String width;
 
     String get svg =>
         """
