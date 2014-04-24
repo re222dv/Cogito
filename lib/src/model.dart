@@ -58,11 +58,14 @@ class Text extends Node {
     String size;
     String text;
 
+    int get textBoxHeight => int.parse(size) + 10;
+    int get textBoxWidth => int.parse(size) * text.length;
+
     String get svg =>
             editing ?
                 """
                 <svg transform="translate(-7,0)">
-                    <foreignobject ng-attr-height="{{ node.size + 10 }}" ng-attr-width="{{ node.size * node.text.length }}">
+                    <foreignobject ng-attr-height="{{ node.textBoxHeight }}" ng-attr-width="{{ node.textBoxWidth }}">
                         <input type="text" ng-model="node.text" style="color: {{ node.color }};font-size: {{ node.size }}px;"></input>
                     </foreignobject>
                 </svg>
