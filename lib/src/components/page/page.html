@@ -31,10 +31,10 @@
 
         <g ng-if="node.type == 'basicList'" ng-repeat="row in node.rows track by $index">
             <circle ng-attr-r="{{ node.scale(0.2) }}" ng-attr-cx="{{ node.scale(0.2) }}"
-                    ng-attr-cy="{{ node.scaleRow($index) - node.scale(0.33) }}"
+                    ng-attr-cy="{{ node.scale($index + 1) - node.scale(0.33) }}"
                     fill="{{ node.color }}" />
             <text fill="{{ node.color }}" font-size="{{ node.size }}"
-                  ng-attr-x="{{ node.scale(0.55) }}" ng-attr-y="{{ node.scaleRow($index) }}">
+                  ng-attr-x="{{ node.scale(0.55) }}" ng-attr-y="{{ node.scale($index + 1) }}">
                 {{ row }}
             </text>
         </g>

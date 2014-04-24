@@ -78,24 +78,6 @@ class BasicList extends Node {
     String color;
     String size;
 
-    String get row =>
-            """
-            <g ng-repeat="row in node.rows track by \$index">
-                <circle ng-attr-r="{{ node.scale(0.2) }}" ng-attr-cx="{{ node.scale(0.2) }}"
-                        ng-attr-cy="{{ node.scaleRow(\$index) - node.scale(0.33) }}"
-                        fill="{{ node.color }}" />
-                <text fill="{{ node.color }}" font-size="{{ node.size }}"
-                      ng-attr-x="{{ node.scale(0.55) }}" ng-attr-y="{{ node.scaleRow(\$index) }}">{{ row }}</text>
-            </g>
-            """;
-
-    String get svg =>
-            """
-            <g>
-                $row
-            </g>
-            """;
-
     int scale(num times) {
         if (times != null) {
             return (int.parse(size) * times).round();
@@ -103,9 +85,4 @@ class BasicList extends Node {
             return 0;
         }
     }
-
-    /**
-     * Workaround for bug in AngularDart
-     */
-    int scaleRow(num times) => scale(times + 1);
 }
