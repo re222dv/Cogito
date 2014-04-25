@@ -16,13 +16,13 @@
               fill="none" ng-attr-d="{{ node.path }}" />
 
         <g ng-if="node.type == 'text'">
-            <svg ng-if="node.editing" transform="translate(-7,0)">
+            <g ng-if="node.editing">
                 <foreignobject ng-attr-height="{{ node.textBoxHeight }}"
                                ng-attr-width="{{ node.textBoxWidth }}">
                     <input type="text" ng-model="node.text"
                            style="color: {{ node.color }};font-size: {{ node.size }}px;" />
                 </foreignobject>
-            </svg>
+            </g>
             <text ng-if="!node.editing"
                   fill="{{ node.color }}" font-size="{{ node.size }}" ng-attr-y="{{ node.size }}">
                 {{ node.text }}
