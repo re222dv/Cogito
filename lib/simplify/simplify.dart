@@ -1,5 +1,7 @@
 library simplify;
 
+import 'dart:math' as math;
+
 /*
  * A simple library for simplifying a path.
  * Mostly a port of [simplify.js](https://github.com/mourner/simplify-js/blob/master/simplify.js)
@@ -50,7 +52,14 @@ class Point {
         return dx * dx + dy * dy;
     }
 
-    String toString() => "$x $y";
+    String toString() => "${x.toStringAsFixed(1)} ${y.toStringAsFixed(1)}";
+    
+    bool operator ==(Point point) => x == point.x && y == point.y;
+}
+
+class SimplifyedPath {
+    Point corner;
+    String path;
 }
 
 /**
@@ -131,15 +140,30 @@ List<Point> simplifyDouglasPeucker(List<Point> points, num sqTolerance) {
 }
 
 /**
+ * Simplification using by removing padding so that the left most point have an x coordinate of zero
+ * and the top most point have an y coordinate of zero.
+ * 
+ * Returns the point 
+ */
+Point removePadding(List<Point> points) {
+    var xPadding = points.map((point) => point.x).reduce(math.min);
+    var yPadding = points.map((point) => point.y).reduce(math.min);
+    
+    points.forEach((point) => point..x-=xPadding..y-=yPadding);
+    
+    return new Point()..x=xPadding..y=yPadding;
+}
+
+/**
  * Simplify a polyline  to a path by removing unnecessary points.
  */
-String simplify(String svgPoints, [tolerance = 2.5]) {
+SimplifyedPath simplify(String svgPoints, [tolerance = 2.5]) {
     List<Point> points = [];
 
     var coords = svgPoints.replaceAll(',', '') .split(' ');
 
     if (coords.length == 1) {
-        return '';
+        return new SimplifyedPath();
     }
 
     for (int i = 0, length = coords.length; i < length; i += 2) {
@@ -153,9 +177,10 @@ String simplify(String svgPoints, [tolerance = 2.5]) {
 
     points = simplifyRadialDist(points, sqTolerance);
     points = simplifyDouglasPeucker(points, sqTolerance);
+    var corner = removePadding(points);
 
     var start = points.removeAt(0).toString();
     var svgPath = points.join(' L ');
 
-    return "M $start L $svgPath";
+    return new SimplifyedPath()..corner=corner..path="M $start L $svgPath";
 }
