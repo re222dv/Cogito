@@ -71,5 +71,24 @@ class PageComponent {
             })));
         }));
 
+        element.onClick.where((_) => tool.selectedTool == 'text').listen((MouseEvent e) {
+            print('click');
+            
+            var node = new Text(edit: true)
+                ..color='black'
+                ..text=''
+                ..x=e.client.x
+                ..y=e.client.y - 12
+                ..size='24';
+            
+            page.nodes.add(node);
+            element.parent.onClick.first.then((_) => node.editing = false);
+            
+            tool.selectedNode = node;
+            tool.propertyPanel = node.propertyPanel;
+            
+            e.stopPropagation();
+            e.preventDefault();
+        });
     }
 }

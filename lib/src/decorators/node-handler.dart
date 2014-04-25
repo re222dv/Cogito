@@ -4,8 +4,16 @@ part of cogito;
 class NodeHandlerDecorator {
     Element element;
 
-    @NgOneWay('node-handler')
     Node node;
+
+    @NgOneWay('node-handler')
+    void set value(Node n) {
+        node = n;
+        
+        node.onEdit.where((_) => node.editing).listen((_) {
+            element.querySelector('input').click();
+        });
+    }
 
     NodeHandlerDecorator(this.element, ToolController tool) {
         ['touchstart', 'mousedown'].forEach((event) => element.on[event]

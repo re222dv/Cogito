@@ -1,5 +1,6 @@
 library cogito;
 
+import 'dart:async';
 import 'dart:html';
 import 'package:angular/angular.dart';
 import 'simplify/simplify.dart' as simplify;

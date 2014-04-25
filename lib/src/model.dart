@@ -28,12 +28,22 @@ class Page {
 
 abstract class Node {
     final bool editable = false;
-    bool editing = false;
+    bool _editing = false;
+
     String propertyPanel = '';
     String get type;
 
     int x;
     int y;
+
+    StreamController _onEdit = new StreamController.broadcast();
+    Stream get onEdit => _onEdit.stream;
+
+    bool get editing => _editing;
+    void set editing(e) {
+        _editing = e;
+        _onEdit.add(null);
+    }
 
     noSuchMethod(Invocation invocation) => null;
 }
@@ -67,6 +77,12 @@ class Text extends Node {
 
     int get textBoxHeight => int.parse(size) + 10;
     int get textBoxWidth => int.parse(size) * text.length;
+
+    Text({edit: false}) {
+        if (edit) {
+            editing = true;
+        }
+    }
 }
 
 class BasicList extends Node {

@@ -3,7 +3,7 @@
         <button ng-click="tool.selectedTool = 'select'">Select</button>
         <button ng-click="tool.selectedTool = 'draw'">Draw</button>
         <p></p>
-        <button>Text</button>
+        <button ng-click="tool.selectedTool = 'text'">Text</button>
     </div>
     <div ng-show="cmp.position == 'top' && tool.propertyPanel == 'text'">
         <label for="textSize">Text Size:</label>
@@ -16,12 +16,12 @@
         </select>
     </div>
     <div ng-show="cmp.position == 'top' && tool.propertyPanel == 'line'">
-        <label for="textSize">Line Width:</label>
-        <select id="textSize" ng-model="tool.selectedNode.width">
+        <label for="lineSize">Line Width:</label>
+        <select id="lineSize" ng-model="tool.selectedNode.width">
             <option ng-repeat="size in cmp.textSizes" value="{{ size }}">{{ size }}</option>
         </select>
-        <label for="textColor">Line Color:</label>
-        <select id="textColor" ng-model="tool.selectedNode.color">
+        <label for="lineColor">Line Color:</label>
+        <select id="lineColor" ng-model="tool.selectedNode.color">
             <option ng-repeat="size in cmp.colors" value="{{ size }}">{{ size }}</option>
         </select>
     </div>

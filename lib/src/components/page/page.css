@@ -6,3 +6,7 @@ input {
     border: 0;
     font-family: "Times New Roman", serif;
 }
+
+.ng-hide {
+    display: none;
+}

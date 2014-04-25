@@ -16,14 +16,14 @@
               fill="none" ng-attr-d="{{ node.path }}" />
 
         <g ng-if="node.type == 'text'">
-            <g ng-if="node.editing">
+            <g ng-show="node.editing">
                 <foreignobject ng-attr-height="{{ node.textBoxHeight }}"
                                ng-attr-width="{{ node.textBoxWidth }}">
-                    <input type="text" ng-model="node.text"
-                           style="color: {{ node.color }};font-size: {{ node.size }}px;" />
+                    <input type="text" ng-model="node.text" autofocus
+                           style="color: {{ node.color }};background-color:yellow;font-size: {{ node.size }}px;" />
                 </foreignobject>
             </g>
-            <text ng-if="!node.editing"
+            <text ng-hide="node.editing"
                   fill="{{ node.color }}" font-size="{{ node.size }}" ng-attr-y="{{ node.size }}">
                 {{ node.text }}
             </text>
