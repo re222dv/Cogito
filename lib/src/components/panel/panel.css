@@ -169,3 +169,7 @@
 
     background: linear-gradient(to top, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0.1) 100%);
 }
+
+[data-position]>div .active {
+    background: rgba(255, 255, 255, 0.20);
+}

@@ -1,9 +1,12 @@
 <div data-position="{{ cmp.position }}" tool-controller>
     <div ng-show="cmp.position == 'right'">
-        <button ng-click="tool.selectedTool = 'select'">Select</button>
-        <button ng-click="tool.selectedTool = 'draw'">Draw</button>
+        <button ng-click="tool.selectedTool = 'select'"
+                ng-class="{active: tool.selectedTool == 'select'}">Select</button>
+        <button ng-click="tool.selectedTool = 'draw'"
+                ng-class="{active: tool.selectedTool == 'draw'}">Draw</button>
         <p></p>
-        <button ng-click="tool.selectedTool = 'text'">Text</button>
+        <button ng-click="tool.selectedTool = 'text'"
+                ng-class="{active: tool.selectedTool == 'text'}">Text</button>
     </div>
     <div ng-show="cmp.position == 'top' && tool.propertyPanel == 'text'">
         <label for="textSize">Text Size:</label>
