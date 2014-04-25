@@ -9,9 +9,13 @@ class NodeHandlerDecorator {
     @NgOneWay('node-handler')
     void set value(Node n) {
         node = n;
-        
+
         node.onEdit.where((_) => node.editing).listen((_) {
-            element.querySelector('input').click();
+            // Future used so browser have time to reflow and show the input as we can't set focus
+            // on a hidden element
+            new Future.delayed(new Duration(microseconds: 1)).then((_) {
+                element.querySelector('input').focus();
+            });
         });
     }
 

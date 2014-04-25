@@ -6,9 +6,20 @@ part of cogito;
 class ToolController {
     static final ToolController _singleton = new ToolController._internal();
     Node selectedNode;
-    String selectedTool = 'select';
-
     String propertyPanel;
+
+    String _selectedTool = 'select';
+    String get selectedTool => _selectedTool;
+    void set selectedTool(t) {
+        _selectedTool = t;
+        _onToolChange.add(t);
+        
+        selectedNode = null;
+        propertyPanel = null;
+    }
+
+    StreamController _onToolChange = new StreamController.broadcast();
+    Stream get onToolChange => _onToolChange.stream;
 
     factory ToolController() {
         return _singleton;

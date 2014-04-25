@@ -36,13 +36,13 @@ abstract class Node {
     int x;
     int y;
 
-    StreamController _onEdit = new StreamController.broadcast();
+    StreamController _onEdit = new StreamController();
     Stream get onEdit => _onEdit.stream;
 
     bool get editing => _editing;
     void set editing(e) {
         _editing = e;
-        _onEdit.add(null);
+        _onEdit.add(e);
     }
 
     noSuchMethod(Invocation invocation) => null;
@@ -76,13 +76,7 @@ class Text extends Node {
     String text;
 
     int get textBoxHeight => int.parse(size) + 10;
-    int get textBoxWidth => int.parse(size) * text.length;
-
-    Text({edit: false}) {
-        if (edit) {
-            editing = true;
-        }
-    }
+    int get textBoxWidth => int.parse(size) * (text.length + 1);
 }
 
 class BasicList extends Node {
