@@ -3,41 +3,48 @@
 <panel position="right"></panel>
 <panel position="bottom"></panel>
 <svg width="1000px" height="600px"
-     xmlns="http://www.w3.org/2000/svg">
+     xmlns="http://www.w3.org/2000/svg" tool-controller>
     <g ng-repeat="node in cmp.page.nodes"
-         ng-attr-transform="translate({{ node.x }},{{ node.y }})" node-handler="node">
-
-        <polyline ng-if="node.type == 'freehand'"
-                  ng-attr-points="{{ node.freehand }}" fill="none"
-                  stroke="{{ node.color }}" stroke-width="{{ node.width }}" />
-
-        <path ng-if="node.type == 'path'"
-              stroke="{{ node.color }}" stroke-width="{{ node.width }}"
-              fill="none" ng-attr-d="{{ node.path }}" />
-
-        <g ng-if="node.type == 'text'">
-            <g ng-show="node.editing">
-                <foreignobject ng-attr-height="{{ node.textBoxHeight }}"
-                               ng-attr-width="{{ node.textBoxWidth }}">
-                    <input type="text" ng-model="node.text"
-                           style="width: {{ node.textBoxWidth }}px;color: {{ node.color }};
-                                  font-size: {{ node.size }}px;" />
-                </foreignobject>
+       ng-attr-transform="translate({{ node.x }},{{ node.y }})" node-handler="node">
+        <g>
+            <polyline ng-if="node.type == 'freehand'"
+                      ng-attr-points="{{ node.freehand }}" fill="none"
+                      stroke="{{ node.color }}" stroke-width="{{ node.width }}" />
+    
+            <path ng-if="node.type == 'path'"
+                  stroke="{{ node.color }}" stroke-width="{{ node.width }}"
+                  fill="none" ng-attr-d="{{ node.path }}" />
+    
+            <g ng-if="node.type == 'text'">
+                <g ng-show="node.editing">
+                    <foreignobject ng-attr-height="{{ node.textBoxHeight }}"
+                                   ng-attr-width="{{ node.textBoxWidth }}">
+                        <input type="text" ng-model="node.text"
+                               style="width: {{ node.textBoxWidth }}px;color: {{ node.color }};
+                                      font-size: {{ node.size }}px;" />
+                    </foreignobject>
+                </g>
+                <text ng-hide="node.editing"
+                      fill="{{ node.color }}" font-size="{{ node.size }}" ng-attr-y="{{ node.size }}">
+                    {{ node.text }}
+                </text>
             </g>
-            <text ng-hide="node.editing"
-                  fill="{{ node.color }}" font-size="{{ node.size }}" ng-attr-y="{{ node.size }}">
-                {{ node.text }}
-            </text>
+    
+            <g ng-if="node.type == 'basicList'" ng-repeat="row in node.rows track by $index">
+                <circle ng-attr-r="{{ node.scale(0.2) }}" ng-attr-cx="{{ node.scale(0.2) }}"
+                        ng-attr-cy="{{ node.scale($index + 1) - node.scale(0.33) }}"
+                        fill="{{ node.color }}" />
+                <text fill="{{ node.color }}" font-size="{{ node.size }}"
+                      ng-attr-x="{{ node.scale(0.55) }}" ng-attr-y="{{ node.scale($index + 1) }}">
+                    {{ row }}
+                </text>
+            </g>
         </g>
-
-        <g ng-if="node.type == 'basicList'" ng-repeat="row in node.rows track by $index">
-            <circle ng-attr-r="{{ node.scale(0.2) }}" ng-attr-cx="{{ node.scale(0.2) }}"
-                    ng-attr-cy="{{ node.scale($index + 1) - node.scale(0.33) }}"
-                    fill="{{ node.color }}" />
-            <text fill="{{ node.color }}" font-size="{{ node.size }}"
-                  ng-attr-x="{{ node.scale(0.55) }}" ng-attr-y="{{ node.scale($index + 1) }}">
-                {{ row }}
-            </text>
+        <g ng-if="tool.selectedNode == node">
+            <circle r="5" cx="-5" cy="-5" />
+            <circle r="5" ng-attr-cx="{{ nodeHandler.width + 5 }}" cy="-5" />
+            <circle r="5" cx="-5" ng-attr-cy="{{ nodeHandler.height + 5 }}" />
+            <circle r="5" ng-attr-cx="{{ nodeHandler.width + 5 }}" ng-attr-cy="{{ nodeHandler.height + 5 }}" />
         </g>
     </g>
 </svg>

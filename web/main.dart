@@ -8,9 +8,9 @@ class WebModule extends Module {
     WebModule() {
         type(PageComponent);
         type(PanelComponent);
+        type(NodeHandlerController);
         type(ToolController);
         type(BindHtmlDecorator);
-        type(NodeHandlerDecorator);
     }
 }
 

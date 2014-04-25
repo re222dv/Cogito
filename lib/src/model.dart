@@ -35,6 +35,9 @@ abstract class Node {
 
     int x;
     int y;
+    
+    num nodeWidth;
+    num nodeHeight;
 
     StreamController _onEdit = new StreamController();
     Stream get onEdit => _onEdit.stream;

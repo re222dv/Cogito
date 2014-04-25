@@ -1,10 +1,13 @@
 part of cogito;
 
-@Decorator(selector: '[node-handler]')
-class NodeHandlerDecorator {
+@Controller(selector: '[node-handler]', publishAs: 'nodeHandler')
+class NodeHandlerController {
     Element element;
 
     Node node;
+    
+    num get width => element.querySelector('g').getBoundingClientRect().width;
+    num get height => element.querySelector('g').getBoundingClientRect().height;
 
     @NgOneWay('node-handler')
     void set value(Node n) {
@@ -19,7 +22,7 @@ class NodeHandlerDecorator {
         });
     }
 
-    NodeHandlerDecorator(this.element, ToolController tool) {
+    NodeHandlerController(this.element, ToolController tool) {
         ['touchstart', 'mousedown'].forEach((event) => element.on[event]
                                    .where((_) => tool.selectedTool == 'select' && !node.editing)
                                    .listen((MouseEvent e) {

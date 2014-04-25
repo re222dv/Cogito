@@ -55,12 +55,14 @@ class PageComponent {
                 events.forEach((e) => e.cancel());
 
                 if (path.freehand.length > 4) {
+                    var simplePath = simplify.simplify(path.freehand.trim());
+                            
                     var node = new Path()
                         ..color=path.color
-                        ..path=simplify.simplify(path.freehand.trim())
+                        ..path=simplePath.path
                         ..width=path.width
-                        ..x=0
-                        ..y=0;
+                        ..x=simplePath.corner.x
+                        ..y=simplePath.corner.y;
 
                     page.nodes.add(node);
                     page.nodes.remove(path);
