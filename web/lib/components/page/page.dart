@@ -9,11 +9,11 @@ part of cogito_web;
 class PageComponent {
     Page page;
 
-    PageComponent(Element element, ToolController tool) {
+    PageComponent(Element element, ToolController tool, PageService pages) {
 
         page = new Page();
 
-        var hel = new Text()..color='red'..text='Hello, World!'..x=50..y=50..size='20';
+        /*var hel = new Text()..color='red'..text='Hello, World!'..x=50..y=50..size='20';
         page.nodes.add(hel);
         page.nodes.add(new Text()..color='green'..text='Test'..x=160..y=160..size='50');
 
@@ -28,7 +28,9 @@ class PageComponent {
         page.raise(hel);
         page.lower(hel);
         page.lower(hel);
-        page.lower(hel);
+        page.lower(hel);*/
+
+        pages.getPage().then((page) => this.page = page);
 
         ['touchstart', 'mousedown'].forEach((event) => element.on[event]
                                    .where((_) => tool.selectedTool == 'draw').listen((_) {

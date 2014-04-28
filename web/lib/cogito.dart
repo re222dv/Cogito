@@ -11,3 +11,4 @@ part 'components/panel/panel.dart';
 part 'controllers/tool.dart';
 part 'decorators/bind-html.dart';
 part 'controllers/node-handler.dart';
+part 'services/page.dart';

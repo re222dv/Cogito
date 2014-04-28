@@ -3,6 +3,24 @@ part of cogito;
 class Page {
     List<Node> nodes = [];
 
+    Page();
+
+    Page.fromJson(Map json) {
+        json['nodes'].forEach((Map json) {
+            switch(json['type']) {
+                case 'text':
+                    nodes.add(new Text.fromJson(json));
+                    break;
+                case 'path':
+                    nodes.add(new Path.fromJson(json));
+                    break;
+                case 'basicList':
+                    nodes.add(new BasicList.fromJson(json));
+                    break;
+            }
+        });
+    }
+
     void raise(Node node) {
         var i = nodes.indexOf(node);
 
@@ -35,7 +53,7 @@ abstract class Node {
 
     int x;
     int y;
-    
+
     num nodeWidth;
     num nodeHeight;
 
@@ -46,6 +64,13 @@ abstract class Node {
     void set editing(e) {
         _editing = e;
         _onEdit.add(e);
+    }
+
+    Node();
+
+    Node.fromJson(Map json) {
+        x = json['x'];
+        y = json['y'];
     }
 
     noSuchMethod(Invocation invocation) => null;
@@ -67,6 +92,14 @@ class Path extends Node {
     String color;
     String path;
     String width;
+
+    Path();
+
+    Path.fromJson(Map json) : super.fromJson(json) {
+        color = json['color'];
+        path = json['path'];
+        width = json['width'];
+    }
 }
 
 class Text extends Node {
@@ -80,6 +113,14 @@ class Text extends Node {
 
     int get textBoxHeight => int.parse(size) + 10;
     int get textBoxWidth => int.parse(size) * (text.length + 1);
+
+    Text();
+
+    Text.fromJson(Map json) : super.fromJson(json) {
+        color = json['color'];
+        size = json['size'];
+        text = json['text'];
+    }
 }
 
 class BasicList extends Node {
@@ -90,6 +131,14 @@ class BasicList extends Node {
 
     String color;
     String size;
+
+    BasicList();
+
+    BasicList.fromJson(Map json) : super.fromJson(json) {
+        color = json['color'];
+        size = json['size'];
+        rows = json['rows'];
+    }
 
     int scale(num times) {
         if (times != null) {

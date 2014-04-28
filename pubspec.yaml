@@ -3,8 +3,13 @@ description: A web based tool for planing and design
 dependencies:
   angular: 0.10.0
   browser: any
+  RestLibrary:
+    git: git@github.com:Pajn/RestLibrary.git
   shadow_dom: any
 dev_dependencies:
   unittest: any
 transformers:
-  - angular
+- angular:
+    html_files:
+      - web/lib/components/page/page.html
+      - web/lib/components/panel/panel.html

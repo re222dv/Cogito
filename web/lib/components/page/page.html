@@ -10,11 +10,11 @@
             <polyline ng-if="node.type == 'freehand'"
                       ng-attr-points="{{ node.freehand }}" fill="none"
                       stroke="{{ node.color }}" stroke-width="{{ node.width }}" />
-    
+
             <path ng-if="node.type == 'path'"
                   stroke="{{ node.color }}" stroke-width="{{ node.width }}"
                   fill="none" ng-attr-d="{{ node.path }}" />
-    
+
             <g ng-if="node.type == 'text'">
                 <g ng-show="node.editing">
                     <foreignobject ng-attr-height="{{ node.textBoxHeight }}"
@@ -29,7 +29,7 @@
                     {{ node.text }}
                 </text>
             </g>
-    
+
             <g ng-if="node.type == 'basicList'" ng-repeat="row in node.rows track by $index">
                 <circle ng-attr-r="{{ node.scale(0.2) }}" ng-attr-cx="{{ node.scale(0.2) }}"
                         ng-attr-cy="{{ node.scale($index + 1) - node.scale(0.33) }}"

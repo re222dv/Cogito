@@ -11,6 +11,7 @@ class WebModule extends Module {
         type(NodeHandlerController);
         type(ToolController);
         type(BindHtmlDecorator);
+        type(PageService);
     }
 }
 
