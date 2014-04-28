@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# bail on error
+set -e
+
 dart test/unit_tests.dart --checked
 
 if [ $? -ne 0 ]; then
