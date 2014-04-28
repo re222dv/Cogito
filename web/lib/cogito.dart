@@ -1,7 +1,7 @@
 library cogito_web;
 
 import 'dart:async';
-import 'dart:html';
+import 'dart:html' show Element, Event, MouseEvent, NodeValidator, NodeValidatorBuilder, ShadowRoot;
 import 'package:angular/angular.dart';
 import 'package:cogito/cogito.dart';
 import 'package:cogito/simplify/simplify.dart' as simplify;
