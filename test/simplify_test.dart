@@ -1,3 +1,5 @@
+library simplify_tests;
+
 import 'package:unittest/unittest.dart';
 import '../lib/simplify/simplify.dart';
 
@@ -14,7 +16,7 @@ void main() {
             expect(result.corner, equals(corner));
             expect(result.path, equals(simplified));
         });
-        
+
         test('simplifies points correctly with the given tolerance', () {
             var result = simplify(points, 5);
             expect(result.corner, equals(corner));

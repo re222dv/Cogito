@@ -1,3 +1,5 @@
+library tool_tests;
+
 import 'package:unittest/unittest.dart';
 import '../web/lib/cogito.dart';
 

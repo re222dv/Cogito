@@ -1,3 +1,5 @@
+library model_tests;
+
 import 'package:unittest/unittest.dart';
 import 'package:cogito/cogito.dart';
 
