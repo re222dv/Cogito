@@ -1,9 +1,9 @@
-part of cogito;
+part of cogito_web;
 
 @Component(
     selector: 'page',
-    templateUrl: 'lib/src/components/page/page.html',
-    cssUrl: 'lib/src/components/page/page.css',
+    templateUrl: 'lib/components/page/page.html',
+    cssUrl: 'lib/components/page/page.css',
     publishAs: 'cmp'
 )
 class PageComponent {
@@ -37,10 +37,10 @@ class PageComponent {
                 ..width='12';
 
             page.nodes.add(path);
-            
+
             tool.selectedNode = path;
             tool.propertyPanel = path.propertyPanel;
-            
+
             var events = [];
 
             ['touchmove', 'mousemove'].forEach((event) => events.add(element.parent.on[event].listen((MouseEvent e) {
@@ -56,7 +56,7 @@ class PageComponent {
 
                 if (path.freehand.length > 4) {
                     var simplePath = simplify.simplify(path.freehand.trim());
-                            
+
                     var node = new Path()
                         ..color=path.color
                         ..path=simplePath.path
@@ -81,15 +81,15 @@ class PageComponent {
                 ..y=e.client.y - 12
                 ..size='24'
                 ..editing = true;
-            
+
             page.nodes.add(node);
             element.onClick.first.then((_) => node.editing = false);
             tool.onToolChange.where((newTool) => newTool != 'text')
                              .first.then((_) => node.editing = false);
-            
+
             tool.selectedNode = node;
             tool.propertyPanel = node.propertyPanel;
-            
+
             e.stopPropagation();
             e.preventDefault();
         });

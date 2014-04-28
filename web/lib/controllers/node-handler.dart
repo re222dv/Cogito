@@ -1,11 +1,11 @@
-part of cogito;
+part of cogito_web;
 
 @Controller(selector: '[node-handler]', publishAs: 'nodeHandler')
 class NodeHandlerController {
     Element element;
 
     Node node;
-    
+
     num get width => element.querySelector('g').getBoundingClientRect().width;
     num get height => element.querySelector('g').getBoundingClientRect().height;
 

@@ -2,7 +2,7 @@ import 'package:angular/angular.dart';
 import 'package:angular/application_factory.dart';
 import 'package:logging/logging.dart';
 
-import 'package:cogito/cogito.dart';
+import 'lib/cogito.dart';
 
 class WebModule extends Module {
     WebModule() {

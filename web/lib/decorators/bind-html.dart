@@ -1,4 +1,4 @@
-part of cogito;
+part of cogito_web;
 
 /**
  * A custom

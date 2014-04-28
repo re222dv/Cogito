@@ -1,4 +1,4 @@
-part of cogito;
+part of cogito_web;
 
 @Controller(
     selector: '[tool-controller]',
@@ -13,7 +13,7 @@ class ToolController {
     void set selectedTool(t) {
         _selectedTool = t;
         _onToolChange.add(t);
-        
+
         selectedNode = null;
         propertyPanel = null;
     }

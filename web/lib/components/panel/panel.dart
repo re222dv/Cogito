@@ -1,9 +1,9 @@
-part of cogito;
+part of cogito_web;
 
 @Component(
     selector: 'panel',
-    templateUrl: 'lib/src/components/panel/panel.html',
-    cssUrl: 'lib/src/components/panel/panel.css',
+    templateUrl: 'lib/components/panel/panel.html',
+    cssUrl: 'lib/components/panel/panel.css',
     publishAs: 'cmp'
 )
 class PanelComponent extends ShadowRootAware {
