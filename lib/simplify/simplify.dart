@@ -53,7 +53,7 @@ class Point {
     }
 
     String toString() => "${x.toStringAsFixed(1)} ${y.toStringAsFixed(1)}";
-    
+
     bool operator ==(Point point) => x == point.x && y == point.y;
 }
 
@@ -142,15 +142,15 @@ List<Point> simplifyDouglasPeucker(List<Point> points, num sqTolerance) {
 /**
  * Simplification using by removing padding so that the left most point have an x coordinate of zero
  * and the top most point have an y coordinate of zero.
- * 
- * Returns the point 
+ *
+ * Returns the point
  */
 Point removePadding(List<Point> points) {
     var xPadding = points.map((point) => point.x).reduce(math.min);
     var yPadding = points.map((point) => point.y).reduce(math.min);
-    
+
     points.forEach((point) => point..x-=xPadding..y-=yPadding);
-    
+
     return new Point()..x=xPadding..y=yPadding;
 }
 
