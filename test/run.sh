@@ -2,7 +2,7 @@
 
 dart unit_tests.dart --checked
 
-[ $? -ne 0 ]; then
+if [ $? -ne 0 ]; then
     exit 1
 fi
 
