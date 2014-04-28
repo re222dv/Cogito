@@ -1,6 +1,6 @@
 #!/bin/bash
 
-dart unit_tests.dart --checked
+dart test/unit_tests.dart --checked
 
 if [ $? -ne 0 ]; then
     exit 1
