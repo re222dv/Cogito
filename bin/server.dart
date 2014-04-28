@@ -1,6 +1,12 @@
+import 'dart:async';
+import 'package:mongo_dart/mongo_dart.dart';
 import 'package:RestLibrary/restlibrary.dart';
 
+Db db;
+
 main() {
+    db = new Db('mongodb://cogito:cogito@ds043997.mongolab.com:43997/cogito');
+
     new RestServer()
         ..static('../build/web')
         ..route(new Route('/page/{id}')
@@ -8,25 +14,13 @@ main() {
         ..start(port: 9000);
 }
 
-Response servePage(Request request) {
-    return new Response({
-        'nodes': [
-            {
-                'type': 'text',
-                'x': 30,
-                'y': 50,
-                'size': '20',
-                'color': 'red',
-                'text': 'Hello, World!'
-            },
-            {
-                "type":"path",
-                "x":200,
-                "y":300,
-                "width":"20",
-                "color":"yellow",
-                "path":"M 0 0 L 100 100"
-            }
-        ]
+servePage(Request request) {
+    return db.open().then((c) {
+        DbCollection pages = db.collection('Pages');
+
+        return pages.findOne().then((json) {
+            db.close();
+            return new Response(json);
+        });
     });
 }

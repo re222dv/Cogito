@@ -28,6 +28,10 @@ packages:
     description: browser
     source: hosted
     version: "0.10.0+2"
+  bson:
+    description: bson
+    source: hosted
+    version: "0.1.18"
   code_transformers:
     description: code_transformers
     source: hosted
@@ -36,6 +40,10 @@ packages:
     description: collection
     source: hosted
     version: "0.9.1"
+  crypto:
+    description: crypto
+    source: hosted
+    version: "0.9.0"
   di:
     description: di
     source: hosted
@@ -68,6 +76,18 @@ packages:
     description: mock
     source: hosted
     version: "0.10.0+1"
+  mongo_dart:
+    description: mongo_dart
+    source: hosted
+    version: "0.1.38"
+  mongo_dart_query:
+    description: mongo_dart_query
+    source: hosted
+    version: "0.1.12"
+  more:
+    description: more
+    source: hosted
+    version: "1.2.0"
   path:
     description: path
     source: hosted
