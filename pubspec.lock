@@ -5,7 +5,7 @@ packages:
     description:
       ref: null
       resolved-ref: "51a6075d6c196f42c824e3d2341df52b4fea4b5b"
-      url: "git@github.com:Pajn/RestLibrary.git"
+      url: "https://github.com/Pajn/RestLibrary.git"
     source: git
     version: "0.0.1"
   analyzer:
