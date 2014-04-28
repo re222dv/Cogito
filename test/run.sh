@@ -15,6 +15,9 @@ if [[ $? -ne 0 ]]; then
   PATH=$cs_path:$PATH
 fi
 
+# Start x
+sudo start xvfb
+
 # Run a set of Dart Unit tests
 results=$(content_shell --dump-render-tree test/browser_tests.html)
 echo -e "$results"
