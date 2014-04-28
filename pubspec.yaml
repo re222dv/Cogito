@@ -4,7 +4,7 @@ dependencies:
   angular: 0.10.0
   browser: any
   RestLibrary:
-    git: git@github.com:Pajn/RestLibrary.git
+    git: https://github.com/re222dv/Cogito.git
   shadow_dom: any
 dev_dependencies:
   unittest: any
