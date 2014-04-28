@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# bail on error
+set -e
+
 dart test/unit_tests.dart --checked
 
 if [ $? -ne 0 ]; then
@@ -14,6 +17,9 @@ if [[ $? -ne 0 ]]; then
   cs_path=$(ls -d drt-*)
   PATH=$cs_path:$PATH
 fi
+
+# Start x
+sudo start xvfb
 
 # Run a set of Dart Unit tests
 results=$(content_shell --dump-render-tree test/browser_tests.html)
