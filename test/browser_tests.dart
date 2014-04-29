@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'dart:html';
 import 'package:unittest/unittest.dart';
+import 'panel_test.dart' as panel;
 import 'tool_test.dart' as tool;
 
 main() {
+    panel.main();
     tool.main();
 
     pollForDone(testCases);

@@ -9,6 +9,7 @@ main() {
     group('ToolController', () {
         test('tool change', () {
             var tool = new ToolController();
+            tool.selectedTool = 'select';
 
             tool.onToolChange.listen(expectAsync((tool) {
                 expect(tool, equals('draw'));
