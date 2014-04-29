@@ -12,9 +12,9 @@ import '../web/lib/cogito.dart';
  */
 void addToTemplateCache(String path) {
     inject((TemplateCache cache) {
-        HttpRequest request = new HttpRequest();
-        request.open('GET', "/Cogito/web/$path", async : false);
-        request.send();
+        HttpRequest request = new HttpRequest()
+            ..open('GET', "../web/$path", async: false)
+            ..send();
         cache.put(path, new HttpResponse(200, request.responseText));
     });
 }
@@ -76,13 +76,11 @@ main() {
             test('select tool is choosed when clicked', () {
                 inject((TestBed tb, ToolController tool) {
                     Timer.run(expectAsync(() {
-                        getElement('select').click();
-                        tb.rootScope.apply();
+                        tb.triggerEvent(getElement('select'), 'click');
+                        microLeap();
 
-                        Timer.run(expectAsync(() {
-                            expect(getElement('select').classes.contains('active'), isTrue);
-                            expect(tool.selectedTool, equals('select'));
-                        }));
+                        expect(getElement('select').classes.contains('active'), isTrue);
+                        expect(tool.selectedTool, equals('select'));
                     }));
                 });
             });
@@ -90,13 +88,11 @@ main() {
             test('draw tool is choosed when clicked', () {
                 inject((TestBed tb, ToolController tool) {
                     Timer.run(expectAsync(() {
-                        getElement('draw').click();
-                        tb.rootScope.apply();
+                        tb.triggerEvent(getElement('draw'), 'click');
+                        microLeap();
 
-                        Timer.run(expectAsync(() {
-                            expect(getElement('draw').classes.contains('active'), isTrue);
-                            expect(tool.selectedTool, equals('draw'));
-                        }));
+                        expect(getElement('draw').classes.contains('active'), isTrue);
+                        expect(tool.selectedTool, equals('draw'));
                     }));
                 });
             });
@@ -104,13 +100,11 @@ main() {
             test('text tool is choosed when clicked', () {
                 inject((TestBed tb, ToolController tool) {
                     Timer.run(expectAsync(() {
-                        getElement('text').click();
-                        tb.rootScope.apply();
+                        tb.triggerEvent(getElement('text'), 'click');
+                        microLeap();
 
-                        Timer.run(expectAsync(() {
-                            expect(getElement('text').classes.contains('active'), isTrue);
-                            expect(tool.selectedTool, equals('text'));
-                        }));
+                        expect(getElement('text').classes.contains('active'), isTrue);
+                        expect(tool.selectedTool, equals('text'));
                     }));
                 });
             });
@@ -118,13 +112,11 @@ main() {
             test('list tool is choosed when clicked', () {
                 inject((TestBed tb, ToolController tool) {
                     Timer.run(expectAsync(() {
-                        getElement('list').click();
-                        tb.rootScope.apply();
+                        tb.triggerEvent(getElement('list'), 'click');
+                        microLeap();
 
-                        Timer.run(expectAsync(() {
-                            expect(getElement('list').classes.contains('active'), isTrue);
-                            expect(tool.selectedTool, equals('list'));
-                        }));
+                        expect(getElement('list').classes.contains('active'), isTrue);
+                        expect(tool.selectedTool, equals('list'));
                     }));
                 });
             });
