@@ -17,7 +17,13 @@ class NodeHandlerController {
             // Future used so browser have time to reflow and show the input as we can't set focus
             // on a hidden element
             new Future.delayed(new Duration(microseconds: 1)).then((_) {
-                element.querySelector('input').focus();
+                var input = element.querySelector('input');
+                if (input == null) {
+                    input = element.querySelector('textarea');
+                }
+                if (input != null) {
+                    input.focus();
+                }
             });
         });
     }

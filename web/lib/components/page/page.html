@@ -49,13 +49,13 @@
                 </g>
                 <g ng-if="node.listType == 'checked'">
                     <g ng-repeat="row in node.rows track by $index" checkbox>
-                        <rect ng-attr-height="{{ node.scale(0.6) }}" width="{{ node.scale(0.6) }}"
-                              x="5" ng-attr-y="{{ node.scale($index) + node.scale(0.4) }}"
-                              fill="none" stroke="{{ node.color }}" />
                         <circle ng-if="checkbox.checked"
                                 ng-attr-r="{{ node.scale(0.2) }}" ng-attr-cx="{{ node.scale(0.3) + 5 }}"
                                 ng-attr-cy="{{ node.scale($index + 1) - node.scale(0.3) }}"
                                 fill="{{ node.color }}" />
+                        <rect ng-attr-height="{{ node.scale(0.6) }}" ng-attr-width="{{ node.scale(0.6) }}"
+                              x="5" ng-attr-y="{{ node.scale($index) + node.scale(0.4) }}"
+                              fill="transparent" stroke="{{ node.color }}" />
                     </g>
                 </g>
                 <g ng-show="node.editing">

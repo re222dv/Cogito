@@ -9,6 +9,10 @@ input, textarea {
     line-height: 1;
 }
 
+[checkbox] {
+    cursor: pointer;
+}
+
 .ng-hide {
     display: none;
 }
