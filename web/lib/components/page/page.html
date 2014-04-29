@@ -30,14 +30,27 @@
                 </text>
             </g>
 
-            <g ng-if="node.type == 'basicList'" ng-repeat="row in node.rows track by $index">
-                <circle ng-attr-r="{{ node.scale(0.2) }}" ng-attr-cx="{{ node.scale(0.2) }}"
-                        ng-attr-cy="{{ node.scale($index + 1) - node.scale(0.33) }}"
-                        fill="{{ node.color }}" />
-                <text fill="{{ node.color }}" font-size="{{ node.size }}"
-                      ng-attr-x="{{ node.scale(0.55) }}" ng-attr-y="{{ node.scale($index + 1) }}">
-                    {{ row }}
-                </text>
+            <g ng-if="node.type == 'basicList'">
+                <g ng-repeat="row in node.rows track by $index">
+                    <circle ng-attr-r="{{ node.scale(0.2) }}" ng-attr-cx="{{ node.scale(0.2) }}"
+                            ng-attr-cy="{{ node.scale($index + 1) - node.scale(0.33) }}"
+                            fill="{{ node.color }}" />
+                </g>
+                <g ng-show="node.editing">
+                    <foreignobject ng-attr-height="{{ node.textBoxHeight }}"
+                                   ng-attr-width="200" ng-attr-x="{{ node.scale(0.55) }}">
+                        <textarea ng-model="node.text"
+                                  style="height: {{ node.textBoxHeight }}px;
+                                         color: {{ node.color }}; font-size: {{ node.size }}px;">
+                        </textarea>
+                    </foreignobject>
+                </g>
+                <g ng-hide="node.editing" ng-repeat="row in node.rows track by $index">
+                    <text fill="{{ node.color }}" font-size="{{ node.size }}"
+                          ng-attr-x="{{ node.scale(0.55) }}" ng-attr-y="{{ node.scale($index + 1) }}">
+                        {{ row }}
+                    </text>
+                </g>
             </g>
         </g>
         <g ng-if="tool.selectedNode == node">

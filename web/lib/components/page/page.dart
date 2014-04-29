@@ -30,7 +30,10 @@ class PageComponent {
         page.lower(hel);
         page.lower(hel);*/
 
-        pages.getPage().then((page) => this.page = page);
+        //pages.getPage().then((page) => this.page = page);
+
+        page.nodes.add(new BasicList()..x=400..y=50..size='32'..rows=['Row 1', 'Row 2', 'Row 1']..color='black');
+        page.nodes.add(new BasicList()..x=400..y=250..size='12'..rows=['Row 1', 'Row 2', 'Row 3']..color='green');
 
         ['touchstart', 'mousedown'].forEach((event) => element.on[event]
                                    .where((_) => tool.selectedTool == 'draw').listen((_) {
@@ -87,7 +90,28 @@ class PageComponent {
             page.nodes.add(node);
             element.onClick.first.then((_) => node.editing = false);
             tool.onToolChange.where((newTool) => newTool != 'text')
-                             .first.then((_) => node.editing = false);
+            .first.then((_) => node.editing = false);
+
+            tool.selectedNode = node;
+            tool.propertyPanel = node.propertyPanel;
+
+            e.stopPropagation();
+            e.preventDefault();
+        });
+
+        element.onClick.where((_) => tool.selectedTool == 'list').listen((MouseEvent e) {
+            var node = new BasicList()
+                ..color='black'
+                ..text=''
+                ..x=e.client.x
+                ..y=e.client.y - 12
+                ..size='24'
+                ..editing = true;
+
+            page.nodes.add(node);
+            element.onClick.first.then((_) => node.editing = false);
+            tool.onToolChange.where((newTool) => newTool != 'list')
+            .first.then((_) => node.editing = false);
 
             tool.selectedNode = node;
             tool.propertyPanel = node.propertyPanel;

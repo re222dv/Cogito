@@ -1,4 +1,4 @@
-input {
+input, textarea {
     margin-top: 4px;
     margin-left: 0;
     padding: 0;
@@ -6,6 +6,7 @@ input {
     border: 0;
     background-color: yellow;
     font-family: "Times New Roman", serif;
+    line-height: 1;
 }
 
 .ng-hide {

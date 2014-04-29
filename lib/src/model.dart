@@ -124,6 +124,7 @@ class Text extends Node {
 }
 
 class BasicList extends Node {
+    bool editable = true;
     String propertyPanel = 'text';
     String type = 'basicList';
 
@@ -131,6 +132,14 @@ class BasicList extends Node {
 
     String color;
     String size;
+
+    String get text => rows.join('\n');
+    set text(String t) {
+        rows = t.split('\n');
+    }
+
+    int get textBoxHeight => int.parse(size) * rows.length + 10;
+    int get textBoxWidth => int.parse(size) * (text.length + 1);
 
     BasicList();
 
