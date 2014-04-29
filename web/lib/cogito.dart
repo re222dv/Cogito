@@ -8,6 +8,7 @@ import 'package:cogito/simplify/simplify.dart' as simplify;
 
 part 'components/page/page.dart';
 part 'components/panel/panel.dart';
+part 'controllers/checkbox.dart';
 part 'controllers/tool.dart';
 part 'decorators/bind-html.dart';
 part 'controllers/node-handler.dart';

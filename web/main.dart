@@ -8,6 +8,7 @@ class WebModule extends Module {
     WebModule() {
         type(PageComponent);
         type(PanelComponent);
+        type(CheckBoxController);
         type(NodeHandlerController);
         type(ToolController);
         type(BindHtmlDecorator);

@@ -19,6 +19,16 @@
         <select id="textColor" ng-model="tool.selectedNode.color">
             <option ng-repeat="size in cmp.colors" value="{{ size }}">{{ size }}</option>
         </select>
+        <div ng-if="tool.selectedNode.type == 'basicList'">
+            <button ng-click="tool.selectedNode.listType = 'unordered'"
+                    ng-class="{active: tool.selectedNode.listType == 'unordered'}">ul</button>
+            <button ng-click="tool.selectedNode.listType = 'ordered'"
+                    ng-class="{active: tool.selectedNode.listType == 'ordered'}">ol
+            </button>
+            <button ng-click="tool.selectedNode.listType = 'checked'"
+                    ng-class="{active: tool.selectedNode.listType == 'checked'}">check
+            </button>
+        </div>
     </div>
     <div ng-show="cmp.position == 'top' && tool.propertyPanel == 'line'">
         <label for="lineSize">Line Width:</label>

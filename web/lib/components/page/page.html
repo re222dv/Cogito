@@ -31,10 +31,32 @@
             </g>
 
             <g ng-if="node.type == 'basicList'">
-                <g ng-repeat="row in node.rows track by $index">
-                    <circle ng-attr-r="{{ node.scale(0.2) }}" ng-attr-cx="{{ node.scale(0.2) }}"
-                            ng-attr-cy="{{ node.scale($index + 1) - node.scale(0.33) }}"
-                            fill="{{ node.color }}" />
+                <g ng-if="node.listType == 'unordered'">
+                    <g ng-repeat="row in node.rows track by $index">
+                        <circle ng-attr-r="{{ node.scale(0.2) }}" ng-attr-cx="{{ node.scale(0.3) }}"
+                                ng-attr-cy="{{ node.scale($index + 1) - node.scale(0.33) }}"
+                                fill="{{ node.color }}" />
+                    </g>
+                </g>
+                <g ng-if="node.listType == 'ordered'">
+                    <g ng-repeat="row in node.rows track by $index">
+                        <text ng-attr-x="{{ node.scale(0.3) }}"
+                              ng-attr-y="{{ node.scale($index + 1) - node.scale(0.2) }}"
+                              fill="{{ node.color }}" ng-attr-font-size="{{ node.scale(0.6) }}">
+                            {{ $index + 1 }}
+                        </text>
+                    </g>
+                </g>
+                <g ng-if="node.listType == 'checked'">
+                    <g ng-repeat="row in node.rows track by $index" checkbox>
+                        <rect ng-attr-height="{{ node.scale(0.6) }}" width="{{ node.scale(0.6) }}"
+                              x="5" ng-attr-y="{{ node.scale($index) + node.scale(0.4) }}"
+                              fill="none" stroke="{{ node.color }}" />
+                        <circle ng-if="checkbox.checked"
+                                ng-attr-r="{{ node.scale(0.2) }}" ng-attr-cx="{{ node.scale(0.3) + 5 }}"
+                                ng-attr-cy="{{ node.scale($index + 1) - node.scale(0.3) }}"
+                                fill="{{ node.color }}" />
+                    </g>
                 </g>
                 <g ng-show="node.editing">
                     <foreignobject ng-attr-height="{{ node.textBoxHeight }}"
@@ -47,8 +69,8 @@
                 </g>
                 <g ng-hide="node.editing" ng-repeat="row in node.rows track by $index">
                     <text fill="{{ node.color }}" font-size="{{ node.size }}"
-                          ng-attr-x="{{ node.scale(0.55) }}" ng-attr-y="{{ node.scale($index + 1) }}">
-                        {{ row }}
+                          ng-attr-x="{{ node.scale(0.65) + 5 }}" ng-attr-y="{{ node.scale($index + 1) }}">
+                        {{ node.printRow(row) }}
                     </text>
                 </g>
             </g>

@@ -127,6 +127,7 @@ class BasicList extends Node {
     bool editable = true;
     String propertyPanel = 'text';
     String type = 'basicList';
+    String listType = 'unordered';
 
     List<String> rows;
 
@@ -134,6 +135,7 @@ class BasicList extends Node {
     String size;
 
     String get text => rows.join('\n');
+
     set text(String t) {
         rows = t.split('\n');
     }
@@ -147,6 +149,15 @@ class BasicList extends Node {
         color = json['color'];
         size = json['size'];
         rows = json['rows'];
+    }
+
+
+    String printRow(String row) {
+        if (row.startsWith('*')) {
+            return row.substring(1);
+        } else {
+            return row;
+        }
     }
 
     int scale(num times) {
