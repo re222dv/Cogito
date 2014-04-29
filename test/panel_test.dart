@@ -24,8 +24,6 @@ main() {
 
     group('PanelComponent', () {
         setUp(() {
-            Future f;
-
             setUpInjector();
             module((Module _) => _
                 ..type(MockHttpBackend)
@@ -35,8 +33,6 @@ main() {
 
             addToTemplateCache('lib/components/panel/panel.css');
             addToTemplateCache('lib/components/panel/panel.html');
-
-            return f;
         });
 
         tearDown(tearDownInjector);

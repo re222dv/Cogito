@@ -4,6 +4,7 @@ dependencies:
   angular: 0.10.0
   browser: any
   mongo_dart: any
+  quiver: any
   RestLibrary:
     git: https://github.com/Pajn/RestLibrary.git
   shadow_dom: any

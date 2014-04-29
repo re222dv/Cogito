@@ -1,6 +1,7 @@
 library simplify;
 
 import 'dart:math' as math;
+import 'package:quiver/core.dart' as quiver;
 
 /*
  * A simple library for simplifying a path.
@@ -55,9 +56,10 @@ class Point {
     String toString() => "${x.toStringAsFixed(1)} ${y.toStringAsFixed(1)}";
 
     bool operator ==(Point point) => x == point.x && y == point.y;
+    int get hashCode => quiver.hash2(x.hashCode, y.hashCode);
 }
 
-class SimplifyedPath {
+class SimplifiedPath {
     Point corner;
     String path;
 }
@@ -157,13 +159,13 @@ Point removePadding(List<Point> points) {
 /**
  * Simplify a polyline  to a path by removing unnecessary points.
  */
-SimplifyedPath simplify(String svgPoints, [tolerance = 2.5]) {
+SimplifiedPath simplify(String svgPoints, [tolerance = 2.5]) {
     List<Point> points = [];
 
     var coords = svgPoints.replaceAll(',', '') .split(' ');
 
     if (coords.length == 1) {
-        return new SimplifyedPath();
+        return new SimplifiedPath();
     }
 
     for (int i = 0, length = coords.length; i < length; i += 2) {
@@ -182,5 +184,5 @@ SimplifyedPath simplify(String svgPoints, [tolerance = 2.5]) {
     var start = points.removeAt(0).toString();
     var svgPath = points.join(' L ');
 
-    return new SimplifyedPath()..corner=corner..path="M $start L $svgPath";
+    return new SimplifiedPath()..corner=corner..path="M $start L $svgPath";
 }
