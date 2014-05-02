@@ -101,12 +101,22 @@ class Line extends Node {
         color = json['color'];
         width = json['width'];
 
-        // TODO get points
+        start = new simplify.Point()
+            ..x = json['start']['x']
+            ..y = json['start']['y'];
+
+        end = new simplify.Point()
+            ..x = json['end']['x']
+            ..y = json['end']['y'];
     }
 }
 
 class Arrow extends Line {
     String type = 'arrow';
+
+    Arrow();
+
+    Arrow.fromJson(Map json) : super.fromJson(json);
 }
 
 class Path extends Node {

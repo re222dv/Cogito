@@ -80,6 +80,12 @@ main() {
                 }));
             });
 
+            test('have arrow tool', () {
+                Timer.run(expectAsync(() {
+                    expect(getElement('arrow'), isNotNull);
+                }));
+            });
+
             test('select tool is choosed when clicked', () {
                 inject((TestBed tb, ToolController tool) {
                     Timer.run(expectAsync(() {
@@ -141,6 +147,19 @@ main() {
 
                         expect(element, hasClass('active'));
                         expect(tool.selectedTool, equals('line'));
+                    }));
+                });
+            });
+
+            test('arrow tool is choosed when clicked', () {
+                inject((TestBed tb, ToolController tool) {
+                    Timer.run(expectAsync(() {
+                        var element = getElement('arrow');
+                        tb.triggerEvent(element, 'click');
+                        microLeap();
+
+                        expect(element, hasClass('active'));
+                        expect(tool.selectedTool, equals('arrow'));
                     }));
                 });
             });
