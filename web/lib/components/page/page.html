@@ -11,6 +11,10 @@
                       ng-attr-points="{{ node.freehand }}" fill="none"
                       stroke="{{ node.color }}" stroke-width="{{ node.width }}" />
 
+            <path ng-if="node.type == 'line'"
+                  stroke="{{ node.color }}" stroke-width="{{ node.width }}" fill="none"
+                  ng-attr-d="M {{ node.start }} L {{ node.end }}" />
+
             <path ng-if="node.type == 'path'"
                   stroke="{{ node.color }}" stroke-width="{{ node.width }}"
                   fill="none" ng-attr-d="{{ node.path }}" />

@@ -78,6 +78,56 @@ class PageComponent {
             })));
         }));
 
+        ['touchstart', 'mousedown'].forEach((event) => element.on[event].where((_) => tool.selectedTool == 'line').listen((MouseEvent e) {
+            var line = new Line()
+                ..color = 'black'
+                ..width = '12'
+                ..start = (new simplify.Point()
+                    ..x = e.offset.x
+                    ..y = e.offset.y)
+                ..end = (new simplify.Point()
+                    ..x = e.offset.x
+                    ..y = e.offset.y);
+
+            page.nodes.add(line);
+
+            tool.selectedNode = line;
+            tool.propertyPanel = line.propertyPanel;
+
+            var events = [];
+
+            ['touchmove', 'mousemove'].forEach((event) => events.add(element.parent.on[event].listen((MouseEvent e) {
+                line.end = new simplify.Point()
+                    ..x = e.offset.x
+                    ..y = e.offset.y;
+                e.preventDefault();
+                e.stopPropagation();
+            })));
+
+            ['touchend', 'mouseup'].forEach((event) => events.add(element.parent.on[event].listen((_) {
+                events.forEach((e) => e.cancel());
+
+                if (line.end != null) {
+                    var points = [line.start, line.end];
+                    var corner = simplify.removePadding(points);
+
+                    line..start = (new simplify.Point()
+                            ..x = points[0].x
+                            ..y = points[0].y)
+                        ..end = (new simplify.Point()
+                            ..x = points[1].x
+                            ..y = points[1].y)
+                        ..x = corner.x
+                        ..y = corner.y;
+
+                    tool.selectedNode = line;
+                    tool.propertyPanel = line.propertyPanel;
+                } else {
+                    page.nodes.remove(line);
+                }
+            })));
+        }));
+
         element.onClick.where((_) => tool.selectedTool == 'text').listen((MouseEvent e) {
             var node = new Text()
                 ..color='black'

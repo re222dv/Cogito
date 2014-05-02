@@ -85,6 +85,26 @@ class Freehand extends Node {
     String freehand = '';
 }
 
+class Line extends Node {
+    String propertyPanel = 'line';
+    String type = 'line';
+
+    String color;
+    String width;
+
+    simplify.Point start;
+    simplify.Point end;
+
+    Line();
+
+    Line.fromJson(Map json) : super.fromJson(json) {
+        color = json['color'];
+        width = json['width'];
+
+        // TODO get points
+    }
+}
+
 class Path extends Node {
     String propertyPanel = 'line';
     String type = 'path';
