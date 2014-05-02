@@ -1,18 +1,23 @@
 #!/bin/bash
 
-dart test/unit_tests.dart --checked
+which content_shell
+if [[ $? -ne 0 ]]; then
+  $DART_SDK/../chromium/download_contentshell.sh
+  unzip -qq content_shell-linux-x64-release.zip
 
+  cs_path=$(ls -d drt-*)
+  PATH=$cs_path:$PATH
+fi
+
+dart test/unit_tests.dart --checked
 if [ $? -ne 0 ]; then
     exit 1
 fi
 
+# check to see if content_shell exists if not, fail
 which content_shell
 if [[ $? -ne 0 ]]; then
-  $DART_SDK/../chromium/download_contentshell.sh
-  unzip content_shell-linux-x64-release.zip
-
-  cs_path=$(ls -d drt-*)
-  PATH=$cs_path:$PATH
+exit 1
 fi
 
 # Start x
