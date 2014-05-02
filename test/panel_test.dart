@@ -6,6 +6,7 @@ import 'package:angular/angular.dart';
 import 'package:angular/mock/module.dart';
 import 'package:unittest/unittest.dart';
 import '../web/lib/cogito.dart';
+import 'helpers.dart';
 
 /**
  * It adds an html template into the TemplateCache.
@@ -73,13 +74,20 @@ main() {
                 }));
             });
 
+            test('have line tool', () {
+                Timer.run(expectAsync(() {
+                    expect(getElement('line'), isNotNull);
+                }));
+            });
+
             test('select tool is choosed when clicked', () {
                 inject((TestBed tb, ToolController tool) {
                     Timer.run(expectAsync(() {
-                        tb.triggerEvent(getElement('select'), 'click');
+                        var element = getElement('select');
+                        tb.triggerEvent(element, 'click');
                         microLeap();
 
-                        expect(getElement('select').classes.contains('active'), isTrue);
+                        expect(element, hasClass('active'));
                         expect(tool.selectedTool, equals('select'));
                     }));
                 });
@@ -88,10 +96,11 @@ main() {
             test('draw tool is choosed when clicked', () {
                 inject((TestBed tb, ToolController tool) {
                     Timer.run(expectAsync(() {
-                        tb.triggerEvent(getElement('draw'), 'click');
+                        var element = getElement('draw');
+                        tb.triggerEvent(element, 'click');
                         microLeap();
 
-                        expect(getElement('draw').classes.contains('active'), isTrue);
+                        expect(element, hasClass('active'));
                         expect(tool.selectedTool, equals('draw'));
                     }));
                 });
@@ -100,10 +109,11 @@ main() {
             test('text tool is choosed when clicked', () {
                 inject((TestBed tb, ToolController tool) {
                     Timer.run(expectAsync(() {
-                        tb.triggerEvent(getElement('text'), 'click');
+                        var element = getElement('text');
+                        tb.triggerEvent(element, 'click');
                         microLeap();
 
-                        expect(getElement('text').classes.contains('active'), isTrue);
+                        expect(element, hasClass('active'));
                         expect(tool.selectedTool, equals('text'));
                     }));
                 });
@@ -112,11 +122,25 @@ main() {
             test('list tool is choosed when clicked', () {
                 inject((TestBed tb, ToolController tool) {
                     Timer.run(expectAsync(() {
-                        tb.triggerEvent(getElement('list'), 'click');
+                        var element = getElement('list');
+                        tb.triggerEvent(element, 'click');
                         microLeap();
 
-                        expect(getElement('list').classes.contains('active'), isTrue);
+                        expect(element, hasClass('active'));
                         expect(tool.selectedTool, equals('list'));
+                    }));
+                });
+            });
+
+            test('line tool is choosed when clicked', () {
+                inject((TestBed tb, ToolController tool) {
+                    Timer.run(expectAsync(() {
+                        var element = getElement('line');
+                        tb.triggerEvent(element, 'click');
+                        microLeap();
+
+                        expect(element, hasClass('active'));
+                        expect(tool.selectedTool, equals('line'));
                     }));
                 });
             });
