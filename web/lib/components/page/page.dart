@@ -35,6 +35,19 @@ class PageComponent {
         page.nodes.add(new BasicList()..x=400..y=50..size='32'..rows=['Row 1', 'Row 2', 'Row 1']..color='black');
         page.nodes.add(new BasicList()..x=400..y=250..size='12'..rows=['Row 1', 'Row 2', 'Row 3']..color='green');
 
+
+        page.nodes.add(new Arrow()
+            ..x = 400
+            ..y = 50
+            ..width = '32'
+            ..start = (new simplify.Point()
+                ..x = 0
+                ..y = 0)
+            ..end = (new simplify.Point()
+                ..x = 220
+                ..y = 220)
+            ..color = 'black');
+
         ['touchstart', 'mousedown'].forEach((event) => element.on[event]
                                    .where((_) => tool.selectedTool == 'draw').listen((_) {
             var path = new Freehand()
@@ -124,6 +137,57 @@ class PageComponent {
                     tool.propertyPanel = line.propertyPanel;
                 } else {
                     page.nodes.remove(line);
+                }
+            })));
+        }));
+
+        ['touchstart', 'mousedown'].forEach((event) => element.on[event].where((_) => tool.selectedTool == 'arrow').listen((MouseEvent e) {
+            var arrow = new Arrow()
+                ..color = 'black'
+                ..width = '12'
+                ..start = (new simplify.Point()
+                    ..x = e.offset.x
+                    ..y = e.offset.y)
+                ..end = (new simplify.Point()
+                    ..x = e.offset.x
+                    ..y = e.offset.y);
+
+            page.nodes.add(arrow);
+
+            tool.selectedNode = arrow;
+            tool.propertyPanel = arrow.propertyPanel;
+
+            var events = [];
+
+            ['touchmove', 'mousemove'].forEach((event) => events.add(element.parent.on[event].listen((MouseEvent e) {
+                arrow.end = new simplify.Point()
+                    ..x = e.offset.x
+                    ..y = e.offset.y;
+                e.preventDefault();
+                e.stopPropagation();
+            })));
+
+            ['touchend', 'mouseup'].forEach((event) => events.add(element.parent.on[event].listen((_) {
+                events.forEach((e) => e.cancel());
+
+                if (arrow.end != null) {
+                    var points = [arrow.start, arrow.end];
+                    var corner = simplify.removePadding(points);
+
+                    arrow
+                        ..start = (new simplify.Point()
+                        ..x = points[0].x
+                        ..y = points[0].y)
+                        ..end = (new simplify.Point()
+                        ..x = points[1].x
+                        ..y = points[1].y)
+                        ..x = corner.x
+                        ..y = corner.y;
+
+                    tool.selectedNode = arrow;
+                    tool.propertyPanel = arrow.propertyPanel;
+                } else {
+                    page.nodes.remove(arrow);
                 }
             })));
         }));

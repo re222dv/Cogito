@@ -13,8 +13,11 @@ packages:
     source: hosted
     version: "0.13.6"
   angular:
-    description: angular
-    source: hosted
+    description:
+      ref: null
+      resolved-ref: "9cb74d417412facecbea250443ba327b87d2a4b7"
+      url: "https://github.com/angular/angular.dart.git"
+    source: git
     version: "0.10.0"
   args:
     description: args
@@ -51,7 +54,7 @@ packages:
   html5lib:
     description: html5lib
     source: hosted
-    version: "0.9.2"
+    version: "0.10.0"
   http_server:
     description: http_server
     source: hosted

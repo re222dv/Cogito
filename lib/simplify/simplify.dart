@@ -16,12 +16,18 @@ class Point {
     num y;
 
     /**
+     * distance between 2 points.
+     */
+    num getDist(Point p) {
+        return math.sqrt(getSqDist(p));
+    }
+
+    /**
      * Square distance between 2 points.
      */
     num getSqDist(Point p) {
         var dx = x - p.x,
             dy = y - p.y;
-
         return dx * dx + dy * dy;
     }
 

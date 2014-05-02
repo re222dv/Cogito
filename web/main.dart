@@ -6,13 +6,14 @@ import 'lib/cogito.dart';
 
 class WebModule extends Module {
     WebModule() {
-        type(PageComponent);
-        type(PanelComponent);
-        type(CheckBoxController);
-        type(NodeHandlerController);
-        type(ToolController);
-        type(BindHtmlDecorator);
-        type(PageService);
+        bind(PageComponent);
+        bind(PanelComponent);
+        bind(CheckBoxController);
+        bind(ArrowController);
+        bind(NodeHandlerController);
+        bind(ToolController);
+        bind(BindHtmlDecorator);
+        bind(PageService);
     }
 }
 

@@ -105,6 +105,10 @@ class Line extends Node {
     }
 }
 
+class Arrow extends Line {
+    String type = 'arrow';
+}
+
 class Path extends Node {
     String propertyPanel = 'line';
     String type = 'path';
