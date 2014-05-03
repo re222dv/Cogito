@@ -10,6 +10,7 @@ dependencies:
     git: https://github.com/Pajn/RestLibrary.git
   shadow_dom: any
 dev_dependencies:
+  guinness: ">=0.0.1 <1.0.0"
   matcher: any
   unittest: any
 transformers:
