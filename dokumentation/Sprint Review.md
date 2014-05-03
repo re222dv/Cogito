@@ -12,7 +12,10 @@ runt problemet orkade jag inte lämna in någon buggrapoirt på den odokumentera
 
 # Sprint 3
 Efter att ha fokuserat på testning känns det som jag har ett bättre grepp på den och har en bra grund att
-bugga vidare på. Tidsmässigt är det väl inte så mycket att säga, vissa saker gick snababre än trott medans
+bugga vidare på. Testresultaten går att se efter vare push på drone.io. Veckans build är
+[#37](https://drone.io/github.com/re222dv/Cogito/37)
+
+Tidsmässigt är det väl inte så mycket att säga, vissa saker gick snababre än trott medans
 en (rita pilar) tog längre tid vilket gjorde att det jämnade ut sig. Jag blev tvungen att rapportera ännu
 en [bugg till AngularDart](https://github.com/angular/angular.dart/issues/987).
 
