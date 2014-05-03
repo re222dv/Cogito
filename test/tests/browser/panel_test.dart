@@ -6,7 +6,7 @@ import 'package:angular/angular.dart';
 import 'package:angular/mock/module.dart';
 import 'package:unittest/unittest.dart' hide expect;
 import 'package:guinness/guinness_html.dart';
-import '../web/lib/cogito.dart';
+import '../../../web/lib/cogito.dart';
 
 /**
  * Adds a template into the TemplateCache.

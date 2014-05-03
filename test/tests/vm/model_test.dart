@@ -9,7 +9,7 @@ main() {
     unittestConfiguration.timeout = new Duration(seconds: 3);
 
     describe('Model', () {
-        describe('from JSON', () {
+        describe('fromJson', () {
             it('should be able to parse a Line', () {
                 var line = new Line.fromJson({
                     'x': 10,

@@ -1,6 +1,6 @@
 import 'package:unittest/html_config.dart';
-import 'panel_test.dart' as panel;
-import 'tool_test.dart' as tool;
+import 'tests/browser/panel_test.dart' as panel;
+import 'tests/browser/tool_test.dart' as tool;
 
 main() {
     useHtmlConfiguration();

@@ -9,7 +9,7 @@ if [[ $? -ne 0 ]]; then
   PATH=$cs_path:$PATH
 fi
 
-dart test/unit_tests.dart --checked
+dart test/vm_tests.dart --checked
 if [ $? -ne 0 ]; then
     exit 1
 fi

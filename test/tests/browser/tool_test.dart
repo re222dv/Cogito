@@ -2,7 +2,7 @@ library tool_tests;
 
 import 'package:unittest/unittest.dart' hide expect;
 import 'package:guinness/guinness.dart';
-import '../web/lib/cogito.dart';
+import '../../../web/lib/cogito.dart';
 
 main() {
     unittestConfiguration.timeout = new Duration(seconds: 3);
