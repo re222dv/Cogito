@@ -25,16 +25,17 @@ void main() {
             expect(result.path).toEqual(simplified5);
         });
 
-        it('should return a line that have only have had its padding removed if it has only two points', () {
+        it('should return a line that only have had its padding removed if it has only two points', () {
             var result = simplify('1, 2 4, 5');
 
             expect(result.corner).toEqual(new Point()..x=1..y=2);
             expect(result.path).toEqual('M 0.0 0.0 L 3.0 3.0');
         });
 
-        it('should returns a empty result if it has no points', () {
+        it('should return an empty result if it has no points', () {
             var result = simplify('');
 
+            expect(result.corner).toEqual(null);
             expect(result.path).toEqual(null);
         });
     });

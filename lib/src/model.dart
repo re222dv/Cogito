@@ -8,11 +8,17 @@ class Page {
     Page.fromJson(Map json) {
         json['nodes'].forEach((Map json) {
             switch(json['type']) {
-                case 'text':
-                    nodes.add(new Text.fromJson(json));
+                case 'line':
+                    nodes.add(new Line.fromJson(json));
+                    break;
+                case 'arrow':
+                    nodes.add(new Arrow.fromJson(json));
                     break;
                 case 'path':
                     nodes.add(new Path.fromJson(json));
+                    break;
+                case 'text':
+                    nodes.add(new Text.fromJson(json));
                     break;
                 case 'basicList':
                     nodes.add(new BasicList.fromJson(json));

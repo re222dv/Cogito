@@ -25,6 +25,10 @@ main() {
     unittestConfiguration.timeout = new Duration(seconds: 3);
 
     describe('PanelComponent', () {
+        ShadowRoot shadowRoot;
+        TestBed tb;
+        ToolController tool;
+
         beforeEach(() {
             // Prepare Angular for testing
             setUpInjector();
@@ -39,22 +43,25 @@ main() {
             // Add required templates to the cache
             addToTemplateCache('lib/components/panel/panel.css');
             addToTemplateCache('lib/components/panel/panel.html');
+
+            // Acquire a TestBed and ToolController instance
+            inject((TestBed _tb, ToolController _tool) {
+                tb = _tb;
+                tool = _tool;
+            });
         });
 
         // Tell Angular we are done
         afterEach(tearDownInjector);
 
         describe('right', () {
-            ShadowRoot shadowRoot;
 
-            /// Makes it easy to get the element we're testing
-            Element element(tool) => shadowRoot.querySelector("[ng-click=\"tool.selectedTool = '$tool'\"]");
+            // Makes it easy to get the element we're testing
+            Element element(tool) => shadowRoot.querySelector('''[ng-click="tool.selectedTool = '$tool'"]''');
 
             beforeEach(() {
-                inject((TestBed tb) {
-                    shadowRoot = tb.compile('<panel position="right"></panel>').shadowRoot;
-                    tb.rootScope.apply();
-                });
+                shadowRoot = tb.compile('<panel position="right"></panel>').shadowRoot;
+                tb.rootScope.apply();
             });
 
             it('should have a select tool', () {
@@ -94,75 +101,57 @@ main() {
             });
 
             it('should choose the select tool when clicked', () {
-                inject((TestBed tb, ToolController tool) {
-                    Timer.run(expectAsync(() {
-                        tb.triggerEvent(element('select'), 'click');
-                        microLeap();
+                Timer.run(expectAsync(() {
+                    tb.triggerEvent(element('select'), 'click');
 
-                        expect(element('select')).toHaveClass('active');
-                        expect(tool.selectedTool).toEqual('select');
-                    }));
-                });
+                    expect(element('select')).toHaveClass('active');
+                    expect(tool.selectedTool).toEqual('select');
+                }));
             });
 
             it('should choose the draw tool when clicked', () {
-                inject((TestBed tb, ToolController tool) {
-                    Timer.run(expectAsync(() {
-                        tb.triggerEvent(element('draw'), 'click');
-                        microLeap();
+                Timer.run(expectAsync(() {
+                    tb.triggerEvent(element('draw'), 'click');
 
-                        expect(element('draw')).toHaveClass('active');
-                        expect(tool.selectedTool).toEqual('draw');
-                    }));
-                });
+                    expect(element('draw')).toHaveClass('active');
+                    expect(tool.selectedTool).toEqual('draw');
+                }));
             });
 
             it('should choose the text tool when clicked', () {
-                inject((TestBed tb, ToolController tool) {
-                    Timer.run(expectAsync(() {
-                        tb.triggerEvent(element('text'), 'click');
-                        microLeap();
+                Timer.run(expectAsync(() {
+                    tb.triggerEvent(element('text'), 'click');
 
-                        expect(element('text')).toHaveClass('active');
-                        expect(tool.selectedTool).toEqual('text');
-                    }));
-                });
+                    expect(element('text')).toHaveClass('active');
+                    expect(tool.selectedTool).toEqual('text');
+                }));
             });
 
             it('should choose the list tool when clicked', () {
-                inject((TestBed tb, ToolController tool) {
-                    Timer.run(expectAsync(() {
-                        tb.triggerEvent(element('list'), 'click');
-                        microLeap();
+                Timer.run(expectAsync(() {
+                    tb.triggerEvent(element('list'), 'click');
 
-                        expect(element('list')).toHaveClass('active');
-                        expect(tool.selectedTool).toEqual('list');
-                    }));
-                });
+                    expect(element('list')).toHaveClass('active');
+                    expect(tool.selectedTool).toEqual('list');
+                }));
             });
 
             it('should choose the line tool when clicked', () {
-                inject((TestBed tb, ToolController tool) {
-                    Timer.run(expectAsync(() {
-                        tb.triggerEvent(element('line'), 'click');
-                        microLeap();
+                Timer.run(expectAsync(() {
+                    tb.triggerEvent(element('line'), 'click');
 
-                        expect(element('line')).toHaveClass('active');
-                        expect(tool.selectedTool).toEqual('line');
-                    }));
-                });
+                    expect(element('line')).toHaveClass('active');
+                    expect(tool.selectedTool).toEqual('line');
+                }));
             });
 
             it('should choose the arrow tool when clicked', () {
-                inject((TestBed tb, ToolController tool) {
-                    Timer.run(expectAsync(() {
-                        tb.triggerEvent(element('arrow'), 'click');
-                        microLeap();
+                Timer.run(expectAsync(() {
+                    tb.triggerEvent(element('arrow'), 'click');
 
-                        expect(element('arrow')).toHaveClass('active');
-                        expect(tool.selectedTool).toEqual('arrow');
-                    }));
-                });
+                    expect(element('arrow')).toHaveClass('active');
+                    expect(tool.selectedTool).toEqual('arrow');
+                }));
             });
         });
     });
