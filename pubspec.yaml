@@ -18,3 +18,6 @@ transformers:
     html_files:
       - web/lib/components/page/page.html
       - web/lib/components/panel/panel.html
+- $dart2js:
+    checked: false
+    minify: false

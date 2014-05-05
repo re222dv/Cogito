@@ -1,5 +1,58 @@
 part of cogito;
 
+/**
+ * A node is an object on a page. I.E. a Text or a Line
+ */
+abstract class Node {
+    final bool editable = false;
+    bool _editing = false;
+
+    String propertyPanel = '';
+    String get type;
+
+    int x;
+    int y;
+
+    num nodeWidth;
+    num nodeHeight;
+
+    StreamController _onEdit = new StreamController();
+    Stream get onEdit => _onEdit.stream;
+
+    bool get editing => _editing;
+    void set editing(e) {
+        _editing = e;
+        _onEdit.add(e);
+    }
+
+    Node();
+
+    Node.fromJson(Map json) {
+        x = json['x'];
+        y = json['y'];
+    }
+
+    noSuchMethod(Invocation invocation) => null;
+}
+
+abstract class Panel {
+    final String propertyPanel;
+}
+
+abstract class LinePanel implements Panel {
+    final String propertyPanel = 'line';
+
+    String color;
+    String width;
+}
+
+abstract class TextPanel implements Panel {
+    final String propertyPanel = 'text';
+
+    String color;
+    String size;
+}
+
 class Page {
     List<Node> nodes = [];
 
@@ -50,50 +103,16 @@ class Page {
     }
 }
 
-abstract class Node {
-    final bool editable = false;
-    bool _editing = false;
-
-    String propertyPanel = '';
-    String get type;
-
-    int x;
-    int y;
-
-    num nodeWidth;
-    num nodeHeight;
-
-    StreamController _onEdit = new StreamController();
-    Stream get onEdit => _onEdit.stream;
-
-    bool get editing => _editing;
-    void set editing(e) {
-        _editing = e;
-        _onEdit.add(e);
-    }
-
-    Node();
-
-    Node.fromJson(Map json) {
-        x = json['x'];
-        y = json['y'];
-    }
-
-    noSuchMethod(Invocation invocation) => null;
-}
-
-class Freehand extends Node {
-    String propertyPanel = 'line';
-    String type = 'freehand';
+class Freehand extends Node with LinePanel {
+    final String type = 'freehand';
 
     String color;
     String width;
     String freehand = '';
 }
 
-class Line extends Node {
-    String propertyPanel = 'line';
-    String type = 'line';
+class Line extends Node with LinePanel {
+    final String type = 'line';
 
     String color;
     String width;
@@ -118,16 +137,15 @@ class Line extends Node {
 }
 
 class Arrow extends Line {
-    String type = 'arrow';
+    final String type = 'arrow';
 
     Arrow();
 
     Arrow.fromJson(Map json) : super.fromJson(json);
 }
 
-class Path extends Node {
-    String propertyPanel = 'line';
-    String type = 'path';
+class Path extends Node with LinePanel {
+    final String type = 'path';
 
     String color;
     String path;
@@ -142,10 +160,9 @@ class Path extends Node {
     }
 }
 
-class Text extends Node {
-    bool editable = true;
-    String propertyPanel = 'text';
-    String type = 'text';
+class Text extends Node with TextPanel {
+    final bool editable = true;
+    final String type = 'text';
 
     String color;
     String size;
@@ -163,10 +180,9 @@ class Text extends Node {
     }
 }
 
-class BasicList extends Node {
-    bool editable = true;
-    String propertyPanel = 'text';
-    String type = 'basicList';
+class BasicList extends Node with TextPanel {
+    final bool editable = true;
+    final String type = 'basicList';
     String listType = 'unordered';
 
     List<String> rows;
@@ -190,7 +206,6 @@ class BasicList extends Node {
         size = json['size'];
         rows = json['rows'];
     }
-
 
     String printRow(String row) {
         if (row.startsWith('*')) {

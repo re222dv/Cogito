@@ -15,7 +15,7 @@ packages:
   angular:
     description:
       ref: null
-      resolved-ref: "9cb74d417412facecbea250443ba327b87d2a4b7"
+      resolved-ref: be1f6b0be9d458bd314b3541e03bb6a1cf9c44f8
       url: "https://github.com/angular/angular.dart.git"
     source: git
     version: "0.10.0"
@@ -54,7 +54,7 @@ packages:
   guinness:
     description: guinness
     source: hosted
-    version: "0.1.1"
+    version: "0.1.2"
   html5lib:
     description: html5lib
     source: hosted
