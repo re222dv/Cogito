@@ -43,14 +43,14 @@ abstract class LinePanel implements Panel {
     final String propertyPanel = 'line';
 
     String color;
-    String width;
+    int width;
 }
 
 abstract class TextPanel implements Panel {
     final String propertyPanel = 'text';
 
     String color;
-    String size;
+    int size;
 }
 
 class Page {
@@ -106,16 +106,11 @@ class Page {
 class Freehand extends Node with LinePanel {
     final String type = 'freehand';
 
-    String color;
-    String width;
     String freehand = '';
 }
 
 class Line extends Node with LinePanel {
     final String type = 'line';
-
-    String color;
-    String width;
 
     simplify.Point start;
     simplify.Point end;
@@ -147,9 +142,7 @@ class Arrow extends Line {
 class Path extends Node with LinePanel {
     final String type = 'path';
 
-    String color;
     String path;
-    String width;
 
     Path();
 
@@ -164,12 +157,10 @@ class Text extends Node with TextPanel {
     final bool editable = true;
     final String type = 'text';
 
-    String color;
-    String size;
     String text;
 
-    int get textBoxHeight => int.parse(size) + 10;
-    int get textBoxWidth => int.parse(size) * (text.length + 1);
+    int get textBoxHeight => size + 10;
+    int get textBoxWidth => size * (text.length + 1);
 
     Text();
 
@@ -187,17 +178,14 @@ class BasicList extends Node with TextPanel {
 
     List<String> rows;
 
-    String color;
-    String size;
-
     String get text => rows.join('\n');
 
     set text(String t) {
         rows = t.split('\n');
     }
 
-    int get textBoxHeight => int.parse(size) * rows.length + 10;
-    int get textBoxWidth => int.parse(size) * (text.length + 1);
+    int get textBoxHeight => size * rows.length + 10;
+    int get textBoxWidth => size * (text.length + 1);
 
     BasicList();
 
@@ -217,7 +205,7 @@ class BasicList extends Node with TextPanel {
 
     int scale(num times) {
         if (times != null) {
-            return (int.parse(size) * times).round();
+            return (size * times).round();
         } else {
             return 0;
         }

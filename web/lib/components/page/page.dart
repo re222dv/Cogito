@@ -32,14 +32,14 @@ class PageComponent {
 
         //pages.getPage().then((page) => this.page = page);
 
-        page.nodes.add(new BasicList()..x=400..y=50..size='32'..rows=['Row 1', 'Row 2', 'Row 1']..color='black');
-        page.nodes.add(new BasicList()..x=400..y=250..size='12'..rows=['Row 1', 'Row 2', 'Row 3']..color='green');
+        page.nodes.add(new BasicList()..x=400..y=50..size=32..rows=['Row 1', 'Row 2', 'Row 1']..color='black');
+        page.nodes.add(new BasicList()..x=400..y=250..size=12..rows=['Row 1', 'Row 2', 'Row 3']..color='green');
 
 
         page.nodes.add(new Arrow()
             ..x = 400
             ..y = 50
-            ..width = '32'
+            ..width = 32
             ..start = (new simplify.Point()
                 ..x = 0
                 ..y = 0)
@@ -52,7 +52,7 @@ class PageComponent {
                                    .where((_) => tool.selectedTool == 'draw').listen((_) {
             var path = new Freehand()
                 ..color='black'
-                ..width='12';
+                ..width=8;
 
             page.nodes.add(path);
 
@@ -94,7 +94,7 @@ class PageComponent {
         ['touchstart', 'mousedown'].forEach((event) => element.on[event].where((_) => tool.selectedTool == 'line').listen((MouseEvent e) {
             var line = new Line()
                 ..color = 'black'
-                ..width = '12'
+                ..width = 8
                 ..start = (new simplify.Point()
                     ..x = e.offset.x
                     ..y = e.offset.y)
@@ -144,7 +144,7 @@ class PageComponent {
         ['touchstart', 'mousedown'].forEach((event) => element.on[event].where((_) => tool.selectedTool == 'arrow').listen((MouseEvent e) {
             var arrow = new Arrow()
                 ..color = 'black'
-                ..width = '12'
+                ..width = 8
                 ..start = (new simplify.Point()
                     ..x = e.offset.x
                     ..y = e.offset.y)
@@ -198,7 +198,7 @@ class PageComponent {
                 ..text=''
                 ..x=e.client.x
                 ..y=e.client.y - 12
-                ..size='24'
+                ..size=24
                 ..editing = true;
 
             page.nodes.add(node);
@@ -219,7 +219,7 @@ class PageComponent {
                 ..text=''
                 ..x=e.client.x
                 ..y=e.client.y - 12
-                ..size='24'
+                ..size=24
                 ..editing = true;
 
             page.nodes.add(node);

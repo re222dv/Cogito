@@ -6,6 +6,7 @@ import 'lib/cogito.dart';
 
 class WebModule extends Module {
     WebModule() {
+        bind(DropDownComponent);
         bind(PageComponent);
         bind(PanelComponent);
         bind(CheckBoxController);

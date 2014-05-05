@@ -173,3 +173,10 @@
 [data-position]>div .active {
     background: rgba(255, 255, 255, 0.20);
 }
+
+[data-position="top"]>div>dropdown {
+    display: inline-block;
+    position: relative;
+
+    height: 2rem;
+}

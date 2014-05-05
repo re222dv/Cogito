@@ -1,0 +1,16 @@
+<div data-type="{{ cmp.type }}" data-open="{{ cmp.open }}" value="{{ cmp.value }}">
+    <p ng-if="cmp.type == 'color'" style="background-color: {{ cmp.value }}">
+    </p>
+    <p ng-if="cmp.type != 'color'">
+        {{ cmp.value }}
+    </p>
+    <ul ng-show="cmp.open">
+        <li ng-repeat="value in cmp.prioritizedValues" ng-click="cmp.value = value" value="{{ value }}">
+            <p ng-if="cmp.type == 'color'" style="background-color: {{ value }}">
+            </p>
+            <p ng-if="cmp.type != 'color'">
+                {{ value }}
+            </p>
+        </li>
+    </ul>
+</div>

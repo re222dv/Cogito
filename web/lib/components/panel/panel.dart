@@ -14,10 +14,15 @@ class PanelComponent extends ShadowRootAware {
         position = value;
     }
 
+    List<int> lineWidths = [];
     List<int> textSizes = [];
     List<String> colors = ['black', 'white', 'red', 'green', 'blue', 'yellow'];
 
     PanelComponent() {
+        // Create line widths from the fibonacci scale
+        for (var i = 1, first = 1, second = 1; i < 90; i = first + second, first = second, second = i) {
+            lineWidths.add(i);
+        }
         for (var i = 12; i <= 72; i+= 2) {
             textSizes.add(i);
         }

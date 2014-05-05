@@ -7,7 +7,7 @@ class ArrowController {
 
     num get radians => math.atan2(node.end.y - node.start.y, node.end.x - node.start.x);
     num get quarterRadians => radians + math.PI / 2;
-    num get width => num.parse(node.width);
+    num get width => node.width;
 
     num get headLength => node.start.getDist(node.end) * 0.3;
     num get headWidth => width * 8;

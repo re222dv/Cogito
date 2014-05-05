@@ -1,0 +1,52 @@
+div {
+
+    display: inline-block;
+    padding: 4px;
+
+    background: rgba(0, 0, 0, 0.2);
+    border: #333;
+    border-radius: 5px;
+}
+
+p {
+    margin: 0;
+    padding: 0.2rem;
+
+    min-width: 1.5rem;
+    min-height: 1.5rem;
+
+    cursor: pointer;
+    color: white;
+
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+div[data-open="true"] {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+ul {
+    position: absolute;
+    left: 0;
+    top: 38px;
+    margin: 0;
+    padding: 4px;
+
+    background: rgba(0, 0, 0, 0.8);
+    border: #333;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+
+    list-style: none;
+}
+
+.ng-hide {
+    display: none;
+}
+
+
+div[data-type="color"] {
+    margin-bottom: -14px;
+}
