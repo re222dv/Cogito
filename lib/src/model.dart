@@ -32,6 +32,14 @@ abstract class Node {
         y = json['y'];
     }
 
+    Map toJson() {
+        return {
+            'type': type,
+            'x': x,
+            'y': y
+        };
+    }
+
     noSuchMethod(Invocation invocation) => null;
 }
 
@@ -101,12 +109,20 @@ class Page {
             nodes.insert(i, second);
         }
     }
+
+    Map toJson() => {
+        'nodes': nodes.map((node) => node.toJson()).toList()
+    };
 }
 
 class Freehand extends Node with LinePanel {
     final String type = 'freehand';
 
     String freehand = '';
+
+    Map toJson() => super.toJson()..addAll({
+        'freehand': freehand
+    });
 }
 
 class Line extends Node with LinePanel {
@@ -129,6 +145,13 @@ class Line extends Node with LinePanel {
             ..x = json['end']['x']
             ..y = json['end']['y'];
     }
+
+    Map toJson() => super.toJson()..addAll({
+        'color': color,
+        'width': width,
+        'start': start.toJson(),
+        'end': end.toJson()
+    });
 }
 
 class Arrow extends Line {
@@ -151,6 +174,12 @@ class Path extends Node with LinePanel {
         path = json['path'];
         width = json['width'];
     }
+
+    Map toJson() => super.toJson()..addAll({
+        'color': color,
+        'width': width,
+        'path': path
+    });
 }
 
 class Text extends Node with TextPanel {
@@ -169,6 +198,12 @@ class Text extends Node with TextPanel {
         size = json['size'];
         text = json['text'];
     }
+
+    Map toJson() => super.toJson()..addAll({
+        'color': color,
+        'size': size,
+        'text': text
+    });
 }
 
 class BasicList extends Node with TextPanel {
@@ -194,6 +229,12 @@ class BasicList extends Node with TextPanel {
         size = json['size'];
         rows = json['rows'];
     }
+
+    Map toJson() => super.toJson()..addAll({
+        'color': color,
+        'size': size,
+        'rows': rows
+    });
 
     String printRow(String row) {
         if (row.startsWith('*')) {

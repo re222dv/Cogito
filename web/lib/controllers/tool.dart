@@ -8,6 +8,8 @@ class ToolController {
     Node selectedNode;
     String propertyPanel;
 
+    PageComponent page;
+
     String _selectedTool = 'select';
     String get selectedTool => _selectedTool;
     void set selectedTool(t) {
@@ -26,4 +28,8 @@ class ToolController {
     }
 
     ToolController._internal();
+
+    save() {
+        page.save();
+    }
 }

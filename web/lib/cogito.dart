@@ -1,6 +1,7 @@
 library cogito_web;
 
 import 'dart:async';
+import 'dart:convert';
 import 'dart:html' show document, Element, Event, MouseEvent, NodeValidator, NodeValidatorBuilder, ShadowRoot;
 import 'dart:math' as math;
 import 'package:angular/angular.dart';

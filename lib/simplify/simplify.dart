@@ -61,6 +61,8 @@ class Point {
 
     String toString() => "${x.toStringAsFixed(1)} ${y.toStringAsFixed(1)}";
 
+    Map toJson() => {'x': x, 'y': y};
+
     bool operator ==(Point point) => x == point.x && y == point.y;
     int get hashCode => quiver.hash2(x.hashCode, y.hashCode);
 }

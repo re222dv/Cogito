@@ -12,7 +12,6 @@ import '../../../web/lib/cogito.dart';
 
 main() {
     guinnessEnableHtmlMatchers();
-    unittestConfiguration.timeout = new Duration(seconds: 3);
 
     group('DropDownComponent', () {
         ShadowRoot shadowRoot;

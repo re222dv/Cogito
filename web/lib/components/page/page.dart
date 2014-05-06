@@ -8,10 +8,13 @@ part of cogito_web;
 )
 class PageComponent {
     Page page;
+    PageService pages;
 
-    PageComponent(Element element, ToolController tool, PageService pages) {
+    PageComponent(Element element, ToolController tool, this.pages) {
 
         page = new Page();
+
+        tool.page = this;
 
         /*var hel = new Text()..color='red'..text='Hello, World!'..x=50..y=50..size='20';
         page.nodes.add(hel);
@@ -234,4 +237,6 @@ class PageComponent {
             e.preventDefault();
         });
     }
+
+    save() => pages.savePage(page);
 }
