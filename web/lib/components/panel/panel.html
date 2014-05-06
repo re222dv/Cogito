@@ -4,15 +4,15 @@
                 ng-class="{active: tool.selectedTool == 'select'}">Select</button>
         <button ng-click="tool.selectedTool = 'draw'"
                 ng-class="{active: tool.selectedTool == 'draw'}">Draw</button>
+        <button ng-click="tool.selectedTool = 'line'"
+                ng-class="{active: tool.selectedTool == 'line'}">Line</button>
+        <button ng-click="tool.selectedTool = 'arrow'"
+                ng-class="{active: tool.selectedTool == 'arrow'}">Arrow</button>
         <p></p>
         <button ng-click="tool.selectedTool = 'text'"
                 ng-class="{active: tool.selectedTool == 'text'}">Text</button>
         <button ng-click="tool.selectedTool = 'list'"
                 ng-class="{active: tool.selectedTool == 'list'}">List</button>
-        <button ng-click="tool.selectedTool = 'line'"
-                ng-class="{active: tool.selectedTool == 'line'}">Line</button>
-        <button ng-click="tool.selectedTool = 'arrow'"
-                ng-class="{active: tool.selectedTool == 'arrow'}">Arrow</button>
     </div>
     <div ng-show="cmp.position == 'top' && tool.propertyPanel == 'text'">
         <dropdown type="color" values="cmp.colors" ng-model="tool.selectedNode.color"></dropdown>

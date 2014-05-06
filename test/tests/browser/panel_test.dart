@@ -14,12 +14,12 @@ main() {
     guinnessEnableHtmlMatchers();
     unittestConfiguration.timeout = new Duration(seconds: 3);
 
-    describe('PanelComponent', () {
+    group('PanelComponent', () {
         ShadowRoot shadowRoot;
         TestBed tb;
         ToolController tool;
 
-        beforeEach(() {
+        setUp(() {
             // Prepare Angular for testing
             setUpInjector();
 
@@ -42,106 +42,85 @@ main() {
         });
 
         // Tell Angular we are done
-        afterEach(tearDownInjector);
+        tearDown(tearDownInjector);
 
-        describe('right', () {
+        group('right', () {
 
             // Makes it easy to get the element we're testing
             Element element(tool) => shadowRoot.querySelector('''[ng-click="tool.selectedTool = '$tool'"]''');
 
-            beforeEach(() {
+            setUp(() {
                 shadowRoot = tb.compile('<panel position="right"></panel>').shadowRoot;
                 tb.rootScope.apply();
+
+                // Make sure Angular get time to attach the shadow root
+                return new Future.delayed(Duration.ZERO, () => tb.getScope(shadowRoot.querySelector('div')).apply());
             });
 
-            it('should have a select tool', () {
-                Timer.run(expectAsync(() {
-                    expect(element('select')).toBeNotNull();
-                }));
+            test('should have a select tool', () {
+                expect(element('select')).toBeNotNull();
             });
 
-            it('should have a draw tool', () {
-                Timer.run(expectAsync(() {
-                    expect(element('draw')).toBeNotNull();
-                }));
+            test('should have a draw tool', () {
+                expect(element('draw')).toBeNotNull();
             });
 
-            it('should have a text tool', () {
-                Timer.run(expectAsync(() {
-                    expect(element('text')).toBeNotNull();
-                }));
+            test('should have a text tool', () {
+                expect(element('text')).toBeNotNull();
             });
 
-            it('should have a list tool', () {
-                Timer.run(expectAsync(() {
-                    expect(element('list')).toBeNotNull();
-                }));
+            test('should have a list tool', () {
+                expect(element('list')).toBeNotNull();
             });
 
-            it('should have a line tool', () {
-                Timer.run(expectAsync(() {
-                    expect(element('line')).toBeNotNull();
-                }));
+            test('should have a line tool', () {
+                expect(element('line')).toBeNotNull();
             });
 
-            it('should have an arrow tool', () {
-                Timer.run(expectAsync(() {
-                    expect(element('arrow')).toBeNotNull();
-                }));
+            test('should have an arrow tool', () {
+                expect(element('arrow')).toBeNotNull();
             });
 
-            it('should choose the select tool when clicked', () {
-                Timer.run(expectAsync(() {
-                    tb.triggerEvent(element('select'), 'click');
+            test('should choose the select tool when clicked', () {
+                tb.triggerEvent(element('select'), 'click');
 
-                    expect(element('select')).toHaveClass('active');
-                    expect(tool.selectedTool).toEqual('select');
-                }));
+                expect(element('select')).toHaveClass('active');
+                expect(tool.selectedTool).toEqual('select');
             });
 
-            it('should choose the draw tool when clicked', () {
-                Timer.run(expectAsync(() {
-                    tb.triggerEvent(element('draw'), 'click');
+            test('should choose the draw tool when clicked', () {
+                tb.triggerEvent(element('draw'), 'click');
 
-                    expect(element('draw')).toHaveClass('active');
-                    expect(tool.selectedTool).toEqual('draw');
-                }));
+                expect(element('draw')).toHaveClass('active');
+                expect(tool.selectedTool).toEqual('draw');
             });
 
-            it('should choose the text tool when clicked', () {
-                Timer.run(expectAsync(() {
-                    tb.triggerEvent(element('text'), 'click');
+            test('should choose the text tool when clicked', () {
+                tb.triggerEvent(element('text'), 'click');
 
-                    expect(element('text')).toHaveClass('active');
-                    expect(tool.selectedTool).toEqual('text');
-                }));
+                expect(element('text')).toHaveClass('active');
+                expect(tool.selectedTool).toEqual('text');
             });
 
-            it('should choose the list tool when clicked', () {
-                Timer.run(expectAsync(() {
-                    tb.triggerEvent(element('list'), 'click');
+            test('should choose the list tool when clicked', () {
+                tb.triggerEvent(element('list'), 'click');
 
-                    expect(element('list')).toHaveClass('active');
-                    expect(tool.selectedTool).toEqual('list');
-                }));
+                expect(element('list')).toHaveClass('active');
+                expect(tool.selectedTool).toEqual('list');
             });
 
-            it('should choose the line tool when clicked', () {
-                Timer.run(expectAsync(() {
-                    tb.triggerEvent(element('line'), 'click');
+            test('should choose the line tool when clicked', () {
+                tb.triggerEvent(element('line'), 'click');
 
-                    expect(element('line')).toHaveClass('active');
-                    expect(tool.selectedTool).toEqual('line');
-                }));
+                expect(element('line')).toHaveClass('active');
+                expect(tool.selectedTool).toEqual('line');
             });
 
-            it('should choose the arrow tool when clicked', () {
-                Timer.run(expectAsync(() {
-                    tb.triggerEvent(element('arrow'), 'click');
+            test('should choose the arrow tool when clicked', () {
+                tb.triggerEvent(element('arrow'), 'click');
 
-                    expect(element('arrow')).toHaveClass('active');
-                    expect(tool.selectedTool).toEqual('arrow');
-                }));
+                expect(element('arrow')).toHaveClass('active');
+                expect(tool.selectedTool).toEqual('arrow');
             });
         });
     });
