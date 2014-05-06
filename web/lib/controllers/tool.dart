@@ -32,4 +32,12 @@ class ToolController {
     save() {
         page.save();
     }
+
+    raise() {
+        page.page.raise(selectedNode);
+    }
+
+    lower() {
+        page.page.lower(selectedNode);
+    }
 }

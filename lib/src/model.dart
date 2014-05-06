@@ -91,7 +91,7 @@ class Page {
     void raise(Node node) {
         var i = nodes.indexOf(node);
 
-        if (i < nodes.length - 1) {
+        if (i < nodes.length - 1 && i >= 0) {
             var first = nodes.removeAt(i);
             var second = nodes.removeAt(i);
             nodes.insert(i, first);

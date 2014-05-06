@@ -30,6 +30,20 @@ main() {
                 expect(page.nodes[0].type).toEqual('arrow');
                 expect(page.nodes[1].type).toEqual('line');
             });
+
+            it('should do nothing when raising the highest node', () {
+                page.raise(page.nodes[1]);
+
+                expect(page.nodes[0].type).toEqual('line');
+                expect(page.nodes[1].type).toEqual('arrow');
+            });
+
+            it('should do nothing when lowering the lowest node', () {
+                page.lower(page.nodes[0]);
+
+                expect(page.nodes[0].type).toEqual('line');
+                expect(page.nodes[1].type).toEqual('arrow');
+            });
         });
 
         describe('fromJson', () {

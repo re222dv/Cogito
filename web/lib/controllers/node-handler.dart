@@ -14,9 +14,9 @@ class NodeHandlerController {
         node = n;
 
         node.onEdit.where((_) => node.editing).listen((_) {
-            // Future used so browser have time to reflow and show the input as we can't set focus
+            // Wait a tick so browser have time to reflow and show the input as we can't set focus
             // on a hidden element
-            new Future.delayed(new Duration(microseconds: 1)).then((_) {
+            Timer.run(() {
                 var input = element.querySelector('input');
                 if (input == null) {
                     input = element.querySelector('textarea');

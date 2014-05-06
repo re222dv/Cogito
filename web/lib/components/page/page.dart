@@ -36,7 +36,7 @@ class PageComponent {
         //pages.getPage().then((page) => this.page = page);
 
         page.nodes.add(new BasicList()..x=400..y=50..size=32..rows=['Row 1', 'Row 2', 'Row 1']..color='black');
-        page.nodes.add(new BasicList()..x=400..y=250..size=12..rows=['Row 1', 'Row 2', 'Row 3']..color='green');
+        page.nodes.add(new Text()..x=400..y=250..size=20..text='Row 2'..color='green');
 
 
         page.nodes.add(new Arrow()
