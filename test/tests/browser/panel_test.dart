@@ -6,19 +6,9 @@ import 'package:angular/angular.dart';
 import 'package:angular/mock/module.dart';
 import 'package:unittest/unittest.dart' hide expect;
 import 'package:guinness/guinness_html.dart';
+import '../../helpers.dart';
 import '../../../web/lib/cogito.dart';
 
-/**
- * Adds a template into the TemplateCache.
- */
-void addToTemplateCache(String path) {
-    inject((TemplateCache cache) {
-        HttpRequest request = new HttpRequest()
-            ..open('GET', "../web/$path", async: false)
-            ..send();
-        cache.put(path, new HttpResponse(200, request.responseText));
-    });
-}
 
 main() {
     guinnessEnableHtmlMatchers();

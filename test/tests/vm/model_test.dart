@@ -1,4 +1,4 @@
-library model_its;
+library model_tests;
 
 import 'package:unittest/unittest.dart' hide expect;
 import 'package:guinness/guinness.dart';
