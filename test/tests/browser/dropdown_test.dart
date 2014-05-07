@@ -170,5 +170,56 @@ main() {
             expect(shadowRoot.querySelector('ul')).toHaveClass('ng-hide');
             expect(tb.rootScope.context['val']).toEqual(30);
         });
+
+        test('should show the selected value', () {
+            expect(shadowRoot.querySelector('div>p').text).toContain('22');
+
+            tb.triggerEvent(shadowRoot.querySelector('div'), 'mousedown');
+            tb.triggerEvent(shadowRoot.querySelector('div'), 'mouseout');
+            tb.triggerEvent(shadowRoot.querySelector('[value="30"] p'), 'mouseup');
+
+            expect(shadowRoot.querySelector('div>p').text).toContain('30');
+        });
+
+        test('should show the selectable values', () {
+            expect(shadowRoot.querySelector('[value="12"] p').text).toContain('12');
+            expect(shadowRoot.querySelector('[value="30"] p').text).toContain('30');
+        });
+
+        group('color type', () {
+            setUp(() {
+                // Remove the int tye dropdown
+                document.body.append(element);
+
+                tb.rootScope.context['val'] = 'green';
+                tb.rootScope.context['vals'] = ['red', 'green', 'blue'];
+                element = tb.compile('<dropdown type="color" values="vals" ng-model="val"></dropdown>');
+                shadowRoot = element.shadowRoot;
+
+                // Add the element to the dom so that events can bubble
+                document.body.append(element);
+
+                tb.rootScope.apply();
+
+                // Make sure Angular get time to attach the shadow root
+                return new Future.delayed(Duration.ZERO, () => tb.getScope(shadowRoot.querySelector('div')).apply());
+            });
+
+            test('should show the selected value', () {
+                expect(shadowRoot.querySelector('div>p').style.backgroundColor).toEqual('green');
+
+                tb.triggerEvent(shadowRoot.querySelector('div'), 'mousedown');
+                tb.triggerEvent(shadowRoot.querySelector('div'), 'mouseout');
+                tb.triggerEvent(shadowRoot.querySelector('[value="red"] p'), 'mouseup');
+
+                expect(shadowRoot.querySelector('div>p').style.backgroundColor).toEqual('red');
+            });
+
+            test('should show the selectable values', () {
+                expect(shadowRoot.querySelector('[value="red"] p').style.backgroundColor).toEqual('red');
+                expect(shadowRoot.querySelector('[value="green"] p').style.backgroundColor).toEqual('green');
+                expect(shadowRoot.querySelector('[value="blue"] p').style.backgroundColor).toEqual('blue');
+            });
+        });
     });
 }
