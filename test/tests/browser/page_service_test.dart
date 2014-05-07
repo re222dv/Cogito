@@ -6,8 +6,8 @@ import 'package:angular/angular.dart';
 import 'package:angular/mock/module.dart';
 import 'package:unittest/unittest.dart' hide expect;
 import 'package:guinness/guinness.dart';
-import '../../../lib/simplify/simplify.dart';
-import '../../../lib/cogito.dart';
+import 'package:cogito/simplify/simplify.dart';
+import 'package:cogito/cogito.dart';
 import '../../../web/lib/cogito.dart';
 
 main() {

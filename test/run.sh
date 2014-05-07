@@ -9,7 +9,7 @@ if [[ $? -ne 0 ]]; then
   PATH=$cs_path:$PATH
 fi
 
-dart test/vm_tests.dart --checked
+dart --checked test/vm_tests.dart
 if [ $? -ne 0 ]; then
     exit 1
 fi
@@ -24,7 +24,7 @@ fi
 sudo start xvfb
 
 # Run a set of Dart Unit tests
-results=$(content_shell --dump-render-tree test/browser_tests.html)
+results=$(content_shell --checked --dump-render-tree test/browser_tests.html)
 echo -e "$results"
 
 # check to see if DumpRenderTree tests
