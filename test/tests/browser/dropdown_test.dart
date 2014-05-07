@@ -182,8 +182,9 @@ main() {
         });
 
         test('should show the selectable values', () {
-            expect(shadowRoot.querySelector('[value="12"] p').text).toContain('12');
-            expect(shadowRoot.querySelector('[value="30"] p').text).toContain('30');
+            ['12', '14', '16', '18', '24', '26', '28', '30', '32', '36', '46', '56', '66'].forEach((size) {
+                expect(shadowRoot.querySelector('[value="$size"] p').text).toContain('$size');
+            });
         });
 
         group('color type', () {
