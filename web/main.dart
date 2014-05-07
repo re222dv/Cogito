@@ -13,7 +13,6 @@ class WebModule extends Module {
         bind(ArrowController);
         bind(NodeHandlerController);
         bind(ToolController);
-        bind(BindHtmlDecorator);
         bind(DrawToolDecorator);
         bind(KeyboardListenerDecorator);
         bind(LineToolDecorator);

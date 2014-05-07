@@ -14,7 +14,6 @@ part 'components/panel/panel.dart';
 part 'controllers/checkbox.dart';
 part 'controllers/arrow.dart';
 part 'controllers/tool.dart';
-part 'decorators/bind-html.dart';
 part 'decorators/draw_tool.dart';
 part 'decorators/line_tool.dart';
 part 'decorators/list_tool.dart';

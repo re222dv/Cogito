@@ -188,9 +188,6 @@ class Text extends Node with TextPanel {
 
     String text;
 
-    num get textBoxHeight => size + 10;
-    num get textBoxWidth => size * (text.length + 1);
-
     Text();
 
     Text.fromJson(Map json) : super.fromJson(json) {
@@ -218,9 +215,6 @@ class BasicList extends Node with TextPanel {
     set text(String t) {
         rows = t.split('\n');
     }
-
-    num get textBoxHeight => size * rows.length + 10;
-    num get textBoxWidth => size * (text.length + 1);
 
     BasicList();
 

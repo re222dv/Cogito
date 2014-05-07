@@ -28,10 +28,10 @@
 
                 <g ng-if="node.type == 'text'">
                     <g ng-show="node.editing">
-                        <foreignobject ng-attr-height="{{ node.textBoxHeight }}"
-                                       ng-attr-width="{{ node.textBoxWidth }}">
+                        <foreignobject ng-attr-height="{{ node.size + 10 }}"
+                                       ng-attr-width="{{ node.size * (node.text.length + 1) }}">
                             <input type="text" ng-model="node.text"
-                                   style="width: {{ node.textBoxWidth }}px;color: {{ node.color }};
+                                   style="width: {{ node.size * (node.text.length + 1) }}px;color: {{ node.color }};
                                           font-size: {{ node.size }}px;" />
                         </foreignobject>
                     </g>
@@ -70,10 +70,11 @@
                         </g>
                     </g>
                     <g ng-show="node.editing">
-                        <foreignobject ng-attr-height="{{ node.textBoxHeight }}"
+                        <foreignobject ng-attr-height="{{ node.size * (node.rows.length + 1) + 10 }}"
                                        ng-attr-width="200" ng-attr-x="{{ node.scale(0.55) }}">
                             <textarea ng-model="node.text"
-                                      style="height: {{ node.textBoxHeight }}px;
+                                      style="height: {{ node.size * node.rows.length + 10 }}px;
+                                             min-height: {{ node.size + 10 }}px;
                                              color: {{ node.color }}; font-size: {{ node.size }}px;">
                             </textarea>
                         </foreignobject>
