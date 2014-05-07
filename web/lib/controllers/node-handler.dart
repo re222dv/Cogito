@@ -1,13 +1,14 @@
 part of cogito_web;
 
 @Controller(selector: '[node-handler]', publishAs: 'nodeHandler')
-class NodeHandlerController {
+class NodeHandlerController extends AttachAware {
     Element element;
+    Element nodeElement;
 
     Node node;
 
-    num get width => element.querySelector('g').getBoundingClientRect().width;
-    num get height => element.querySelector('g').getBoundingClientRect().height;
+    num width = 0;
+    num height = 0;
 
     @NgOneWay('node-handler')
     void set value(Node n) {
@@ -37,7 +38,11 @@ class NodeHandlerController {
         element.onKeyDown.where((e) => keyMap.any((binding) => binding == e)).listen((e) => e.stopPropagation());
     }
 
-    NodeHandlerController(this.element, ToolController tool) {
+    NodeHandlerController(this.element, ToolController tool, Scope scope) {
+        scope.watch('node.size', calculateSize);
+        scope.watch('node.width', calculateSize);
+        scope.watch('node.text', calculateSize);
+
         ['touchstart', 'mousedown'].forEach((event) => element.on[event]
                                    .where((_) => tool.selectedTool == 'select' && !node.editing)
                                    .listen((MouseEvent e) {
@@ -76,5 +81,21 @@ class NodeHandlerController {
         ['touchstart', 'mousedown', 'click'].forEach((event) => element.on[event].where((_) => node.editing)
                 .listen((Event e) => e.stopPropagation())
         );
+    }
+
+    attach() {
+        nodeElement = element.querySelector('g');
+    }
+
+    /**
+     * Calculates the size of the node
+     */
+    calculateSize(_, __) {
+        // Wait a tick so that Angular have time to update the view
+        Timer.run(() {
+            var rect = nodeElement.getBoundingClientRect();
+            width = rect.width;
+            height = rect.height;
+        });
     }
 }
