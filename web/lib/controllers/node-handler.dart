@@ -26,6 +26,8 @@ class NodeHandlerController {
                 }
             });
         });
+        
+        element.onKeyDown.listen((e) => e.stopPropagation());
     }
 
     NodeHandlerController(this.element, ToolController tool) {

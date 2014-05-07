@@ -12,12 +12,25 @@ class KeyboardListenerDecorator {
 
     KeyboardListenerDecorator(this.element, this.tool) {
         keyMap = [
-            new KeyBinding(tool.delete, 127) 
-        ];
+            new KeyBinding(tool.save, 83, ctrl: true),              // Ctrl + S
+            new KeyBinding(tool.delete, 46),                        // Delete
+            new KeyBinding(tool.raise, 107),                        // +
+            new KeyBinding(tool.lower, 109),                        // -
+            new KeyBinding(() => tool.selectedTool = 'select', 83), // S
+            new KeyBinding(() => tool.selectedTool = 'draw', 68),   // D
+            new KeyBinding(() => tool.selectedTool = 'line', 81),   // Q
+            new KeyBinding(() => tool.selectedTool = 'arrow', 65),  // A
+            new KeyBinding(() => tool.selectedTool = 'text', 84),   // T
+            new KeyBinding(() => tool.selectedTool = 'list', 76)    // L
+    ];
 
-        element.onKeyPress
+        element.onKeyDown
             .where((e) => keyMap.any((binding) => binding == e))
-            .listen((e) => keyMap.singleWhere((binding) => binding == e).handler());
+            .listen((e) {
+                keyMap.singleWhere((binding) => binding == e).handler();
+
+                e.preventDefault();
+            });
     }
 }
 
