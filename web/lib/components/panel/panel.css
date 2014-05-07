@@ -75,7 +75,7 @@
     border-radius: 0 0 10px 10px;
 }
 
-[data-position] div>button {
+button {
     display: inline-block;
     margin: 0;
 
@@ -155,4 +155,8 @@
 
     height: 40px;
     min-width: 40px;
+}
+
+button:hover {
+    background: rgba(255, 255, 255, 0.2);
 }

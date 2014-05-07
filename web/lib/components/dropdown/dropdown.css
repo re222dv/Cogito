@@ -36,7 +36,7 @@ ul {
     left: 0;
     top: 38px;
     margin: 0;
-    padding: 4px;
+    padding: 4px 0;
 
     background: rgba(0, 0, 0, 0.8);
     border: #333;
@@ -46,10 +46,18 @@ ul {
     list-style: none;
 }
 
+li {
+    padding: 0 4px;
+}
+
 .ng-hide {
     display: none;
 }
 
 div[data-type="color"] {
     margin-bottom: -14px;
+}
+
+div:hover, li:hover {
+    background: rgba(255, 255, 255, 0.2);
 }
