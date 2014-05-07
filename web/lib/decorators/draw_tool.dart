@@ -19,7 +19,6 @@ class DrawToolDecorator {
             tool.page.page.nodes.add(path);
 
             tool.selectedNode = path;
-            tool.propertyPanel = path.propertyPanel;
 
             var events = [];
 
@@ -48,7 +47,6 @@ class DrawToolDecorator {
                     tool.page.page.nodes.remove(path);
 
                     tool.selectedNode = node;
-                    tool.propertyPanel = node.propertyPanel;
                 }
             })));
         }));

@@ -33,7 +33,6 @@ class NodeHandlerController {
                                    .where((_) => tool.selectedTool == 'select' && !node.editing)
                                    .listen((MouseEvent e) {
             tool.selectedNode = node;
-            tool.propertyPanel = node.propertyPanel;
 
             var offsetX = node.x - e.offset.x;
             var offsetY = node.y - e.offset.y;

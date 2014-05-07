@@ -32,7 +32,6 @@ class LineToolDecorator {
             tool.page.page.nodes.add(line);
 
             tool.selectedNode = line;
-            tool.propertyPanel = line.propertyPanel;
 
             var events = [];
 
@@ -61,7 +60,6 @@ class LineToolDecorator {
                         ..y = corner.y;
 
                     tool.selectedNode = line;
-                    tool.propertyPanel = line.propertyPanel;
                 } else {
                     tool.page.page.nodes.remove(line);
                 }

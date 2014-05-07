@@ -25,7 +25,6 @@ class ListToolDecorator {
             .first.then((_) => node.editing = false);
 
             tool.selectedNode = node;
-            tool.propertyPanel = node.propertyPanel;
 
             e.stopPropagation();
             e.preventDefault();
