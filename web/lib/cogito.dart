@@ -2,7 +2,7 @@ library cogito_web;
 
 import 'dart:async';
 import 'dart:convert';
-import 'dart:html' show document, Element, Event, MouseEvent, NodeValidator, NodeValidatorBuilder, ShadowRoot;
+import 'dart:html' hide Node, Path, Text;
 import 'dart:math' as math;
 import 'package:angular/angular.dart';
 import 'package:cogito/cogito.dart';
@@ -19,5 +19,6 @@ part 'decorators/draw_tool.dart';
 part 'decorators/line_tool.dart';
 part 'decorators/list_tool.dart';
 part 'decorators/text_tool.dart';
+part 'decorators/keyboard_listener.dart';
 part 'controllers/node-handler.dart';
 part 'services/page.dart';
