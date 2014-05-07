@@ -26,7 +26,8 @@ class NodeHandlerController {
                 }
             });
         });
-        
+
+
         element.onKeyDown.listen((e) => e.stopPropagation());
     }
 
@@ -36,20 +37,23 @@ class NodeHandlerController {
                                    .listen((MouseEvent e) {
             tool.selectedNode = node;
 
-            var offsetX = node.x - e.offset.x;
-            var offsetY = node.y - e.offset.y;
+            var offset = tool.page.getPoint(e);
+            offset.x = node.x - offset.x;
+            offset.y = node.y - offset.y;
 
             var events = [];
 
-            ['touchmove', 'mousemove'].forEach((event) => events.add(element.parent.on[event].listen((MouseEvent e) {
-                node.x = e.offset.x + offsetX;
-                node.y = e.offset.y + offsetY;
+            ['touchmove', 'mousemove'].forEach((event) => events.add(element.parent.parent.on[event].listen((MouseEvent e) {
+                var point = tool.page.getPoint(e);
+
+                node.x = point.x + offset.x;
+                node.y = point.y + offset.y;
 
                 e.preventDefault();
                 e.stopPropagation();
             })));
 
-            ['touchend', 'mouseup'].forEach((event) => events.add(element.parent.on[event].listen((_) {
+            ['touchend', 'mouseup'].forEach((event) => events.add(element.parent.parent.on[event].listen((_) {
                 events.forEach((e) => e.cancel());
             })));
 

@@ -20,14 +20,12 @@ class LineToolDecorator {
                 line = new Arrow();
             }
 
+            var point = tool.page.getPoint(e);
+
             line..color = 'black'
                 ..width = 8
-                ..start = (new simplify.Point()
-                ..x = e.offset.x
-                ..y = e.offset.y)
-                ..end = (new simplify.Point()
-                ..x = e.offset.x
-                ..y = e.offset.y);
+                ..start = point
+                ..end = point;
 
             tool.page.page.nodes.add(line);
 
@@ -36,9 +34,9 @@ class LineToolDecorator {
             var events = [];
 
             ['touchmove', 'mousemove'].forEach((event) => events.add(element.on[event].listen((MouseEvent e) {
-                line.end = new simplify.Point()
-                    ..x = e.offset.x
-                    ..y = e.offset.y;
+                var point = tool.page.getPoint(e);
+
+                line.end = point;
                 e.preventDefault();
                 e.stopPropagation();
             })));

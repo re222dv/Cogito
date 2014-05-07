@@ -10,8 +10,8 @@ abstract class Node {
     String propertyPanel = '';
     String get type;
 
-    int x;
-    int y;
+    num x;
+    num y;
 
     num nodeWidth;
     num nodeHeight;
@@ -51,14 +51,14 @@ abstract class LinePanel implements Panel {
     final String propertyPanel = 'line';
 
     String color;
-    int width;
+    num width;
 }
 
 abstract class TextPanel implements Panel {
     final String propertyPanel = 'text';
 
     String color;
-    int size;
+    num size;
 }
 
 class Page {
@@ -188,8 +188,8 @@ class Text extends Node with TextPanel {
 
     String text;
 
-    int get textBoxHeight => size + 10;
-    int get textBoxWidth => size * (text.length + 1);
+    num get textBoxHeight => size + 10;
+    num get textBoxWidth => size * (text.length + 1);
 
     Text();
 
@@ -219,8 +219,8 @@ class BasicList extends Node with TextPanel {
         rows = t.split('\n');
     }
 
-    int get textBoxHeight => size * rows.length + 10;
-    int get textBoxWidth => size * (text.length + 1);
+    num get textBoxHeight => size * rows.length + 10;
+    num get textBoxWidth => size * (text.length + 1);
 
     BasicList();
 
@@ -244,7 +244,7 @@ class BasicList extends Node with TextPanel {
         }
     }
 
-    int scale(num times) {
+    num scale(num times) {
         if (times != null) {
             return (size * times).round();
         } else {

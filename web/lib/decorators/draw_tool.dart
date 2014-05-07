@@ -22,15 +22,15 @@ class DrawToolDecorator {
 
             var events = [];
 
-            ['touchmove', 'mousemove'].forEach((event) => events.add(element.on[event].listen((MouseEvent e) {
-                var x = e.offset.x;
-                var y = e.offset.y;
-                path.freehand += "$x, $y ";
+            ['touchmove', 'mousemove'].forEach((event) => events.add(element.parent.on[event].listen((MouseEvent e) {
+                var point = tool.page.getPoint(e);
+
+                path.freehand += "${point.x}, ${point.y} ";
                 e.preventDefault();
                 e.stopPropagation();
             })));
 
-            ['touchend', 'mouseup'].forEach((event) => events.add(element.on[event].listen((_) {
+            ['touchend', 'mouseup'].forEach((event) => events.add(element.parent.on[event].listen((_) {
                 events.forEach((e) => e.cancel());
 
                 if (path.freehand.length > 4) {

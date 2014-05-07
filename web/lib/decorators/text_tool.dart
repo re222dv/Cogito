@@ -11,12 +11,14 @@ class TextToolDecorator {
     TextToolDecorator(this.element, this.tool) {
 
         element.onClick.where((_) => tool.selectedTool == 'list').listen((MouseEvent e) {
+            var point = tool.page.getPoint(e);
+
             var node = new BasicList()
-                ..color='black'
-                ..text=''
-                ..x=e.client.x
-                ..y=e.client.y - 12
-                ..size=24
+                ..color = 'black'
+                ..text = ''
+                ..x = point.x
+                ..y = point.y - 12
+                ..size = 24
                 ..editing = true;
 
             tool.page.page.nodes.add(node);
