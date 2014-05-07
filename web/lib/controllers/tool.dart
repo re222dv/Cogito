@@ -5,10 +5,18 @@ part of cogito_web;
     publishAs: 'tool')
 class ToolController {
     static final ToolController _singleton = new ToolController._internal();
-    Node selectedNode;
     String propertyPanel;
 
     PageComponent page;
+
+    Node _selectedNode;
+    Node get selectedNode => _selectedNode;
+    set selectedNode(Node node) {
+        _selectedNode = node;
+        if (node != null) {
+            propertyPanel = node.propertyPanel;
+        }
+    }
 
     String _selectedTool = 'select';
     String get selectedTool => _selectedTool;
