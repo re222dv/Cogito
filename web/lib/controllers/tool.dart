@@ -15,6 +15,8 @@ class ToolController {
         _selectedNode = node;
         if (node != null) {
             propertyPanel = node.propertyPanel;
+        } else {
+            propertyPanel = null;
         }
     }
 
@@ -47,5 +49,10 @@ class ToolController {
 
     lower() {
         page.page.lower(selectedNode);
+    }
+
+    delete() {
+        page.page.nodes.remove(selectedNode);
+        selectedNode = null;
     }
 }
