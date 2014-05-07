@@ -8,7 +8,21 @@ class LineToolDecorator {
     Element element;
     ToolController tool;
 
+    var tempNode;
+
     LineToolDecorator(this.element, this.tool) {
+        tool.onToolChange.where((tool) => ['line', 'arrow'].contains(tool)).listen((_) {
+            if (tempNode == null) {
+                tempNode = new Line()
+                    ..color = 'black'
+                    ..width = 5;
+            } else {
+                tempNode = new Line()
+                    ..color = tempNode.color
+                    ..width = tempNode.width;
+            }
+            tool.selectedNode = tempNode;
+        });
 
         ['touchstart', 'mousedown'].forEach((event) => element.on[event]
                 .where((_) => ['line', 'arrow'].contains(tool.selectedTool)).listen((MouseEvent e) {
@@ -22,14 +36,12 @@ class LineToolDecorator {
 
             var point = tool.page.getPoint(e);
 
-            line..color = 'black'
-                ..width = 8
+            line..color = tempNode.color
+                ..width = tempNode.width
                 ..start = point
                 ..end = point;
 
             tool.page.page.nodes.add(line);
-
-            tool.selectedNode = line;
 
             var events = [];
 
@@ -44,7 +56,7 @@ class LineToolDecorator {
             ['touchend', 'mouseup'].forEach((event) => events.add(element.on[event].listen((_) {
                 events.forEach((e) => e.cancel());
 
-                if (line.end != null) {
+                if (line.end != line.start) {
                     var points = [line.start, line.end];
                     var corner = simplify.removePadding(points);
 
@@ -58,6 +70,7 @@ class LineToolDecorator {
                         ..y = corner.y;
 
                     tool.selectedNode = line;
+                    tempNode = line;
                 } else {
                     tool.page.page.nodes.remove(line);
                 }

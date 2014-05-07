@@ -8,17 +8,29 @@ class DrawToolDecorator {
     Element element;
     ToolController tool;
 
+    Path tempNode;
+
     DrawToolDecorator(this.element, this.tool) {
+        tool.onToolChange.where((tool) => tool == 'draw').listen((_) {
+            if (tempNode == null) {
+                tempNode = new Path()
+                    ..color = 'black'
+                    ..width = 5;
+            } else {
+                tempNode = new Path()
+                    ..color = tempNode.color
+                    ..width = tempNode.width;
+            }
+            tool.selectedNode = tempNode;
+        });
 
         ['touchstart', 'mousedown'].forEach((event) => element.on[event]
                 .where((_) => tool.selectedTool == 'draw').listen((_) {
             var path = new Freehand()
-                ..color='black'
-                ..width=8;
+                ..color = tempNode.color
+                ..width = tempNode.width;
 
             tool.page.page.nodes.add(path);
-
-            tool.selectedNode = path;
 
             var events = [];
 
@@ -47,6 +59,7 @@ class DrawToolDecorator {
                     tool.page.page.nodes.remove(path);
 
                     tool.selectedNode = node;
+                    tempNode = node;
                 }
             })));
         }));

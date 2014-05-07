@@ -22,12 +22,14 @@ class ToolController {
 
     String _selectedTool = 'select';
     String get selectedTool => _selectedTool;
-    void set selectedTool(t) {
-        _selectedTool = t;
-        _onToolChange.add(t);
+    void set selectedTool(tool) {
+        if (tool != _selectedTool) {
+            _selectedTool = tool;
+            _onToolChange.add(tool);
 
-        selectedNode = null;
-        propertyPanel = null;
+            selectedNode = null;
+            propertyPanel = null;
+        }
     }
 
     StreamController _onToolChange = new StreamController.broadcast();
