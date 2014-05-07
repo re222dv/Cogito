@@ -12,6 +12,11 @@
     border: 1px solid #555;
 }
 
+[data-position]>div>div {
+    position: relative;
+    display: inline-block;
+}
+
 [data-position="left"], [data-position="right"] {
     flex-direction: column;
 
@@ -80,7 +85,7 @@
     border-radius: 10px 10px 0 0;
 }
 
-[data-position]>div>button {
+[data-position] div>button {
     display: inline-block;
     margin: 0;
 
@@ -92,7 +97,7 @@
     border-radius: 5px;
 }
 
-[data-position="bottom"]>div>button {
+[data-position="top"] div>button, [data-position="bottom"] div>button {
     position: relative;
     bottom: 14px;
 }
@@ -111,22 +116,11 @@
     text-shadow: 0 0 2px black;
 }
 
-[data-position="top"]>div>select {
-    position: relative;
-    bottom: 0;
-
-    padding: 4px;
-
-    background: rgba(0, 0, 0, 0.2);
-    border: #333;
-    border-radius: 5px;
-}
-
 [data-position="bottom"]>div>button {
     bottom: 15px;
 }
 
-[data-position]>div>p {
+[data-position] div>p {
     display: inline-block;
     position: relative;
 
@@ -134,37 +128,37 @@
     padding: 0;
 }
 
-[data-position="left"]>div>p, [data-position="right"]>div>p {
+[data-position="left"] div>p, [data-position="right"] div>p {
     bottom: 4px;
 
     width: 40px;
     height: 1px;
 }
 
-[data-position="top"]>div>p, [data-position="bottom"]>div>p {
+[data-position="top"] div>p, [data-position="bottom"] div>p {
     width: 1px;
     height: 40px;
 }
 
-[data-position="left"]>div>p {
+[data-position="left"] div>p {
     right: 4px;
 
     background: linear-gradient(to right, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0.1) 100%);
 }
 
-[data-position="right"]>div>p {
+[data-position="right"] div>p {
     left: 4px;
 
     background: linear-gradient(to left, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0.1) 100%);
 }
 
-[data-position="top"]>div>p {
+[data-position="top"] div>p {
     bottom: 4px;
 
     background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0.1) 100%);
 }
 
-[data-position="bottom"]>div>p {
+[data-position="bottom"] div>p {
     top: 4px;
 
     background: linear-gradient(to top, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0.1) 100%);
@@ -174,9 +168,10 @@
     background: rgba(255, 255, 255, 0.20);
 }
 
-[data-position="top"]>div>dropdown {
+[data-position="top"] div>dropdown {
     display: inline-block;
     position: relative;
+    bottom: 14px;
 
-    height: 2rem;
+    height: 40px;
 }

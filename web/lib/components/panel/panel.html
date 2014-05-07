@@ -14,23 +14,27 @@
         <button ng-click="tool.selectedTool = 'list'"
                 ng-class="{active: tool.selectedTool == 'list'}">List</button>
     </div>
-    <div ng-show="cmp.position == 'top' && tool.propertyPanel == 'text'">
-        <dropdown type="color" values="cmp.colors" ng-model="tool.selectedNode.color"></dropdown>
-        <dropdown type="int" values="cmp.textSizes" ng-model="tool.selectedNode.size"></dropdown>
-        <button ng-click="tool.selectedNode.listType = 'unordered'" ng-if="tool.selectedNode.type == 'basicList'"
-                ng-class="{active: tool.selectedNode.listType == 'unordered'}">ul</button>
-        <button ng-click="tool.selectedNode.listType = 'ordered'" ng-if="tool.selectedNode.type == 'basicList'"
-                ng-class="{active: tool.selectedNode.listType == 'ordered'}">ol
-        </button>
-        <button ng-click="tool.selectedNode.listType = 'checked'" ng-if="tool.selectedNode.type == 'basicList'"
-                ng-class="{active: tool.selectedNode.listType == 'checked'}">check
-        </button>
-        <button ng-click="tool.raise()">Raise</button>
-        <button ng-click="tool.lower()">Lower</button>
-    </div>
-    <div ng-show="cmp.position == 'top' && tool.propertyPanel == 'line'">
-        <dropdown type="color" values="cmp.colors" ng-model="tool.selectedNode.color"></dropdown>
-        <dropdown type="int" values="cmp.lineWidths" ng-model="tool.selectedNode.width"></dropdown>
+    <div ng-show="cmp.position == 'top' && tool.propertyPanel != null">
+        <div ng-if="tool.propertyPanel == 'text'">
+            <dropdown type="color" values="cmp.colors" ng-model="tool.selectedNode.color"></dropdown>
+            <dropdown type="int" values="cmp.textSizes" ng-model="tool.selectedNode.size"></dropdown>
+        </div>
+        <div ng-if="tool.propertyPanel == 'line'">
+            <dropdown type="color" values="cmp.colors" ng-model="tool.selectedNode.color"></dropdown>
+            <dropdown type="int" values="cmp.lineWidths" ng-model="tool.selectedNode.width"></dropdown>
+        </div>
+        <div ng-if="tool.selectedNode.type == 'basicList'">
+            <p></p>
+            <button ng-click="tool.selectedNode.listType = 'unordered'"
+                    ng-class="{active: tool.selectedNode.listType == 'unordered'}">ul</button>
+            <button ng-click="tool.selectedNode.listType = 'ordered'"
+                    ng-class="{active: tool.selectedNode.listType == 'ordered'}">ol
+            </button>
+            <button ng-click="tool.selectedNode.listType = 'checked'"
+                    ng-class="{active: tool.selectedNode.listType == 'checked'}">check
+            </button>
+        </div>
+        <p></p>
         <button ng-click="tool.raise()">Raise</button>
         <button ng-click="tool.lower()">Lower</button>
     </div>
