@@ -27,8 +27,14 @@ class NodeHandlerController {
             });
         });
 
+        var keyMap = [
+            new KeyBinding(null, 46),   // Delete
+            new KeyBinding(null, 107),  // +
+            new KeyBinding(null, 109),  // -
+        ];
 
-        element.onKeyDown.listen((e) => e.stopPropagation());
+        // Make sure keys used when typing doesn't do other stuff
+        element.onKeyDown.where((e) => keyMap.any((binding) => binding == e)).listen((e) => e.stopPropagation());
     }
 
     NodeHandlerController(this.element, ToolController tool) {

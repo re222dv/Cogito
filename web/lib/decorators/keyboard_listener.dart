@@ -5,26 +5,26 @@ part of cogito_web;
  */
 @Decorator(selector: '[keyboard-listener]')
 class KeyboardListenerDecorator {
-    Element element;
     ToolController tool;
 
     var keyMap;
 
-    KeyboardListenerDecorator(this.element, this.tool) {
+    KeyboardListenerDecorator(this.tool) {
         keyMap = [
-            new KeyBinding(tool.save, 83, ctrl: true),              // Ctrl + S
-            new KeyBinding(tool.delete, 46),                        // Delete
-            new KeyBinding(tool.raise, 107),                        // +
-            new KeyBinding(tool.lower, 109),                        // -
-            new KeyBinding(() => tool.selectedTool = 'select', 83), // S
-            new KeyBinding(() => tool.selectedTool = 'draw', 68),   // D
-            new KeyBinding(() => tool.selectedTool = 'line', 81),   // Q
-            new KeyBinding(() => tool.selectedTool = 'arrow', 65),  // A
-            new KeyBinding(() => tool.selectedTool = 'text', 84),   // T
-            new KeyBinding(() => tool.selectedTool = 'list', 76)    // L
-    ];
+            new KeyBinding(tool.save, 83, ctrl: true),                          // Ctrl + S
+            new KeyBinding(tool.delete, 46),                                    // Delete
+            new KeyBinding(tool.delete, 46, ctrl: true),                        // Ctrl + Delete
+            new KeyBinding(tool.raise, 107),                                    // +
+            new KeyBinding(tool.lower, 109),                                    // -
+            new KeyBinding(() => tool.selectedTool = 'select', 49, alt: true),  // Alt + 1
+            new KeyBinding(() => tool.selectedTool = 'draw', 50, alt: true),    // Alt + 2
+            new KeyBinding(() => tool.selectedTool = 'line', 51, alt: true),    // Alt + 3
+            new KeyBinding(() => tool.selectedTool = 'arrow', 52, alt: true),   // Alt + 4
+            new KeyBinding(() => tool.selectedTool = 'text', 53, alt: true),    // Alt + 5
+            new KeyBinding(() => tool.selectedTool = 'list', 54, alt: true)     // Alt + 6
+        ];
 
-        element.onKeyDown
+        document.onKeyDown
             .where((e) => keyMap.any((binding) => binding == e))
             .listen((e) {
                 keyMap.singleWhere((binding) => binding == e).handler();
