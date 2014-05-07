@@ -28,7 +28,6 @@ class ToolController {
             _onToolChange.add(tool);
 
             selectedNode = null;
-            propertyPanel = null;
         }
     }
 

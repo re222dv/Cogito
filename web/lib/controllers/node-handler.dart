@@ -78,7 +78,7 @@ class NodeHandlerController extends AttachAware {
             element.parent.onClick.first.then((_) => node.editing = false);
         });
 
-        ['touchstart', 'mousedown', 'click'].forEach((event) => element.on[event].where((_) => node.editing)
+        ['touchstart', 'mousedown', 'click'].forEach((event) => element.on[event]
                 .listen((Event e) => e.stopPropagation())
         );
     }

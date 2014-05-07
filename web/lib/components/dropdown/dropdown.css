@@ -5,20 +5,25 @@ div {
     background: rgba(0, 0, 0, 0.2);
     border: #333;
     border-radius: 5px;
+
+    height: 32px;
+    min-width: 32px;
 }
 
 p {
     margin: 0;
-    padding: 0.2rem;
+    padding: 4px;
 
-    min-width: 1.5rem;
-    min-height: 1.5rem;
+    height: 24px;
+    min-width: 24px;
 
     cursor: pointer;
     color: white;
 
+    font-family: Arial, sans-serif;
     font-size: 1.2rem;
     text-align: center;
+    vertical-align: middle;
 }
 
 div[data-open="true"] {
@@ -44,7 +49,6 @@ ul {
 .ng-hide {
     display: none;
 }
-
 
 div[data-type="color"] {
     margin-bottom: -14px;

@@ -9,18 +9,20 @@ part of cogito_web;
 class PageComponent extends ShadowRootAware {
     Element paper;
 
-    Page page;
+    Page page = new Page();
     PageService pages;
 
     final width = 1200;
     final height = 675;
 
     PageComponent(Element element, ToolController tool, this.pages) {
-        page = new Page();
-
         tool.page = this;
 
-        pages.getPage().then((page) => this.page = page);
+        // Get the current page
+        pages.getPage().then((_page) => page = _page);
+
+        // Deselect the node when the page is clicked
+        element.onClick.where((_) => tool.selectedTool == 'select').listen((_) => tool.selectedNode = null);
     }
 
     simplify.Point getPoint(MouseEvent e) {
