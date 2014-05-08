@@ -45,11 +45,11 @@ class ToolController {
     }
 
     raise() {
-        page.page.raise(selectedNode);
+        page.raise(selectedNode);
     }
 
     lower() {
-        page.page.lower(selectedNode);
+        page.lower(selectedNode);
     }
 
     delete() {

@@ -9,42 +9,6 @@ main() {
     unittestConfiguration.timeout = new Duration(seconds: 3);
 
     describe('Model', () {
-        describe('Page', () {
-            Page page;
-
-            beforeEach(() {
-                page = new Page()
-                    ..nodes = [new Line(), new Arrow()];
-            });
-
-            it('should be able to raise a node', () {
-                page.raise(page.nodes[0]);
-
-                expect(page.nodes[0].type).toEqual('arrow');
-                expect(page.nodes[1].type).toEqual('line');
-            });
-
-            it('should be able to lower a node', () {
-                page.lower(page.nodes[1]);
-
-                expect(page.nodes[0].type).toEqual('arrow');
-                expect(page.nodes[1].type).toEqual('line');
-            });
-
-            it('should do nothing when raising the highest node', () {
-                page.raise(page.nodes[1]);
-
-                expect(page.nodes[0].type).toEqual('line');
-                expect(page.nodes[1].type).toEqual('arrow');
-            });
-
-            it('should do nothing when lowering the lowest node', () {
-                page.lower(page.nodes[0]);
-
-                expect(page.nodes[0].type).toEqual('line');
-                expect(page.nodes[1].type).toEqual('arrow');
-            });
-        });
 
         describe('fromJson', () {
             it('should be able to parse a Page', () {

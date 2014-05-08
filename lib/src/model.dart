@@ -88,28 +88,6 @@ class Page {
         });
     }
 
-    void raise(Node node) {
-        var i = nodes.indexOf(node);
-
-        if (i < nodes.length - 1 && i >= 0) {
-            var first = nodes.removeAt(i);
-            var second = nodes.removeAt(i);
-            nodes.insert(i, first);
-            nodes.insert(i, second);
-        }
-    }
-
-    void lower(Node node) {
-        var i = nodes.indexOf(node) - 1;
-
-        if (i >= 0) {
-            var first = nodes.removeAt(i);
-            var second = nodes.removeAt(i);
-            nodes.insert(i, first);
-            nodes.insert(i, second);
-        }
-    }
-
     Map toJson() => {
         'nodes': nodes.map((node) => node.toJson()).toList()
     };
