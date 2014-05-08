@@ -18,6 +18,7 @@ class WebModule extends Module {
         bind(LineToolDecorator);
         bind(ListToolDecorator);
         bind(TextToolDecorator);
+        bind(PrioritizeFormatter);
         bind(PageService);
     }
 }

@@ -20,4 +20,5 @@ part 'decorators/list_tool.dart';
 part 'decorators/text_tool.dart';
 part 'decorators/keyboard_listener.dart';
 part 'controllers/node-handler.dart';
+part 'formatters/prioritize.dart';
 part 'services/page.dart';
