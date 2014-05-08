@@ -1,7 +1,7 @@
 library panel_tests;
 
 import 'dart:async';
-import 'dart:html' hide Text;
+import 'dart:html' hide Path, Text;
 import 'package:angular/angular.dart';
 import 'package:angular/mock/module.dart';
 import 'package:unittest/unittest.dart' hide expect;

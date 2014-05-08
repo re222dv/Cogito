@@ -11,7 +11,7 @@ main() {
     guinnessEnableHtmlMatchers();
 
     group('PrioritizeFormatter', () {
-        PrioritizeFormatter formatter;
+        PrioritizeFormatter prioritize;
         var textSizes;
 
         setUp(() {
@@ -29,16 +29,16 @@ main() {
             }
 
             // Acquire a PrioritizeFormatter instance
-            inject((PrioritizeFormatter _formatter) => formatter = _formatter);
+            inject((PrioritizeFormatter _formatter) => prioritize = _formatter);
         });
 
         // Tell Angular we are done
         tearDown(tearDownInjector);
 
         test('should prioritize values correctly', () {
-            var prioritizedValues = formatter(textSizes, 22);
-            var prioritizedValues2 = formatter(textSizes, 30);
-            var prioritizedValues3 = formatter(textSizes, 50);
+            var prioritizedValues = prioritize(textSizes, 22);
+            var prioritizedValues2 = prioritize(textSizes, 30);
+            var prioritizedValues3 = prioritize(textSizes, 50);
 
             expect(prioritizedValues).toEqual([12, 14, 16, 18, 20, 24, 26, 28, 30, 32, 36, 46, 56, 66]);
             expect(prioritizedValues2).toEqual([16, 20, 22, 24, 26, 28, 32, 34, 36, 38, 40, 44, 54, 64]);
@@ -46,7 +46,7 @@ main() {
         });
 
         test('should not prioritize values if provides list is short', () {
-            var prioritizedValues = formatter([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 10);
+            var prioritizedValues = prioritize([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 10);
 
             expect(prioritizedValues).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
         });

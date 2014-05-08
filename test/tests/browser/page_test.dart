@@ -11,8 +11,14 @@ import 'package:cogito/cogito.dart';
 import '../../../web/lib/cogito.dart';
 
 var injectedPage;
+var savePageSpy;
 
 class PageServiceMock implements PageService {
+
+    PageServiceMock() {
+        savePageSpy = guinness.createSpy('savePageSpy');
+    }
+
     Future<Page> getPage() => new Future.sync(() {
         injectedPage = new Page()
             ..nodes = [
@@ -61,6 +67,8 @@ class PageServiceMock implements PageService {
             ];
         return injectedPage;
     });
+
+    savePage(page) => savePageSpy(page);
 }
 
 main() {
@@ -83,6 +91,7 @@ main() {
             module((Module _) => _
                     ..bind(PageComponent)
                     ..bind(PageService, toImplementation: PageServiceMock)
+                    ..bind(RemoveLeadingFormatter)
                     ..bind(ToolController)
                     ..bind(TestBed));
 
@@ -198,6 +207,12 @@ main() {
             expect(page.nodes[2].type).toEqual('path');
             expect(page.nodes[3].type).toEqual('text');
             expect(page.nodes[4].type).toEqual('basicList');
+        });
+
+        test('should save the current page on save', () {
+            pageComponent.save();
+
+            expect(savePageSpy).toHaveBeenCalledOnceWith(page);
         });
     });
 }
