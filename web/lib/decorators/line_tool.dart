@@ -57,17 +57,12 @@ class LineToolDecorator {
                 events.forEach((e) => e.cancel());
 
                 if (line.end != line.start) {
-                    var points = [line.start, line.end];
-                    var corner = simplify.removePadding(points);
+                    var unpaddedPoints = simplify.removePadding([line.start, line.end]);
 
-                    line..start = (new simplify.Point()
-                        ..x = points[0].x
-                        ..y = points[0].y)
-                        ..end = (new simplify.Point()
-                        ..x = points[1].x
-                        ..y = points[1].y)
-                        ..x = corner.x
-                        ..y = corner.y;
+                    line..start = unpaddedPoints.points[0]
+                        ..end = unpaddedPoints.points[1]
+                        ..x = unpaddedPoints.corner.x
+                        ..y = unpaddedPoints.corner.y;
 
                     tool.selectedNode = line;
                     tempNode = line;

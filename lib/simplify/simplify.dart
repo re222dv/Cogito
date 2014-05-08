@@ -11,21 +11,21 @@ import 'package:quiver/core.dart' as quiver;
 /**
  * A simple 2D point
  */
-class Point {
+class _Point {
     num x;
     num y;
 
     /**
      * distance between 2 points.
      */
-    num getDist(Point p) {
+    num getDist(_Point p) {
         return math.sqrt(getSqDist(p));
     }
 
     /**
      * Square distance between 2 points.
      */
-    num getSqDist(Point p) {
+    num getSqDist(_Point p) {
         var dx = x - p.x,
             dy = y - p.y;
         return dx * dx + dy * dy;
@@ -34,7 +34,7 @@ class Point {
     /**
      * Square distance from a point to a segment.
      */
-    num getSqSegDist(Point p1, Point p2) {
+    num getSqSegDist(_Point p1, _Point p2) {
 
         var x = p1.x,
             y = p1.y,
@@ -61,21 +61,24 @@ class Point {
 
     String toString() => "${x.toStringAsFixed(1)} ${y.toStringAsFixed(1)}";
 
-    Map toJson() => {'x': x, 'y': y};
-
-    bool operator ==(Point point) => x == point.x && y == point.y;
+    bool operator ==(_Point point) => x == point.x && y == point.y;
     int get hashCode => quiver.hash2(x.hashCode, y.hashCode);
 }
 
+class UnpaddedPoints {
+    math.Point corner;
+    List<math.Point> points;
+}
+
 class SimplifiedPath {
-    Point corner;
+    math.Point corner;
     String path;
 }
 
 /**
  * Basic distance-based simplification.
  */
-List<Point> simplifyRadialDist(List<Point> points, num sqTolerance) {
+List<_Point> simplifyRadialDist(List<_Point> points, num sqTolerance) {
 
     var prevPoint = points[0],
         newPoints = [prevPoint],
@@ -100,7 +103,7 @@ List<Point> simplifyRadialDist(List<Point> points, num sqTolerance) {
 /**
  * Simplification using optimized Douglas-Peucker algorithm with recursion elimination.
  */
-List<Point> simplifyDouglasPeucker(List<Point> points, num sqTolerance) {
+List<_Point> simplifyDouglasPeucker(List<_Point> points, num sqTolerance) {
 
     var len = points.length,
         markers = new List<num>(len),
@@ -155,20 +158,20 @@ List<Point> simplifyDouglasPeucker(List<Point> points, num sqTolerance) {
  *
  * Returns the point
  */
-Point removePadding(List<Point> points) {
+UnpaddedPoints removePadding(List<math.Point> points) {
     var xPadding = points.map((point) => point.x).reduce(math.min);
     var yPadding = points.map((point) => point.y).reduce(math.min);
+    
+    var unpaddedPoints = points.map((point) => new math.Point(point.x - xPadding, point.y - yPadding)).toList();
 
-    points.forEach((point) => point..x-=xPadding..y-=yPadding);
-
-    return new Point()..x=xPadding..y=yPadding;
+    return new UnpaddedPoints()..corner=(new math.Point(xPadding, yPadding))..points=unpaddedPoints;
 }
 
 /**
  * Simplify a polyline  to a path by removing unnecessary points.
  */
 SimplifiedPath simplify(String svgPoints, [tolerance = 2.5]) {
-    List<Point> points = [];
+    List<_Point> points = [];
 
     var coords = svgPoints.replaceAll(',', '') .split(' ');
 
@@ -177,7 +180,7 @@ SimplifiedPath simplify(String svgPoints, [tolerance = 2.5]) {
     }
 
     for (int i = 0, length = coords.length; i < length; i += 2) {
-        points.add(new Point()
+        points.add(new _Point()
                         ..x=num.parse(coords.removeAt(0))
                         ..y=num.parse(coords.removeAt(0))
         );
@@ -187,10 +190,13 @@ SimplifiedPath simplify(String svgPoints, [tolerance = 2.5]) {
 
     points = simplifyRadialDist(points, sqTolerance);
     points = simplifyDouglasPeucker(points, sqTolerance);
-    var corner = removePadding(points);
+    
+    var mathPoints = points.map((point) => new math.Point(point.x, point.y)).toList();
+    var unpaddedPoints = removePadding(mathPoints);
+    points = unpaddedPoints.points.map((point) => new _Point()..x=point.x..y=point.y).toList();
 
     var start = points.removeAt(0).toString();
     var svgPath = points.join(' L ');
 
-    return new SimplifiedPath()..corner=corner..path="M $start L $svgPath";
+    return new SimplifiedPath()..corner=unpaddedPoints.corner..path="M $start L $svgPath";
 }

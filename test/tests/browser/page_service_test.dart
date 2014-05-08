@@ -2,11 +2,11 @@ library page_service_tests;
 
 import 'dart:async';
 import 'dart:convert';
+import 'dart:math';
 import 'package:angular/angular.dart';
 import 'package:angular/mock/module.dart';
 import 'package:unittest/unittest.dart' hide expect;
 import 'package:guinness/guinness.dart';
-import 'package:cogito/simplify/simplify.dart';
 import 'package:cogito/cogito.dart';
 import '../../../web/lib/cogito.dart';
 
@@ -106,23 +106,15 @@ main() {
                     expect(line.x).toEqual(10);
                     expect(line.y).toEqual(20);
                     expect(line.color).toEqual('green');
-                    expect(line.start).toEqual(new Point()
-                        ..x = 0
-                        ..y = 0);
-                    expect(line.end).toEqual(new Point()
-                        ..x = 200
-                        ..y = 200);
+                    expect(line.start).toEqual(new Point(0, 0));
+                    expect(line.end).toEqual(new Point(200, 200));
                     expect(line.width).toEqual(10);
 
                     expect(arrow.x).toEqual(10);
                     expect(arrow.y).toEqual(20);
                     expect(arrow.color).toEqual('green');
-                    expect(arrow.start).toEqual(new Point()
-                        ..x = 0
-                        ..y = 0);
-                    expect(arrow.end).toEqual(new Point()
-                        ..x = 200
-                        ..y = 200);
+                    expect(arrow.start).toEqual(new Point(0, 0));
+                    expect(arrow.end).toEqual(new Point(200, 200));
                     expect(arrow.width).toEqual(10);
 
                     expect(path.x).toEqual(200);

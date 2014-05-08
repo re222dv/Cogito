@@ -128,8 +128,8 @@ class Freehand extends Node with LinePanel {
 class Line extends Node with LinePanel {
     final String type = 'line';
 
-    simplify.Point start;
-    simplify.Point end;
+    math.Point start;
+    math.Point end;
 
     Line();
 
@@ -137,20 +137,24 @@ class Line extends Node with LinePanel {
         color = json['color'];
         width = json['width'];
 
-        start = new simplify.Point()
-            ..x = json['start']['x']
-            ..y = json['start']['y'];
+        start = new math.Point(json['start']['x'],
+                               json['start']['y']);
 
-        end = new simplify.Point()
-            ..x = json['end']['x']
-            ..y = json['end']['y'];
+        end = new math.Point(json['end']['x'],
+                             json['end']['y']);
     }
 
     Map toJson() => super.toJson()..addAll({
         'color': color,
         'width': width,
-        'start': start.toJson(),
-        'end': end.toJson()
+        'start': {
+            'x': start.x,
+            'y': start.y
+        },
+        'end': {
+            'x': end.x,
+            'y': end.y
+        }
     });
 }
 

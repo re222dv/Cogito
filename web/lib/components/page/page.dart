@@ -25,12 +25,11 @@ class PageComponent extends ShadowRootAware {
         element.onClick.where((_) => tool.selectedTool == 'select').listen((_) => tool.selectedNode = null);
     }
 
-    simplify.Point getPoint(MouseEvent e) {
+    math.Point getPoint(MouseEvent e) {
         var rect = paper.getBoundingClientRect();
 
-        return new simplify.Point()
-            ..x = e.client.x * width / rect.width - rect.left * width / rect.width
-            ..y = e.client.y * height / rect.height - rect.top * height / rect.height;
+        return new math.Point(e.client.x * width / rect.width - rect.left * width / rect.width,
+                              e.client.y * height / rect.height - rect.top * height / rect.height);
     }
 
     save() => pages.savePage(page);

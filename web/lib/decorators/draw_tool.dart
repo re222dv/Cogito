@@ -49,11 +49,11 @@ class DrawToolDecorator {
                     var simplePath = simplify.simplify(path.freehand.trim());
 
                     var node = new Path()
-                        ..color=path.color
-                        ..path=simplePath.path
-                        ..width=path.width
-                        ..x=simplePath.corner.x
-                        ..y=simplePath.corner.y;
+                        ..color = path.color
+                        ..path = simplePath.path
+                        ..width = path.width
+                        ..x = simplePath.corner.x
+                        ..y = simplePath.corner.y;
 
                     tool.page.page.nodes.add(node);
                     tool.page.page.nodes.remove(path);

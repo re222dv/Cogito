@@ -9,7 +9,7 @@ class ArrowController {
     num get quarterRadians => radians + math.PI / 2;
     num get width => node.width;
 
-    num get headLength => node.start.getDist(node.end) * 0.3;
+    num get headLength => node.start.distanceTo(node.end) * 0.3;
     num get headWidth => width * 8;
 
     num get headCut => math.sqrt(math.pow(headLength, 2) + math.pow(width, 2));

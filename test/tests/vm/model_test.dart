@@ -1,9 +1,9 @@
 library model_tests;
 
+import 'dart:math';
 import 'package:unittest/unittest.dart' hide expect;
 import 'package:guinness/guinness.dart';
 import 'package:cogito/cogito.dart';
-import 'package:cogito/simplify/simplify.dart';
 
 main() {
     unittestConfiguration.timeout = new Duration(seconds: 3);
@@ -116,15 +116,15 @@ main() {
                 expect(line.x).toEqual(10);
                 expect(line.y).toEqual(20);
                 expect(line.color).toEqual('green');
-                expect(line.start).toEqual(new Point()..x=0..y=0);
-                expect(line.end).toEqual(new Point()..x=200..y=200);
+                expect(line.start).toEqual(new Point(0, 0));
+                expect(line.end).toEqual(new Point(200, 200));
                 expect(line.width).toEqual(10);
 
                 expect(arrow.x).toEqual(10);
                 expect(arrow.y).toEqual(20);
                 expect(arrow.color).toEqual('green');
-                expect(arrow.start).toEqual(new Point()..x=0..y=0);
-                expect(arrow.end).toEqual(new Point()..x=200..y=200);
+                expect(arrow.start).toEqual(new Point(0, 0));
+                expect(arrow.end).toEqual(new Point(200, 200));
                 expect(arrow.width).toEqual(10);
 
                 expect(path.x).toEqual(200);
@@ -163,8 +163,8 @@ main() {
                 expect(line.x).toEqual(10);
                 expect(line.y).toEqual(20);
                 expect(line.color).toEqual('green');
-                expect(line.start).toEqual(new Point()..x=0..y=0);
-                expect(line.end).toEqual(new Point()..x=200..y=200);
+                expect(line.start).toEqual(new Point(0, 0));
+                expect(line.end).toEqual(new Point(200, 200));
                 expect(line.width).toEqual(10);
             });
 
@@ -185,8 +185,8 @@ main() {
                 expect(arrow.x).toEqual(10);
                 expect(arrow.y).toEqual(20);
                 expect(arrow.color).toEqual('green');
-                expect(arrow.start).toEqual(new Point()..x=0..y=0);
-                expect(arrow.end).toEqual(new Point()..x=200..y=200);
+                expect(arrow.start).toEqual(new Point(0, 0));
+                expect(arrow.end).toEqual(new Point(200, 200));
                 expect(arrow.width).toEqual(10);
             });
 
@@ -248,8 +248,8 @@ main() {
                                 ..x = 10
                                 ..y = 20
                                 ..color = 'green'
-                                ..start = (new Point()..x=0..y=0)
-                                ..end = (new Point()..x=200..y=200)
+                                ..start = (new Point(0, 0))
+                                ..end = (new Point(200, 200))
                                 ..width = 10
                         ),
                         (
@@ -257,8 +257,8 @@ main() {
                                 ..x = 10
                                 ..y = 20
                                 ..color = 'green'
-                                ..start = (new Point()..x=0..y=0)
-                                ..end = (new Point()..x=200..y=200)
+                                ..start = (new Point(0, 0))
+                                ..end = (new Point(200, 200))
                                 ..width = 10
                         ),
                         (
@@ -348,8 +348,8 @@ main() {
                     ..x = 10
                     ..y = 20
                     ..color = 'green'
-                    ..start = (new Point()..x=0..y=0)
-                    ..end = (new Point()..x=200..y=200)
+                    ..start = (new Point(0, 0))
+                    ..end = (new Point(200, 200))
                     ..width = 10;
 
                 expect(line.toJson()).toEqual({
@@ -372,8 +372,8 @@ main() {
                     ..x = 10
                     ..y = 20
                     ..color = 'green'
-                    ..start = (new Point()..x=0..y=0)
-                    ..end = (new Point()..x=200..y=200)
+                    ..start = (new Point(0, 0))
+                    ..end = (new Point(200, 200))
                     ..width = 10;
 
                 expect(arrow.toJson()).toEqual({

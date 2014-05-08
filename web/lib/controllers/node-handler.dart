@@ -49,8 +49,7 @@ class NodeHandlerController extends AttachAware {
             tool.selectedNode = node;
 
             var offset = tool.page.getPoint(e);
-            offset.x = node.x - offset.x;
-            offset.y = node.y - offset.y;
+            offset = new math.Point(node.x - offset.x, node.y - offset.y);
 
             var events = [];
 
