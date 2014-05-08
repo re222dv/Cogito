@@ -2,7 +2,6 @@
     <panel position="left"></panel>
     <panel position="top"></panel>
     <panel position="right"></panel>
-    <panel position="bottom"></panel>
     <svg width="100%" height="100%" viewBox="0 0 1200 675"
          preserveAspectRatio="xMidYMid meet"
          xmlns="http://www.w3.org/2000/svg" tool-controller draw-tool line-tool text-tool list-tool>
@@ -16,7 +15,7 @@
 
                 <path ng-if="node.type == 'line'"
                       stroke="{{ node.color }}" stroke-width="{{ node.width }}" fill="none"
-                      ng-attr-d="M {{ node.start }} L {{ node.end }}" />
+                      ng-attr-d="M {{ node.start.x }} {{ node.start.y }} L {{ node.end.x }} {{ node.end.y }}" />
 
                 <polygon ng-if="node.type == 'arrow'" arrow=""
                          fill="{{ node.color }}" stroke="none"

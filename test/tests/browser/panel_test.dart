@@ -1,14 +1,14 @@
 library panel_tests;
 
 import 'dart:async';
-import 'dart:html';
+import 'dart:html' hide Text;
 import 'package:angular/angular.dart';
 import 'package:angular/mock/module.dart';
 import 'package:unittest/unittest.dart' hide expect;
 import 'package:guinness/guinness_html.dart';
 import '../../helpers.dart';
+import 'package:cogito/cogito.dart';
 import '../../../web/lib/cogito.dart';
-
 
 main() {
     guinnessEnableHtmlMatchers();
@@ -25,10 +25,10 @@ main() {
 
             // Make required classes available for dependency injection
             module((Module _) => _
-                ..type(MockHttpBackend)
-                ..type(ToolController)
-                ..type(PanelComponent)
-                ..type(TestBed));
+                ..bind(MockHttpBackend)
+                ..bind(ToolController)
+                ..bind(PanelComponent)
+                ..bind(TestBed));
 
             // Add required templates to the cache
             addToTemplateCache('lib/components/panel/panel.css');
@@ -121,6 +121,142 @@ main() {
 
                 expect(element('arrow')).toHaveClass('active');
                 expect(tool.selectedTool).toEqual('arrow');
+            });
+        });
+
+        group('left', () {
+
+            // Makes it easy to get the element we're testing
+            Element element(tool) => shadowRoot.querySelector('[ng-click="tool.$tool()"]');
+
+            setUp(() {
+                shadowRoot = tb.compile('<panel position="left"></panel>').shadowRoot;
+                tb.rootScope.apply();
+
+                // Make sure Angular get time to attach the shadow root
+                return new Future.delayed(Duration.ZERO, () => tb.getScope(shadowRoot.querySelector('div')).apply());
+            });
+
+            test('should have a save button', () {
+                expect(element('save')).toBeNotNull();
+            });
+        });
+
+        group('top', () {
+
+            // Makes it easy to get the elements we're testing
+            Element element(tool) => shadowRoot.querySelector('[ng-click="tool.$tool"]');
+            Element dropdown(type) => shadowRoot.querySelector('dropdown[ng-model="tool.selectedNode.$type"]');
+
+            setUp(() {
+                shadowRoot = tb.compile('<panel position="top"></panel>').shadowRoot;
+                tb.rootScope.apply();
+
+                // Make sure Angular get time to attach the shadow root
+                return new Future.delayed(Duration.ZERO, () => tb.getScope(shadowRoot.querySelector('div')).apply());
+            });
+
+            test('should have a raise button', () {
+                expect(element('raise()')).toBeNotNull();
+            });
+
+            test('should have a lower button', () {
+                expect(element('lower()')).toBeNotNull();
+            });
+
+            test('should have a delete button', () {
+                expect(element('delete()')).toBeNotNull();
+            });
+
+            test('should net be shown when no node is selected', () {
+                expect(element('delete()')).toBeNotNull();
+            });
+
+            group('for Line', () {
+                setUp(() {
+                    tool.selectedNode = new Line();
+                    tb.getScope(shadowRoot.querySelector('div')).apply();
+                });
+
+                test('should have a color dropdown', () {
+                    expect(dropdown('color')).toBeNotNull();
+                });
+
+                test('should have a width dropdown', () {
+                    expect(dropdown('width')).toBeNotNull();
+                });
+            });
+
+            group('for Arrow', () {
+                setUp(() {
+                    tool.selectedNode = new Arrow();
+                    tb.getScope(shadowRoot.querySelector('div')).apply();
+                });
+
+                test('should have a color dropdown', () {
+                    expect(dropdown('color')).toBeNotNull();
+                });
+
+                test('should have a width dropdown', () {
+                    expect(dropdown('width')).toBeNotNull();
+                });
+            });
+
+            group('for Path', () {
+                setUp(() {
+                    tool.selectedNode = new Path();
+                    tb.getScope(shadowRoot.querySelector('div')).apply();
+                });
+
+                test('should have a color dropdown', () {
+                    expect(dropdown('color')).toBeNotNull();
+                });
+
+                test('should have a width dropdown', () {
+                    expect(dropdown('width')).toBeNotNull();
+                });
+            });
+
+            group('for Text', () {
+                setUp(() {
+                    tool.selectedNode = new Text();
+                    tb.getScope(shadowRoot.querySelector('div')).apply();
+                });
+
+                test('should have a color dropdown', () {
+                    expect(dropdown('color')).toBeNotNull();
+                });
+
+                test('should have a size dropdown', () {
+                    expect(dropdown('size')).toBeNotNull();
+                });
+            });
+
+            group('for BasicList', () {
+                setUp(() {
+                    tool.selectedNode = new BasicList();
+                    tb.getScope(shadowRoot.querySelector('div')).apply();
+                });
+
+                test('should have a color dropdown', () {
+                    expect(dropdown('color')).toBeNotNull();
+                });
+
+                test('should have a size dropdown', () {
+                    expect(dropdown('size')).toBeNotNull();
+                });
+
+                test('should have a ul button', () {
+                    expect(element('selectedNode.listType = \'unordered\'')).toBeNotNull();
+                });
+
+                test('should have a ol button', () {
+                    expect(element('selectedNode.listType = \'ordered\'')).toBeNotNull();
+                });
+
+                test('should have a checked button', () {
+                    expect(element('selectedNode.listType = \'checked\'')).toBeNotNull();
+                });
             });
         });
     });
