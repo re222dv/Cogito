@@ -21,4 +21,5 @@ part 'decorators/text_tool.dart';
 part 'decorators/keyboard_listener.dart';
 part 'controllers/node-handler.dart';
 part 'formatters/prioritize.dart';
+part 'formatters/remove_leading.dart';
 part 'services/page.dart';

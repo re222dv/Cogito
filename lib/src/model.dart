@@ -212,14 +212,6 @@ class BasicList extends Node with TextPanel {
         'rows': rows
     });
 
-    String printRow(String row) {
-        if (row.startsWith('*')) {
-            return row.substring(1);
-        } else {
-            return row;
-        }
-    }
-
     num scale(num times) {
         if (times != null) {
             return (size * times).round();

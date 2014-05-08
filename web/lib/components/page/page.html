@@ -81,7 +81,7 @@
                     <g ng-hide="node.editing" ng-repeat="row in node.rows track by $index">
                         <text fill="{{ node.color }}" font-size="{{ node.size }}"
                               ng-attr-x="{{ node.scale(0.65) + 5 }}" ng-attr-y="{{ node.scale($index + 1) }}">
-                            {{ node.printRow(row) }}
+                            {{ row | removeLeading:'*' }}
                         </text>
                     </g>
                 </g>
