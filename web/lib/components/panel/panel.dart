@@ -6,7 +6,8 @@ part of cogito_web;
     cssUrl: 'lib/components/panel/panel.css',
     publishAs: 'cmp'
 )
-class PanelComponent extends ShadowRootAware {
+class PanelComponent implements ShadowRootAware {
+    ToolController tool;
     String position;
 
     @NgAttr('position')
@@ -18,7 +19,7 @@ class PanelComponent extends ShadowRootAware {
     List<int> textSizes = [];
     List<String> colors = ['black', 'white', 'red', 'green', 'blue', 'yellow'];
 
-    PanelComponent() {
+    PanelComponent(this.tool) {
         // Create line widths from the fibonacci scale
         for (var i = 1, first = 1, second = 1; i < 90; i = first + second, first = second, second = i) {
             lineWidths.add(i);
@@ -27,12 +28,29 @@ class PanelComponent extends ShadowRootAware {
             textSizes.add(i);
         }
     }
-
+    
     onShadowRoot(ShadowRoot shadowRoot) {
-        List<Element> panels = shadowRoot.querySelectorAll('[data-position] > div');
-
-        panels.forEach((panel) {
-            ['click', 'mousedown'].forEach((event) => panel.on[event].listen((Event e) => e.stopPropagation()));
+        // TODO: Listen on a better event from angular so that Timer.run isn't needed
+        // Wait a tick so Angular got time to digest the shadowRoot
+        Timer.run(() {
+            List<Element> panels = shadowRoot.querySelectorAll('[data-position] > div');
+    
+            panels.forEach((panel) {
+                ['click', 'mousedown'].forEach((event) => panel.on[event].listen((Event e) => e.stopPropagation()));
+            });
+    
+            List<Element> tools = shadowRoot.querySelectorAll('[data-draggable="true"]');
+    
+            tools.forEach((toolButton) {
+                var dragging = false;
+    
+                ['mousedown', 'touchstart'].forEach((event) => toolButton.on[event].listen((_) => dragging = true));
+                ['mouseout', 'touchleave'].forEach((event) => toolButton.on[event].where((_) => dragging).listen((_) {
+                    dragging = false;
+    
+                    tool.toolDrag.add(toolButton.getAttribute('data-tool'));
+                }));
+            });
         });
     }
 }

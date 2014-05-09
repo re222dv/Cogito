@@ -34,6 +34,9 @@ class ToolController {
     StreamController _onToolChange = new StreamController.broadcast();
     Stream get onToolChange => _onToolChange.stream;
 
+    StreamController toolDrag = new StreamController.broadcast();
+    Stream get onToolDrag => toolDrag.stream;
+
     factory ToolController() {
         return _singleton;
     }

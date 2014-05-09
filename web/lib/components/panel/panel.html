@@ -1,5 +1,5 @@
 <div data-position="{{ cmp.position }}" tool-controller>
-    <div ng-show="cmp.position == 'right'">
+    <div ng-if="cmp.position == 'right'">
         <button ng-click="tool.selectedTool = 'select'"
                 ng-class="{active: tool.selectedTool == 'select'}">Select</button>
         <button ng-click="tool.selectedTool = 'draw'"
@@ -9,12 +9,12 @@
         <button ng-click="tool.selectedTool = 'arrow'"
                 ng-class="{active: tool.selectedTool == 'arrow'}">Arrow</button>
         <p></p>
-        <button ng-click="tool.selectedTool = 'text'"
+        <button ng-click="tool.selectedTool = 'text'" data-draggable="true" data-tool="text"
                 ng-class="{active: tool.selectedTool == 'text'}">Text</button>
-        <button ng-click="tool.selectedTool = 'list'"
+        <button ng-click="tool.selectedTool = 'list'" data-draggable="true" data-tool="list"
                 ng-class="{active: tool.selectedTool == 'list'}">List</button>
     </div>
-    <div ng-show="cmp.position == 'top' && tool.propertyPanel != null">
+    <div ng-if="cmp.position == 'top' && tool.propertyPanel != null">
         <div ng-if="tool.propertyPanel == 'text'">
             <dropdown type="color" values="cmp.colors" ng-model="tool.selectedNode.color"></dropdown>
             <dropdown type="int" values="cmp.textSizes" ng-model="tool.selectedNode.size"></dropdown>

@@ -8,22 +8,51 @@ class ListToolDecorator {
     Element element;
     ToolController tool;
 
-    var tempNode;
+    var tempNode = new BasicList()
+        ..color = 'black'
+        ..size = 24
+        ..listType = 'unordered';
 
-    ListToolDecorator(this.element, this.tool) {
-        tool.onToolChange.where((tool) => tool == 'list').listen((_) {
-            if (tempNode == null) {
-                tempNode = new BasicList()
-                    ..color = 'black'
-                    ..size = 24
-                    ..listType = 'unordered';
-            } else {
-                tempNode = new BasicList()
-                    ..color = tempNode.color
-                    ..size = tempNode.size
-                    ..listType = tempNode.listType;
+    ListToolDecorator(this.element, this.tool, Scope scope) {
+        scope.watch('tool.selectedNode', (_, old) {
+            if (old is BasicList) {
+                old.editing = false;
             }
+        });
+
+        tool.onToolChange.where((tool) => tool == 'list').listen((_) {
+            tempNode = new BasicList()
+                ..color = tempNode.color
+                ..size = tempNode.size
+                ..listType = tempNode.listType;
             tool.selectedNode = tempNode;
+        });
+
+        tool.onToolDrag.where((tool) => tool == 'list').listen((_) {
+            var node = new BasicList()
+                ..color = tempNode.color
+                ..rows = []
+                ..size = tempNode.size
+                ..editing = true
+                ..listType = tempNode.listType;
+
+            tool.page.page.nodes.add(node);
+
+            tool.selectedNode = node;
+            tempNode = node;
+
+            var events = [];
+
+            events.add(element.onMouseMove.listen((MouseEvent e) {
+                var point = tool.page.getPoint(e);
+
+                node..x = point.x
+                    ..y = point.y;
+            }));
+
+            events.add(element.onMouseUp.listen((_) {
+                events.forEach((e) => e.cancel());
+            }));
         });
 
         element.onClick.where((_) => tool.selectedTool == 'list').listen((MouseEvent e) {
@@ -39,9 +68,6 @@ class ListToolDecorator {
                 ..listType = tempNode.listType;
 
             tool.page.page.nodes.add(node);
-            element.onClick.first.then((_) => node.editing = false);
-            tool.onToolChange.where((newTool) => newTool != 'text')
-            .first.then((_) => node.editing = false);
 
             tool.selectedNode = node;
             tempNode = node;

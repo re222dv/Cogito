@@ -42,7 +42,12 @@ main() {
         });
 
         // Tell Angular we are done
-        tearDown(tearDownInjector);
+        tearDown(() {
+            tearDownInjector();
+
+            // Reset the stream as ToolController is a singleton
+            tool.toolDrag = new StreamController.broadcast();
+        });
 
         group('right', () {
 
@@ -122,6 +127,50 @@ main() {
                 expect(element('arrow')).toHaveClass('active');
                 expect(tool.selectedTool).toEqual('arrow');
             });
+
+            test('should trigger a onDrag event when text is dragged by mouse', () {
+                tool.onToolDrag.listen(expectAsync((tool) {
+                    expect(tool).toEqual('text');
+                }));
+
+                Timer.run(expectAsync(() {
+                    tb.triggerEvent(element('text'), 'mousedown');
+                    tb.triggerEvent(element('text'), 'mouseout');
+                }));
+            });
+
+            test('should trigger a onDrag event when text is dragged by touch', () {
+                tool.onToolDrag.listen(expectAsync((tool) {
+                    expect(tool).toEqual('text');
+                }));
+
+                Timer.run(expectAsync(() {
+                    tb.triggerEvent(element('text'), 'touchstart');
+                    tb.triggerEvent(element('text'), 'touchleave');
+                }));
+            });
+
+            test('should trigger a onDrag event when list is dragged by mouse', () {
+                tool.onToolDrag.listen(expectAsync((tool) {
+                    expect(tool).toEqual('list');
+                }));
+
+                Timer.run(expectAsync(() {
+                    tb.triggerEvent(element('list'), 'mousedown');
+                    tb.triggerEvent(element('list'), 'mouseout');
+                }));
+            });
+
+            test('should trigger a onDrag event when list is dragged by touch', () {
+                tool.onToolDrag.listen(expectAsync((tool) {
+                    expect(tool).toEqual('list');
+                }));
+
+                Timer.run(expectAsync(() {
+                    tb.triggerEvent(element('list'), 'touchstart');
+                    tb.triggerEvent(element('list'), 'touchleave');
+                }));
+            });
         });
 
         group('left', () {
@@ -138,6 +187,7 @@ main() {
             });
 
             test('should have a save button', () {
+                print(shadowRoot.innerHtml);
                 expect(element('save')).toBeNotNull();
             });
         });
@@ -156,20 +206,8 @@ main() {
                 return new Future.delayed(Duration.ZERO, () => tb.getScope(shadowRoot.querySelector('div')).apply());
             });
 
-            test('should have a raise button', () {
-                expect(element('raise()')).toBeNotNull();
-            });
-
-            test('should have a lower button', () {
-                expect(element('lower()')).toBeNotNull();
-            });
-
-            test('should have a delete button', () {
-                expect(element('delete()')).toBeNotNull();
-            });
-
-            test('should net be shown when no node is selected', () {
-                expect(element('delete()')).toBeNotNull();
+            test('should not be shown when no node is selected', () {
+                expect(shadowRoot.querySelector('div>div')).toBeNull();
             });
 
             group('for Line', () {
@@ -184,6 +222,18 @@ main() {
 
                 test('should have a width dropdown', () {
                     expect(dropdown('width')).toBeNotNull();
+                });
+
+                test('should have a raise button', () {
+                    expect(element('raise()')).toBeNotNull();
+                });
+
+                test('should have a lower button', () {
+                    expect(element('lower()')).toBeNotNull();
+                });
+
+                test('should have a delete button', () {
+                    expect(element('delete()')).toBeNotNull();
                 });
             });
 
@@ -200,6 +250,18 @@ main() {
                 test('should have a width dropdown', () {
                     expect(dropdown('width')).toBeNotNull();
                 });
+
+                test('should have a raise button', () {
+                    expect(element('raise()')).toBeNotNull();
+                });
+
+                test('should have a lower button', () {
+                    expect(element('lower()')).toBeNotNull();
+                });
+
+                test('should have a delete button', () {
+                    expect(element('delete()')).toBeNotNull();
+                });
             });
 
             group('for Path', () {
@@ -215,6 +277,18 @@ main() {
                 test('should have a width dropdown', () {
                     expect(dropdown('width')).toBeNotNull();
                 });
+
+                test('should have a raise button', () {
+                    expect(element('raise()')).toBeNotNull();
+                });
+
+                test('should have a lower button', () {
+                    expect(element('lower()')).toBeNotNull();
+                });
+
+                test('should have a delete button', () {
+                    expect(element('delete()')).toBeNotNull();
+                });
             });
 
             group('for Text', () {
@@ -229,6 +303,18 @@ main() {
 
                 test('should have a size dropdown', () {
                     expect(dropdown('size')).toBeNotNull();
+                });
+
+                test('should have a raise button', () {
+                    expect(element('raise()')).toBeNotNull();
+                });
+
+                test('should have a lower button', () {
+                    expect(element('lower()')).toBeNotNull();
+                });
+
+                test('should have a delete button', () {
+                    expect(element('delete()')).toBeNotNull();
                 });
             });
 
@@ -256,6 +342,18 @@ main() {
 
                 test('should have a checked button', () {
                     expect(element('selectedNode.listType = \'checked\'')).toBeNotNull();
+                });
+
+                test('should have a raise button', () {
+                    expect(element('raise()')).toBeNotNull();
+                });
+
+                test('should have a lower button', () {
+                    expect(element('lower()')).toBeNotNull();
+                });
+
+                test('should have a delete button', () {
+                    expect(element('delete()')).toBeNotNull();
                 });
             });
         });
