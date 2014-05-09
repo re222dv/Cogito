@@ -12,12 +12,17 @@ class ToolController {
     Node _selectedNode;
     Node get selectedNode => _selectedNode;
     set selectedNode(Node node) {
-        _selectedNode = node;
+        if (_selectedNode != null && _selectedNode.editable && _selectedNode.editing) {
+            _selectedNode.editing = false;
+        }
+
         if (node != null) {
             propertyPanel = node.propertyPanel;
         } else {
             propertyPanel = null;
         }
+
+        _selectedNode = node;
     }
 
     String _selectedTool = 'select';
@@ -56,7 +61,7 @@ class ToolController {
     }
 
     delete() {
-        page.page.nodes.remove(selectedNode);
+        page.delete(selectedNode);
         selectedNode = null;
     }
 }

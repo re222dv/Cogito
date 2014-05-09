@@ -8,12 +8,9 @@ part of cogito_web;
 )
 class PanelComponent implements ShadowRootAware {
     ToolController tool;
-    String position;
 
     @NgAttr('position')
-    set value(value) {
-        position = value;
-    }
+    String position;
 
     List<int> lineWidths = [];
     List<int> textSizes = [];
@@ -28,26 +25,26 @@ class PanelComponent implements ShadowRootAware {
             textSizes.add(i);
         }
     }
-    
+
     onShadowRoot(ShadowRoot shadowRoot) {
         // TODO: Listen on a better event from angular so that Timer.run isn't needed
         // Wait a tick so Angular got time to digest the shadowRoot
         Timer.run(() {
             List<Element> panels = shadowRoot.querySelectorAll('[data-position] > div');
-    
+
             panels.forEach((panel) {
                 ['click', 'mousedown'].forEach((event) => panel.on[event].listen((Event e) => e.stopPropagation()));
             });
-    
+
             List<Element> tools = shadowRoot.querySelectorAll('[data-draggable="true"]');
-    
+
             tools.forEach((toolButton) {
                 var dragging = false;
-    
+
                 ['mousedown', 'touchstart'].forEach((event) => toolButton.on[event].listen((_) => dragging = true));
                 ['mouseout', 'touchleave'].forEach((event) => toolButton.on[event].where((_) => dragging).listen((_) {
                     dragging = false;
-    
+
                     tool.toolDrag.add(toolButton.getAttribute('data-tool'));
                 }));
             });

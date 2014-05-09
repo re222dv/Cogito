@@ -14,12 +14,6 @@ class ListToolDecorator {
         ..listType = 'unordered';
 
     ListToolDecorator(this.element, this.tool, Scope scope) {
-        scope.watch('tool.selectedNode', (_, old) {
-            if (old is BasicList) {
-                old.editing = false;
-            }
-        });
-
         tool.onToolChange.where((tool) => tool == 'list').listen((_) {
             tempNode = new BasicList()
                 ..color = tempNode.color

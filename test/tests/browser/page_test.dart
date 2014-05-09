@@ -214,5 +214,11 @@ main() {
 
             expect(savePageSpy).toHaveBeenCalledOnceWith(page);
         });
+
+        test('should delete a node on delete', () {
+            pageComponent.delete(page.nodes[0]);
+
+            expect(page.nodes.length).toBe(4);
+        });
     });
 }

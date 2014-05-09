@@ -187,7 +187,6 @@ main() {
             });
 
             test('should have a save button', () {
-                print(shadowRoot.innerHtml);
                 expect(element('save')).toBeNotNull();
             });
         });

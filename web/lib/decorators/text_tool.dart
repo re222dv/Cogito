@@ -13,12 +13,6 @@ class TextToolDecorator {
         ..size = 24;
 
     TextToolDecorator(this.element, this.tool, Scope scope) {
-        scope.watch('tool.selectedNode', (_, old) {
-            if (old is Text) {
-                old.editing = false;
-            }
-        });
-
         tool.onToolChange.where((tool) => tool == 'text').listen((_) {
             tempNode = new Text()
                 ..color = tempNode.color

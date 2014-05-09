@@ -25,6 +25,9 @@ class PageComponent extends ShadowRootAware {
         element.onClick.where((_) => tool.selectedTool == 'select').listen((_) => tool.selectedNode = null);
     }
 
+    /**
+     * Get the point of the [MouseEvent] scaled and moved appropriately to reflect the scaling of the paper
+     */
     math.Point getPoint(MouseEvent e) {
         var rect = paper.getBoundingClientRect();
 
@@ -32,6 +35,9 @@ class PageComponent extends ShadowRootAware {
                               e.client.y * height / rect.height - rect.top * height / rect.height);
     }
 
+    /**
+     * Move a node one step closer to the user
+     */
     void raise(Node node) {
         var i = page.nodes.indexOf(node);
 
@@ -43,6 +49,9 @@ class PageComponent extends ShadowRootAware {
         }
     }
 
+    /**
+     * Move a node one step away from the user
+     */
     void lower(Node node) {
         var i = page.nodes.indexOf(node) - 1;
 
@@ -54,6 +63,16 @@ class PageComponent extends ShadowRootAware {
         }
     }
 
+    /**
+     * Deletes a node
+     */
+    void delete(Node node) {
+        page.nodes.remove(node);
+    }
+
+    /**
+     * Save the page to the server
+     */
     save() => pages.savePage(page);
 
     onShadowRoot(ShadowRoot shadowRoot) {
