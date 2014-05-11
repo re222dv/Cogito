@@ -23,11 +23,11 @@ rm -rf dart-sdk
 unzip $DART_SDK_ZIP > /dev/null
 rm $DART_SDK_ZIP
 
-wget -q http://dartlang.org/editor/update/channels/stable/35121/dartium/content_shell-linux-x64-release.zip
+echo http://dartlang.org/editor/update/channels/stable/35121/dartium/content_shell-linux-x64-release.zip
+curl http://dartlang.org/editor/update/channels/stable/35121/dartium/content_shell-linux-x64-release.zip > content_shell-linux-x64-release.zip
+rm -rf drt-lucid64-full-stable-35121.0
 unzip -qq content_shell-linux-x64-release.zip
-
-cs_path=$(ls -d drt-*)
-export PATH=$cs_path:$PATH
+rm content_shell-linux-x64-release.zip
 
 
 echo =============================================================================

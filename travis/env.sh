@@ -38,6 +38,9 @@ case $( uname -s ) in
   esac
 export BASE_DIR=$(dirname $SCRIPT_DIR)
 
+
+  export CS_PATH=$BASE_DIR/drt-lucid64-full-stable-35121.0
+  export CS_BIN=$CS_PATH/content_shell
   export DART_SDK="$DARTSDK"
   export DARTSDK
   export DART=${DART:-"$DARTSDK/bin/dart"}
@@ -48,11 +51,13 @@ export BASE_DIR=$(dirname $SCRIPT_DIR)
   export DART_VM_OPTIONS="--old_gen_heap_size=2048"
   export DARTIUM_BIN=${DARTIUM_BIN:-"$DARTIUM"}
   export CHROME_BIN=${CHROME_BIN:-"google-chrome"}
-  export PATH=$PATH:$DARTSDK/bin
+  export PATH=$CS_PATH:$PATH:$DARTSDK/bin
 
   echo '*********'
   echo '** ENV **'
   echo '*********'
+  echo CS_PATH=$CS_PATH
+  echo CS_BIN=$CS_BIN
   echo DART_SDK=$DART_SDK
   echo DART=$DART
   echo PUB=$PUB
