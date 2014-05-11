@@ -3,20 +3,10 @@
 set -e
 . "$(dirname $0)/env.sh"
 
-echo '==========='
-echo '== BUILD =='
-echo '==========='
-
-if [[ $TESTS == "dart2js" ]]; then
-  # skip vm tests if we are only running dart2js
-
-  $PUB build
-else
-  echo '--------------------'
-  echo '-- TEST: VM Tests --'
-  echo '--------------------'
-  $DART --checked $BASE_DIR/test/vm_tests.dart
-fi
+echo '--------------------'
+echo '-- TEST: VM Tests --'
+echo '--------------------'
+$DART --checked $BASE_DIR/test/vm_tests.dart
 
 echo '-------------------------'
 echo '-- TEST: Browser Tests --'
@@ -31,3 +21,8 @@ if [[ "$results" == *"failed"* ]]
 then
 exit 1
 fi
+
+echo '=============================='
+echo '== run: pub build (dart2js) =='
+echo '=============================='
+$PUB build
