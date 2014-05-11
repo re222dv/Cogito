@@ -44,7 +44,7 @@ abstract class Node {
 }
 
 abstract class Panel {
-    final String propertyPanel;
+    String propertyPanel;
 }
 
 abstract class LinePanel implements Panel {
