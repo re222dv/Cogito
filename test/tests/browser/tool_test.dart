@@ -79,7 +79,7 @@ main() {
             expect(lowerNodeSpy).toHaveBeenCalledOnceWith(node);
         });
 
-        it('should raise the page on save', () {
+        it('should save the page on save', () {
             tool.save();
 
             expect(savePageSpy).toHaveBeenCalledOnce();
