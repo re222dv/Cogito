@@ -45,7 +45,7 @@ class PanelComponent implements ShadowRootAware {
                 ['mouseout', 'touchleave'].forEach((event) => toolButton.on[event].where((_) => dragging).listen((_) {
                     dragging = false;
 
-                    tool.toolDrag.add(toolButton.getAttribute('data-tool'));
+                    tool.toolDrag.add(toolButton.getAttribute('tool'));
                 }));
             });
         });

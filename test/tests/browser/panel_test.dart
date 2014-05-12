@@ -27,6 +27,7 @@ main() {
             module((Module _) => _
                 ..bind(MockHttpBackend)
                 ..bind(ToolController)
+                ..bind(ToolDecorator)
                 ..bind(PanelComponent)
                 ..bind(TestBed));
 
@@ -45,14 +46,15 @@ main() {
         tearDown(() {
             tearDownInjector();
 
-            // Reset the stream as ToolController is a singleton
+            // Reset ToolController as it is a singleton
             tool.toolDrag = new StreamController.broadcast();
+            tool.selectedNode = null;
         });
 
         group('right', () {
 
             // Makes it easy to get the element we're testing
-            Element element(tool) => shadowRoot.querySelector('''[ng-click="tool.selectedTool = '$tool'"]''');
+            Element element(tool) => shadowRoot.querySelector('[tool="$tool"]');
 
             setUp(() {
                 shadowRoot = tb.compile('<panel position="right"></panel>').shadowRoot;
@@ -84,48 +86,6 @@ main() {
 
             test('should have an arrow tool', () {
                 expect(element('arrow')).toBeNotNull();
-            });
-
-            test('should choose the select tool when clicked', () {
-                tb.triggerEvent(element('select'), 'click');
-
-                expect(element('select')).toHaveClass('active');
-                expect(tool.selectedTool).toEqual('select');
-            });
-
-            test('should choose the draw tool when clicked', () {
-                tb.triggerEvent(element('draw'), 'click');
-
-                expect(element('draw')).toHaveClass('active');
-                expect(tool.selectedTool).toEqual('draw');
-            });
-
-            test('should choose the text tool when clicked', () {
-                tb.triggerEvent(element('text'), 'click');
-
-                expect(element('text')).toHaveClass('active');
-                expect(tool.selectedTool).toEqual('text');
-            });
-
-            test('should choose the list tool when clicked', () {
-                tb.triggerEvent(element('list'), 'click');
-
-                expect(element('list')).toHaveClass('active');
-                expect(tool.selectedTool).toEqual('list');
-            });
-
-            test('should choose the line tool when clicked', () {
-                tb.triggerEvent(element('line'), 'click');
-
-                expect(element('line')).toHaveClass('active');
-                expect(tool.selectedTool).toEqual('line');
-            });
-
-            test('should choose the arrow tool when clicked', () {
-                tb.triggerEvent(element('arrow'), 'click');
-
-                expect(element('arrow')).toHaveClass('active');
-                expect(tool.selectedTool).toEqual('arrow');
             });
 
             test('should trigger a onDrag event when text is dragged by mouse', () {
@@ -195,6 +155,7 @@ main() {
 
             // Makes it easy to get the elements we're testing
             Element element(tool) => shadowRoot.querySelector('[ng-click="tool.$tool"]');
+
             Element dropdown(type) => shadowRoot.querySelector('dropdown[ng-model="tool.selectedNode.$type"]');
 
             setUp(() {

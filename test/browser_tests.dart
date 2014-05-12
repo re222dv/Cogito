@@ -6,6 +6,7 @@ import 'tests/browser/panel_test.dart' as panel;
 import 'tests/browser/prioritize_test.dart' as prioritize;
 import 'tests/browser/remove_leading_test.dart' as remove_leading;
 import 'tests/browser/tool_test.dart' as tool;
+import 'tests/browser/tool_decorator_test.dart' as tool_decorator;
 
 main() {
     useHtmlConfiguration();
@@ -17,4 +18,5 @@ main() {
     prioritize.main();
     remove_leading.main();
     tool.main();
+    tool_decorator.main();
 }

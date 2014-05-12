@@ -1,18 +1,12 @@
 <div data-position="{{ cmp.position }}" tool-controller>
     <div ng-if="cmp.position == 'right'">
-        <button ng-click="tool.selectedTool = 'select'" data-tool="select"
-                ng-class="{active: tool.selectedTool == 'select'}">Select</button>
-        <button ng-click="tool.selectedTool = 'draw'" data-tool="draw"
-                ng-class="{active: tool.selectedTool == 'draw'}">Draw</button>
-        <button ng-click="tool.selectedTool = 'line'" data-tool="line"
-                ng-class="{active: tool.selectedTool == 'line'}">Line</button>
-        <button ng-click="tool.selectedTool = 'arrow'" data-tool="arrow"
-                ng-class="{active: tool.selectedTool == 'arrow'}">Arrow</button>
+        <button tool="select"></button>
+        <button tool="draw"></button>
+        <button tool="line"></button>
+        <button tool="arrow"></button>
         <p></p>
-        <button ng-click="tool.selectedTool = 'text'" data-draggable="true" data-tool="text"
-                ng-class="{active: tool.selectedTool == 'text'}">Text</button>
-        <button ng-click="tool.selectedTool = 'list'" data-draggable="true" data-tool="list"
-                ng-class="{active: tool.selectedTool == 'list'}">List</button>
+        <button data-draggable="true" tool="text"></button>
+        <button data-draggable="true" tool="list"></button>
     </div>
     <div ng-if="cmp.position == 'top' && tool.propertyPanel != null">
         <div ng-if="tool.propertyPanel == 'text'">
