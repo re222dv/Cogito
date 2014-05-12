@@ -315,6 +315,27 @@ main() {
                 test('should have a delete button', () {
                     expect(element('delete()')).toBeNotNull();
                 });
+
+                test('should choose the ul button when clicked', () {
+                    tb.triggerEvent(element('selectedNode.listType = \'unordered\''), 'click');
+
+                    expect(element('selectedNode.listType = \'unordered\'')).toHaveClass('active');
+                    expect((tool.selectedNode as BasicList).listType).toEqual('unordered');
+                });
+
+                test('should choose the ol button when clicked', () {
+                    tb.triggerEvent(element('selectedNode.listType = \'ordered\''), 'click');
+
+                    expect(element('selectedNode.listType = \'ordered\'')).toHaveClass('active');
+                    expect((tool.selectedNode as BasicList).listType).toEqual('ordered');
+                });
+
+                test('should choose the checked button when clicked', () {
+                    tb.triggerEvent(element('selectedNode.listType = \'checked\''), 'click');
+
+                    expect(element('selectedNode.listType = \'checked\'')).toHaveClass('active');
+                    expect((tool.selectedNode as BasicList).listType).toEqual('checked');
+                });
             });
         });
     });
