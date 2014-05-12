@@ -44,28 +44,29 @@
                     <g ng-if="node.listType == 'unordered'">
                         <g ng-repeat="row in node.rows track by $index">
                             <circle ng-attr-r="{{ node.scale(0.2) }}" ng-attr-cx="{{ node.scale(0.3) }}"
-                                    ng-attr-cy="{{ node.scale($index + 1) - node.scale(0.33) }}"
+                                    ng-attr-cy="{{ node.scale($index + 1) - node.scale(0.3) }}"
                                     fill="{{ node.color }}" />
                         </g>
                     </g>
                     <g ng-if="node.listType == 'ordered'">
                         <g ng-repeat="row in node.rows track by $index">
-                            <text ng-attr-x="{{ node.scale(0.3) }}"
-                                  ng-attr-y="{{ node.scale($index + 1) - node.scale(0.2) }}"
-                                  fill="{{ node.color }}" ng-attr-font-size="{{ node.scale(0.6) }}">
+                            <text text-anchor="end"
+                                  ng-attr-x="{{ node.scale(0.5) + 5 }}" ng-attr-y="{{ node.scale($index + 1) }}"
+                                  fill="{{ node.color }}" ng-attr-font-size="{{ node.scale(0.8) }}">
                                 {{ $index + 1 }}
                             </text>
                         </g>
                     </g>
                     <g ng-if="node.listType == 'checked'">
-                        <g ng-repeat="row in node.rows track by $index" checkbox>
-                            <circle ng-if="checkbox.checked"
-                                    ng-attr-r="{{ node.scale(0.2) }}" ng-attr-cx="{{ node.scale(0.3) + 5 }}"
-                                    ng-attr-cy="{{ node.scale($index + 1) - node.scale(0.3) }}"
-                                    fill="{{ node.color }}" />
+                        <g ng-repeat="row in node.rows track by $index" checkbox
+                           ng-attr-transform="translate(0,{{ node.scale($index) + node.scale(0.4) }})">
+                            <path ng-if="checkbox.checked"
+                                  ng-attr-stroke-width="{{ node.scale(0.1) }}" stroke="{{ node.color }}"
+                                  ng-attr-d="M 0 0 L {{ node.scale(0.6) }} {{ node.scale(0.6) }}
+                                             M 0 {{ node.scale(0.6) }} L {{ node.scale(0.6) }} 0" />
                             <rect ng-attr-height="{{ node.scale(0.6) }}" ng-attr-width="{{ node.scale(0.6) }}"
-                                  x="5" ng-attr-y="{{ node.scale($index) + node.scale(0.4) }}"
-                                  fill="transparent" stroke="{{ node.color }}" />
+                                  x="0" y="0" fill="transparent"
+                                  stroke="{{ node.color }}" ng-attr-stroke-width="{{ node.scale(0.1) }}" />
                         </g>
                     </g>
                     <g ng-show="node.editing">
