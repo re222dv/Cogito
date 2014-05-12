@@ -51,6 +51,8 @@ class NodeHandlerController extends AttachAware {
             var offset = tool.page.getPoint(e);
             offset = new math.Point(node.x - offset.x, node.y - offset.y);
 
+            element.parent.classes.add('dragging');
+
             var events = [];
 
             ['touchmove', 'mousemove'].forEach((event) => events.add(element.parent.parent.on[event].listen((MouseEvent e) {
@@ -65,6 +67,8 @@ class NodeHandlerController extends AttachAware {
 
             ['touchend', 'mouseup'].forEach((event) => events.add(element.parent.parent.on[event].listen((_) {
                 events.forEach((e) => e.cancel());
+
+                element.parent.classes.remove('dragging');
             })));
 
             e.preventDefault();
