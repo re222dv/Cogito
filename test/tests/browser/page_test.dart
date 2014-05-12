@@ -74,7 +74,7 @@ class PageServiceMock implements PageService {
 main() {
     guinnessEnableHtmlMatchers();
 
-    group('PageComponent', () {
+    describe('PageComponent', () {
         Element element;
         MockHttpBackend http;
         Page page;
@@ -83,7 +83,7 @@ main() {
         ToolController tool;
         TestBed tb;
 
-        setUp(() {
+        beforeEach(() {
             // Prepare Angular for testing
             setUpInjector();
 
@@ -119,49 +119,49 @@ main() {
         });
 
         // Tell Angular we are done
-        tearDown(tearDownInjector);
+        afterEach(tearDownInjector);
 
-        test('should load a page', () {
+        it('should load a page', () {
             expect(page).toBeNotNull();
         });
 
-        test('should provide a top panel', () {
+        it('should provide a top panel', () {
             expect(shadowRoot.querySelector('panel[position="top"]')).toBeNotNull();
         });
 
-        test('should provide a left panel', () {
+        it('should provide a left panel', () {
             expect(shadowRoot.querySelector('panel[position="left"]')).toBeNotNull();
         });
 
-        test('should provide a right panel', () {
+        it('should provide a right panel', () {
             expect(shadowRoot.querySelector('panel[position="right"]')).toBeNotNull();
         });
 
-        test('should mixin keyboard-listener', () {
+        it('should mixin keyboard-listener', () {
             expect(shadowRoot.querySelector('div[keyboard-listener]')).toBeNotNull();
         });
 
-        test('should mixin draw-tool', () {
+        it('should mixin draw-tool', () {
             expect(shadowRoot.querySelector('svg[draw-tool]')).toBeNotNull();
         });
 
-        test('should mixin line-tool', () {
+        it('should mixin line-tool', () {
             expect(shadowRoot.querySelector('svg[line-tool]')).toBeNotNull();
         });
 
-        test('should mixin list-tool', () {
+        it('should mixin list-tool', () {
             expect(shadowRoot.querySelector('svg[list-tool]')).toBeNotNull();
         });
 
-        test('should mixin text-tool', () {
+        it('should mixin text-tool', () {
             expect(shadowRoot.querySelector('svg[text-tool]')).toBeNotNull();
         });
 
-        test('should have a white paper', () {
+        it('should have a white paper', () {
             expect(shadowRoot.querySelector('svg>rect[height="100%"][width="100%"][fill="white"]')).toBeNotNull();
         });
 
-        test('should draw all nodes', () {
+        it('should draw all nodes', () {
             expect(shadowRoot.querySelectorAll('svg>g').length).toBe(5);
 
             page.nodes.forEach(expectAsync((node) {
@@ -169,7 +169,7 @@ main() {
             }, count: 5));
         });
 
-        test('should be able to raise a node', () {
+        it('should be able to raise a node', () {
             pageComponent.raise(page.nodes[0]);
 
             expect(page.nodes[0].type).toEqual('arrow');
@@ -179,7 +179,7 @@ main() {
             expect(page.nodes[4].type).toEqual('basicList');
         });
 
-        test('should be able to lower a node', () {
+        it('should be able to lower a node', () {
             pageComponent.lower(page.nodes[1]);
 
             expect(page.nodes[0].type).toEqual('arrow');
@@ -189,7 +189,7 @@ main() {
             expect(page.nodes[4].type).toEqual('basicList');
         });
 
-        test('should do nothing when raising the highest node', () {
+        it('should do nothing when raising the highest node', () {
             pageComponent.raise(page.nodes[4]);
 
             expect(page.nodes[0].type).toEqual('line');
@@ -199,7 +199,7 @@ main() {
             expect(page.nodes[4].type).toEqual('basicList');
         });
 
-        test('should do nothing when lowering the lowest node', () {
+        it('should do nothing when lowering the lowest node', () {
             pageComponent.lower(page.nodes[0]);
 
             expect(page.nodes[0].type).toEqual('line');
@@ -209,13 +209,13 @@ main() {
             expect(page.nodes[4].type).toEqual('basicList');
         });
 
-        test('should save the current page on save', () {
+        it('should save the current page on save', () {
             pageComponent.save();
 
             expect(savePageSpy).toHaveBeenCalledOnceWith(page);
         });
 
-        test('should delete a node on delete', () {
+        it('should delete a node on delete', () {
             pageComponent.delete(page.nodes[0]);
 
             expect(page.nodes.length).toBe(4);

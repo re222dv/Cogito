@@ -4,7 +4,6 @@ import 'dart:async';
 import 'dart:html' hide Path, Text;
 import 'package:angular/angular.dart';
 import 'package:angular/mock/module.dart';
-import 'package:unittest/unittest.dart' hide expect;
 import 'package:guinness/guinness_html.dart';
 import '../../helpers.dart';
 import 'package:cogito/cogito.dart';
@@ -12,9 +11,8 @@ import '../../../web/lib/cogito.dart';
 
 main() {
     guinnessEnableHtmlMatchers();
-    unittestConfiguration.timeout = new Duration(seconds: 3);
 
-    group('ToolDecorator', () {
+    describe('ToolDecorator', () {
         Element rootElement;
         TestBed tb;
         ToolController tool;
@@ -22,7 +20,7 @@ main() {
         // Makes it easy to get the element we're testing
         Element element(tool) => rootElement.querySelector('[tool="$tool"]');
 
-        setUp(() {
+        beforeEach(() {
             // Prepare Angular for testing
             setUpInjector();
 
@@ -45,22 +43,20 @@ main() {
         });
 
         // Tell Angular we are done
-        tearDown(() {
-            tearDownInjector();
-        });
+        afterEach(tearDownInjector);
 
-        test('should activate the draw tool button from start', () {
+        it('should activate the draw tool button from start', () {
             expect(element('draw')).toBeNotNull();
         });
 
-        test('should deactivate the draw tool and select the line tool on click', () {
+        it('should deactivate the draw tool and select the line tool on click', () {
             tb.triggerEvent(element('line'), 'click');
 
-            Timer.run(expectAsync(() {
+            return new Future.delayed(Duration.ZERO, () {
                 expect(element('draw')).not.toHaveClass('active');
                 expect(element('line')).toHaveClass('active');
                 expect(tool.selectedTool).toEqual('line');
-            }));
+            });
         });
     });
 }

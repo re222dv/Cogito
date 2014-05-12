@@ -1,6 +1,5 @@
 library tool_tests;
 
-import 'package:unittest/unittest.dart' hide expect;
 import 'package:guinness/guinness.dart';
 import 'package:cogito/cogito.dart';
 import '../../../web/lib/cogito.dart';
@@ -25,7 +24,6 @@ class MockPageComponent implements PageComponent {
 }
 
 main() {
-    unittestConfiguration.timeout = new Duration(seconds: 3);
 
     describe('ToolController', () {
         ToolController tool;
@@ -44,11 +42,13 @@ main() {
             tool.selectedTool = 'select';
             expect(tool.selectedTool).toEqual('select');
 
-            tool.onToolChange.listen(expectAsync((tool) {
+            var future = tool.onToolChange.first.then((tool) {
                 expect(tool).toEqual('draw');
-            }));
+            });
 
             tool.selectedTool = 'draw';
+
+            return future;
         });
 
         it('should bind onToolDrag to toolDrag.stream', () {

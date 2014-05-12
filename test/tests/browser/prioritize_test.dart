@@ -2,7 +2,6 @@ library prioritize_tests;
 
 import 'package:angular/angular.dart';
 import 'package:angular/mock/module.dart';
-import 'package:unittest/unittest.dart' hide expect;
 import 'package:guinness/guinness_html.dart';
 import '../../../web/lib/cogito.dart';
 
@@ -10,11 +9,11 @@ import '../../../web/lib/cogito.dart';
 main() {
     guinnessEnableHtmlMatchers();
 
-    group('PrioritizeFormatter', () {
+    describe('PrioritizeFormatter', () {
         PrioritizeFormatter prioritize;
         var textSizes;
 
-        setUp(() {
+        beforeEach(() {
             // Prepare Angular for testing
             setUpInjector();
 
@@ -33,9 +32,9 @@ main() {
         });
 
         // Tell Angular we are done
-        tearDown(tearDownInjector);
+        afterEach(tearDownInjector);
 
-        test('should prioritize values correctly', () {
+        it('should prioritize values correctly', () {
             var prioritizedValues = prioritize(textSizes, 22);
             var prioritizedValues2 = prioritize(textSizes, 30);
             var prioritizedValues3 = prioritize(textSizes, 50);
@@ -45,7 +44,7 @@ main() {
             expect(prioritizedValues3).toEqual([16, 26, 36, 40, 42, 44, 46, 48, 52, 54, 56, 58, 60, 64]);
         });
 
-        test('should not prioritize values if provides list is short', () {
+        it('should not prioritize values if provides list is short', () {
             var prioritizedValues = prioritize([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 10);
 
             expect(prioritizedValues).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);

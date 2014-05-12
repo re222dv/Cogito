@@ -4,7 +4,6 @@ import 'dart:async';
 import 'dart:html';
 import 'package:angular/angular.dart';
 import 'package:angular/mock/module.dart';
-import 'package:unittest/unittest.dart' hide expect;
 import 'package:guinness/guinness_html.dart';
 import '../../helpers.dart';
 import '../../../web/lib/cogito.dart';
@@ -13,12 +12,12 @@ import '../../../web/lib/cogito.dart';
 main() {
     guinnessEnableHtmlMatchers();
 
-    group('DropDownComponent', () {
+    describe('DropDownComponent', () {
         Element element;
         ShadowRoot shadowRoot;
         TestBed tb;
 
-        setUp(() {
+        beforeEach(() {
             // Prepare Angular for testing
             setUpInjector();
 
@@ -37,14 +36,14 @@ main() {
         });
 
         // Tell Angular we are done
-        tearDown(() {
+        afterEach(() {
             tearDownInjector();
 
             element.remove();
         });
 
-        group('int type', () {
-            setUp(() {
+        describe('int type', () {
+            beforeEach(() {
                 // Prepare test values
                 var textSizes = [];
                 for (var i = 12; i <= 72; i+= 2) {
@@ -65,7 +64,7 @@ main() {
                 return new Future.delayed(Duration.ZERO, () => tb.getScope(shadowRoot.querySelector('div')).apply());
             });
 
-            test('should prioritize values correctly', () {
+            it('should prioritize values correctly', () {
                 var prioritizedValues = shadowRoot.querySelectorAll('li').map((element) => element.getAttribute('value'));
 
                 expect(prioritizedValues).toEqual(['12', '14', '16', '18', '20', '24', '26', '28', '30', '32', '36', '46', '56', '66']);
@@ -79,39 +78,39 @@ main() {
                 expect(prioritizedValues).toEqual(['16', '20', '22', '24', '26', '28', '32', '34', '36', '38', '40', '44', '54', '64']);
             });
 
-            test('should be hidden from start', () {
+            it('should be hidden from start', () {
                 expect(shadowRoot.querySelector('ul')).toHaveClass('ng-hide');
             });
 
-            test('should be shown after a click', () {
+            it('should be shown after a click', () {
                 tb.triggerEvent(shadowRoot.querySelector('div'), 'mousedown');
                 tb.triggerEvent(shadowRoot.querySelector('div'), 'mouseup');
 
                 expect(shadowRoot.querySelector('ul')).not.toHaveClass('ng-hide');
             });
 
-            test('should be shown after a mouse drag', () {
+            it('should be shown after a mouse drag', () {
                 tb.triggerEvent(shadowRoot.querySelector('div'), 'mousedown');
                 tb.triggerEvent(shadowRoot.querySelector('div'), 'mouseout');
 
                 expect(shadowRoot.querySelector('ul')).not.toHaveClass('ng-hide');
             });
 
-            test('should be shown after a tap', () {
+            it('should be shown after a tap', () {
                 tb.triggerEvent(shadowRoot.querySelector('div'), 'touchstart');
                 tb.triggerEvent(shadowRoot.querySelector('div'), 'touchend');
 
                 expect(shadowRoot.querySelector('ul')).not.toHaveClass('ng-hide');
             });
 
-            test('should be shown after a touch drag', () {
+            it('should be shown after a touch drag', () {
                 tb.triggerEvent(shadowRoot.querySelector('div'), 'touchstart');
                 tb.triggerEvent(shadowRoot.querySelector('div'), 'touchleave');
 
                 expect(shadowRoot.querySelector('ul')).not.toHaveClass('ng-hide');
             });
 
-            test('should hide after a click', () {
+            it('should hide after a click', () {
                 tb.triggerEvent(shadowRoot.querySelector('div'), 'mousedown');
                 tb.triggerEvent(shadowRoot.querySelector('div'), 'mouseup');
 
@@ -121,7 +120,7 @@ main() {
                 expect(shadowRoot.querySelector('ul')).toHaveClass('ng-hide');
             });
 
-            test('should hide after a tap', () {
+            it('should hide after a tap', () {
                 tb.triggerEvent(shadowRoot.querySelector('div'), 'touchstart');
                 tb.triggerEvent(shadowRoot.querySelector('div'), 'touchend');
 
@@ -131,7 +130,7 @@ main() {
                 expect(shadowRoot.querySelector('ul')).toHaveClass('ng-hide');
             });
 
-            test('should be able to select a value with a click', () {
+            it('should be able to select a value with a click', () {
                 tb.triggerEvent(shadowRoot.querySelector('div'), 'mousedown');
                 tb.triggerEvent(shadowRoot.querySelector('div'), 'mouseup');
 
@@ -145,7 +144,7 @@ main() {
                 expect(tb.rootScope.context['val']).toEqual(30);
             });
 
-            test('should be able to select a value with a tap', () {
+            it('should be able to select a value with a tap', () {
                 tb.triggerEvent(shadowRoot.querySelector('div'), 'touchstart');
                 tb.triggerEvent(shadowRoot.querySelector('div'), 'touchend');
 
@@ -159,7 +158,7 @@ main() {
                 expect(tb.rootScope.context['val']).toEqual(30);
             });
 
-            test('should be able to select a value with a mouse drag', () {
+            it('should be able to select a value with a mouse drag', () {
                 tb.triggerEvent(shadowRoot.querySelector('div'), 'mousedown');
                 tb.triggerEvent(shadowRoot.querySelector('div'), 'mouseout');
 
@@ -171,7 +170,7 @@ main() {
                 expect(tb.rootScope.context['val']).toEqual(30);
             });
 
-            test('should be able to select a value with a touch drag', () {
+            it('should be able to select a value with a touch drag', () {
                 tb.triggerEvent(shadowRoot.querySelector('div'), 'touchstart');
                 tb.triggerEvent(shadowRoot.querySelector('div'), 'touchleave');
 
@@ -183,7 +182,7 @@ main() {
                 expect(tb.rootScope.context['val']).toEqual(30);
             });
 
-            test('should show the selected value', () {
+            it('should show the selected value', () {
                 expect(shadowRoot.querySelector('div>p').text).toContain('22');
 
                 tb.triggerEvent(shadowRoot.querySelector('div'), 'mousedown');
@@ -193,7 +192,7 @@ main() {
                 expect(shadowRoot.querySelector('div>p').text).toContain('30');
             });
 
-            test('should show the selectable values', () {
+            it('should show the selectable values', () {
                 ['12', '14', '16', '18', '20', '24', '26', '28', '30', '32', '36', '46', '56', '66'].forEach((size) {
                     expect(shadowRoot.querySelector('[value="$size"] p').text).toContain('$size');
                 });
@@ -208,8 +207,8 @@ main() {
             });
         });
 
-        group('color type', () {
-            setUp(() {
+        describe('color type', () {
+            beforeEach(() {
                 tb.rootScope.context['val'] = 'green';
                 tb.rootScope.context['vals'] = ['red', 'green', 'blue'];
                 element = tb.compile('<dropdown type="color" values="vals" ng-model="val"></dropdown>');
@@ -224,7 +223,7 @@ main() {
                 return new Future.delayed(Duration.ZERO, () => tb.getScope(shadowRoot.querySelector('div')).apply());
             });
 
-            test('should show the selected value', () {
+            it('should show the selected value', () {
                 expect(shadowRoot.querySelector('div>p').style.backgroundColor).toEqual('green');
 
                 tb.triggerEvent(shadowRoot.querySelector('div'), 'mousedown');
@@ -234,7 +233,7 @@ main() {
                 expect(shadowRoot.querySelector('div>p').style.backgroundColor).toEqual('red');
             });
 
-            test('should show the selectable values', () {
+            it('should show the selectable values', () {
                 expect(shadowRoot.querySelector('[value="red"] p').style.backgroundColor).toEqual('red');
                 expect(shadowRoot.querySelector('[value="green"] p').style.backgroundColor).toEqual('green');
                 expect(shadowRoot.querySelector('[value="blue"] p').style.backgroundColor).toEqual('blue');
