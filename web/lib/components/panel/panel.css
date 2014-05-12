@@ -82,7 +82,8 @@ button {
     width: 40px;
     height: 40px;
 
-    background: rgba(0, 0, 0, 0.2);
+    color: transparent;
+    background: rgba(0, 0, 0, 0.2) no-repeat center;
     border: 0;
     border-radius: 5px;
 }
@@ -145,7 +146,7 @@ button {
 }
 
 [data-position]>div .active {
-    background: rgba(255, 255, 255, 0.20);
+    background-color: rgba(255, 255, 255, 0.20);
 }
 
 [data-position="top"] div>dropdown {
@@ -158,5 +159,60 @@ button {
 }
 
 button:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+[data-tool], [data-icon] {
+    background-size: 70%;
+}
+
+[data-position]>div [data-tool="select"] {
+    background-image: url("lib/components/panel/icons/pointer.svg");
+    background-size: 60%;
+}
+
+[data-position]>div [data-tool="draw"] {
+    background-image: url("lib/components/panel/icons/freehand.svg");
+}
+
+[data-position]>div [data-tool="line"] {
+    background-image: url("lib/components/panel/icons/line.svg");
+}
+
+[data-position]>div [data-tool="arrow"] {
+    background-image: url("lib/components/panel/icons/arrow.svg");
+    background-size: 60%;
+}
+
+[data-position]>div [data-tool="text"] {
+    background-image: url("lib/components/panel/icons/text.svg");
+    background-size: 60%;
+}
+
+[data-position]>div [data-tool="list"], [data-position]>div [data-icon="list"] {
+    background-image: url("lib/components/panel/icons/list.svg");
+}
+
+[data-position]>div [data-icon="ordered-list"] {
+    background-image: url("lib/components/panel/icons/ordered-list.svg");
+}
+
+[data-position]>div [data-icon="checked-list"] {
+    background-image: url("lib/components/panel/icons/checked-list.svg");
+}
+
+[data-position]>div [data-icon="up"] {
+    background-image: url("lib/components/panel/icons/up.svg");
+}
+
+[data-position]>div [data-icon="down"] {
+    background-image: url("lib/components/panel/icons/down.svg");
+}
+
+[data-position]>div [data-icon="trash"] {
+    background-image: url("lib/components/panel/icons/trash-simple.svg");
+}
+
+[data-position]>div [data-icon="save"] {
+    background-image: url("lib/components/panel/icons/save.svg");
 }

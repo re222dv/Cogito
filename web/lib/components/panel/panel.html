@@ -1,12 +1,12 @@
 <div data-position="{{ cmp.position }}" tool-controller>
     <div ng-if="cmp.position == 'right'">
-        <button ng-click="tool.selectedTool = 'select'"
+        <button ng-click="tool.selectedTool = 'select'" data-tool="select"
                 ng-class="{active: tool.selectedTool == 'select'}">Select</button>
-        <button ng-click="tool.selectedTool = 'draw'"
+        <button ng-click="tool.selectedTool = 'draw'" data-tool="draw"
                 ng-class="{active: tool.selectedTool == 'draw'}">Draw</button>
-        <button ng-click="tool.selectedTool = 'line'"
+        <button ng-click="tool.selectedTool = 'line'" data-tool="line"
                 ng-class="{active: tool.selectedTool == 'line'}">Line</button>
-        <button ng-click="tool.selectedTool = 'arrow'"
+        <button ng-click="tool.selectedTool = 'arrow'" data-tool="arrow"
                 ng-class="{active: tool.selectedTool == 'arrow'}">Arrow</button>
         <p></p>
         <button ng-click="tool.selectedTool = 'text'" data-draggable="true" data-tool="text"
@@ -25,21 +25,21 @@
         </div>
         <div ng-if="tool.selectedNode.type == 'basicList'">
             <p></p>
-            <button ng-click="tool.selectedNode.listType = 'unordered'"
+            <button ng-click="tool.selectedNode.listType = 'unordered'" data-icon="list"
                     ng-class="{active: tool.selectedNode.listType == 'unordered'}">ul</button>
-            <button ng-click="tool.selectedNode.listType = 'ordered'"
+            <button ng-click="tool.selectedNode.listType = 'ordered'" data-icon="ordered-list"
                     ng-class="{active: tool.selectedNode.listType == 'ordered'}">ol
             </button>
-            <button ng-click="tool.selectedNode.listType = 'checked'"
+            <button ng-click="tool.selectedNode.listType = 'checked'" data-icon="checked-list"
                     ng-class="{active: tool.selectedNode.listType == 'checked'}">check
             </button>
         </div>
         <p></p>
-        <button ng-click="tool.raise()">Raise</button>
-        <button ng-click="tool.lower()">Lower</button>
-        <button ng-click="tool.delete()">Delete</button>
+        <button ng-click="tool.raise()" data-icon="up">Raise</button>
+        <button ng-click="tool.lower()" data-icon="down">Lower</button>
+        <button ng-click="tool.delete()" data-icon="trash">Delete</button>
     </div>
     <div ng-if="cmp.position == 'left'">
-        <button ng-click="tool.save()">Save</button>
+        <button ng-click="tool.save()" data-icon="save">Save</button>
     </div>
 </div>
