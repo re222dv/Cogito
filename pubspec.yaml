@@ -10,7 +10,8 @@ dependencies:
     git: https://github.com/Pajn/RestLibrary.git
   shadow_dom: any
 dev_dependencies:
-  guinness: ">=0.0.1 <1.0.0"
+  dart_to_js_script_rewriter: any
+  guinness: ">=0.1.3"
   matcher: any
   unittest: any
 transformers:
@@ -18,6 +19,12 @@ transformers:
     html_files:
       - web/lib/components/page/page.html
       - web/lib/components/panel/panel.html
+- dart_to_js_script_rewriter
 - $dart2js:
     checked: false
-    minify: false
+    minify: true
+    verbose: true
+    analyzeAll: false
+    suppressWarnings: false
+    suppressHints: false
+    terse: false
