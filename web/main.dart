@@ -17,6 +17,7 @@ class WebModule extends Module {
         bind(KeyboardListenerDecorator);
         bind(LineToolDecorator);
         bind(ListToolDecorator);
+        bind(StopClicksDecorator);
         bind(TextToolDecorator);
         bind(ToolDecorator);
         bind(PrioritizeFormatter);

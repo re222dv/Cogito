@@ -64,6 +64,10 @@ main() {
                 return new Future.delayed(Duration.ZERO, () => tb.getScope(shadowRoot.querySelector('div')).apply());
             });
 
+            test('should stop clicks', () {
+                expect(shadowRoot.querySelector('div>div[stop-clicks]')).toBeNotNull();
+            });
+
             test('should have a select tool', () {
                 expect(element('select')).toBeNotNull();
             });
@@ -146,6 +150,10 @@ main() {
                 return new Future.delayed(Duration.ZERO, () => tb.getScope(shadowRoot.querySelector('div')).apply());
             });
 
+            test('should stop clicks', () {
+                expect(shadowRoot.querySelector('div>div[stop-clicks]')).toBeNotNull();
+            });
+
             test('should have a save button', () {
                 expect(element('save')).toBeNotNull();
             });
@@ -164,6 +172,13 @@ main() {
 
                 // Make sure Angular get time to attach the shadow root
                 return new Future.delayed(Duration.ZERO, () => tb.getScope(shadowRoot.querySelector('div')).apply());
+            });
+
+            test('should stop clicks', () {
+                tool.selectedNode = new Line();
+                tb.getScope(shadowRoot.querySelector('div')).apply();
+
+                expect(shadowRoot.querySelector('div>div[stop-clicks]')).toBeNotNull();
             });
 
             test('should not be shown when no node is selected', () {

@@ -30,12 +30,6 @@ class PanelComponent implements ShadowRootAware {
         // TODO: Listen on a better event from angular so that Timer.run isn't needed
         // Wait a tick so Angular got time to digest the shadowRoot
         Timer.run(() {
-            List<Element> panels = shadowRoot.querySelectorAll('[data-position] > div');
-
-            panels.forEach((panel) {
-                ['click', 'mousedown'].forEach((event) => panel.on[event].listen((Event e) => e.stopPropagation()));
-            });
-
             List<Element> tools = shadowRoot.querySelectorAll('[data-draggable="true"]');
 
             tools.forEach((toolButton) {
