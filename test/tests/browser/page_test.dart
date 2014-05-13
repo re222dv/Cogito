@@ -220,5 +220,14 @@ main() {
 
             expect(page.nodes.length).toBe(4);
         });
+
+        it('should deselect a node on click', () {
+            tool.selectedNode = new Line();
+            tool.selectedTool = 'select';
+
+            tb.triggerEvent(element, 'mousedown');
+
+            expect(tool.selectedNode).toBeNull();
+        });
     });
 }

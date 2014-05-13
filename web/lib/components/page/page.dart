@@ -8,6 +8,7 @@ part of cogito_web;
 )
 class PageComponent extends ShadowRootAware {
     Element paper;
+    Element svg;
 
     Page page = new Page();
     PageService pages;
@@ -22,7 +23,13 @@ class PageComponent extends ShadowRootAware {
         pages.getPage().then((_page) => page = _page);
 
         // Deselect the node when the page is clicked
-        element.onClick.where((_) => tool.selectedTool == 'select').listen((_) => tool.selectedNode = null);
+        element.onMouseDown.where((_) => tool.selectedTool == 'select')
+                           .listen((Event e) {
+                                tool.selectedNode = null;
+                                
+                                e.preventDefault();
+                                e.stopPropagation();
+                            });
     }
 
     /**
@@ -77,5 +84,6 @@ class PageComponent extends ShadowRootAware {
 
     onShadowRoot(ShadowRoot shadowRoot) {
         paper = shadowRoot.querySelector('rect');
+        svg = shadowRoot.querySelector('svg');
     }
 }

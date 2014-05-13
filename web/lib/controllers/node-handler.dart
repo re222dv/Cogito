@@ -65,10 +65,13 @@ class NodeHandlerController extends AttachAware {
                 e.stopPropagation();
             })));
 
-            ['touchend', 'mouseup'].forEach((event) => events.add(element.parent.parent.on[event].listen((_) {
+            ['touchend', 'mouseup'].forEach((event) => events.add(element.parent.parent.on[event].listen((Event e) {
                 events.forEach((e) => e.cancel());
 
                 element.parent.classes.remove('dragging');
+
+                e.preventDefault();
+                e.stopPropagation();
             })));
 
             e.preventDefault();

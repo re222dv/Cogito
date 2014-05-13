@@ -12,6 +12,10 @@ class ToolController {
     Node _selectedNode;
     Node get selectedNode => _selectedNode;
     set selectedNode(Node node) {
+        if (node == _selectedNode) {
+            return;
+        }
+        
         if (_selectedNode != null && _selectedNode.editable && _selectedNode.editing) {
             _selectedNode.editing = false;
         }
