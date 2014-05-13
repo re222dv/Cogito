@@ -21,20 +21,19 @@ main {
   color: white;
   font-family: Arial, sans-serif; }
   main section {
+    box-sizing: border-box;
     width: 100%;
     height: 100%;
+    z-index: 2;
     background-color: red; }
   main section:first-child {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding-top: 50px; }
-    main section:first-child button {
-      padding: 7px 20px;
-      background-color: rgba(255, 255, 255, 0.5);
-      border: none;
-      border-radius: 10px; }
+    padding-top: 100px;
+    background: url(images/bg.jpg) no-repeat center center fixed;
+    background-size: cover; }
     main section:first-child #loginbox {
       position: relative; }
       main section:first-child #loginbox div {
@@ -50,8 +49,12 @@ main {
         margin: 0.3rem 8px;
         padding: 0.3rem;
         width: 200px;
+        background-color: rgba(255, 255, 255, 0.8);
         border: none;
-        font-size: 1rem; }
+        font-size: 1rem;
+        transition: background-color 0.5s ease; }
+      main section:first-child #loginbox input:hover, main section:first-child #loginbox input:focus, main section:first-child #loginbox input:active {
+        background-color: rgba(255, 255, 255, 0.9); }
       main section:first-child #loginbox div:first-of-type label::after {
         content: '';
         display: block;
@@ -70,12 +73,27 @@ main {
         width: 1px;
         height: 70px;
         background: linear-gradient(to bottom, white 50%, rgba(255, 255, 255, 0.1) 100%); }
-      main section:first-child #loginbox div + div #login {
+      main section:first-child #loginbox div + div svg {
         position: absolute;
         top: 0;
-        margin-top: 0.4rem;
+        margin-top: 0.95rem;
         height: 4rem;
-        cursor: pointer; }
+        cursor: pointer;
+        transition: fill 0; }
+      main section:first-child #loginbox div + div svg [data-x] circle {
+        fill: #aaa; }
+      main section:first-child #loginbox div + div svg:hover [data-x] circle {
+        fill: white; }
+      main section:first-child #loginbox div + div svg:hover [data-x="5"] circle {
+        transition-delay: 0.1s; }
+      main section:first-child #loginbox div + div svg:hover [data-x="10"] circle {
+        transition-delay: 0.2s; }
+      main section:first-child #loginbox div + div svg:hover [data-x="15"] circle {
+        transition-delay: 0.3s; }
+      main section:first-child #loginbox div + div svg:hover [data-x="20"] circle {
+        transition-delay: 0.4s; }
+      main section:first-child #loginbox div + div svg:hover [data-x="25"] circle {
+        transition-delay: 0.5s; }
       main section:first-child #loginbox div:last-of-type a {
         display: block;
         padding-right: 2px;
@@ -85,26 +103,22 @@ main {
       main section:first-child #registerbox button {
         display: block;
         padding: 10px 50px;
-        color: white;
+        cursor: pointer;
+        color: #333;
+        background-color: rgba(255, 255, 255, 0.5);
+        border: none;
+        border-radius: 10px;
         font-size: 1.3rem;
-        cursor: pointer; }
+        transition: background-color 0.5s ease; }
+      main section:first-child #registerbox button:hover, main section:first-child #registerbox button:focus {
+        background-color: rgba(255, 255, 255, 0.8); }
       main section:first-child #registerbox p {
         text-align: center; }
         main section:first-child #registerbox p a {
-          color: darkblue;
+          color: white;
           text-decoration: none; }
         main section:first-child #registerbox p a:hover {
           text-decoration: underline; }
-    main section:first-child footer {
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%; }
-      main section:first-child footer a {
-        display: inline-block;
-        width: 50%; }
-      main section:first-child footer a:first-child {
-        text-align: right; }
   main section + section {
     background-color: blue; }
   main section + section + section {

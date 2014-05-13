@@ -17,7 +17,19 @@
                     <div>
                         <label for="password">Password</label>
                         <input type="password" id="password" />
-                        <img id="login" src="images/login.svg" />
+                        <a href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 version="1.1"
+                                 width="25"
+                                 height="45">
+                                <g ng-repeat="x in [5, 10, 15, 20, 25]" data-x="{{ x }}">
+                                    <g ng-repeat="y in [5, 10, 15, 20, 25, 30, 35, 40, 45]">
+                                        <circle ng-if="(y <= 25 && x <= y) || (y > 25 && x+y <= 50)"
+                                                ng-attr-cx="{{ x - 2.5 }}" ng-attr-cy="{{ y - 2.5 }}" r="1.8" />
+                                    </g>
+                                </g>
+                            </svg>
+                        </a>
                     </div>
                 </div>
                 <div id="registerbox">
