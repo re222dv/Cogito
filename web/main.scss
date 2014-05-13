@@ -16,3 +16,174 @@ html, body {
         height: 100%;
     }
 }
+
+main {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow-x: hidden;
+    overflow-y: scroll;
+
+    color: white;
+    font-family: Arial, sans-serif;
+
+    section {
+        width: 100%;
+        height: 100%;
+
+        background-color: red;
+    }
+
+    section:first-child {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        padding-top: 50px;
+
+        button {
+            padding: 7px 20px;
+
+            background-color: rgba(255, 255, 255, 0.5);
+            border: none;
+            border-radius: 10px;
+        }
+
+        #loginbox {
+            position: relative;
+
+            div {
+                display: table-row;
+            }
+
+            label, input, p {
+                display: table-cell;
+            }
+
+            label {
+                position: relative;
+
+                margin: 0;
+                padding: 0 10px;
+
+                text-align: right;
+            }
+
+            input {
+                margin: 0.3rem 8px;
+                padding: 0.3rem;
+
+                width: 200px;
+
+                border: none;
+
+                font-size: 1rem;
+            }
+
+            div:first-of-type label::after {
+                content: '';
+                display: block;
+                position: absolute;
+                right: 0;
+                bottom: 0;
+
+                width: 1px;
+                height: 70px;
+
+                background: linear-gradient(to top, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0.1) 100%);
+            }
+
+            div+div {
+                label::after {
+                    content: '';
+                    display: block;
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+
+                    width: 1px;
+                    height: 70px;
+
+                    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0.1) 100%);
+                }
+
+                #login {
+                    position: absolute;
+                    top: 0;
+                    margin-top: 0.4rem;
+
+                    height: 4rem;
+
+                    cursor: pointer;
+                }
+            }
+
+            div:last-of-type {
+
+                a {
+                    display: block;
+                    padding-right: 2px;
+
+                    text-align: right;
+                }
+            }
+        }
+
+        #registerbox {
+            margin-top: 100px;
+
+            button {
+                display: block;
+                padding: 10px 50px;
+
+                color: white;
+                font-size: 1.3rem;
+
+                cursor: pointer;
+            }
+
+            p {
+                text-align: center;
+
+                a {
+                    color: darkblue;
+                    text-decoration: none;
+                }
+
+                a:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+
+        footer {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+
+            a {
+                display: inline-block;
+
+                width: 50%;
+            }
+
+            a:first-child {
+                text-align: right;
+            }
+        }
+    }
+
+    section + section {
+        background-color: blue;
+    }
+
+    section + section + section {
+        background-color: yellow;
+    }
+}

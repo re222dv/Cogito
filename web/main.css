@@ -9,3 +9,103 @@ html, body {
     display: block;
     width: 100%;
     height: 100%; }
+
+main {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  color: white;
+  font-family: Arial, sans-serif; }
+  main section {
+    width: 100%;
+    height: 100%;
+    background-color: red; }
+  main section:first-child {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 50px; }
+    main section:first-child button {
+      padding: 7px 20px;
+      background-color: rgba(255, 255, 255, 0.5);
+      border: none;
+      border-radius: 10px; }
+    main section:first-child #loginbox {
+      position: relative; }
+      main section:first-child #loginbox div {
+        display: table-row; }
+      main section:first-child #loginbox label, main section:first-child #loginbox input, main section:first-child #loginbox p {
+        display: table-cell; }
+      main section:first-child #loginbox label {
+        position: relative;
+        margin: 0;
+        padding: 0 10px;
+        text-align: right; }
+      main section:first-child #loginbox input {
+        margin: 0.3rem 8px;
+        padding: 0.3rem;
+        width: 200px;
+        border: none;
+        font-size: 1rem; }
+      main section:first-child #loginbox div:first-of-type label::after {
+        content: '';
+        display: block;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 1px;
+        height: 70px;
+        background: linear-gradient(to top, white 50%, rgba(255, 255, 255, 0.1) 100%); }
+      main section:first-child #loginbox div + div label::after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 1px;
+        height: 70px;
+        background: linear-gradient(to bottom, white 50%, rgba(255, 255, 255, 0.1) 100%); }
+      main section:first-child #loginbox div + div #login {
+        position: absolute;
+        top: 0;
+        margin-top: 0.4rem;
+        height: 4rem;
+        cursor: pointer; }
+      main section:first-child #loginbox div:last-of-type a {
+        display: block;
+        padding-right: 2px;
+        text-align: right; }
+    main section:first-child #registerbox {
+      margin-top: 100px; }
+      main section:first-child #registerbox button {
+        display: block;
+        padding: 10px 50px;
+        color: white;
+        font-size: 1.3rem;
+        cursor: pointer; }
+      main section:first-child #registerbox p {
+        text-align: center; }
+        main section:first-child #registerbox p a {
+          color: darkblue;
+          text-decoration: none; }
+        main section:first-child #registerbox p a:hover {
+          text-decoration: underline; }
+    main section:first-child footer {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%; }
+      main section:first-child footer a {
+        display: inline-block;
+        width: 50%; }
+      main section:first-child footer a:first-child {
+        text-align: right; }
+  main section + section {
+    background-color: blue; }
+  main section + section + section {
+    background-color: yellow; }
