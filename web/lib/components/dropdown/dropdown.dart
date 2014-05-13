@@ -7,6 +7,7 @@ part of cogito_web;
     publishAs: 'cmp'
 )
 class DropDownComponent extends ShadowRootAware {
+    final Element _element;
     final NgModel _ngModel;
 
     @NgAttr('type')
@@ -27,9 +28,19 @@ class DropDownComponent extends ShadowRootAware {
         _ngModel.render(_ngModel.modelValue);
     }
 
-    bool open = false;
+    bool _open = false;
+    bool get open => _open;
+    set open(bool open) {
+        _open = open;
 
-    DropDownComponent(this._ngModel) {
+        if (open) {
+            _element.classes.add('open');
+        } else {
+            _element.classes.remove('open');
+        }
+    }
+
+    DropDownComponent(this._element, this._ngModel) {
         _ngModel.render = (val) {
             _value = val;
         };
