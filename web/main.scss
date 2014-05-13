@@ -71,6 +71,7 @@ main {
                 padding: 0 10px;
 
                 text-align: right;
+                text-shadow: 0 0 3px #000;
             }
 
             input {
@@ -178,7 +179,7 @@ main {
 
                 cursor: pointer;
 
-                color: #333;
+                color: rgba(0, 0, 0, 0.6);
                 background-color: rgba(255, 255, 255, 0.5);
                 border: none;
                 border-radius: 10px;
