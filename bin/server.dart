@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:mongo_dart/mongo_dart.dart';
 import 'package:RestLibrary/restlibrary.dart';
+import 'package:cogito/cogito.dart';
 
 Db db;
 
@@ -30,10 +31,13 @@ servePage(Request request) {
 }
 
 savePage(Request request) {
+    // Create a Page from the Json and then back to make sure we only get stuff that Page accepts.
+    var page = new Page.fromJson(request.json);
+
     return db.open().then((_) {
         DbCollection pages = db.collection('Pages');
 
-        return pages.update({}, request.json).then((json) {
+        return pages.update({}, page.toJson()).then((json) {
             db.close();
             return new Response(json);
         });
