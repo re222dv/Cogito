@@ -219,3 +219,93 @@ button:hover {
 [data-position]>div [data-icon="save"] {
     background-image: url("lib/components/panel/icons/save.svg");
 }
+
+[data-position] [tooltip]::before {
+    content: attr(tooltip);
+
+    display: block;
+    position: absolute;
+
+    padding: 0;
+    max-width: 0;
+    max-height: 0;
+
+    color: white;
+    background: radial-gradient(rgba(40, 40, 40, 1) 0%, rgba(80, 80, 80, 0.8) 100%);
+
+    font-family: Arial, sans-serif;
+    font-size: 0.9rem;
+    white-space: nowrap;
+
+    opacity: 0;
+    transition: opacity 0.5s,
+                padding 0 0.5,
+                max-width 0 0.5;
+}
+
+[data-position] [tooltip]:hover::before {
+    max-width: 999px;
+    max-height: 999px;
+    padding: 10px;
+
+    opacity: 1;
+    transition: opacity 1s 1s ease-in-out;
+}
+
+[data-position="right"] [tooltip]::before {
+    right: 0;
+    margin-top: -18px;
+
+    border-radius: 5px 0 0 5px;
+}
+
+[data-position="left"] [tooltip]::before {
+    left: 0;
+    margin-top: -9px;
+    margin-left: 50px;
+
+    border-radius: 0 5px 5px 0;
+}
+
+[data-position="top"] [tooltip]:hover::before {
+    top: -999px;
+    margin-top: -999px;
+}
+
+[data-position="top"] [tooltip]:hover::before {
+    top: 0;
+    margin-top: 60px;
+    margin-left: -50%;
+
+    border-radius: 5px;
+}
+
+[data-position="top"] [tooltip]::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    margin-top: -999px;
+
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+
+    border-bottom: 10px solid rgba(80, 80, 80, 0.8);
+
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+[data-position="top"] [tooltip]:hover::after {
+    margin-top: 50px;
+    margin-left: 5px;
+
+    opacity: 1;
+    transition: opacity 1s 1s ease-in-out;
+}
+
+[data-position="top"] dropdown[tooltip]:hover::after {
+    margin-left: 10px;
+}

@@ -1,39 +1,39 @@
 <div data-position="{{ cmp.position }}" tool-controller>
     <div ng-if="cmp.position == 'right'">
-        <button tool="select"></button>
-        <button tool="draw"></button>
-        <button tool="line"></button>
-        <button tool="arrow"></button>
+        <button tool="select" tooltip="Selection tool [Alt]+1"></button>
+        <button tool="draw" tooltip="Draw tool [Alt]+2"></button>
+        <button tool="line" tooltip="Line tool [Alt]+3"></button>
+        <button tool="arrow" tooltip="Arrow tool [Alt]+4"></button>
         <p></p>
-        <button data-draggable="true" tool="text"></button>
-        <button data-draggable="true" tool="list"></button>
+        <button data-draggable="true" tool="text" tooltip="Text tool [Alt]+5"></button>
+        <button data-draggable="true" tool="list" tooltip="List tool [Alt]+6"></button>
     </div>
     <div ng-if="cmp.position == 'top' && tool.propertyPanel != null">
         <div ng-if="tool.propertyPanel == 'text'">
-            <dropdown type="color" values="cmp.colors" ng-model="tool.selectedNode.color"></dropdown>
-            <dropdown type="int" values="cmp.textSizes" ng-model="tool.selectedNode.size"></dropdown>
+            <dropdown type="color" values="cmp.colors" ng-model="tool.selectedNode.color" tooltip="Text color"></dropdown>
+            <dropdown type="int" values="cmp.textSizes" ng-model="tool.selectedNode.size" tooltip="Text size"></dropdown>
         </div>
         <div ng-if="tool.propertyPanel == 'line'">
-            <dropdown type="color" values="cmp.colors" ng-model="tool.selectedNode.color"></dropdown>
-            <dropdown type="int" values="cmp.lineWidths" ng-model="tool.selectedNode.width"></dropdown>
+            <dropdown type="color" values="cmp.colors" ng-model="tool.selectedNode.color" tooltip="Line color"></dropdown>
+            <dropdown type="int" values="cmp.lineWidths" ng-model="tool.selectedNode.width" tooltip="Line width"></dropdown>
         </div>
         <div ng-if="tool.selectedNode.type == 'basicList'">
             <p></p>
-            <button ng-click="tool.selectedNode.listType = 'unordered'" data-icon="list"
+            <button ng-click="tool.selectedNode.listType = 'unordered'" data-icon="list" tooltip="Unordered list"
                     ng-class="{active: tool.selectedNode.listType == 'unordered'}">ul</button>
-            <button ng-click="tool.selectedNode.listType = 'ordered'" data-icon="ordered-list"
+            <button ng-click="tool.selectedNode.listType = 'ordered'" data-icon="ordered-list" tooltip="Ordered list"
                     ng-class="{active: tool.selectedNode.listType == 'ordered'}">ol
             </button>
-            <button ng-click="tool.selectedNode.listType = 'checked'" data-icon="checked-list"
+            <button ng-click="tool.selectedNode.listType = 'checked'" data-icon="checked-list" tooltip="Checked list"
                     ng-class="{active: tool.selectedNode.listType == 'checked'}">check
             </button>
         </div>
         <p></p>
-        <button ng-click="tool.raise()" data-icon="up">Raise</button>
-        <button ng-click="tool.lower()" data-icon="down">Lower</button>
-        <button ng-click="tool.delete()" data-icon="trash">Delete</button>
+        <button ng-click="tool.raise()" data-icon="up" tooltip="Raise node [+]">Raise</button>
+        <button ng-click="tool.lower()" data-icon="down" tooltip="Lower node [-]">Lower</button>
+        <button ng-click="tool.delete()" data-icon="trash" tooltip="Delete node [Delete]">Delete</button>
     </div>
     <div ng-if="cmp.position == 'left'">
-        <button ng-click="tool.save()" data-icon="save">Save</button>
+        <button ng-click="tool.save()" data-icon="save" tooltip="Save [Ctrl]+S">Save</button>
     </div>
 </div>
