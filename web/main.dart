@@ -4,6 +4,17 @@ import 'package:logging/logging.dart';
 
 import 'lib/cogito.dart';
 
+void routeInitializer(Router router, RouteViewFactory views) {
+    views.configure({
+        'login': ngRoute(
+            path: '/',
+            view: 'views/login.html'),
+        'page': ngRoute(
+            path: '/page',
+            viewHtml: '<page></page>')
+    });
+}
+
 class WebModule extends Module {
     WebModule() {
         bind(DropDownComponent);
@@ -23,6 +34,7 @@ class WebModule extends Module {
         bind(PrioritizeFormatter);
         bind(RemoveLeadingFormatter);
         bind(PageService);
+        bind(RouteInitializerFn, toValue: routeInitializer);
     }
 }
 

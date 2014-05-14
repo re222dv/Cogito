@@ -12,7 +12,7 @@ main() {
     var port = portEnv == null ? 9000 : int.parse(portEnv);
 
     new RestServer()
-        ..static('../build/web')
+        ..static('../web', jailRoot: false)
         ..route(new Route('/page/{id}')
             ..get = servePage
             ..put = savePage)
