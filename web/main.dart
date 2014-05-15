@@ -24,10 +24,12 @@ class WebModule extends Module {
         bind(ArrowController);
         bind(NodeHandlerController);
         bind(ToolController);
+        bind(CircleToolDecorator);
         bind(DrawToolDecorator);
         bind(KeyboardListenerDecorator);
         bind(LineToolDecorator);
         bind(ListToolDecorator);
+        bind(RectToolDecorator);
         bind(StopClicksDecorator);
         bind(TextToolDecorator);
         bind(ToolDecorator);

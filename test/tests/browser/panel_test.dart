@@ -92,6 +92,14 @@ main() {
                 expect(element('arrow')).toBeNotNull();
             });
 
+            test('should have a rect tool', () {
+                expect(element('rect')).toBeNotNull();
+            });
+
+            test('should have an circle tool', () {
+                expect(element('circle')).toBeNotNull();
+            });
+
             test('should trigger a onDrag event when text is dragged by mouse', () {
                 tool.onToolDrag.listen(expectAsync((tool) {
                     expect(tool).toEqual('text');
@@ -350,6 +358,68 @@ main() {
 
                     expect(element('selectedNode.listType = \'checked\'')).toHaveClass('active');
                     expect((tool.selectedNode as BasicList).listType).toEqual('checked');
+                });
+            });
+
+            group('for Rect', () {
+                setUp(() {
+                    tool.selectedNode = new Rect();
+                    tb.getScope(shadowRoot.querySelector('div')).apply();
+                });
+
+                test('should have a fill color dropdown', () {
+                    expect(dropdown('fillColor')).toBeNotNull();
+                });
+
+                test('should have a stroke color dropdown', () {
+                    expect(dropdown('strokeColor')).toBeNotNull();
+                });
+
+                test('should have a stroke width dropdown', () {
+                    expect(dropdown('strokeWidth')).toBeNotNull();
+                });
+
+                test('should have a raise button', () {
+                    expect(element('raise()')).toBeNotNull();
+                });
+
+                test('should have a lower button', () {
+                    expect(element('lower()')).toBeNotNull();
+                });
+
+                test('should have a delete button', () {
+                    expect(element('delete()')).toBeNotNull();
+                });
+            });
+
+            group('for Circle', () {
+                setUp(() {
+                    tool.selectedNode = new Circle();
+                    tb.getScope(shadowRoot.querySelector('div')).apply();
+                });
+
+                test('should have a fill color dropdown', () {
+                    expect(dropdown('fillColor')).toBeNotNull();
+                });
+
+                test('should have a stroke color dropdown', () {
+                    expect(dropdown('strokeColor')).toBeNotNull();
+                });
+
+                test('should have a stroke width dropdown', () {
+                    expect(dropdown('strokeWidth')).toBeNotNull();
+                });
+
+                test('should have a raise button', () {
+                    expect(element('raise()')).toBeNotNull();
+                });
+
+                test('should have a lower button', () {
+                    expect(element('lower()')).toBeNotNull();
+                });
+
+                test('should have a delete button', () {
+                    expect(element('delete()')).toBeNotNull();
                 });
             });
         });

@@ -67,6 +67,25 @@ main() {
                                 'Dart',
                                 'MongoDB'
                             ]
+                        },
+                        {
+                            'type': 'rect',
+                            'x': 10,
+                            'y': 20,
+                            'width': 30,
+                            'height': 40,
+                            'fillColor': 'green',
+                            'strokeColor': 'blue',
+                            'strokeWidth': 50
+                        },
+                        {
+                            'type': 'circle',
+                            'x': 10,
+                            'y': 20,
+                            'radius': 30,
+                            'fillColor': 'green',
+                            'strokeColor': 'blue',
+                            'strokeWidth': 40
                         }
                     ]
                 });
@@ -76,6 +95,8 @@ main() {
                 Path path = page.nodes[2];
                 Text text = page.nodes[3];
                 BasicList list = page.nodes[4];
+                Rect rect = page.nodes[5];
+                Circle circle = page.nodes[6];
 
                 expect(line.x).toEqual(10);
                 expect(line.y).toEqual(20);
@@ -108,6 +129,21 @@ main() {
                 expect(list.color).toEqual('blue');
                 expect(list.rows).toEqual(['AngularDart', 'Dart', 'MongoDB']);
                 expect(list.size).toEqual(20);
+
+                expect(rect.x).toEqual(10);
+                expect(rect.y).toEqual(20);
+                expect(rect.width).toEqual(30);
+                expect(rect.height).toEqual(40);
+                expect(rect.fillColor).toEqual('green');
+                expect(rect.strokeColor).toEqual('blue');
+                expect(rect.strokeWidth).toEqual(50);
+
+                expect(circle.x).toEqual(10);
+                expect(circle.y).toEqual(20);
+                expect(circle.radius).toEqual(30);
+                expect(circle.fillColor).toEqual('green');
+                expect(circle.strokeColor).toEqual('blue');
+                expect(circle.strokeWidth).toEqual(40);
             });
 
             it('should be able to parse a Line', () {
@@ -121,7 +157,7 @@ main() {
                     'end': {
                         'x': 200, 'y': 200
                     },
-                    'width': 10
+                    'width': 30
                 });
 
                 expect(line.x).toEqual(10);
@@ -129,7 +165,7 @@ main() {
                 expect(line.color).toEqual('green');
                 expect(line.start).toEqual(new Point(0, 0));
                 expect(line.end).toEqual(new Point(200, 200));
-                expect(line.width).toEqual(10);
+                expect(line.width).toEqual(30);
             });
 
             it('should be able to parse an Arrow', () {
@@ -143,7 +179,7 @@ main() {
                     'end': {
                         'x': 200, 'y': 200
                     },
-                    'width': 10
+                    'width': 30
                 });
 
                 expect(arrow.x).toEqual(10);
@@ -151,7 +187,7 @@ main() {
                 expect(arrow.color).toEqual('green');
                 expect(arrow.start).toEqual(new Point(0, 0));
                 expect(arrow.end).toEqual(new Point(200, 200));
-                expect(arrow.width).toEqual(10);
+                expect(arrow.width).toEqual(30);
             });
 
             it('should be able to parse a Path', () {
@@ -160,14 +196,14 @@ main() {
                     'y': 20,
                     'color': 'green',
                     'path': 'M 0 0 L 10 10',
-                    'width': 10
+                    'width': 30
                 });
 
                 expect(path.x).toEqual(10);
                 expect(path.y).toEqual(20);
                 expect(path.color).toEqual('green');
                 expect(path.path).toEqual('M 0 0 L 10 10');
-                expect(path.width).toEqual(10);
+                expect(path.width).toEqual(30);
             });
 
             it('should be able to parse a Text', () {
@@ -176,14 +212,14 @@ main() {
                     'y': 20,
                     'color': 'green',
                     'text': 'FooBar',
-                    'size': 10
+                    'size': 30
                 });
 
                 expect(text.x).toEqual(10);
                 expect(text.y).toEqual(20);
                 expect(text.color).toEqual('green');
                 expect(text.text).toEqual('FooBar');
-                expect(text.size).toEqual(10);
+                expect(text.size).toEqual(30);
             });
 
             it('should be able to parse a BasicList', () {
@@ -192,14 +228,52 @@ main() {
                     'y': 20,
                     'color': 'green',
                     'rows': ['Foo', 'Bar'],
-                    'size': 10
+                    'size': 30
                 });
 
                 expect(list.x).toEqual(10);
                 expect(list.y).toEqual(20);
                 expect(list.color).toEqual('green');
                 expect(list.rows).toEqual(['Foo', 'Bar']);
-                expect(list.size).toEqual(10);
+                expect(list.size).toEqual(30);
+            });
+
+            it('should be able to parse a Rect', () {
+                var rect = new Rect.fromJson({
+                    'x': 10,
+                    'y': 20,
+                    'width': 30,
+                    'height': 40,
+                    'fillColor': 'green',
+                    'strokeColor': 'blue',
+                    'strokeWidth': 50
+                });
+
+                expect(rect.x).toEqual(10);
+                expect(rect.y).toEqual(20);
+                expect(rect.width).toEqual(30);
+                expect(rect.height).toEqual(40);
+                expect(rect.fillColor).toEqual('green');
+                expect(rect.strokeColor).toEqual('blue');
+                expect(rect.strokeWidth).toEqual(50);
+            });
+
+            it('should be able to parse a Circle', () {
+                var circle = new Circle.fromJson({
+                    'x': 10,
+                    'y': 20,
+                    'radius': 30,
+                    'fillColor': 'green',
+                    'strokeColor': 'blue',
+                    'strokeWidth': 40
+                });
+
+                expect(circle.x).toEqual(10);
+                expect(circle.y).toEqual(20);
+                expect(circle.radius).toEqual(30);
+                expect(circle.fillColor).toEqual('green');
+                expect(circle.strokeColor).toEqual('blue');
+                expect(circle.strokeWidth).toEqual(40);
             });
         });
 
@@ -248,6 +322,25 @@ main() {
                                 ..color = 'green'
                                 ..rows = ['Foo', 'Bar']
                                 ..size = 10
+                        ),
+                        (
+                            new Rect()
+                                ..x = 10
+                                ..y = 20
+                                ..width = 30
+                                ..height = 40
+                                ..fillColor = 'green'
+                                ..strokeColor = 'blue'
+                                ..strokeWidth = 50
+                        ),
+                        (
+                            new Circle()
+                                ..x = 10
+                                ..y = 20
+                                ..radius = 30
+                                ..fillColor = 'green'
+                                ..strokeColor = 'blue'
+                                ..strokeWidth = 40
                         )
                     ];
 
@@ -302,6 +395,25 @@ main() {
                             'size': 10,
                             'color': 'green',
                             'rows': ['Foo', 'Bar']
+                        },
+                        {
+                            'type': 'rect',
+                            'x': 10,
+                            'y': 20,
+                            'width': 30,
+                            'height': 40,
+                            'fillColor': 'green',
+                            'strokeColor': 'blue',
+                            'strokeWidth': 50
+                        },
+                        {
+                            'type': 'circle',
+                            'x': 10,
+                            'y': 20,
+                            'radius': 30,
+                            'fillColor': 'green',
+                            'strokeColor': 'blue',
+                            'strokeWidth': 40
                         }
                     ]
                 });
@@ -406,6 +518,48 @@ main() {
                     'color': 'green',
                     'rows': ['Foo', 'Bar'],
                     'size': 10
+                });
+            });
+
+            it('Should be able to encode a Rect', () {
+                var rect = new Rect()
+                    ..x = 10
+                    ..y = 20
+                    ..width = 30
+                    ..height = 40
+                    ..fillColor = 'green'
+                    ..strokeColor = 'blue'
+                    ..strokeWidth = 50;
+
+                expect(rect.toJson()).toEqual({
+                    'type': 'rect',
+                    'x': 10,
+                    'y': 20,
+                    'width': 30,
+                    'height': 40,
+                    'fillColor': 'green',
+                    'strokeColor': 'blue',
+                    'strokeWidth': 50
+                });
+            });
+
+            it('Should be able to encode a Circle', () {
+                var circle = new Circle()
+                    ..x = 10
+                    ..y = 20
+                    ..radius = 30
+                    ..fillColor = 'green'
+                    ..strokeColor = 'blue'
+                    ..strokeWidth = 40;
+
+                expect(circle.toJson()).toEqual({
+                    'type': 'circle',
+                    'x': 10,
+                    'y': 20,
+                    'radius': 30,
+                    'fillColor': 'green',
+                    'strokeColor': 'blue',
+                    'strokeWidth': 40
                 });
             });
         });

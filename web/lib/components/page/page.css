@@ -45,6 +45,14 @@ svg.list {
     cursor: url('lib/components/page/cursors/list.cur'), default;
 }
 
+svg.rect {
+    cursor: url('lib/components/page/cursors/rect.cur'), default;
+}
+
+svg.circle {
+    cursor: url('lib/components/page/cursors/circle.cur'), default;
+}
+
 svg.select [node-handler] {
     cursor: -webkit-grab;
     cursor: -moz-grab;

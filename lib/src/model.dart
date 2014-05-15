@@ -61,6 +61,15 @@ abstract class TextPanel implements Panel {
     num size;
 }
 
+abstract class AreaPanel implements Panel {
+    final String propertyPanel = 'area';
+
+    String fillColor;
+    String strokeColor;
+
+    num strokeWidth;
+}
+
 class Page {
     List<Node> nodes = [];
 
@@ -83,6 +92,12 @@ class Page {
                     break;
                 case 'basicList':
                     nodes.add(new BasicList.fromJson(json));
+                    break;
+                case 'rect':
+                    nodes.add(new Rect.fromJson(json));
+                    break;
+                case 'circle':
+                    nodes.add(new Circle.fromJson(json));
                     break;
             }
         });
@@ -219,4 +234,56 @@ class BasicList extends Node with TextPanel {
             return 0;
         }
     }
+}
+
+class Rect extends Node with AreaPanel {
+    final String type = 'rect';
+
+    num width;
+    num height;
+
+    Rect();
+
+    Rect.fromJson(Map json) : super.fromJson(json) {
+        width = json['width'];
+        height = json['height'];
+
+        fillColor = json['fillColor'];
+        strokeColor = json['strokeColor'];
+        strokeWidth = json['strokeWidth'];
+    }
+
+    Map toJson() => super.toJson()..addAll({
+        'width': width,
+        'height': height,
+
+        'fillColor': fillColor,
+        'strokeColor': strokeColor,
+        'strokeWidth': strokeWidth
+    });
+}
+
+
+class Circle extends Node with AreaPanel {
+    final String type = 'circle';
+
+    num radius;
+
+    Circle();
+
+    Circle.fromJson(Map json) : super.fromJson(json) {
+        radius = json['radius'];
+
+        fillColor = json['fillColor'];
+        strokeColor = json['strokeColor'];
+        strokeWidth = json['strokeWidth'];
+    }
+
+    Map toJson() => super.toJson()..addAll({
+        'radius': radius,
+
+        'fillColor': fillColor,
+        'strokeColor': strokeColor,
+        'strokeWidth': strokeWidth
+    });
 }

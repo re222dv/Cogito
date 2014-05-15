@@ -157,6 +157,14 @@ main() {
             expect(shadowRoot.querySelector('svg[text-tool]')).toBeNotNull();
         });
 
+        it('should mixin rect-tool', () {
+            expect(shadowRoot.querySelector('svg[list-tool]')).toBeNotNull();
+        });
+
+        it('should mixin circle-tool', () {
+            expect(shadowRoot.querySelector('svg[text-tool]')).toBeNotNull();
+        });
+
         it('should have a white paper', () {
             expect(shadowRoot.querySelector('svg>rect[height="100%"][width="100%"][fill="white"]')).toBeNotNull();
         });

@@ -196,6 +196,14 @@ button:hover {
     background-image: url("lib/components/panel/icons/list.svg");
 }
 
+[data-position]>div [tool="rect"] {
+    background-image: url("lib/components/panel/icons/rect.svg");
+}
+
+[data-position]>div [tool="circle"] {
+    background-image: url("lib/components/panel/icons/circle.svg");
+}
+
 [data-position]>div [data-icon="ordered-list"] {
     background-image: url("lib/components/panel/icons/ordered-list.svg");
 }

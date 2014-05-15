@@ -4,7 +4,8 @@
     <panel position="right"></panel>
     <svg width="100%" height="100%" viewBox="0 0 1200 675"
          preserveAspectRatio="xMidYMid meet"
-         xmlns="http://www.w3.org/2000/svg" tool-controller draw-tool line-tool text-tool list-tool
+         xmlns="http://www.w3.org/2000/svg" tool-controller
+         draw-tool line-tool text-tool list-tool rect-tool circle-tool
          class="{{ tool.selectedTool }}">
         <rect height="100%" width="100%" fill="white" />
         <g ng-repeat="node in cmp.page.nodes"
@@ -87,6 +88,14 @@
                         </text>
                     </g>
                 </g>
+
+                <rect ng-if="node.type == 'rect'" x="0" y="0"
+                      stroke="{{ node.strokeColor }}" stroke-width="{{ node.strokeWidth }}" fill="{{ node.fillColor }}"
+                      ng-attr-height="{{ node.height }}" ng-attr-width="{{ node.width }}" />
+
+                <circle ng-if="node.type == 'circle'" x="0" y="0"
+                        stroke="{{ node.strokeColor }}" stroke-width="{{ node.strokeWidth }}"
+                        fill="{{ node.fillColor }}" ng-attr-r="{{ node.radius }}" />
             </g>
             <g ng-if="tool.selectedNode == node">
                 <circle r="5" cx="-5" cy="-5" />
