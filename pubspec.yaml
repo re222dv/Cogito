@@ -3,6 +3,7 @@ description: A web based tool for planing and design
 dependencies:
   angular:
     git: https://github.com/angular/angular.dart.git
+  animation: any
   browser: any
   mongo_dart: any
   quiver: any
@@ -12,6 +13,7 @@ dependencies:
 dev_dependencies:
   guinness: ">=0.1.3"
   matcher: any
+  mock: any
   unittest: any
 transformers:
 - angular:

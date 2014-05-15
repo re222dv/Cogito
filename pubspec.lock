@@ -4,10 +4,10 @@ packages:
   RestLibrary:
     description:
       ref: null
-      resolved-ref: eb3fb0f8c59892abe8a6fddb2775a0d338a74b2a
+      resolved-ref: "43c28524c26743f01c713134efc05ff3b3474ed5"
       url: "https://github.com/Pajn/RestLibrary.git"
     source: git
-    version: "0.1.0"
+    version: "0.2.0"
   analyzer:
     description: analyzer
     source: hosted
@@ -15,10 +15,14 @@ packages:
   angular:
     description:
       ref: null
-      resolved-ref: "7a340ac9cdf92d33e478722d585fb5da7ae04ab0"
+      resolved-ref: "6102d8a15092f2206093842ab8629c86472d4a4e"
       url: "https://github.com/angular/angular.dart.git"
     source: git
     version: "0.11.0"
+  animation:
+    description: animation
+    source: hosted
+    version: "0.5.20"
   args:
     description: args
     source: hosted
@@ -82,11 +86,11 @@ packages:
   mime:
     description: mime
     source: hosted
-    version: "0.9.0"
+    version: "0.9.0+1"
   mock:
     description: mock
     source: hosted
-    version: "0.10.0+1"
+    version: "0.11.0+1"
   mongo_dart:
     description: mongo_dart
     source: hosted
@@ -98,7 +102,7 @@ packages:
   more:
     description: more
     source: hosted
-    version: "1.2.0"
+    version: "1.2.1"
   path:
     description: path
     source: hosted
@@ -130,7 +134,7 @@ packages:
   unittest:
     description: unittest
     source: hosted
-    version: "0.10.1+2"
+    version: "0.11.0"
   utf:
     description: utf
     source: hosted
