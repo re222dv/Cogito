@@ -1,4 +1,4 @@
-<main>
+<main login-controller>
     <section>
         <div id="loginbox">
             <div>
@@ -27,8 +27,19 @@
             <button>Not a member?</button>
             <p><a href="#">Reset Password</a></p>
         </div>
+        <a href="#more" ng-click="ctrl.scrollDown()">
+            <svg id="down"
+                 xmlns="http://www.w3.org/2000/svg"
+                 version="1.1"
+                 width="70"
+                 height="40">
+                <g ng-repeat="x in [5, 15, 25, 35, 45, 55, 65]">
+                    <circle ng-attr-cx="{{ x }}" ng-attr-cy="{{ (x <= 35) ? x : 70 - x }}" r="3" />
+                </g>
+            </svg>
+        </a>
     </section>
-    <article>
+    <article id="more">
         <div>
             <h1>Lorem ipsum dolor</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu consectetur dolor. Phasellus laoreet, libero ut fringilla pellentesque, arcu lorem tristique libero, tincidunt euismod sapien enim et urna. Integer ut turpis vestibulum, posuere lacus eu, convallis ante. Nulla dapibus orci nunc, quis convallis nisi tempus at. Suspendisse nibh leo, cursus id tortor ut, ultrices congue metus. Phasellus commodo luctus ante, eget tincidunt nulla fermentum sit amet. Etiam sed velit est. Aenean in accumsan mi, id suscipit turpis. Nulla ligula purus, semper nec sem sit amet, tincidunt fermentum dui. Fusce eu egestas mauris. Duis varius placerat sollicitudin.</p>
@@ -50,5 +61,6 @@
         <div>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lacinia fringilla odio vel mattis. Donec a elit a nibh porta ultrices venenatis in diam. Aenean at hendrerit tellus, et dapibus nisi. Integer vel risus tincidunt, tempor justo et, laoreet libero. Maecenas aliquam, metus a vestibulum cursus, lacus nisl lacinia libero, sit amet porttitor diam lectus ac urna. Vivamus at faucibus lorem. Aenean vehicula pharetra velit, id consequat ante cursus vitae. Nullam vel magna dapibus, egestas tellus sit amet, accumsan leo. Phasellus eleifend molestie diam ac consequat. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla posuere lacus eu ultricies malesuada.
         </div>
+        <p>Background image used under CC-BY-SA. Original work: <a href="http://500px.com/photo/60590780/forever-by-shady-s-">Forever by Shady S</a>.</p>
     </footer>
 </main>

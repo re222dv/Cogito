@@ -22,6 +22,7 @@ class WebModule extends Module {
         bind(PanelComponent);
         bind(CheckBoxController);
         bind(ArrowController);
+        bind(LoginController);
         bind(NodeHandlerController);
         bind(ToolController);
         bind(CircleToolDecorator);

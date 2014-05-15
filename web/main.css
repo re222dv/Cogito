@@ -32,7 +32,8 @@ main {
     background: url(images/bg.jpg) no-repeat center center fixed;
     background-size: cover; }
     main section:first-child #loginbox {
-      position: relative; }
+      position: relative;
+      padding-right: 50px; }
       main section:first-child #loginbox div {
         display: table-row; }
       main section:first-child #loginbox label, main section:first-child #loginbox input, main section:first-child #loginbox p {
@@ -79,7 +80,7 @@ main {
         cursor: pointer;
         transition: fill 0; }
       main section:first-child #loginbox div + div svg [data-x] circle {
-        fill: #aaa; }
+        fill: rgba(255, 255, 255, 0.7); }
       main section:first-child #loginbox div + div svg:hover [data-x] circle {
         fill: white; }
       main section:first-child #loginbox div + div svg:hover [data-x="5"] circle {
@@ -117,6 +118,21 @@ main {
           text-decoration: none; }
         main section:first-child #registerbox p a:hover {
           text-decoration: underline; }
+    main section:first-child #down {
+      position: absolute;
+      left: calc(50% - 65px / 2);
+      bottom: 30px;
+      fill: rgba(255, 255, 255, 0.5); }
+    main section:first-child #down:hover [cy] {
+      fill: white; }
+    main section:first-child #down:hover [cy="5"] {
+      transition-delay: 0.1s; }
+    main section:first-child #down:hover [cy="15"] {
+      transition-delay: 0.2s; }
+    main section:first-child #down:hover [cy="25"] {
+      transition-delay: 0.4s; }
+    main section:first-child #down:hover [cy="35"] {
+      transition-delay: 0.5s; }
   main article:before {
     content: '';
     display: block;
@@ -150,3 +166,16 @@ main {
     background-color: #333; }
     main footer div {
       padding: 3rem; }
+    main footer p {
+      position: relative;
+      bottom: 1rem;
+      margin: 0;
+      padding-right: 1rem;
+      color: #666;
+      font-style: italic;
+      text-align: right; }
+      main footer p a {
+        color: #666;
+        text-decoration: none; }
+    main footer p:hover a {
+      text-decoration: underline; }

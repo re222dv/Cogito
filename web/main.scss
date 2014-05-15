@@ -48,6 +48,7 @@ main {
 
         #loginbox {
             position: relative;
+            padding-right: 50px;
 
             div {
                 display: table-row;
@@ -124,7 +125,7 @@ main {
                 }
 
                 svg [data-x] circle {
-                    fill: #aaa;
+                    fill: rgba(255, 255, 255, 0.7);
                 }
 
                 svg:hover [data-x] circle {
@@ -198,6 +199,34 @@ main {
                 }
             }
         }
+
+        #down {
+            position: absolute;
+            left: calc(50% - 65px / 2);
+            bottom: 30px;
+
+            fill: rgba(255, 255, 255, 0.5);
+        }
+
+        #down:hover [cy] {
+            fill: white;
+        }
+
+        #down:hover [cy="5"] {
+            transition-delay: 0.1s;
+        }
+
+        #down:hover [cy="15"] {
+            transition-delay: 0.2s;
+        }
+
+        #down:hover [cy="25"] {
+            transition-delay: 0.4s;
+        }
+
+        #down:hover [cy="35"] {
+            transition-delay: 0.5s;
+        }
     }
 
     article:before {
@@ -253,6 +282,26 @@ main {
 
         div {
             padding: 3rem;
+        }
+
+        p {
+            position: relative;
+            bottom: 1rem;
+            margin: 0;
+            padding-right: 1rem;
+
+            color: #666;
+            font-style: italic;
+            text-align: right;
+
+            a {
+                color: #666;
+                text-decoration: none;
+            }
+        }
+
+        p:hover a {
+            text-decoration: underline;
         }
     }
 }
