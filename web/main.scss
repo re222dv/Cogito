@@ -31,17 +31,6 @@ main {
     color: white;
     font-family: Arial, sans-serif;
 
-    section {
-        box-sizing: border-box;
-
-        width: 100%;
-        height: 100%;
-
-        z-index: 2;
-
-        background-color: red;
-    }
-
     section:first-child {
         display: flex;
         flex-direction: column;
@@ -49,6 +38,10 @@ main {
         justify-content: center;
 
         padding-top: 100px;
+
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
 
         background: url(images/bg.jpg) no-repeat center center fixed;
         background-size: cover;
@@ -207,11 +200,59 @@ main {
         }
     }
 
-    section + section {
-        background-color: blue;
+    article:before {
+        content: '';
+        display: block;
+        position: relative;
+        bottom: 10px;
+
+        width: 100%;
+        height: 10px;
+
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%);
     }
 
-    section + section + section {
-        background-color: yellow;
+    article {
+        color: #333;
+        background: #eee;
+
+        div {
+            margin: 0 auto;
+            padding: 3rem;
+
+            width: 960px;
+
+            p:nth-of-type(2n - 1) {
+                padding-right: 400px;
+            }
+
+            p:nth-of-type(2n) {
+                padding-left: 400px;
+                text-align: right;
+            }
+
+            h1:nth-of-type(2n) {
+                text-align: right;
+            }
+        }
+    }
+
+    footer:before {
+        content: '';
+        display: block;
+
+        width: 100%;
+        height: 10px;
+
+        background: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%);
+        border-top: 1px solid #000000;
+    }
+
+    footer {
+        background-color: #333;
+
+        div {
+            padding: 3rem;
+        }
     }
 }
