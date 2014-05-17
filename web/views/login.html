@@ -33,6 +33,12 @@
                  version="1.1"
                  width="70"
                  height="40">
+                <g ng-repeat="x in [15, 25, 35, 45, 55]">
+                    <g ng-repeat="y in [5, 15, 25]">
+                        <circle ng-if="(x <= 35 && y < x) || (x > 35 && x+y < 70)"
+                                ng-attr-cx="{{ x }}" ng-attr-cy="{{ y }}" r="2" />
+                    </g>
+                </g>
                 <g ng-repeat="x in [5, 15, 25, 35, 45, 55, 65]">
                     <circle ng-attr-cx="{{ x }}" ng-attr-cy="{{ (x <= 35) ? x : 70 - x }}" r="3" />
                 </g>
