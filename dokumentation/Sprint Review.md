@@ -36,3 +36,14 @@ se att det fungerar hela vägen.
 
 Heroku gick bättre att publicera på än OpenShift då det fanns en mer supportad plattform.
 Så nu finns en publicerad version på [re222dv-cogito.herokuapp.com](http://re222dv-cogito.herokuapp.com/)
+
+# Sprint 5
+Med lite mer fokus på gränsnitt känns appen nu lite mer finputsad och på en bra väg. Sista
+builden är nu [#24](https://travis-ci.org/re222dv/Cogito/builds/25400736) på Travis.
+
+Jag har den här Sprinten fått ändra på en ganska stor del av mitt fokus, nämligen Touchstöd.
+Varför gåt jag igenom mer ingående i [Touchstöd.md](https://github.com/re222dv/Cogito/blob/master/dokumentation/Touchst%C3%B6d.md)
+
+En uppdaterad build finns publicerad version på [re222dv-cogito.herokuapp.com](http://re222dv-cogito.herokuapp.com/)
+än så länge finns det inget stöd för inloggning så fältet för användarnamn och lösenord kan
+lämnas tomt.
