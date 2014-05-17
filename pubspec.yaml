@@ -18,6 +18,8 @@ dev_dependencies:
 transformers:
 - angular:
     html_files:
+      - web/views/login.html
+      - web/lib/components/dropdown/dropdown.html
       - web/lib/components/page/page.html
       - web/lib/components/panel/panel.html
 - $dart2js:
