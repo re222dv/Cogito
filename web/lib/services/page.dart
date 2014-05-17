@@ -6,7 +6,7 @@ class PageService {
 
     PageService(Http this._http);
 
-    Future<Page> getPage() => _http.get('/page/1').then((HttpResponse response) {
+    Future<Page> getPage() => _http.get('/api/page/1').then((HttpResponse response) {
         if (response.status == 200) {
             return new Page.fromJson(response.data['data']);
         } else {
@@ -14,7 +14,7 @@ class PageService {
         }
     }).catchError((_) => new Page());
 
-    Future<bool> savePage(Page page) => _http.put('/page/1', JSON.encode(page.toJson()))
+    Future<bool> savePage(Page page) => _http.put('/api/page/1', JSON.encode(page.toJson()))
             .then((HttpResponse response) {
         return response.status == 200;
     }).catchError((_) => false);

@@ -29,7 +29,7 @@ main() {
             inject((PageService _service, MockHttpBackend http) {
                 service = _service;
 
-                http.whenGET('/page/1').respond(200, '''{
+                http.whenGET('/api/page/1').respond(200, '''{
                     "data": {
                         "nodes": [
                             {
@@ -144,7 +144,7 @@ main() {
 
         test('should save a page correctly', () {
             inject((MockHttpBackend http) {
-                http.expectPUT('/page/1', JSON.encode({
+                http.expectPUT('/api/page/1', JSON.encode({
                     "nodes": [
                         {
                             "type": "line",

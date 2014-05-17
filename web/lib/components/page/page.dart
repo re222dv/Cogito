@@ -26,7 +26,7 @@ class PageComponent extends ShadowRootAware {
         element.onMouseDown.where((_) => tool.selectedTool == 'select')
                            .listen((Event e) {
                                 tool.selectedNode = null;
-                                
+
                                 e.preventDefault();
                                 e.stopPropagation();
                             });

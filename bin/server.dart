@@ -12,8 +12,9 @@ main() {
     var port = portEnv == null ? 9000 : int.parse(portEnv);
 
     new RestServer()
+        ..clientRoutes = ['/page']
         ..static('../web', jailRoot: false)
-        ..route(new Route('/page/{id}')
+        ..route(new Route('/api/page/{id}')
             ..get = servePage
             ..put = savePage)
         ..start(address: InternetAddress.ANY_IP_V4, port: port);
