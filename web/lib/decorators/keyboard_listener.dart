@@ -21,7 +21,9 @@ class KeyboardListenerDecorator {
             new KeyBinding(() => tool.selectedTool = 'line', 51, alt: true),    // Alt + 3
             new KeyBinding(() => tool.selectedTool = 'arrow', 52, alt: true),   // Alt + 4
             new KeyBinding(() => tool.selectedTool = 'text', 53, alt: true),    // Alt + 5
-            new KeyBinding(() => tool.selectedTool = 'list', 54, alt: true)     // Alt + 6
+            new KeyBinding(() => tool.selectedTool = 'list', 54, alt: true),    // Alt + 6
+            new KeyBinding(() => tool.selectedTool = 'rect', 55, alt: true),    // Alt + 7
+            new KeyBinding(() => tool.selectedTool = 'circle', 56, alt: true)     // Alt + 8
         ];
 
         document.onKeyDown
@@ -50,4 +52,6 @@ class KeyBinding {
                                     alt == e.altKey &&
                                     ctrl == e.ctrlKey &&
                                     shift == e.shiftKey;
+
+    int get hashCode => quiver.hash4(alt, ctrl, shift, keyCode);
 }

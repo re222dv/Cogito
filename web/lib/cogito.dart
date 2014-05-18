@@ -6,6 +6,7 @@ import 'dart:html' hide Node, Path, Text;
 import 'dart:math' as math;
 import 'package:angular/angular.dart';
 import 'package:animation/animation.dart';
+import 'package:quiver/core.dart' as quiver;
 import 'package:cogito/cogito.dart';
 import 'package:cogito/simplify/simplify.dart' as simplify;
 
