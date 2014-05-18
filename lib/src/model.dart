@@ -7,7 +7,6 @@ abstract class Node {
     final bool editable = false;
     bool _editing = false;
 
-    String propertyPanel = '';
     String get type;
 
     num x;
@@ -43,27 +42,17 @@ abstract class Node {
     noSuchMethod(Invocation invocation) => null;
 }
 
-abstract class Panel {
-    String propertyPanel;
-}
-
-abstract class LinePanel implements Panel {
-    final String propertyPanel = 'line';
-
+abstract class LineProperties {
     String color;
     num width;
 }
 
-abstract class TextPanel implements Panel {
-    final String propertyPanel = 'text';
-
+abstract class TextProperties {
     String color;
     num size;
 }
 
-abstract class AreaPanel implements Panel {
-    final String propertyPanel = 'area';
-
+abstract class AreaProperties {
     String fillColor;
     String strokeColor;
 
@@ -108,7 +97,7 @@ class Page {
     };
 }
 
-class Freehand extends Node with LinePanel {
+class Freehand extends Node with LineProperties {
     final String type = 'freehand';
 
     String freehand = '';
@@ -118,7 +107,7 @@ class Freehand extends Node with LinePanel {
     });
 }
 
-class Line extends Node with LinePanel {
+class Line extends Node with LineProperties {
     final String type = 'line';
 
     math.Point start;
@@ -159,7 +148,7 @@ class Arrow extends Line {
     Arrow.fromJson(Map json) : super.fromJson(json);
 }
 
-class Path extends Node with LinePanel {
+class Path extends Node with LineProperties {
     final String type = 'path';
 
     String path;
@@ -179,7 +168,7 @@ class Path extends Node with LinePanel {
     });
 }
 
-class Text extends Node with TextPanel {
+class Text extends Node with TextProperties {
     final bool editable = true;
     final String type = 'text';
 
@@ -200,7 +189,7 @@ class Text extends Node with TextPanel {
     });
 }
 
-class BasicList extends Node with TextPanel {
+class BasicList extends Node with TextProperties {
     final bool editable = true;
     final String type = 'basicList';
     String listType = 'unordered';
@@ -236,7 +225,7 @@ class BasicList extends Node with TextPanel {
     }
 }
 
-class Rect extends Node with AreaPanel {
+class Rect extends Node with AreaProperties {
     final String type = 'rect';
 
     num width;
@@ -264,7 +253,7 @@ class Rect extends Node with AreaPanel {
 }
 
 
-class Circle extends Node with AreaPanel {
+class Circle extends Node with AreaProperties {
     final String type = 'circle';
 
     num radius;

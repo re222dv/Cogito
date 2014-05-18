@@ -10,16 +10,16 @@
         <button data-draggable="true" tool="rect" tooltip="Rectangle tool [Alt]+7">Rect</button>
         <button data-draggable="true" tool="circle" tooltip="Circle tool [Alt]+8">Circle</button>
     </div>
-    <div ng-if="cmp.position == 'top' && tool.propertyPanel != null" stop-clicks>
-        <div ng-if="tool.propertyPanel == 'text'">
+    <div ng-if="cmp.position == 'top' && tool.selectedNode != null" stop-clicks>
+        <div ng-if="cmp.ShowTextProperties">
             <dropdown type="color" values="cmp.colors" ng-model="tool.selectedNode.color" tooltip="Text color"></dropdown>
             <dropdown type="int" values="cmp.textSizes" ng-model="tool.selectedNode.size" tooltip="Text size"></dropdown>
         </div>
-        <div ng-if="tool.propertyPanel == 'line'">
+        <div ng-if="cmp.ShowLineProperties">
             <dropdown type="color" values="cmp.colors" ng-model="tool.selectedNode.color" tooltip="Line color"></dropdown>
             <dropdown type="int" values="cmp.lineWidths" ng-model="tool.selectedNode.width" tooltip="Line width"></dropdown>
         </div>
-        <div ng-if="tool.selectedNode.type == 'basicList'">
+        <div ng-if="cmp.ShowListProperties">
             <p></p>
             <button ng-click="tool.selectedNode.listType = 'unordered'" data-icon="list" tooltip="Unordered list"
                     ng-class="{active: tool.selectedNode.listType == 'unordered'}">ul</button>
@@ -30,7 +30,7 @@
                     ng-class="{active: tool.selectedNode.listType == 'checked'}">check
             </button>
         </div>
-        <div ng-if="tool.propertyPanel == 'area'">
+        <div ng-if="cmp.ShowAreaProperties">
             <dropdown type="color" values="cmp.colors" ng-model="tool.selectedNode.fillColor" tooltip="Fill color"></dropdown>
             <dropdown type="color" values="cmp.colors" ng-model="tool.selectedNode.strokeColor" tooltip="Stroke color"></dropdown>
             <dropdown type="int" values="cmp.lineWidths" ng-model="tool.selectedNode.strokeWidth" tooltip="Stroke width"></dropdown>

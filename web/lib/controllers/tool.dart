@@ -5,7 +5,6 @@ part of cogito_web;
     publishAs: 'tool')
 class ToolController {
     static final ToolController _singleton = new ToolController._internal();
-    String propertyPanel;
 
     PageComponent page;
 
@@ -15,15 +14,9 @@ class ToolController {
         if (node == _selectedNode) {
             return;
         }
-        
+
         if (_selectedNode != null && _selectedNode.editable && _selectedNode.editing) {
             _selectedNode.editing = false;
-        }
-
-        if (node != null) {
-            propertyPanel = node.propertyPanel;
-        } else {
-            propertyPanel = null;
         }
 
         _selectedNode = node;

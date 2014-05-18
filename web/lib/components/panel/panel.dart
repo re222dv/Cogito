@@ -16,6 +16,11 @@ class PanelComponent implements ShadowRootAware {
     List<int> textSizes = [];
     List<String> colors = ['black', 'white', 'red', 'green', 'blue', 'yellow'];
 
+    bool get ShowAreaProperties => tool.selectedNode is AreaProperties;
+    bool get ShowLineProperties => tool.selectedNode is LineProperties;
+    bool get ShowListProperties => tool.selectedNode is BasicList;
+    bool get ShowTextProperties => tool.selectedNode is TextProperties;
+
     PanelComponent(this.tool) {
         // Create line widths from the fibonacci scale
         for (var i = 1, first = 1, second = 1; i < 90; i = first + second, first = second, second = i) {
