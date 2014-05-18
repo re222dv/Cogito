@@ -8,6 +8,7 @@ Db db;
 main() {
     db = new Db('mongodb://cogito:cogito@ds043997.mongolab.com:43997/cogito');
 
+    var address = InternetAddress.ANY_IP_V4;
     var portEnv = Platform.environment['PORT'];
     var port = portEnv == null ? 9000 : int.parse(portEnv);
 
@@ -17,7 +18,9 @@ main() {
         ..route(new Route('/api/page/{id}')
             ..get = servePage
             ..put = savePage)
-        ..start(address: InternetAddress.ANY_IP_V4, port: port);
+        ..start(address: address, port: port);
+
+    print('Listening on ${address.address}:$port');
 }
 
 servePage(Request request) {
