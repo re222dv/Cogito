@@ -40,13 +40,13 @@ class PanelComponent implements ShadowRootAware {
             tools.forEach((toolButton) {
                 var dragging = false;
 
-                ['mousedown', 'touchstart'].forEach((event) => toolButton.on[event].listen((_) => dragging = true));
-                ['mouseup', 'touchend'].forEach((event) => toolButton.on[event].listen((_) => dragging = false));
-                ['mouseout', 'touchleave'].forEach((event) => toolButton.on[event].where((_) => dragging).listen((_) {
+                toolButton.onMouseDown.listen((_) => dragging = true);
+                toolButton.onMouseUp.listen((_) => dragging = false);
+                toolButton.onMouseOut.where((_) => dragging).listen((_) {
                     dragging = false;
 
                     tool.toolDrag.add(toolButton.getAttribute('tool'));
-                }));
+                });
             });
         });
     }

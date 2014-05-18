@@ -96,36 +96,12 @@ main() {
                 expect(shadowRoot.querySelector('ul')).not.toHaveClass('ng-hide');
             });
 
-            it('should be shown after a tap', () {
-                tb.triggerEvent(shadowRoot.querySelector('div'), 'touchstart');
-                tb.triggerEvent(shadowRoot.querySelector('div'), 'touchend');
-
-                expect(shadowRoot.querySelector('ul')).not.toHaveClass('ng-hide');
-            });
-
-            it('should be shown after a touch drag', () {
-                tb.triggerEvent(shadowRoot.querySelector('div'), 'touchstart');
-                tb.triggerEvent(shadowRoot.querySelector('div'), 'touchleave');
-
-                expect(shadowRoot.querySelector('ul')).not.toHaveClass('ng-hide');
-            });
-
             it('should hide after a click', () {
                 tb.triggerEvent(shadowRoot.querySelector('div'), 'mousedown');
                 tb.triggerEvent(shadowRoot.querySelector('div'), 'mouseup');
 
                 tb.triggerEvent(shadowRoot.querySelector('div'), 'mousedown');
                 tb.triggerEvent(shadowRoot.querySelector('div'), 'mouseup');
-
-                expect(shadowRoot.querySelector('ul')).toHaveClass('ng-hide');
-            });
-
-            it('should hide after a tap', () {
-                tb.triggerEvent(shadowRoot.querySelector('div'), 'touchstart');
-                tb.triggerEvent(shadowRoot.querySelector('div'), 'touchend');
-
-                tb.triggerEvent(shadowRoot.querySelector('div'), 'touchstart');
-                tb.triggerEvent(shadowRoot.querySelector('div'), 'touchend');
 
                 expect(shadowRoot.querySelector('ul')).toHaveClass('ng-hide');
             });
@@ -144,20 +120,6 @@ main() {
                 expect(tb.rootScope.context['val']).toEqual(30);
             });
 
-            it('should be able to select a value with a tap', () {
-                tb.triggerEvent(shadowRoot.querySelector('div'), 'touchstart');
-                tb.triggerEvent(shadowRoot.querySelector('div'), 'touchend');
-
-                expect(shadowRoot.querySelector('ul')).not.toHaveClass('ng-hide');
-
-                tb.triggerEvent(shadowRoot.querySelector('[value="30"] p'), 'touchstart');
-                tb.triggerEvent(shadowRoot.querySelector('[value="30"] p'), 'touchend');
-                tb.triggerEvent(shadowRoot.querySelector('[value="30"] p'), 'click');
-
-                expect(shadowRoot.querySelector('ul')).toHaveClass('ng-hide');
-                expect(tb.rootScope.context['val']).toEqual(30);
-            });
-
             it('should be able to select a value with a mouse drag', () {
                 tb.triggerEvent(shadowRoot.querySelector('div'), 'mousedown');
                 tb.triggerEvent(shadowRoot.querySelector('div'), 'mouseout');
@@ -165,18 +127,6 @@ main() {
                 expect(shadowRoot.querySelector('ul')).not.toHaveClass('ng-hide');
 
                 tb.triggerEvent(shadowRoot.querySelector('[value="30"] p'), 'mouseup');
-
-                expect(shadowRoot.querySelector('ul')).toHaveClass('ng-hide');
-                expect(tb.rootScope.context['val']).toEqual(30);
-            });
-
-            it('should be able to select a value with a touch drag', () {
-                tb.triggerEvent(shadowRoot.querySelector('div'), 'touchstart');
-                tb.triggerEvent(shadowRoot.querySelector('div'), 'touchleave');
-
-                expect(shadowRoot.querySelector('ul')).not.toHaveClass('ng-hide');
-
-                tb.triggerEvent(shadowRoot.querySelector('[value="30"] p'), 'touchend');
 
                 expect(shadowRoot.querySelector('ul')).toHaveClass('ng-hide');
                 expect(tb.rootScope.context['val']).toEqual(30);

@@ -24,8 +24,7 @@ class LineToolDecorator {
             tool.selectedNode = tempNode;
         });
 
-        ['touchstart', 'mousedown'].forEach((event) => element.on[event]
-                .where((_) => ['line', 'arrow'].contains(tool.selectedTool)).listen((MouseEvent e) {
+        element.onMouseDown.where((_) => ['line', 'arrow'].contains(tool.selectedTool)).listen((MouseEvent e) {
             var line;
 
             if (tool.selectedTool == 'line') {
@@ -45,15 +44,15 @@ class LineToolDecorator {
 
             var events = [];
 
-            ['touchmove', 'mousemove'].forEach((event) => events.add(element.on[event].listen((MouseEvent e) {
+            events.add(element.onMouseMove.listen((MouseEvent e) {
                 var point = tool.page.getPoint(e);
 
                 line.end = point;
                 e.preventDefault();
                 e.stopPropagation();
-            })));
+            }));
 
-            ['touchend', 'mouseup'].forEach((event) => events.add(element.on[event].listen((_) {
+            events.add(element.onMouseUp.listen((_) {
                 events.forEach((e) => e.cancel());
 
                 if (line.end != line.start) {
@@ -69,7 +68,7 @@ class LineToolDecorator {
                 } else {
                     tool.page.page.nodes.remove(line);
                 }
-            })));
-        }));
+            }));
+        });
     }
 }

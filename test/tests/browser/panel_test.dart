@@ -111,17 +111,6 @@ main() {
                 }));
             });
 
-            test('should trigger a onDrag event when text is dragged by touch', () {
-                tool.onToolDrag.listen(expectAsync((tool) {
-                    expect(tool).toEqual('text');
-                }));
-
-                Timer.run(expectAsync(() {
-                    tb.triggerEvent(element('text'), 'touchstart');
-                    tb.triggerEvent(element('text'), 'touchleave');
-                }));
-            });
-
             test('should trigger a onDrag event when list is dragged by mouse', () {
                 tool.onToolDrag.listen(expectAsync((tool) {
                     expect(tool).toEqual('list');
@@ -130,17 +119,6 @@ main() {
                 Timer.run(expectAsync(() {
                     tb.triggerEvent(element('list'), 'mousedown');
                     tb.triggerEvent(element('list'), 'mouseout');
-                }));
-            });
-
-            test('should trigger a onDrag event when list is dragged by touch', () {
-                tool.onToolDrag.listen(expectAsync((tool) {
-                    expect(tool).toEqual('list');
-                }));
-
-                Timer.run(expectAsync(() {
-                    tb.triggerEvent(element('list'), 'touchstart');
-                    tb.triggerEvent(element('list'), 'touchleave');
                 }));
             });
         });

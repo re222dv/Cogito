@@ -26,8 +26,7 @@ class CircleToolDecorator {
             tool.selectedNode = tempNode;
         });
 
-        ['touchstart', 'mousedown'].forEach((event) => element.on[event]
-                .where((_) => 'circle' == tool.selectedTool).listen((MouseEvent e) {
+        element.onMouseDown.where((_) => 'circle' == tool.selectedTool).listen((MouseEvent e) {
             var circle = new Circle();
 
             var start = tool.page.getPoint(e);
@@ -44,21 +43,21 @@ class CircleToolDecorator {
 
             var events = [];
 
-            ['touchmove', 'mousemove'].forEach((event) => events.add(element.on[event].listen((MouseEvent e) {
+            events.add(element.onMouseMove.listen((MouseEvent e) {
                 var point = tool.page.getPoint(e);
 
                 circle.radius = point.distanceTo(start);
 
                 e.preventDefault();
                 e.stopPropagation();
-            })));
+            }));
 
-            ['touchend', 'mouseup'].forEach((event) => events.add(element.on[event].listen((_) {
+            events.add(element.onMouseUp.listen((_) {
                 events.forEach((e) => e.cancel());
 
                 tool.selectedNode = circle;
                 tempNode = circle;
-            })));
-        }));
+            }));
+        });
     }
 }

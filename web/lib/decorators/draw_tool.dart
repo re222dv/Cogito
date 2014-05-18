@@ -24,8 +24,7 @@ class DrawToolDecorator {
             tool.selectedNode = tempNode;
         });
 
-        ['touchstart', 'mousedown'].forEach((event) => element.on[event]
-                .where((_) => tool.selectedTool == 'draw').listen((_) {
+        element.onMouseDown.where((_) => tool.selectedTool == 'draw').listen((_) {
             var path = new Freehand()
                 ..color = tempNode.color
                 ..width = tempNode.width;
@@ -34,15 +33,15 @@ class DrawToolDecorator {
 
             var events = [];
 
-            ['touchmove', 'mousemove'].forEach((event) => events.add(element.parent.on[event].listen((MouseEvent e) {
+            events.add(element.parent.onMouseMove.listen((MouseEvent e) {
                 var point = tool.page.getPoint(e);
 
                 path.freehand += "${point.x}, ${point.y} ";
                 e.preventDefault();
                 e.stopPropagation();
-            })));
+            }));
 
-            ['touchend', 'mouseup'].forEach((event) => events.add(element.parent.on[event].listen((_) {
+            events.add(element.parent.onMouseUp.listen((_) {
                 events.forEach((e) => e.cancel());
 
                 if (path.freehand.length > 4) {
@@ -61,7 +60,7 @@ class DrawToolDecorator {
                     tool.selectedNode = node;
                     tempNode = node;
                 }
-            })));
-        }));
+            }));
+        });
     }
 }

@@ -43,9 +43,7 @@ class NodeHandlerController extends AttachAware {
         scope.watch('node.width', calculateSize);
         scope.watch('node.text', calculateSize);
 
-        ['touchstart', 'mousedown'].forEach((event) => element.on[event]
-                                   .where((_) => tool.selectedTool == 'select' && !node.editing)
-                                   .listen((MouseEvent e) {
+        element.onMouseDown.where((_) => tool.selectedTool == 'select' && !node.editing).listen((MouseEvent e) {
             tool.selectedNode = node;
 
             var offset = tool.page.getPoint(e);
@@ -55,7 +53,7 @@ class NodeHandlerController extends AttachAware {
 
             var events = [];
 
-            ['touchmove', 'mousemove'].forEach((event) => events.add(element.parent.parent.on[event].listen((MouseEvent e) {
+            events.add(element.parent.parent.onMouseMove.listen((MouseEvent e) {
                 var point = tool.page.getPoint(e);
 
                 node.x = point.x + offset.x;
@@ -63,20 +61,20 @@ class NodeHandlerController extends AttachAware {
 
                 e.preventDefault();
                 e.stopPropagation();
-            })));
+            }));
 
-            ['touchend', 'mouseup'].forEach((event) => events.add(element.parent.parent.on[event].listen((Event e) {
+            events.add(element.parent.parent.onMouseUp.listen((Event e) {
                 events.forEach((e) => e.cancel());
 
                 element.parent.classes.remove('dragging');
 
                 e.preventDefault();
                 e.stopPropagation();
-            })));
+            }));
 
             e.preventDefault();
             e.stopPropagation();
-        }));
+        });
 
         element.onDoubleClick.where((_) => tool.selectedTool == 'select' && node.editable).listen((_) {
             node.editing = true;
@@ -84,9 +82,7 @@ class NodeHandlerController extends AttachAware {
             element.parent.onClick.first.then((_) => node.editing = false);
         });
 
-        ['touchstart', 'mousedown', 'click'].forEach((event) => element.on[event]
-                .listen((Event e) => e.stopPropagation())
-        );
+        ['mousedown', 'click'].forEach((event) => element.on[event].listen((Event e) => e.stopPropagation()));
     }
 
     attach() {

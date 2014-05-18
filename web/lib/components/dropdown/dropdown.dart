@@ -51,16 +51,14 @@ class DropDownComponent extends ShadowRootAware {
 
         var dragging = false;
 
-        ['mousedown', 'touchstart'].forEach((event) => element.on[event].listen((e) {
+        element.onMouseDown.listen((e) {
             dragging = true;
             e.preventDefault();
-        }));
-
-        ['mouseout', 'touchleave'].forEach((event) {
-            element.on[event].where((_) => dragging).listen((_) => open = true);
         });
 
-        ['mouseup', 'touchend'].forEach((event) => element.on[event].where((_) => dragging).listen((e) {
+        element.onMouseOut.where((_) => dragging).listen((_) => open = true);
+
+        element.onMouseUp.where((_) => dragging).listen((e) {
             dragging = false;
 
             if (e.target.parent != null && e.target.parent.tagName == 'LI') {
@@ -69,6 +67,6 @@ class DropDownComponent extends ShadowRootAware {
             } else {
                 open = !open;
             }
-        }));
+        });
     }
 }

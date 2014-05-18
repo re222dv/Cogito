@@ -26,8 +26,7 @@ class RectToolDecorator {
             tool.selectedNode = tempNode;
         });
 
-        ['touchstart', 'mousedown'].forEach((event) => element.on[event]
-                .where((_) => 'rect' == tool.selectedTool).listen((MouseEvent e) {
+        element.onMouseDown.where((_) => 'rect' == tool.selectedTool).listen((MouseEvent e) {
             var rect = new Rect();
 
             var start = tool.page.getPoint(e);
@@ -44,7 +43,7 @@ class RectToolDecorator {
 
             var events = [];
 
-            ['touchmove', 'mousemove'].forEach((event) => events.add(element.on[event].listen((MouseEvent e) {
+            events.add(element.onMouseMove.listen((MouseEvent e) {
                 var point = tool.page.getPoint(e);
 
                 var startX, startY, width, height;
@@ -70,14 +69,14 @@ class RectToolDecorator {
 
                 e.preventDefault();
                 e.stopPropagation();
-            })));
+            }));
 
-            ['touchend', 'mouseup'].forEach((event) => events.add(element.on[event].listen((_) {
+            events.add(element.onMouseUp.listen((_) {
                 events.forEach((e) => e.cancel());
 
                 tool.selectedNode = rect;
                 tempNode = rect;
-            })));
-        }));
+            }));
+        });
     }
 }
