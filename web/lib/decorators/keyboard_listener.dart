@@ -23,13 +23,13 @@ class KeyboardListenerDecorator {
             new KeyBinding(() => tool.selectedTool = 'text', 53, alt: true),    // Alt + 5
             new KeyBinding(() => tool.selectedTool = 'list', 54, alt: true),    // Alt + 6
             new KeyBinding(() => tool.selectedTool = 'rect', 55, alt: true),    // Alt + 7
-            new KeyBinding(() => tool.selectedTool = 'circle', 56, alt: true)     // Alt + 8
+            new KeyBinding(() => tool.selectedTool = 'circle', 56, alt: true)   // Alt + 8
         ];
 
         document.onKeyDown
-            .where((e) => keyMap.any((binding) => binding == e))
+            .where((e) => keyMap.any((binding) => binding.matches(e)))
             .listen((e) {
-                keyMap.singleWhere((binding) => binding == e).handler();
+                keyMap.singleWhere((binding) => binding.matches(e)).handler();
 
                 e.preventDefault();
             });
@@ -48,10 +48,8 @@ class KeyBinding {
 
     KeyBinding(this.handler, this.keyCode, {this.alt: false, this.ctrl: false, this.shift: false});
 
-    operator ==(KeyboardEvent e) => keyCode == e.keyCode &&
-                                    alt == e.altKey &&
-                                    ctrl == e.ctrlKey &&
-                                    shift == e.shiftKey;
-
-    int get hashCode => quiver.hash4(alt, ctrl, shift, keyCode);
+    bool matches(KeyboardEvent e) => keyCode == e.keyCode &&
+                                     alt == e.altKey &&
+                                     ctrl == e.ctrlKey &&
+                                     shift == e.shiftKey;
 }
