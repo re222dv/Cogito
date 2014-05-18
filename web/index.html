@@ -5,6 +5,23 @@
         <meta charset="utf-8">
         <title>Cogito</title>
         <link rel="stylesheet" href="main.css">
+        <script>
+            /**
+             * Shim for prefixed shadow dom, original work on https://github.com/sole/WebComponentsMonkeyPatcha
+             */
+            (function() {
+                // Unprefixed createShadowRoot
+                if( HTMLElement.prototype.webkitCreateShadowRoot !== undefined &&
+                    HTMLElement.prototype.createShadowRoot === undefined ) {
+                    HTMLElement.prototype.createShadowRoot = HTMLElement.prototype.webkitCreateShadowRoot;
+                }
+
+                // Alias document.register to document.registerElement
+                if(document.register !== undefined && document.registerElement === undefined) {
+                    document.registerElement = document.register;
+                }
+            })();
+        </script>
     </head>
     <body>
         <ng-view></ng-view>
