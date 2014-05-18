@@ -1,74 +1,64 @@
 part of cogito_web;
 
 /**
- * Handles the line and arrow tool
+ * Handles the line tool
  */
 @Decorator(selector: '[line-tool]')
-class LineToolDecorator {
-    Element element;
-    ToolController tool;
+class LineToolDecorator extends DrawingToolBase {
+    final String tool = 'line';
 
-    var tempNode;
+    Line tempNode = new Line()
+        ..color = 'black'
+        ..width = 5
+        ..start = new math.Point(0 ,0)
+        ..end = new math.Point(0 ,0);
 
-    LineToolDecorator(this.element, this.tool) {
-        tool.onToolChange.where((tool) => ['line', 'arrow'].contains(tool)).listen((_) {
-            if (tempNode == null) {
-                tempNode = new Line()
-                    ..color = 'black'
-                    ..width = 5;
-            } else {
-                tempNode = new Line()
-                    ..color = tempNode.color
-                    ..width = tempNode.width;
-            }
-            tool.selectedNode = tempNode;
-        });
+    LineToolDecorator(Element element, ToolController toolCtrl) : super (element, toolCtrl);
 
-        element.onMouseDown.where((_) => ['line', 'arrow'].contains(tool.selectedTool)).listen((MouseEvent e) {
-            var line;
+    onMouseDown(MouseEvent e) {
+        var point = toolCtrl.page.getPoint(e);
 
-            if (tool.selectedTool == 'line') {
-                line = new Line();
-            } else {
-                line = new Arrow();
-            }
+        tempNode = tempNode.clone()
+            ..x = 0
+            ..y = 0
+            ..start = point
+            ..end = point;
 
-            var point = tool.page.getPoint(e);
-
-            line..color = tempNode.color
-                ..width = tempNode.width
-                ..start = point
-                ..end = point;
-
-            tool.page.page.nodes.add(line);
-
-            var events = [];
-
-            events.add(element.onMouseMove.listen((MouseEvent e) {
-                var point = tool.page.getPoint(e);
-
-                line.end = point;
-                e.preventDefault();
-                e.stopPropagation();
-            }));
-
-            events.add(element.onMouseUp.listen((_) {
-                events.forEach((e) => e.cancel());
-
-                if (line.end != line.start) {
-                    var unpaddedPoints = simplify.removePadding([line.start, line.end]);
-
-                    line..start = unpaddedPoints.points[0]
-                        ..end = unpaddedPoints.points[1]
-                        ..x = unpaddedPoints.corner.x
-                        ..y = unpaddedPoints.corner.y;
-
-                    tool.selectedNode = line;
-                    tempNode = line;
-                } else {
-                    tool.page.page.nodes.remove(line);
-                }
-            }));
-        });
+        toolCtrl.page.page.nodes.add(tempNode);
     }
+
+    onMouseMove(MouseEvent e) {
+        var point = toolCtrl.page.getPoint(e);
+
+        tempNode.end = point;
+    }
+
+    onMouseUp(MouseEvent e) {
+        if (tempNode.end != tempNode.start) {
+            var unpaddedPoints = simplify.removePadding([tempNode.start, tempNode.end]);
+
+            tempNode..start = unpaddedPoints.points[0]
+                    ..end = unpaddedPoints.points[1]
+                    ..x = unpaddedPoints.corner.x
+                    ..y = unpaddedPoints.corner.y;
+        } else {
+            toolCtrl.page.page.nodes.remove(tempNode);
+        }
+    }
+}
+
+/**
+ * Handles the arrow tool
+ */
+@Decorator(selector: '[arrow-tool]')
+class ArrowToolDecorator extends LineToolDecorator {
+    final String tool = 'arrow';
+
+    Arrow tempNode = new Arrow()
+        ..color = 'black'
+        ..width = 5
+        ..start = new math.Point(0 ,0)
+        ..end = new math.Point(0 ,0);
+
+    ArrowToolDecorator(Element element, ToolController toolCtrl) : super (element, toolCtrl);
 }

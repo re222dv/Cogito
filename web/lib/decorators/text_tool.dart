@@ -4,38 +4,31 @@ part of cogito_web;
  * Handles the text tool
  */
 @Decorator(selector: '[text-tool]')
-class TextToolDecorator {
-    Element element;
-    ToolController tool;
+class TextToolDecorator extends TempNode {
+    final String tool = 'text';
 
     var tempNode = new Text()
         ..color = 'black'
         ..size = 24;
 
-    TextToolDecorator(this.element, this.tool, Scope scope) {
-        tool.onToolChange.where((tool) => tool == 'text').listen((_) {
-            tempNode = new Text()
-                ..color = tempNode.color
-                ..size = tempNode.size;
-            tool.selectedNode = tempNode;
-        });
+    TextToolDecorator(Element element, ToolController toolCtrl) : super(toolCtrl) {
 
-        tool.onToolDrag.where((tool) => tool == 'text').listen((_) {
+        toolCtrl.onToolDrag.where((draggedTool) => draggedTool == tool).listen((_) {
             var node = new Text()
                 ..color = tempNode.color
                 ..text = ''
                 ..size = tempNode.size
                 ..editing = true;
 
-            tool.page.page.nodes.add(node);
+            toolCtrl.page.page.nodes.add(node);
 
-            tool.selectedNode = node;
+            toolCtrl.selectedNode = node;
             tempNode = node;
 
             var events = [];
 
             events.add(element.onMouseMove.listen((MouseEvent e) {
-                var point = tool.page.getPoint(e);
+                var point = toolCtrl.page.getPoint(e);
 
                 node..x = point.x
                     ..y = point.y;
@@ -46,8 +39,8 @@ class TextToolDecorator {
             }));
         });
 
-        element.onClick.where((_) => tool.selectedTool == 'text').listen((MouseEvent e) {
-            var point = tool.page.getPoint(e);
+        element.onClick.where((_) => toolCtrl.selectedTool == tool).listen((MouseEvent e) {
+            var point = toolCtrl.page.getPoint(e);
 
             var node = new Text()
                 ..color = tempNode.color
@@ -57,9 +50,9 @@ class TextToolDecorator {
                 ..size = tempNode.size
                 ..editing = true;
 
-            tool.page.page.nodes.add(node);
+            toolCtrl.page.page.nodes.add(node);
 
-            tool.selectedNode = node;
+            toolCtrl.selectedNode = node;
             tempNode = node;
 
             e.stopPropagation();

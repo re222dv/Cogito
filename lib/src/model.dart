@@ -31,6 +31,8 @@ abstract class Node {
         y = json['y'];
     }
 
+    Node clone();
+
     Map toJson() {
         return {
             'type': type,
@@ -102,6 +104,17 @@ class Freehand extends Node with LineProperties {
 
     String freehand = '';
 
+    Freehand();
+
+    Freehand.fromJson(Map json) : super.fromJson(json) {
+        color = json['color'];
+        width = json['width'];
+
+        freehand = json['freehand'];
+    }
+
+    Node clone() => new Freehand.fromJson(toJson());
+
     Map toJson() => super.toJson()..addAll({
         'freehand': freehand
     });
@@ -126,6 +139,8 @@ class Line extends Node with LineProperties {
                              json['end']['y']);
     }
 
+    Line clone() => new Line.fromJson(toJson());
+
     Map toJson() => super.toJson()..addAll({
         'color': color,
         'width': width,
@@ -146,6 +161,8 @@ class Arrow extends Line {
     Arrow();
 
     Arrow.fromJson(Map json) : super.fromJson(json);
+
+    Arrow clone() => new Arrow.fromJson(toJson());
 }
 
 class Path extends Node with LineProperties {
@@ -160,6 +177,8 @@ class Path extends Node with LineProperties {
         path = json['path'];
         width = json['width'];
     }
+
+    Path clone() => new Path.fromJson(toJson());
 
     Map toJson() => super.toJson()..addAll({
         'color': color,
@@ -181,6 +200,8 @@ class Text extends Node with TextProperties {
         size = json['size'];
         text = json['text'];
     }
+
+    Text clone() => new Text.fromJson(toJson());
 
     Map toJson() => super.toJson()..addAll({
         'color': color,
@@ -209,6 +230,8 @@ class BasicList extends Node with TextProperties {
         size = json['size'];
         rows = json['rows'];
     }
+
+    BasicList clone() => new BasicList.fromJson(toJson());
 
     Map toJson() => super.toJson()..addAll({
         'color': color,
@@ -242,6 +265,8 @@ class Rect extends Node with AreaProperties {
         strokeWidth = json['strokeWidth'];
     }
 
+    Rect clone() => new Rect.fromJson(toJson());
+
     Map toJson() => super.toJson()..addAll({
         'width': width,
         'height': height,
@@ -267,6 +292,8 @@ class Circle extends Node with AreaProperties {
         strokeColor = json['strokeColor'];
         strokeWidth = json['strokeWidth'];
     }
+
+    Circle clone() => new Circle.fromJson(toJson());
 
     Map toJson() => super.toJson()..addAll({
         'radius': radius,

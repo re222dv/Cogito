@@ -4,63 +4,51 @@ part of cogito_web;
  * Handles the draw tool
  */
 @Decorator(selector: '[draw-tool]')
-class DrawToolDecorator {
-    Element element;
-    ToolController tool;
+class DrawToolDecorator extends DrawingToolBase {
+    final String tool = 'draw';
 
-    Path tempNode;
+    Path tempNode = new Path()
+        ..color = 'black'
+        ..width = 5;
 
-    DrawToolDecorator(this.element, this.tool) {
-        tool.onToolChange.where((tool) => tool == 'draw').listen((_) {
-            if (tempNode == null) {
-                tempNode = new Path()
-                    ..color = 'black'
-                    ..width = 5;
-            } else {
-                tempNode = new Path()
-                    ..color = tempNode.color
-                    ..width = tempNode.width;
-            }
-            tool.selectedNode = tempNode;
-        });
+    Freehand tempPath;
 
-        element.onMouseDown.where((_) => tool.selectedTool == 'draw').listen((_) {
-            var path = new Freehand()
-                ..color = tempNode.color
-                ..width = tempNode.width;
+    DrawToolDecorator(Element element, ToolController toolCtrl) : super (element, toolCtrl);
 
-            tool.page.page.nodes.add(path);
+    onMouseDown(MouseEvent e) {
+        var point = toolCtrl.page.getPoint(e);
 
-            var events = [];
+        tempPath = new Freehand()
+            ..color = tempNode.color
+            ..width = tempNode.width
+            ..freehand = "${point.x}, ${point.y} ";
 
-            events.add(element.parent.onMouseMove.listen((MouseEvent e) {
-                var point = tool.page.getPoint(e);
+        toolCtrl.page.page.nodes.add(tempPath);
+    }
 
-                path.freehand += "${point.x}, ${point.y} ";
-                e.preventDefault();
-                e.stopPropagation();
-            }));
+    onMouseMove(MouseEvent e) {
+        var point = toolCtrl.page.getPoint(e);
 
-            events.add(element.parent.onMouseUp.listen((_) {
-                events.forEach((e) => e.cancel());
+        tempPath.freehand += "${point.x}, ${point.y} ";
+    }
 
-                if (path.freehand.length > 4) {
-                    var simplePath = simplify.simplify(path.freehand.trim());
+    onMouseUp(MouseEvent e) {
+        if (tempPath.freehand.length > 4) {
+            var simplePath = simplify.simplify(tempPath.freehand.trim());
 
-                    var node = new Path()
-                        ..color = path.color
-                        ..path = simplePath.path
-                        ..width = path.width
-                        ..x = simplePath.corner.x
-                        ..y = simplePath.corner.y;
+            var node = new Path()
+                ..color = tempPath.color
+                ..path = simplePath.path
+                ..width = tempPath.width
+                ..x = simplePath.corner.x
+                ..y = simplePath.corner.y;
 
-                    tool.page.page.nodes.add(node);
-                    tool.page.page.nodes.remove(path);
+            toolCtrl.page.page.nodes.add(node);
+            toolCtrl.page.page.nodes.remove(tempPath);
 
-                    tool.selectedNode = node;
-                    tempNode = node;
-                }
-            }));
-        });
+            tempNode = node;
+        } else {
+            toolCtrl.page.page.nodes.remove(tempPath);
+        }
     }
 }

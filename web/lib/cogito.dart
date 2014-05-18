@@ -9,6 +9,8 @@ import 'package:animation/animation.dart';
 import 'package:cogito/cogito.dart';
 import 'package:cogito/simplify/simplify.dart' as simplify;
 
+part 'baseclasses/tool_decorators.dart';
+
 part 'components/dropdown/dropdown.dart';
 part 'components/page/page.dart';
 part 'components/panel/panel.dart';
