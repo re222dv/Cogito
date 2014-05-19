@@ -23,7 +23,9 @@ class RectToolDecorator extends DrawingToolBase {
 
         tempNode = tempNode.clone()
             ..x = start.x
-            ..y = start.y;
+            ..y = start.y
+            ..width = 0
+            ..height = 0;
 
         toolCtrl.page.page.nodes.add(tempNode);
     }

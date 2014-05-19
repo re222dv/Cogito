@@ -22,7 +22,8 @@ class CircleToolDecorator extends DrawingToolBase {
 
         tempNode = tempNode.clone()
             ..x = start.x
-            ..y = start.y;
+            ..y = start.y
+            ..radius = 0;
 
         toolCtrl.page.page.nodes.add(tempNode);
     }

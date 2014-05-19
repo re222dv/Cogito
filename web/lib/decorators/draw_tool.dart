@@ -33,7 +33,7 @@ class DrawToolDecorator extends DrawingToolBase {
     }
 
     onMouseUp(MouseEvent e) {
-        if (tempPath.freehand.length > 8) {
+        if (tempPath.freehand.split(', ').length > 2) {
             var simplePath = simplify.simplify(tempPath.freehand.trim());
 
             var node = new Path()

@@ -17,7 +17,7 @@ class MockPageComponent implements PageComponent {
     var page = new Page();
 
     MockPageComponent() {
-        var values = [1, 2, 3, 4];
+        var values = [1, 2, 3, 4, 5, 6];
 
         getPointSpy = guinness.createSpy('getPointSpy').andCallFake((_) {
             return new math.Point(values.removeAt(0), values.removeAt(0));
@@ -80,6 +80,15 @@ main() {
             return new Future.delayed(Duration.ZERO);
         }
 
+        // Preconditions
+        Future whenDrawn() {
+            return whenSelected().then((_) {
+                tb.triggerEvent(svgElement, 'mousedown');
+                tb.triggerEvent(svgElement, 'mousemove');
+                tb.triggerEvent(svgElement, 'mouseup');
+            });
+        }
+
         it('should set a temporary node as selectedNode when activated', () {
             return whenSelected().then((_) {
                 expect(tool.selectedNode).toBeNotNull();
@@ -113,6 +122,15 @@ main() {
                     'strokeColor': 'red',
                     'strokeWidth': 5
                 }));
+            });
+        });
+
+        it('should do nothing on just a click after an element have been drawn', () {
+            return whenDrawn().then((_) {
+                tb.triggerEvent(svgElement, 'mousedown');
+                tb.triggerEvent(svgElement, 'mouseup');
+
+                expect(tool.page.page.nodes.length).toBe(1);
             });
         });
     });
