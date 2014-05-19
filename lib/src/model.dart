@@ -191,7 +191,7 @@ class Text extends Node with TextProperties {
     final bool editable = true;
     final String type = 'text';
 
-    String text;
+    String text = '';
 
     Text();
 
@@ -215,7 +215,7 @@ class BasicList extends Node with TextProperties {
     final String type = 'basicList';
     String listType = 'unordered';
 
-    List<String> rows;
+    List<String> rows = [];
 
     String get text => rows.join('\n');
 

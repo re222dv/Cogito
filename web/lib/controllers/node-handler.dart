@@ -35,7 +35,7 @@ class NodeHandlerController extends AttachAware {
         ];
 
         // Make sure keys used when typing doesn't do other stuff
-        element.onKeyDown.where((e) => keyMap.any((binding) => binding.match(e))).listen((e) => e.stopPropagation());
+        element.onKeyDown.where((e) => keyMap.any((binding) => binding.matches(e))).listen((e) => e.stopPropagation());
     }
 
     NodeHandlerController(this.element, ToolController tool, Scope scope) {

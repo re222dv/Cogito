@@ -42,6 +42,10 @@ class ListToolDecorator extends TempNode {
         });
 
         element.onClick.where((_) => toolCtrl.selectedTool == tool).listen((MouseEvent e) {
+            if (tempNode.text.length == 0) {
+                toolCtrl.page.page.nodes.remove(tempNode);
+            }
+
             var point = toolCtrl.page.getPoint(e);
 
             var node = new BasicList()

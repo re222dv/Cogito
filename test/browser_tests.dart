@@ -12,6 +12,8 @@ import 'tests/browser/tool_decorator_test.dart' as tool_decorator;
 import 'tests/browser/draw_tool_test.dart' as draw_tool;
 import 'tests/browser/arrow_tool_test.dart' as arrow_tool;
 import 'tests/browser/line_tool_test.dart' as line_tool;
+import 'tests/browser/text_tool_test.dart' as text_tool;
+import 'tests/browser/list_tool_test.dart' as list_tool;
 import 'tests/browser/rect_tool_test.dart' as rect_tool;
 import 'tests/browser/circle_tool_test.dart' as circle_tool;
 
@@ -31,6 +33,8 @@ main() {
     draw_tool.main();
     arrow_tool.main();
     line_tool.main();
+    text_tool.main();
+    list_tool.main();
     rect_tool.main();
     circle_tool.main();
 }

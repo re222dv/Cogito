@@ -80,7 +80,6 @@ main() {
             return new Future.delayed(Duration.ZERO);
         }
 
-        // Preconditions
         Future whenDrawn() {
             return whenSelected().then((_) {
                 tb.triggerEvent(svgElement, 'mousedown');

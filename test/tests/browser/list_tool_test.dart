@@ -1,4 +1,4 @@
-library circle_tool_tests;
+library list_tool_tests;
 
 import 'dart:async';
 import 'dart:convert';
@@ -17,7 +17,7 @@ class MockPageComponent implements PageComponent {
     var page = new Page();
 
     MockPageComponent() {
-        var values = [1, 2, 3, 4, 5, 6];
+        var values = [1, 2, 3, 4];
 
         getPointSpy = guinness.createSpy('getPointSpy').andCallFake((_) {
             return new math.Point(values.removeAt(0), values.removeAt(0));
@@ -31,7 +31,7 @@ class MockPageComponent implements PageComponent {
 main() {
     guinnessEnableHtmlMatchers();
 
-    describe('CircleToolDecorator', () {
+    describe('ListToolDecorator', () {
         Element rootElement;
         Element svgElement;
         ShadowRoot shadowRoot;
@@ -44,7 +44,7 @@ main() {
 
             // Make required classes available for dependency injection
             module((Module _) => _
-                    ..bind(CircleToolDecorator)
+                    ..bind(ListToolDecorator)
                     ..bind(ToolController)
                     ..bind(TestBed));
 
@@ -54,7 +54,7 @@ main() {
                 tool = _tool;
             });
 
-            rootElement = tb.compile('<div><svg circle-tool></svg></div>');
+            rootElement = tb.compile('<div><svg list-tool></svg></div>');
             svgElement = rootElement.querySelector('svg');
 
             // Add the element to the dom so that events can bubble
@@ -75,16 +75,14 @@ main() {
 
         // Preconditions
         Future whenSelected() {
-            tool.selectedTool = 'circle';
+            tool.selectedTool = 'list';
 
             return new Future.delayed(Duration.ZERO);
         }
 
-        Future whenDrawn() {
+        Future whenAdded() {
             return whenSelected().then((_) {
-                tb.triggerEvent(svgElement, 'mousedown');
-                tb.triggerEvent(svgElement, 'mousemove');
-                tb.triggerEvent(svgElement, 'mouseup');
+                tb.triggerEvent(svgElement, 'click');
             });
         }
 
@@ -94,41 +92,39 @@ main() {
             });
         });
 
-        it('should do nothing on just a click', () {
+        it('should add an empty list in edit mode on click', () {
             return whenSelected().then((_) {
-                tb.triggerEvent(svgElement, 'mousedown');
-                tb.triggerEvent(svgElement, 'mouseup');
-
-                expect(tool.page.page.nodes.length).toBe(0);
-            });
-        });
-
-        it('should be able to draw a line', () {
-            return whenSelected().then((_) {
-                tb.triggerEvent(svgElement, 'mousedown');
-                tb.triggerEvent(svgElement, 'mousemove');
-                tb.triggerEvent(svgElement, 'mouseup');
+                tb.triggerEvent(svgElement, 'click');
 
                 expect(tool.page.page.nodes.length).toBe(1);
 
                 expect(JSON.encode(tool.page.page.nodes[0].toJson())).toEqual(JSON.encode({
-                    'type': 'circle',
+                    'type': 'basicList',
                     'x': 1,
-                    'y': 2,
-                    'radius': 2.8284271247461903,
-                    'fillColor': 'black',
-                    'strokeColor': 'red',
-                    'strokeWidth': 5
+                    'y': -10,
+                    'color': 'black',
+                    'size': 24,
+                    'rows': []
                 }));
+
+                expect(tool.page.page.nodes[0].editing).toEqual(true);
             });
         });
 
-        it('should do nothing on just a click after an element have been drawn', () {
-            return whenDrawn().then((_) {
-                tb.triggerEvent(svgElement, 'mousedown');
-                tb.triggerEvent(svgElement, 'mouseup');
+        it('should remove the empty list on click outside', () {
+            return whenAdded().then((_) {
+                tb.triggerEvent(svgElement, 'click');
 
                 expect(tool.page.page.nodes.length).toBe(1);
+            });
+        });
+
+        it('should not remove the list on click outside when filled', () {
+            return whenAdded().then((_) {
+                (tool.page.page.nodes[0] as BasicList).text = 'FooBar';
+                tb.triggerEvent(svgElement, 'click');
+
+                expect(tool.page.page.nodes.length).toBe(2);
             });
         });
     });
