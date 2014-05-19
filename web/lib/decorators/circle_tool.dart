@@ -33,5 +33,9 @@ class CircleToolDecorator extends DrawingToolBase {
         tempNode.radius = point.distanceTo(start);
     }
 
-    onMouseUp(MouseEvent e) {}
+    onMouseUp(MouseEvent e) {
+        if (tempNode.radius == 0) {
+            toolCtrl.page.page.nodes.remove(tempNode);
+        }
+    }
 }

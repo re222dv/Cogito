@@ -53,5 +53,9 @@ class RectToolDecorator extends DrawingToolBase {
                 ..height = height;
     }
 
-    onMouseUp(MouseEvent e) {}
+    onMouseUp(MouseEvent e) {
+        if (tempNode.width == 0 || tempNode.height == 0) {
+            toolCtrl.page.page.nodes.remove(tempNode);
+        }
+    }
 }

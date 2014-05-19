@@ -149,6 +149,10 @@ main() {
             expect(shadowRoot.querySelector('svg[line-tool]')).toBeNotNull();
         });
 
+        it('should mixin arrow-tool', () {
+            expect(shadowRoot.querySelector('svg[line-tool]')).toBeNotNull();
+        });
+
         it('should mixin list-tool', () {
             expect(shadowRoot.querySelector('svg[list-tool]')).toBeNotNull();
         });
