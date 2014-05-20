@@ -72,6 +72,9 @@ main() {
         afterEach(() {
             tearDownInjector();
 
+            // As ToolController is a singleton we need to reset it between tests
+            tool.toolDrag = new StreamController.broadcast();
+
             rootElement.remove();
         });
 
@@ -88,6 +91,12 @@ main() {
                 tb.triggerEvent(svgElement, 'mousemove');
                 tb.triggerEvent(svgElement, 'mouseup');
             });
+        }
+
+        Future whenDragged() {
+            tool.toolDrag.add('rect');
+
+            return new Future.delayed(Duration.ZERO);
         }
 
         it('should set a temporary node as selectedNode when activated', () {
@@ -133,6 +142,27 @@ main() {
                 tb.triggerEvent(svgElement, 'mouseup');
 
                 expect(tool.page.page.nodes.length).toBe(1);
+            });
+        });
+
+        it('should add an rectangle on drag', () {
+            return whenDragged().then((_) {
+                expect(tool.selectedNode).toBeNotNull();
+                expect(tool.page.page.nodes.length).toBe(1);
+
+                tb.triggerEvent(svgElement, 'mousemove');
+
+                expect(JSON.encode(tool.page.page.nodes[0].toJson())).toEqual(JSON.encode({
+                    'type': 'rect',
+                    'x': 1,
+                    'y': 2,
+                    'scale': 1,
+                    'width': 20,
+                    'height': 20,
+                    'fillColor': 'black',
+                    'strokeColor': 'red',
+                    'strokeWidth': 5
+                }));
             });
         });
     });

@@ -15,7 +15,36 @@ class CircleToolDecorator extends DrawingToolBase {
 
     math.Point start;
 
-    CircleToolDecorator(Element element, ToolController toolCtrl) : super(element, toolCtrl);
+    CircleToolDecorator(Element element, ToolController toolCtrl) : super(element, toolCtrl) {
+
+        toolCtrl.onToolDrag.where((draggedTool) => draggedTool == tool).listen((_) {
+
+            tempNode = tempNode.clone()
+                ..x = 0
+                ..y = 0;
+
+            if (tempNode.radius < 10) {
+                tempNode.radius = 10;
+            }
+
+            toolCtrl.page.page.nodes.add(tempNode);
+
+            toolCtrl.selectedNode = tempNode;
+
+            var events = [];
+
+            events.add(element.onMouseMove.listen((MouseEvent e) {
+                var point = toolCtrl.page.getPoint(e);
+
+                tempNode..x = point.x
+                        ..y = point.y;
+            }));
+
+            events.add(element.onMouseUp.listen((_) {
+                events.forEach((e) => e.cancel());
+            }));
+        });
+    }
 
     onMouseDown(MouseEvent e) {
         start = toolCtrl.page.getPoint(e);

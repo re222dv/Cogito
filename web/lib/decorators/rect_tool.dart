@@ -16,7 +16,40 @@ class RectToolDecorator extends DrawingToolBase {
 
     math.Point start;
 
-    RectToolDecorator(Element element, ToolController toolCtrl) : super(element, toolCtrl);
+    RectToolDecorator(Element element, ToolController toolCtrl) : super(element, toolCtrl) {
+
+        toolCtrl.onToolDrag.where((draggedTool) => draggedTool == tool).listen((_) {
+
+            tempNode = tempNode.clone()
+                ..x = 0
+                ..y = 0;
+
+            if (tempNode.width < 20) {
+                tempNode.width = 20;
+            }
+
+            if (tempNode.height < 20) {
+                tempNode.height = 20;
+            }
+
+            toolCtrl.page.page.nodes.add(tempNode);
+
+            toolCtrl.selectedNode = tempNode;
+
+            var events = [];
+
+            events.add(element.onMouseMove.listen((MouseEvent e) {
+                var point = toolCtrl.page.getPoint(e);
+
+                tempNode..x = point.x
+                        ..y = point.y;
+            }));
+
+            events.add(element.onMouseUp.listen((_) {
+                events.forEach((e) => e.cancel());
+            }));
+        });
+    }
 
     onMouseDown(MouseEvent e) {
         start = toolCtrl.page.getPoint(e);
