@@ -31,4 +31,5 @@ part 'decorators/tool.dart';
 part 'controllers/node-handler.dart';
 part 'formatters/prioritize.dart';
 part 'formatters/remove_leading.dart';
+part 'services/notification.dart';
 part 'services/page.dart';

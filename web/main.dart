@@ -38,6 +38,7 @@ class WebModule extends Module {
         bind(ToolDecorator);
         bind(PrioritizeFormatter);
         bind(RemoveLeadingFormatter);
+        bind(NotificationService);
         bind(PageService);
         bind(RouteInitializerFn, toValue: routeInitializer);
     }
