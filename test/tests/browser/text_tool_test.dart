@@ -72,6 +72,9 @@ main() {
         afterEach(() {
             tearDownInjector();
 
+            // As ToolController is a singleton we need to reset it between tests
+            tool.toolDrag = new StreamController.broadcast();
+
             rootElement.remove();
         });
 
@@ -88,6 +91,12 @@ main() {
             });
         }
 
+        Future whenDragged() {
+            tool.toolDrag.add('text');
+
+            return new Future.delayed(Duration.ZERO);
+        }
+
         it('should set a temporary node as selectedNode when activated', () {
             return whenSelected().then((_) {
                 expect(tool.selectedNode).toBeNotNull();
@@ -95,9 +104,7 @@ main() {
         });
 
         it('should add an empty text node in edit mode on click', () {
-            return whenSelected().then((_) {
-                tb.triggerEvent(svgElement, 'click');
-
+            return whenAdded().then((_) {
                 expect(tool.page.page.nodes.length).toBe(1);
 
                 expect(JSON.encode(tool.page.page.nodes[0].toJson())).toEqual(JSON.encode({
@@ -128,6 +135,27 @@ main() {
                 tb.triggerEvent(svgElement, 'click');
 
                 expect(tool.page.page.nodes.length).toBe(2);
+            });
+        });
+
+        it('should add an empty text node in edit mode on drag', () {
+            return whenDragged().then((_) {
+                expect(tool.selectedNode).toBeNotNull();
+                expect(tool.page.page.nodes.length).toBe(1);
+
+                tb.triggerEvent(svgElement, 'mousemove');
+
+                expect(JSON.encode(tool.page.page.nodes[0].toJson())).toEqual(JSON.encode({
+                    'type': 'text',
+                    'x': 1,
+                    'y': 2,
+                    'scale': 1,
+                    'color': 'black',
+                    'size': 24,
+                    'text': ''
+                }));
+
+                expect(tool.page.page.nodes[0].editing).toEqual(true);
             });
         });
     });
