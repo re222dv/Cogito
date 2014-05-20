@@ -18,6 +18,7 @@ main() {
                             'type': 'line',
                             'x': 10,
                             'y': 20,
+                            'scale': 2,
                             'color': 'green',
                             'start': {
                                 'x': 0, 'y': 0
@@ -31,6 +32,7 @@ main() {
                             'type': 'arrow',
                             'x': 10,
                             'y': 20,
+                            'scale': 2,
                             'color': 'green',
                             'start': {
                                 'x': 0, 'y': 0
@@ -44,6 +46,7 @@ main() {
                             'type': 'path',
                             'x': 200,
                             'y': 300,
+                            'scale': 2,
                             'width': 20,
                             'color': 'yellow',
                             'path': 'M 0 0 L 100 100'
@@ -52,6 +55,7 @@ main() {
                             'type': 'text',
                             'x': 30,
                             'y': 50,
+                            'scale': 2,
                             'size': 20,
                             'color': 'red',
                             'text': 'Hello, Mongo!'
@@ -60,6 +64,7 @@ main() {
                             'type': 'basicList',
                             'x': 500,
                             'y': 200,
+                            'scale': 2,
                             'size': 20,
                             'color': 'blue',
                             'rows': [
@@ -72,6 +77,7 @@ main() {
                             'type': 'rect',
                             'x': 10,
                             'y': 20,
+                            'scale': 2,
                             'width': 30,
                             'height': 40,
                             'fillColor': 'green',
@@ -82,6 +88,7 @@ main() {
                             'type': 'circle',
                             'x': 10,
                             'y': 20,
+                            'scale': 2,
                             'radius': 30,
                             'fillColor': 'green',
                             'strokeColor': 'blue',
@@ -100,6 +107,7 @@ main() {
 
                 expect(line.x).toEqual(10);
                 expect(line.y).toEqual(20);
+                expect(line.scale).toEqual(2);
                 expect(line.color).toEqual('green');
                 expect(line.start).toEqual(new Point(0, 0));
                 expect(line.end).toEqual(new Point(200, 200));
@@ -107,6 +115,7 @@ main() {
 
                 expect(arrow.x).toEqual(10);
                 expect(arrow.y).toEqual(20);
+                expect(arrow.scale).toEqual(2);
                 expect(arrow.color).toEqual('green');
                 expect(arrow.start).toEqual(new Point(0, 0));
                 expect(arrow.end).toEqual(new Point(200, 200));
@@ -114,24 +123,28 @@ main() {
 
                 expect(path.x).toEqual(200);
                 expect(path.y).toEqual(300);
+                expect(path.scale).toEqual(2);
                 expect(path.color).toEqual('yellow');
                 expect(path.path).toEqual('M 0 0 L 100 100');
                 expect(path.width).toEqual(20);
 
                 expect(text.x).toEqual(30);
                 expect(text.y).toEqual(50);
+                expect(text.scale).toEqual(2);
                 expect(text.color).toEqual('red');
                 expect(text.text).toEqual('Hello, Mongo!');
                 expect(text.size).toEqual(20);
 
                 expect(list.x).toEqual(500);
                 expect(list.y).toEqual(200);
+                expect(list.scale).toEqual(2);
                 expect(list.color).toEqual('blue');
                 expect(list.rows).toEqual(['AngularDart', 'Dart', 'MongoDB']);
                 expect(list.size).toEqual(20);
 
                 expect(rect.x).toEqual(10);
                 expect(rect.y).toEqual(20);
+                expect(rect.scale).toEqual(2);
                 expect(rect.width).toEqual(30);
                 expect(rect.height).toEqual(40);
                 expect(rect.fillColor).toEqual('green');
@@ -140,6 +153,7 @@ main() {
 
                 expect(circle.x).toEqual(10);
                 expect(circle.y).toEqual(20);
+                expect(circle.scale).toEqual(2);
                 expect(circle.radius).toEqual(30);
                 expect(circle.fillColor).toEqual('green');
                 expect(circle.strokeColor).toEqual('blue');
@@ -150,6 +164,7 @@ main() {
                 var line = new Line.fromJson({
                     'x': 10,
                     'y': 20,
+                    'scale': 2,
                     'color': 'green',
                     'start': {
                         'x': 0, 'y': 0
@@ -162,6 +177,7 @@ main() {
 
                 expect(line.x).toEqual(10);
                 expect(line.y).toEqual(20);
+                expect(line.scale).toEqual(2);
                 expect(line.color).toEqual('green');
                 expect(line.start).toEqual(new Point(0, 0));
                 expect(line.end).toEqual(new Point(200, 200));
@@ -172,6 +188,7 @@ main() {
                 var arrow = new Arrow.fromJson({
                     'x': 10,
                     'y': 20,
+                    'scale': 2,
                     'color': 'green',
                     'start': {
                         'x': 0, 'y': 0
@@ -184,6 +201,7 @@ main() {
 
                 expect(arrow.x).toEqual(10);
                 expect(arrow.y).toEqual(20);
+                expect(arrow.scale).toEqual(2);
                 expect(arrow.color).toEqual('green');
                 expect(arrow.start).toEqual(new Point(0, 0));
                 expect(arrow.end).toEqual(new Point(200, 200));
@@ -194,6 +212,7 @@ main() {
                 var path = new Path.fromJson({
                     'x': 10,
                     'y': 20,
+                    'scale': 2,
                     'color': 'green',
                     'path': 'M 0 0 L 10 10',
                     'width': 30
@@ -201,6 +220,7 @@ main() {
 
                 expect(path.x).toEqual(10);
                 expect(path.y).toEqual(20);
+                expect(path.scale).toEqual(2);
                 expect(path.color).toEqual('green');
                 expect(path.path).toEqual('M 0 0 L 10 10');
                 expect(path.width).toEqual(30);
@@ -210,6 +230,7 @@ main() {
                 var text = new Text.fromJson({
                     'x': 10,
                     'y': 20,
+                    'scale': 2,
                     'color': 'green',
                     'text': 'FooBar',
                     'size': 30
@@ -217,6 +238,7 @@ main() {
 
                 expect(text.x).toEqual(10);
                 expect(text.y).toEqual(20);
+                expect(text.scale).toEqual(2);
                 expect(text.color).toEqual('green');
                 expect(text.text).toEqual('FooBar');
                 expect(text.size).toEqual(30);
@@ -226,6 +248,7 @@ main() {
                 var list = new BasicList.fromJson({
                     'x': 10,
                     'y': 20,
+                    'scale': 2,
                     'color': 'green',
                     'rows': ['Foo', 'Bar'],
                     'size': 30
@@ -233,6 +256,7 @@ main() {
 
                 expect(list.x).toEqual(10);
                 expect(list.y).toEqual(20);
+                expect(list.scale).toEqual(2);
                 expect(list.color).toEqual('green');
                 expect(list.rows).toEqual(['Foo', 'Bar']);
                 expect(list.size).toEqual(30);
@@ -242,6 +266,7 @@ main() {
                 var rect = new Rect.fromJson({
                     'x': 10,
                     'y': 20,
+                    'scale': 2,
                     'width': 30,
                     'height': 40,
                     'fillColor': 'green',
@@ -251,6 +276,7 @@ main() {
 
                 expect(rect.x).toEqual(10);
                 expect(rect.y).toEqual(20);
+                expect(rect.scale).toEqual(2);
                 expect(rect.width).toEqual(30);
                 expect(rect.height).toEqual(40);
                 expect(rect.fillColor).toEqual('green');
@@ -262,6 +288,7 @@ main() {
                 var circle = new Circle.fromJson({
                     'x': 10,
                     'y': 20,
+                    'scale': 2,
                     'radius': 30,
                     'fillColor': 'green',
                     'strokeColor': 'blue',
@@ -270,6 +297,7 @@ main() {
 
                 expect(circle.x).toEqual(10);
                 expect(circle.y).toEqual(20);
+                expect(circle.scale).toEqual(2);
                 expect(circle.radius).toEqual(30);
                 expect(circle.fillColor).toEqual('green');
                 expect(circle.strokeColor).toEqual('blue');
@@ -285,6 +313,7 @@ main() {
                             new Line()
                                 ..x = 10
                                 ..y = 20
+                                ..scale = 2
                                 ..color = 'green'
                                 ..start = (new Point(0, 0))
                                 ..end = (new Point(200, 200))
@@ -294,6 +323,7 @@ main() {
                             new Arrow()
                                 ..x = 10
                                 ..y = 20
+                                ..scale = 2
                                 ..color = 'green'
                                 ..start = (new Point(0, 0))
                                 ..end = (new Point(200, 200))
@@ -303,6 +333,7 @@ main() {
                             new Path()
                                 ..x = 10
                                 ..y = 20
+                                ..scale = 2
                                 ..color = 'green'
                                 ..path = 'M 0 0 L 10 10'
                                 ..width = 10
@@ -311,6 +342,7 @@ main() {
                             new Text()
                                 ..x = 10
                                 ..y = 20
+                                ..scale = 2
                                 ..color = 'green'
                                 ..text = 'FooBar'
                                 ..size = 10
@@ -319,6 +351,7 @@ main() {
                             new BasicList()
                                 ..x = 10
                                 ..y = 20
+                                ..scale = 2
                                 ..color = 'green'
                                 ..rows = ['Foo', 'Bar']
                                 ..size = 10
@@ -327,6 +360,7 @@ main() {
                             new Rect()
                                 ..x = 10
                                 ..y = 20
+                                ..scale = 2
                                 ..width = 30
                                 ..height = 40
                                 ..fillColor = 'green'
@@ -337,6 +371,7 @@ main() {
                             new Circle()
                                 ..x = 10
                                 ..y = 20
+                                ..scale = 2
                                 ..radius = 30
                                 ..fillColor = 'green'
                                 ..strokeColor = 'blue'
@@ -350,6 +385,7 @@ main() {
                             'type': 'line',
                             'x': 10,
                             'y': 20,
+                            'scale': 2,
                             'color': 'green',
                             'start': {
                                 'x': 0, 'y': 0
@@ -363,6 +399,7 @@ main() {
                             'type': 'arrow',
                             'x': 10,
                             'y': 20,
+                            'scale': 2,
                             'color': 'green',
                             'start': {
                                 'x': 0, 'y': 0
@@ -376,6 +413,7 @@ main() {
                             'type': 'path',
                             'x': 10,
                             'y': 20,
+                            'scale': 2,
                             'width': 10,
                             'color': 'green',
                             'path': 'M 0 0 L 10 10'
@@ -384,6 +422,7 @@ main() {
                             'type': 'text',
                             'x': 10,
                             'y': 20,
+                            'scale': 2,
                             'size': 10,
                             'color': 'green',
                             'text': 'FooBar'
@@ -392,6 +431,7 @@ main() {
                             'type': 'basicList',
                             'x': 10,
                             'y': 20,
+                            'scale': 2,
                             'size': 10,
                             'color': 'green',
                             'rows': ['Foo', 'Bar']
@@ -400,6 +440,7 @@ main() {
                             'type': 'rect',
                             'x': 10,
                             'y': 20,
+                            'scale': 2,
                             'width': 30,
                             'height': 40,
                             'fillColor': 'green',
@@ -410,6 +451,7 @@ main() {
                             'type': 'circle',
                             'x': 10,
                             'y': 20,
+                            'scale': 2,
                             'radius': 30,
                             'fillColor': 'green',
                             'strokeColor': 'blue',
@@ -423,6 +465,7 @@ main() {
                 var line = new Line()
                     ..x = 10
                     ..y = 20
+                    ..scale = 2
                     ..color = 'green'
                     ..start = (new Point(0, 0))
                     ..end = (new Point(200, 200))
@@ -432,6 +475,7 @@ main() {
                     'type': 'line',
                     'x': 10,
                     'y': 20,
+                    'scale': 2,
                     'color': 'green',
                     'start': {
                         'x': 0, 'y': 0
@@ -447,6 +491,7 @@ main() {
                 var arrow = new Arrow()
                     ..x = 10
                     ..y = 20
+                    ..scale = 2
                     ..color = 'green'
                     ..start = (new Point(0, 0))
                     ..end = (new Point(200, 200))
@@ -456,6 +501,7 @@ main() {
                     'type': 'arrow',
                     'x': 10,
                     'y': 20,
+                    'scale': 2,
                     'color': 'green',
                     'start': {
                         'x': 0, 'y': 0
@@ -471,6 +517,7 @@ main() {
                 var path = new Path()
                     ..x = 10
                     ..y = 20
+                    ..scale = 2
                     ..color = 'green'
                     ..path = 'M 0 0 L 10 10'
                     ..width = 10;
@@ -479,6 +526,7 @@ main() {
                     'type': 'path',
                     'x': 10,
                     'y': 20,
+                    'scale': 2,
                     'color': 'green',
                     'path': 'M 0 0 L 10 10',
                     'width': 10
@@ -489,6 +537,7 @@ main() {
                 var text = new Text()
                     ..x = 10
                     ..y = 20
+                    ..scale = 2
                     ..color = 'green'
                     ..text = 'FooBar'
                     ..size = 10;
@@ -497,6 +546,7 @@ main() {
                     'type': 'text',
                     'x': 10,
                     'y': 20,
+                    'scale': 2,
                     'color': 'green',
                     'text': 'FooBar',
                     'size': 10
@@ -507,6 +557,7 @@ main() {
                 var list = new BasicList()
                     ..x = 10
                     ..y = 20
+                    ..scale = 2
                     ..color = 'green'
                     ..rows = ['Foo', 'Bar']
                     ..size = 10;
@@ -515,6 +566,7 @@ main() {
                     'type': 'basicList',
                     'x': 10,
                     'y': 20,
+                    'scale': 2,
                     'color': 'green',
                     'rows': ['Foo', 'Bar'],
                     'size': 10
@@ -525,6 +577,7 @@ main() {
                 var rect = new Rect()
                     ..x = 10
                     ..y = 20
+                    ..scale = 2
                     ..width = 30
                     ..height = 40
                     ..fillColor = 'green'
@@ -535,6 +588,7 @@ main() {
                     'type': 'rect',
                     'x': 10,
                     'y': 20,
+                    'scale': 2,
                     'width': 30,
                     'height': 40,
                     'fillColor': 'green',
@@ -547,6 +601,7 @@ main() {
                 var circle = new Circle()
                     ..x = 10
                     ..y = 20
+                    ..scale = 2
                     ..radius = 30
                     ..fillColor = 'green'
                     ..strokeColor = 'blue'
@@ -556,6 +611,7 @@ main() {
                     'type': 'circle',
                     'x': 10,
                     'y': 20,
+                    'scale': 2,
                     'radius': 30,
                     'fillColor': 'green',
                     'strokeColor': 'blue',
