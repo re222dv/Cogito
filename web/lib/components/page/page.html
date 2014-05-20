@@ -1,12 +1,12 @@
 <div keyboard-listener>
-    <panel position="left"></panel>
-    <panel position="top"></panel>
-    <panel position="right"></panel>
+    <panel position="left" ng-if="cmp.loaded"></panel>
+    <panel position="top" ng-if="cmp.loaded"></panel>
+    <panel position="right" ng-if="cmp.loaded"></panel>
     <svg width="100%" height="100%" viewBox="0 0 1200 675"
          preserveAspectRatio="xMidYMid meet"
          xmlns="http://www.w3.org/2000/svg" tool-controller
          draw-tool line-tool arrow-tool text-tool list-tool rect-tool circle-tool
-         class="{{ tool.selectedTool }}">
+         class="{{ tool.selectedTool }}" ng-show="cmp.loaded">
         <rect height="100%" width="100%" fill="white" />
         <g ng-repeat="node in cmp.page.nodes"
            ng-attr-transform="translate({{ node.x }},{{ node.y }}) scale({{ node.scale }})" node-handler="node">
@@ -111,4 +111,17 @@
             </g>
         </g>
     </svg>
+    <div id="loading" ng-if="!cmp.loaded">
+        <loading ng-if="!cmp.localFound && !cmp.loadingFailed"></loading>
+        <div ng-if="cmp.localFound">
+            <p>A local version were found</p>
+            <p>Do you want to use it?</p>
+
+            <button ng-click="cmp.getLocalPage()">Yes</button><button ng-click="cmp.getPage()">No</button>
+        </div>
+        <div ng-if="cmp.loadingFailed">
+            <p>The loading failed!</p>
+            <p>Do you want a <a href ng-click="cmp.newPage()">new page instead</a>?</p>
+        </div>
+    </div>
 </div>

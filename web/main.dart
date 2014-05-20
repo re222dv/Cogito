@@ -18,6 +18,7 @@ void routeInitializer(Router router, RouteViewFactory views) {
 class WebModule extends Module {
     WebModule() {
         bind(DropDownComponent);
+        bind(LoadingComponent);
         bind(PageComponent);
         bind(PanelComponent);
         bind(CheckBoxController);

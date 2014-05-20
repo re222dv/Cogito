@@ -1,0 +1,60 @@
+.loader {
+    position: relative;
+    width: 40px;
+    height: 40px;
+
+    .circle {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        -webkit-animation: orbit 3s infinite cubic-bezier(.8,.2,.2,.8);
+        animation: orbit 3s infinite cubic-bezier(.8,.2,.2,.8);
+
+        &:after {
+            content: '';
+            position: absolute;
+            left: 17.5px;
+            width: 5px;
+            height: 5px;
+            border-radius: 5px;
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        &:nth-child(1) {
+            -webkit-animation-delay: 240ms;
+            animation-delay: 240ms;
+        }
+        &:nth-child(2) {
+            -webkit-animation-delay: 480ms;
+            animation-delay: 480ms;
+        }
+        &:nth-child(3) {
+            -webkit-animation-delay: 720ms;
+            animation-delay: 720ms;
+        }
+        &:nth-child(4) {
+            -webkit-animation-delay: 960ms;
+            animation-delay: 960ms;
+        }
+    }
+}
+
+@-webkit-keyframes orbit {
+    0%   {
+        -webkit-transform:rotate(0deg);
+    }
+
+    100%   {
+        -webkit-transform:rotate(360deg);
+    }
+}
+
+@keyframes orbit {
+    0%   {
+        transform:rotate(0deg);
+    }
+
+    100%   {
+        transform:rotate(360deg);
+    }
+}

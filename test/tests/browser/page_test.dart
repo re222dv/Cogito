@@ -15,6 +15,8 @@ var savePageSpy;
 
 class PageServiceMock implements PageService {
 
+    bool haveLocal = false;
+
     PageServiceMock() {
         savePageSpy = guinness.createSpy('savePageSpy');
     }
@@ -109,6 +111,7 @@ main() {
             element = tb.compile('<page></page>');
             tb.rootScope.apply();
             shadowRoot = element.shadowRoot;
+            pageComponent.shadowRoot = shadowRoot;
 
             // Make sure Angular get time to attach the shadow root
             return new Future.delayed(Duration.ZERO, () {

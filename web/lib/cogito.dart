@@ -12,6 +12,7 @@ import 'package:cogito/simplify/simplify.dart' as simplify;
 part 'baseclasses/tool_decorators.dart';
 
 part 'components/dropdown/dropdown.dart';
+part 'components/loading/loading.dart';
 part 'components/page/page.dart';
 part 'components/panel/panel.dart';
 part 'controllers/checkbox.dart';

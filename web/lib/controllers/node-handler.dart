@@ -39,9 +39,9 @@ class NodeHandlerController extends AttachAware {
     }
 
     NodeHandlerController(this.element, ToolController tool, Scope scope) {
-        scope.watch('node.size', calculateSize);
-        scope.watch('node.width', calculateSize);
-        scope.watch('node.text', calculateSize);
+        scope.watch('node.size', calculateSize, canChangeModel: true);
+        scope.watch('node.width', calculateSize, canChangeModel: true);
+        scope.watch('node.text', calculateSize, canChangeModel: true);
 
         element.onMouseDown.where((_) => tool.selectedTool == 'select' && !node.editing).listen((MouseEvent e) {
             tool.selectedNode = node;
