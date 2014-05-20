@@ -33,18 +33,18 @@ main() {
         Node node;
 
         beforeEach(() {
-            tool = new ToolController();
+            tool = ToolController.newInstance();
             tool.page = new MockPageComponent();
 
             node = new Text()..editing = true;
             tool.selectedNode = node;
         });
 
-        it('should fire an event on tool change', () {
-            // As ToolController is a singleton, make sure we start of with select as default tool
-            tool.selectedTool = 'select';
+        it('should have select as default tool', () {
             expect(tool.selectedTool).toEqual('select');
+        });
 
+        it('should fire an event on tool change', () {
             var future = tool.onToolChange.first.then((tool) {
                 expect(tool).toEqual('draw');
             });

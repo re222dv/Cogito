@@ -47,7 +47,7 @@ main() {
             // Make required classes available for dependency injection
             module((Module _) => _
                     ..bind(CircleToolDecorator)
-                    ..bind(ToolController)
+                    ..bind(ToolController, toFactory: ToolController.newInstance)
                     ..bind(TestBed));
 
             // Acquire a TestBed and ToolController instance
@@ -62,18 +62,12 @@ main() {
             // Add the element to the dom so that events can bubble
             document.body.append(rootElement);
 
-            // As ToolController is a singleton we need to reset it between tests
             tool.page = new MockPageComponent();
-            tool.selectedNode = null;
-            tool.selectedTool = 'select';
         });
 
         // Tell Angular we are done
         afterEach(() {
             tearDownInjector();
-
-            // As ToolController is a singleton we need to reset it between tests
-            tool.toolDrag = new StreamController.broadcast();
 
             rootElement.remove();
         });

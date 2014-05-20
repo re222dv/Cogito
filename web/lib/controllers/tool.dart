@@ -34,9 +34,11 @@ class ToolController {
     }
 
     StreamController _onToolChange = new StreamController.broadcast();
+    ///Fired when the tool is changed
     Stream get onToolChange => _onToolChange.stream;
 
     StreamController toolDrag = new StreamController.broadcast();
+    /// Fired when a draggable tool is dragged
     Stream get onToolDrag => toolDrag.stream;
 
     factory ToolController() {
@@ -45,20 +47,34 @@ class ToolController {
 
     ToolController._internal();
 
+    /**
+     * Saves the current page to the server.
+     */
     save() {
         page.save();
     }
 
+    /**
+     * Moves the selected node one step closer to the user.
+     */
     raise() {
         page.raise(selectedNode);
     }
 
+    /**
+     * Moves the selected node one step away from the user.
+     */
     lower() {
         page.lower(selectedNode);
     }
 
+    /**
+     * Deletes the selected node.
+     */
     delete() {
         page.delete(selectedNode);
         selectedNode = null;
     }
+
+    static ToolController newInstance([_]) => new ToolController._internal();
 }
