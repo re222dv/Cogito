@@ -104,6 +104,7 @@ main() {
                     'type': 'basicList',
                     'x': 1,
                     'y': -10,
+                    'scale': 1,
                     'color': 'black',
                     'size': 24,
                     'rows': []

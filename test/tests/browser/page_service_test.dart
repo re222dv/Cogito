@@ -23,6 +23,7 @@ main() {
             // Make required classes available for dependency injection
             module((Module _) => _
                 ..bind(MockHttpBackend)
+                ..bind(NotificationService)
                 ..bind(PageService));
 
             // Acquire a PageService instance and mock HttpBackend

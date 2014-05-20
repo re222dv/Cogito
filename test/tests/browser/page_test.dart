@@ -177,7 +177,8 @@ main() {
             expect(shadowRoot.querySelectorAll('svg>g').length).toBe(5);
 
             page.nodes.forEach(expectAsync((node) {
-                expect(shadowRoot.querySelector('svg>g[transform="translate(${node.x},${node.y})"]')).toBeNotNull();
+                var selector = 'svg>g[transform="translate(${node.x},${node.y}) scale(${node.scale})"]';
+                expect(shadowRoot.querySelector(selector)).toBeNotNull();
             }, count: 5));
         });
 

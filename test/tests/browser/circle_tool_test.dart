@@ -117,6 +117,7 @@ main() {
                     'type': 'circle',
                     'x': 1,
                     'y': 2,
+                    'scale': 1,
                     'radius': 2.8284271247461903,
                     'fillColor': 'black',
                     'strokeColor': 'red',

@@ -109,6 +109,7 @@ main() {
                     'type': 'path',
                     'x': 1,
                     'y': 2,
+                    'scale': 1,
                     'color': 'black',
                     'width': 5,
                     'path': 'M 0.0 0.0 L 2.0 2.0'
