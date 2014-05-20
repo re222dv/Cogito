@@ -71,6 +71,9 @@ class PageServiceMock implements PageService {
     });
 
     savePage(page) => savePageSpy(page);
+
+    // Ignore warnings about unimplemented methods
+    noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 }
 
 main() {
