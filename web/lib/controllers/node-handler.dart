@@ -96,8 +96,8 @@ class NodeHandlerController extends AttachAware {
         // Wait a tick so that Angular have time to update the view
         Timer.run(() {
             var rect = nodeElement.getBoundingClientRect();
-            width = rect.width;
-            height = rect.height;
+            width = rect.width / node.scale;
+            height = rect.height / node.scale;;
         });
     }
 }

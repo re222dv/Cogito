@@ -12,6 +12,8 @@ abstract class Node {
     num x;
     num y;
 
+    num scale = 1;
+
     num nodeWidth;
     num nodeHeight;
 
@@ -29,6 +31,7 @@ abstract class Node {
     Node.fromJson(Map json) {
         x = json['x'];
         y = json['y'];
+        scale = json['scale'];
     }
 
     Node clone();
@@ -37,7 +40,8 @@ abstract class Node {
         return {
             'type': type,
             'x': x,
-            'y': y
+            'y': y,
+            'scale': scale
         };
     }
 
@@ -238,14 +242,6 @@ class BasicList extends Node with TextProperties {
         'size': size,
         'rows': rows
     });
-
-    num scale(num times) {
-        if (times != null) {
-            return (size * times).round();
-        } else {
-            return 0;
-        }
-    }
 }
 
 class Rect extends Node with AreaProperties {

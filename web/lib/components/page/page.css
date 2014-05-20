@@ -64,3 +64,19 @@ svg.select.dragging, svg.select.dragging [node-handler] {
     cursor: -moz-grabbing;
     cursor: grabbing;
 }
+
+.ne {
+    cursor: ne-resize;
+}
+
+.nw {
+    cursor: nw-resize;
+}
+
+.se {
+    cursor: se-resize;
+}
+
+.sw {
+    cursor: sw-resize;
+}

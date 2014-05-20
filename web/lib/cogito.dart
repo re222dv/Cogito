@@ -24,6 +24,7 @@ part 'decorators/line_tool.dart';
 part 'decorators/list_tool.dart';
 part 'decorators/rect_tool.dart';
 part 'decorators/text_tool.dart';
+part 'decorators/drag_handles.dart';
 part 'decorators/keyboard_listener.dart';
 part 'decorators/stop_clicks.dart';
 part 'decorators/tool.dart';
