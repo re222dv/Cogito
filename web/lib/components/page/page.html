@@ -9,7 +9,7 @@
          class="{{ tool.selectedTool }}">
         <rect height="100%" width="100%" fill="white" />
         <g ng-repeat="node in cmp.page.nodes"
-           ng-attr-transform="translate({{ node.x }},{{ node.y }})" node-handler="node">
+           ng-attr-transform="translate({{ node.x }},{{ node.y }}) scale({{ node.scale }})" node-handler="node">
             <g>
                 <polyline ng-if="node.type == 'freehand'"
                           ng-attr-points="{{ node.freehand }}" fill="none"
@@ -45,35 +45,36 @@
                 <g ng-if="node.type == 'basicList'">
                     <g ng-if="node.listType == 'unordered'">
                         <g ng-repeat="row in node.rows track by $index">
-                            <circle ng-attr-r="{{ node.scale(0.2) }}" ng-attr-cx="{{ node.scale(0.3) }}"
-                                    ng-attr-cy="{{ node.scale($index + 1) - node.scale(0.3) }}"
+                            <circle ng-attr-r="{{ node.size * 0.2 }}" ng-attr-cx="{{ node.size * 0.3 }}"
+                                    ng-attr-cy="{{ node.size * ($index + 1) - node.size * 0.3 }}"
                                     fill="{{ node.color }}" />
                         </g>
                     </g>
                     <g ng-if="node.listType == 'ordered'">
                         <g ng-repeat="row in node.rows track by $index">
                             <text text-anchor="end"
-                                  ng-attr-x="{{ node.scale(0.5) + 5 }}" ng-attr-y="{{ node.scale($index + 1) }}"
-                                  fill="{{ node.color }}" ng-attr-font-size="{{ node.scale(0.8) }}">
+                                  ng-attr-x="{{ node.size * 0.5 + 5 }}"
+                                  ng-attr-y="{{ node.size * ($index + 1) }}"
+                                  fill="{{ node.color }}" ng-attr-font-size="{{ node.size * 0.8) }}">
                                 {{ $index + 1 }}
                             </text>
                         </g>
                     </g>
                     <g ng-if="node.listType == 'checked'">
                         <g ng-repeat="row in node.rows track by $index" checkbox
-                           ng-attr-transform="translate(0,{{ node.scale($index) + node.scale(0.4) }})">
+                           ng-attr-transform="translate(0,{{ node.size * $index + node.size * 0.4 }})">
                             <path ng-if="checkbox.checked"
-                                  ng-attr-stroke-width="{{ node.scale(0.1) }}" stroke="{{ node.color }}"
-                                  ng-attr-d="M 0 0 L {{ node.scale(0.6) }} {{ node.scale(0.6) }}
-                                             M 0 {{ node.scale(0.6) }} L {{ node.scale(0.6) }} 0" />
-                            <rect ng-attr-height="{{ node.scale(0.6) }}" ng-attr-width="{{ node.scale(0.6) }}"
+                                  ng-attr-stroke-width="{{ node.size * 0.1 }}" stroke="{{ node.color }}"
+                                  ng-attr-d="M 0 0 L {{ node.size * 0.6 }} {{ node.size * 0.6 }}
+                                             M 0 {{ node.size * 0.6 }} L {{ node.size * 0.6 }} 0" />
+                            <rect ng-attr-height="{{ node.size * 0.6 }}" ng-attr-width="{{ node.size * 0.6 }}"
                                   x="0" y="0" fill="transparent"
-                                  stroke="{{ node.color }}" ng-attr-stroke-width="{{ node.scale(0.1) }}" />
+                                  stroke="{{ node.color }}" ng-attr-stroke-width="{{ node.size * 0.1 }}" />
                         </g>
                     </g>
                     <g ng-show="node.editing">
                         <foreignobject ng-attr-height="{{ node.size * (node.rows.length + 1) + 10 }}"
-                                       ng-attr-width="200" ng-attr-x="{{ node.scale(0.55) }}">
+                                       ng-attr-width="200" ng-attr-x="{{ node.size * 0.55 }}">
                             <textarea ng-model="node.text"
                                       style="height: {{ node.size * node.rows.length + 10 }}px;
                                              min-height: {{ node.size + 10 }}px;
@@ -83,7 +84,8 @@
                     </g>
                     <g ng-hide="node.editing" ng-repeat="row in node.rows track by $index">
                         <text fill="{{ node.color }}" font-size="{{ node.size }}"
-                              ng-attr-x="{{ node.scale(0.65) + 5 }}" ng-attr-y="{{ node.scale($index + 1) }}">
+                              ng-attr-x="{{ node.size * 0.65 + 5 }}"
+                              ng-attr-y="{{ node.size * ($index + 1) }}">
                             {{ row | removeLeading:'*' }}
                         </text>
                     </g>
@@ -97,11 +99,15 @@
                         stroke="{{ node.strokeColor }}" stroke-width="{{ node.strokeWidth }}"
                         fill="{{ node.fillColor }}" ng-attr-r="{{ node.radius }}" />
             </g>
-            <g ng-if="tool.selectedNode == node">
-                <circle r="5" cx="-5" cy="-5" />
-                <circle r="5" ng-attr-cx="{{ nodeHandler.width + 5 }}" cy="-5" />
-                <circle r="5" cx="-5" ng-attr-cy="{{ nodeHandler.height + 5 }}" />
-                <circle r="5" ng-attr-cx="{{ nodeHandler.width + 5 }}" ng-attr-cy="{{ nodeHandler.height + 5 }}" />
+            <g ng-if="tool.selectedNode == node" drag-handles>
+                <circle ng-attr-r="{{ 5 / node.scale }}" class="nw"
+                        cx="-5" cy="-5" />
+                <circle ng-attr-r="{{ 5 / node.scale }}" class="ne"
+                        ng-attr-cx="{{ nodeHandler.width + 5 }}" cy="-5" />
+                <circle ng-attr-r="{{ 5 / node.scale }}" class="sw"
+                        cx="-5" ng-attr-cy="{{ nodeHandler.height + 5 }}" />
+                <circle ng-attr-r="{{ 5 / node.scale }}" class="se"
+                        ng-attr-cx="{{ nodeHandler.width + 5 }}" ng-attr-cy="{{ nodeHandler.height + 5 }}" />
             </g>
         </g>
     </svg>
