@@ -21,6 +21,9 @@ class MockPageComponent implements PageComponent {
     lower(node) => lowerNodeSpy(node);
     raise(node) => raiseNodeSpy(node);
     save() => savePageSpy();
+
+    // Ignore warnings about unimplemented methods
+    noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 }
 
 main() {

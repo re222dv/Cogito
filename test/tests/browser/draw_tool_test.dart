@@ -7,7 +7,6 @@ import 'dart:math' as math;
 import 'package:angular/angular.dart';
 import 'package:angular/mock/module.dart';
 import 'package:guinness/guinness_html.dart';
-import '../../helpers.dart';
 import 'package:cogito/cogito.dart';
 import '../../../web/lib/cogito.dart';
 
@@ -25,6 +24,9 @@ class MockPageComponent implements PageComponent {
     }
 
     getPoint(MouseEvent e) => getPointSpy(e);
+
+    // Ignore warnings about unimplemented methods
+    noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 }
 
 
