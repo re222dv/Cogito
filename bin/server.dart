@@ -3,6 +3,8 @@ import 'package:mongo_dart/mongo_dart.dart';
 import 'package:RestLibrary/restlibrary.dart';
 import 'package:cogito/cogito.dart';
 
+const STATIC_PATH = '../web';
+
 Db db;
 
 main() {
@@ -14,7 +16,7 @@ main() {
 
     new RestServer()
         ..clientRoutes = ['/page']
-        ..static('../web', jailRoot: false)
+        ..static(STATIC_PATH, jailRoot: false)
         ..route(new Route('/api/auth')
             ..post = register
             ..put = login)
