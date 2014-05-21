@@ -37,8 +37,8 @@ main() {
     draw_tool.main();
     arrow_tool.main();
     line_tool.main();
-    text_tool.main();
-    list_tool.main();
     rect_tool.main();
     circle_tool.main();
+    text_tool.main();
+    list_tool.main();
 }

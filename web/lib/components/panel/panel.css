@@ -92,7 +92,7 @@ button {
 
 [data-position="top"] div>button {
     position: relative;
-    bottom: 15px;
+    bottom: 1px;
 }
 
 [data-position="top"]>div>label {
