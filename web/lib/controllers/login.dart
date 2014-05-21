@@ -18,7 +18,13 @@ class LoginController {
     var showRegisterBox = false;
     var unknownRegisterError = false;
 
-    LoginController(this.element, this.router, this.userService);
+    LoginController(this.element, this.router, this.userService) {
+        userService.isLoggedIn().then((loggedIn) {
+            if (loggedIn) {
+                router.go('page', {});
+            }
+        });
+    }
 
     closeRegisterBox() {
         registrationDone = false;

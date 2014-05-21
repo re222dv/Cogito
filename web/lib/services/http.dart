@@ -28,7 +28,7 @@ class HttpService {
                     xsrfCookieName: xsrfCookieName, interceptors: interceptors,
                     cache: cache, timeout: timeout)
                .catchError((_) => _router.go('login', {}),
-                           test: (HttpResponse response) => response.status == 401);
+                           test: (HttpResponse response) => response is HttpResponse && response.status == 401);
 
     /**
      * Shortcut method for PUT requests.  See [Http.call] for a complete description
@@ -47,5 +47,5 @@ class HttpService {
                     xsrfCookieName: xsrfCookieName, interceptors: interceptors,
                     cache: cache, timeout: timeout)
                 .catchError((_) => _router.go('login', {}),
-                            test: (HttpResponse response) => response.status == 401);
+                            test: (HttpResponse response) => response is HttpResponse && response.status == 401);
 }

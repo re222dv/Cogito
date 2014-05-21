@@ -2,7 +2,7 @@ part of cogito;
 
 class User {
     /// Email validation according to WHATWGs HTML5 type="email" standard.
-    final EMAIL_REGEX = new RegExp(r'''^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$''');
+    final EMAIL_REGEX = new RegExp(r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$");
 
     String email = '';
     String password = '';
@@ -12,8 +12,11 @@ class User {
 
     String get id => _id;
 
+    /// True if email matches EMAIL_REGEX
     bool get emailIsValid => EMAIL_REGEX.hasMatch(email);
+    /// True if password have a length of at least 5
     bool get passwordIsValid => password.length > 4;
+    /// True if hash have a length of exactly 64
     bool get hashIsValid => hash.length == 64;
 
     User();

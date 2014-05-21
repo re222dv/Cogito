@@ -35,19 +35,13 @@ class PageService {
     Future<bool> savePage(Page page) {
         window.localStorage['page'] = JSON.encode(page.toJson());
 
-        return _http.put('/api/page/1', JSON.encode(page.toJson())).then((HttpResponse response) {
-            if (response.status == 200) {
-                window.localStorage.remove('page');
-                _notification.notify('Saved');
-            } else {
-                _notification.notify('Save Failed!');
-            }
-
-            return response.status == 200;
+        return _http.put('/api/page/1', JSON.encode(page.toJson())).then((_) {
+            window.localStorage.remove('page');
+            _notification.notify('Saved');
         }).catchError((_) {
             _notification.notify('Save Failed!');
 
             return false;
-        });
+        }, test: (response) => response is HttpResponse);
     }
 }
