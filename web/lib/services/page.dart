@@ -1,25 +1,37 @@
 part of cogito_web;
 
+/**
+ * Handles loading and saving of [Page] objects.
+ */
 @Injectable()
 class PageService {
-    final Http _http;
+    final HttpService _http;
     final NotificationService _notification;
 
     bool get haveLocal => window.localStorage.containsKey('page');
 
     PageService(this._http, this._notification);
 
+    /**
+     * Gets a [Page] from the server and on success deletes the local version, if it exists.
+     */
     Future<Page> getPage() => _http.get('/api/page/1').then((HttpResponse response) {
-        if (response.status == 200) {
-            window.localStorage.remove('page');
-            return new Page.fromJson(response.data['data']);
-        } else {
-            return new Page();
-        }
+        window.localStorage.remove('page');
+        return new Page.fromJson(response.data['data']);
     });
 
+    /**
+     * Gets a [Page] from localStorage.
+     */
     Page getLocalPage() => new Page.fromJson(JSON.decode(window.localStorage['page']));
 
+    /**
+     * Saves a [Page] to the server, or if that fails, localStorage.
+     *
+     * Will notify the user of what happens.
+     *
+     * Returns true when saving on the server succeeded.
+     */
     Future<bool> savePage(Page page) {
         window.localStorage['page'] = JSON.encode(page.toJson());
 

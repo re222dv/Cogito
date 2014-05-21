@@ -13,6 +13,9 @@ class NotificationService {
         });
     }
 
+    /**
+     * Notifies the user
+     */
     void notify(String message) {
         if (permission == 'granted') {
             new Notification(message);

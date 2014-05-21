@@ -40,6 +40,7 @@ class WebModule extends Module {
         bind(ToolDecorator);
         bind(PrioritizeFormatter);
         bind(RemoveLeadingFormatter);
+        bind(HttpService);
         bind(NotificationService);
         bind(PageService);
         bind(UserService);

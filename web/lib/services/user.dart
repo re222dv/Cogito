@@ -1,5 +1,8 @@
 part of cogito_web;
 
+/**
+ * Handles all interactions with the authorization system.
+ */
 @Injectable()
 class UserService {
     final Cookies _cookies;
@@ -8,38 +11,46 @@ class UserService {
 
     UserService(this._cookies, this._http, this._router);
 
+    /**
+     * Checks if the user is logged in by checking if cookies exists, and if they do, if they are correct.
+     */
     Future<bool> isLoggedIn() {
         if (_cookies['email'] == null || _cookies['key'] == null) {
             return new Future.sync(() => false);
         }
 
-        return _http.get('/api/checkAuth').then((response) {
-            if (response.data['status'] == 'success') {
-                return true;
-            } else {
-                return false;
-            }
-        }).catchError((_) => false);
+        return _http.get('/api/checkAuth')
+                    .then((response) => response.data['status'] == 'success')
+                    .catchError((_) => false);
     }
 
+    /**
+     * Tries to log in the user if the provided values are valid.
+     *
+     * Returns true on success.
+     */
     Future<bool> login(User user) {
         if (!user.emailIsValid || !user.passwordIsValid) {
             return new Future.sync(() => false);
         }
         user.calculateHash();
 
-        return _http.put('http://127.0.0.1:9000/api/auth', JSON.encode(user.toJson())).then((response) {
-
-            if (response.data['status'] == 'success') {
-                _cookies['email'] = user.email;
-                _cookies['key'] = response.data['data'];
-                return true;
-            } else {
-                return false;
-            }
-        }).catchError((_) => false);
+        return _http.put('http://127.0.0.1:9000/api/auth', JSON.encode(user.toJson()))
+                    .then((response) {
+                        if (response.data['status'] == 'success') {
+                            _cookies['email'] = user.email;
+                            _cookies['key'] = response.data['data'];
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    })
+                    .catchError((_) => false);
     }
 
+    /**
+     * Logs out the user and redirects to login screen.
+     */
     void logout() {
         _cookies.remove('email');
         _cookies.remove('key');
@@ -47,15 +58,18 @@ class UserService {
         _router.go('login', {});
     }
 
+    /**
+     * Tries to register the user if the provided values are valid.
+     *
+     * Returns the response from the server.
+     */
     Future<String> register(User user) {
         if (!user.emailIsValid || !user.passwordIsValid) {
             return new Future.sync(() => 'not valid');
         }
         user.calculateHash();
 
-        return _http.post(
-            'http://127.0.0.1:9000/api/auth',
-            JSON.encode(user.toJson())
-        ).then((response) => response.data);
+        return _http.post('http://127.0.0.1:9000/api/auth', JSON.encode(user.toJson()))
+                    .then((response) => response.data);
     }
 }
