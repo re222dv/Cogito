@@ -15,6 +15,7 @@ part 'components/dropdown/dropdown.dart';
 part 'components/loading/loading.dart';
 part 'components/page/page.dart';
 part 'components/panel/panel.dart';
+part 'components/popup_menu/popup_menu.dart';
 part 'controllers/checkbox.dart';
 part 'controllers/arrow.dart';
 part 'controllers/login.dart';

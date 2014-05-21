@@ -1,0 +1,29 @@
+ul {
+  position: absolute;
+  top: 5px;
+  left: 55px;
+  margin: 0;
+  padding: 0;
+  color: #333;
+  background-color: white;
+  border: 1px solid #333;
+  border-radius: 5px;
+  font-family: Arial, sans-serif;
+  font-size: 1.1rem;
+  list-style: none; }
+  ul::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 10px;
+    left: -5px;
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-right: 5px solid #333; }
+  ul li {
+    padding: 5px 10px;
+    border-radius: 5px; }
+    ul li:hover {
+      background-color: lightgray; }

@@ -8,6 +8,7 @@ part of cogito_web;
 )
 class PanelComponent implements ShadowRootAware {
     ToolController tool;
+    UserService userService;
 
     @NgAttr('position')
     String position;
@@ -22,7 +23,7 @@ class PanelComponent implements ShadowRootAware {
     bool get ShowListProperties => tool.selectedNode is BasicList;
     bool get ShowTextProperties => tool.selectedNode is TextProperties;
 
-    PanelComponent(this.tool) {
+    PanelComponent(this.tool, this.userService) {
         // Create line widths from the fibonacci scale
         for (var i = 1, first = 1, second = 1; i < 90; i = first + second, first = second, second = i) {
             lineWidths.add(i);

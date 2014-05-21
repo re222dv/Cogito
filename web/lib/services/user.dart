@@ -4,8 +4,9 @@ part of cogito_web;
 class UserService {
     final Cookies _cookies;
     final Http _http;
+    final Router _router;
 
-    UserService(this._cookies, this._http);
+    UserService(this._cookies, this._http, this._router);
 
     Future<bool> isLoggedIn() {
         if (_cookies['email'] == null || _cookies['key'] == null) {
@@ -37,6 +38,13 @@ class UserService {
                 return false;
             }
         }).catchError((_) => false);
+    }
+
+    void logout() {
+        _cookies.remove('email');
+        _cookies.remove('key');
+
+        _router.go('login', {});
     }
 
     Future<String> register(User user) {

@@ -161,7 +161,21 @@ button {
     min-width: 40px;
 }
 
-button:hover {
+popup-menu {
+    display: inline-block;
+    position: relative;
+    top: 4px;
+
+    height: 40px;
+    width: 40px;
+
+    cursor: pointer;
+
+    background: rgba(0, 0, 0, 0.2) no-repeat center;
+    border-radius: 5px;
+}
+
+button:hover, popup-menu:hover, popup-menu.open {
     background-color: rgba(255, 255, 255, 0.2);
 }
 
@@ -228,6 +242,10 @@ button:hover {
     background-image: url("lib/components/panel/icons/save.svg");
 }
 
+[data-position]>div [data-icon="user"] {
+    background-image: url("lib/components/panel/icons/user.svg");
+}
+
 [data-position] [tooltip]::before {
     content: attr(tooltip);
 
@@ -269,7 +287,7 @@ button:hover {
 
 [data-position="left"] [tooltip]::before {
     left: 0;
-    margin-top: -9px;
+    margin-top: -18px;
     margin-left: 50px;
 
     border-radius: 0 5px 5px 0;

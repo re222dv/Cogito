@@ -21,6 +21,7 @@ class WebModule extends Module {
         bind(LoadingComponent);
         bind(PageComponent);
         bind(PanelComponent);
+        bind(PopupMenuComponent);
         bind(CheckBoxController);
         bind(ArrowController);
         bind(LoginController);

@@ -29,6 +29,7 @@ main() {
                 ..bind(ToolController)
                 ..bind(ToolDecorator)
                 ..bind(PanelComponent)
+                ..bind(UserService)
                 ..bind(TestBed));
 
             // Add required templates to the cache
@@ -127,6 +128,7 @@ main() {
 
             // Makes it easy to get the element we're testing
             Element element(tool) => shadowRoot.querySelector('[ng-click="tool.$tool()"]');
+            Element menu(icon, items) => shadowRoot.querySelector('popup-menu[data-icon="$icon"][items="$items"]');
 
             setUp(() {
                 shadowRoot = tb.compile('<panel position="left"></panel>').shadowRoot;
@@ -142,6 +144,10 @@ main() {
 
             test('should have a save button', () {
                 expect(element('save')).toBeNotNull();
+            });
+
+            test('should have a user menu', () {
+                expect(menu('user', "{'Logout': cmp.userService.logout}")).toBeNotNull();
             });
         });
 

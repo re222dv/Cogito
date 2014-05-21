@@ -7,8 +7,8 @@
         <p></p>
         <button data-draggable="true" tool="text" tooltip="Text tool [Alt]+5"></button>
         <button data-draggable="true" tool="list" tooltip="List tool [Alt]+6"></button>
-        <button data-draggable="true" tool="rect" tooltip="Rectangle tool [Alt]+7">Rect</button>
-        <button data-draggable="true" tool="circle" tooltip="Circle tool [Alt]+8">Circle</button>
+        <button data-draggable="true" tool="rect" tooltip="Rectangle tool [Alt]+7"></button>
+        <button data-draggable="true" tool="circle" tooltip="Circle tool [Alt]+8"></button>
     </div>
     <div ng-if="cmp.position == 'top' && tool.selectedNode != null" stop-clicks>
         <div ng-if="cmp.ShowTextProperties">
@@ -36,11 +36,12 @@
             <dropdown type="int" values="cmp.lineWidths" ng-model="tool.selectedNode.strokeWidth" tooltip="Stroke width"></dropdown>
         </div>
         <p></p>
-        <button ng-click="tool.raise()" data-icon="up" tooltip="Raise node [+]">Raise</button>
-        <button ng-click="tool.lower()" data-icon="down" tooltip="Lower node [-]">Lower</button>
-        <button ng-click="tool.delete()" data-icon="trash" tooltip="Delete node [Delete]">Delete</button>
+        <button ng-click="tool.raise()" data-icon="up" tooltip="Raise node [+]"></button>
+        <button ng-click="tool.lower()" data-icon="down" tooltip="Lower node [-]"></button>
+        <button ng-click="tool.delete()" data-icon="trash" tooltip="Delete node [Delete]"></button>
     </div>
     <div ng-if="cmp.position == 'left'" stop-clicks>
-        <button ng-click="tool.save()" data-icon="save" tooltip="Save [Ctrl]+S">Save</button>
+        <button ng-click="tool.save()" data-icon="save" tooltip="Save [Ctrl]+S"></button>
+        <popup-menu data-icon="user" items="{'Logout': cmp.userService.logout}"></popup-menu>
     </div>
 </div>
