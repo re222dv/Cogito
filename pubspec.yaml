@@ -5,6 +5,8 @@ dependencies:
     git: https://github.com/angular/angular.dart.git
   animation: any
   browser: any
+  crypto: any
+  dbcrypt: any
   mongo_dart: any
   quiver: any
   RestLibrary:

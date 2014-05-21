@@ -34,3 +34,4 @@ part 'formatters/prioritize.dart';
 part 'formatters/remove_leading.dart';
 part 'services/notification.dart';
 part 'services/page.dart';
+part 'services/user.dart';

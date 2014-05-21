@@ -16,7 +16,7 @@ class PageService {
         } else {
             return new Page();
         }
-    }).catchError((_) => new Page());
+    });
 
     Page getLocalPage() => new Page.fromJson(JSON.decode(window.localStorage['page']));
 

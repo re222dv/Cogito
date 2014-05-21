@@ -4,7 +4,7 @@ packages:
   RestLibrary:
     description:
       ref: null
-      resolved-ref: "352d815131cdc1471abd822a3adf3949caaf0eec"
+      resolved-ref: b319384df92006ff108837f36dc605759d79532a
       url: "https://github.com/Pajn/RestLibrary.git"
     source: git
     version: "0.2.0"
@@ -15,7 +15,7 @@ packages:
   angular:
     description:
       ref: null
-      resolved-ref: "669d47ce8dd9c1df1033a7f0715be76843be67a3"
+      resolved-ref: "0c22a3b6d73ab6789dca7859ce3424e6018fa688"
       url: "https://github.com/angular/angular.dart.git"
     source: git
     version: "0.11.0"
@@ -51,14 +51,18 @@ packages:
     description: crypto
     source: hosted
     version: "0.9.0"
-  dart_to_js_script_rewriter:
-    description: dart_to_js_script_rewriter
+  dbcrypt:
+    description: dbcrypt
     source: hosted
-    version: "0.0.1+2"
+    version: "0.2.1"
   di:
     description: di
     source: hosted
     version: "0.0.40"
+  drandom:
+    description: drandom
+    source: hosted
+    version: "0.0.3"
   guinness:
     description: guinness
     source: hosted

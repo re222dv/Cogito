@@ -1,14 +1,44 @@
 <main login-controller>
+    <div id="registerBox" ng-class="{open: ctrl.showRegisterBox}">
+        <div ng-if="!ctrl.isRegistering && !ctrl.registrationDone">
+            <h1>Register</h1>
+
+            <form id="registerForm" ng-submit="ctrl.register()">
+                <span class="error" ng-if="ctrl.emailExists">Email exists!</span>
+                <div>
+                    <label for="rEmail">Email</label>
+                    <input type="email" id="rEmail" ng-model="ctrl.newUser.email" required />
+                </div>
+                <div>
+                    <label for="rPassword">Password</label>
+                    <input type="password" id="rPassword" ng-model="ctrl.newUser.password" required pattern=".{5}"
+                           title="Minimum 5 characters." />
+                </div>
+                <input type="submit" value="Register" />
+            </form>
+        </div>
+        <div ng-if="ctrl.isRegistering">
+            <loading></loading>
+        </div>
+        <div ng-if="ctrl.registrationDone">
+            <h1>Done!</h1>
+            <p>You have successfully registered and may now login</p>
+
+            <button ng-click="ctrl.closeRegisterBox()">Close</button>
+        </div>
+    </div>
     <section>
-        <div id="loginbox">
+        <span id="loginError" ng-if="ctrl.loginError">Incorrect email or password.</span>
+        <form id="loginForm" ng-submit="ctrl.login()">
             <div>
                 <label for="email">Email</label>
-                <input type="text" id="email" />
+                <input type="email" id="email" ng-model="ctrl.user.email" required />
             </div>
             <div>
                 <label for="password">Password</label>
-                <input type="password" id="password" />
-                <a href="/page">
+                <input type="password" id="password" ng-model="ctrl.user.password" required pattern=".{5}"
+                       title="Minimum 5 characters." />
+                <a onclick="document.querySelector('#loginSubmit').click();">
                     <svg xmlns="http://www.w3.org/2000/svg"
                          version="1.1"
                          width="25"
@@ -21,10 +51,11 @@
                         </g>
                     </svg>
                 </a>
+                <input type="submit" id="loginSubmit" />
             </div>
-        </div>
-        <div id="registerbox">
-            <button>Not a member?</button>
+        </form>
+        <div id="registerButton">
+            <button ng-click="ctrl.showRegisterBox = true">Not a member?</button>
             <p><a href="#">Reset Password</a></p>
         </div>
         <a href="#more" ng-click="ctrl.scrollDown()">
