@@ -20,6 +20,7 @@ part 'controllers/checkbox.dart';
 part 'controllers/arrow.dart';
 part 'controllers/login.dart';
 part 'controllers/tool.dart';
+part 'decorators/arrow_tool.dart';
 part 'decorators/circle_tool.dart';
 part 'decorators/draw_tool.dart';
 part 'decorators/line_tool.dart';
