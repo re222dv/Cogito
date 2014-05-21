@@ -8,6 +8,7 @@ import 'package:angular/angular.dart';
 import 'package:angular/mock/module.dart';
 import 'package:unittest/unittest.dart' hide expect;
 import 'package:guinness/guinness.dart';
+import '../../helpers.dart';
 import 'package:cogito/cogito.dart';
 import '../../../web/lib/cogito.dart';
 
@@ -74,9 +75,7 @@ main() {
                     expect(result).toEqual(true);
                 }));
 
-                Timer.run(() {
-                    http.flush();
-                });
+                return asyncExpectation(http.flush);
             });
 
             test('should return false when no cookies exists', () {
@@ -95,9 +94,7 @@ main() {
                     expect(result).toEqual(false);
                 }));
 
-                Timer.run(() {
-                    http.flush();
-                });
+                return asyncExpectation(http.flush);
             });
         });
 
@@ -119,9 +116,7 @@ main() {
                     expect(cookies['key']).toEqual('3e624bee6f82b83206b7bfa02a4176d9f6c86141456d63d4f6a723428c19c2d8');
                 }));
 
-                Timer.run(() {
-                    http.flush();
-                });
+                return asyncExpectation(http.flush);
             });
 
             test('should return false when login fails', () {
@@ -135,9 +130,7 @@ main() {
                     expect(result).toEqual(false);
                 }));
 
-                Timer.run(() {
-                    http.flush();
-                });
+                return asyncExpectation(http.flush);
             });
 
             test('should validate email and password before trying', () {
@@ -170,9 +163,7 @@ main() {
                     expect(user.password).toEqual('');
                 }));
 
-                Timer.run(() {
-                    http.flush();
-                });
+                return asyncExpectation(http.flush);
             });
         });
 
@@ -204,9 +195,7 @@ main() {
                     expect(result).toEqual({'data': 'success'});
                 }));
 
-                Timer.run(() {
-                    http.flush();
-                });
+                return asyncExpectation(http.flush);
             });
 
             test('should return returned response on success', () {
@@ -221,9 +210,7 @@ main() {
                     expect(result.data).toEqual(JSON.encode({'data': 'failure'}));
                 }));
 
-                Timer.run(() {
-                    http.flush();
-                });
+                return asyncExpectation(http.flush);
             });
 
             test('should validate email and password before trying', () {
@@ -256,9 +243,7 @@ main() {
                     expect(user.password).toEqual('');
                 }));
 
-                Timer.run(() {
-                    http.flush();
-                });
+                return asyncExpectation(http.flush);
             });
         });
     });

@@ -52,7 +52,7 @@ main() {
         it('should deactivate the draw tool and select the line tool on click', () {
             tb.triggerEvent(element('line'), 'click');
 
-            return new Future.delayed(Duration.ZERO, () {
+            return asyncExpectation(() {
                 expect(element('draw')).not.toHaveClass('active');
                 expect(element('line')).toHaveClass('active');
                 expect(tool.selectedTool).toEqual('line');

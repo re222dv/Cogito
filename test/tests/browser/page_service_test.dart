@@ -8,6 +8,7 @@ import 'package:angular/mock/module.dart';
 import 'package:unittest/unittest.dart' hide expect;
 import 'package:guinness/guinness.dart';
 import 'package:cogito/cogito.dart';
+import '../../helpers.dart';
 import '../../../web/lib/cogito.dart';
 
 SpyFunction goSpy;
@@ -172,7 +173,7 @@ main() {
                 expect(list.size).toEqual(20);
             }));
 
-            Timer.run(() {
+            return asyncExpectation(() {
                 http.flush();
             });
         });
@@ -239,13 +240,13 @@ main() {
                 ]
             );
 
-            Timer.run(expectAsync(() {
+            return asyncExpectation(() {
                 http.flush();
 
-                Timer.run(expectAsync(() {
+                return asyncExpectation(() {
                     expect(goSpy).not.toHaveBeenCalled();
-                }));
-            }));
+                });
+            });
         });
 
         test('it should handle login error', () {
@@ -253,12 +254,12 @@ main() {
 
             service.getPage().catchError(expectAsync((_) {}));
 
-            Timer.run(() {
+            return asyncExpectation(() {
                 http.flush();
 
-                Timer.run(expectAsync(() {
+                return asyncExpectation(() {
                     expect(goSpy).toHaveBeenCalledOnce();
-                }));
+                });
             });
         });
     });
