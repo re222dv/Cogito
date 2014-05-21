@@ -2,13 +2,15 @@
     position: relative;
     width: 40px;
     height: 40px;
+    -webkit-animation: fadein 1s ease-in;
+    animation: fadein 1s ease-in;
 
     .circle {
         position: absolute;
         width: 40px;
         height: 40px;
-        -webkit-animation: orbit 3s infinite cubic-bezier(.8,.2,.2,.8);
-        animation: orbit 3s infinite cubic-bezier(.8,.2,.2,.8);
+        -webkit-animation: orbit 3s -1s infinite cubic-bezier(.8,.2,.2,.8);
+        animation: orbit 3s -1s infinite cubic-bezier(.8,.2,.2,.8);
 
         &:after {
             content: '';
@@ -21,21 +23,41 @@
         }
 
         &:nth-child(1) {
-            -webkit-animation-delay: 240ms;
-            animation-delay: 240ms;
+            -webkit-animation-delay: -760ms;
+            animation-delay: -760ms;
         }
         &:nth-child(2) {
-            -webkit-animation-delay: 480ms;
-            animation-delay: 480ms;
+            -webkit-animation-delay: -520ms;
+            animation-delay: -520ms;
         }
         &:nth-child(3) {
-            -webkit-animation-delay: 720ms;
-            animation-delay: 720ms;
+            -webkit-animation-delay: -280ms;
+            animation-delay: -280ms;
         }
         &:nth-child(4) {
-            -webkit-animation-delay: 960ms;
-            animation-delay: 960ms;
+            -webkit-animation-delay: -40ms;
+            animation-delay: -40ms;
         }
+    }
+}
+
+@-webkit-keyframes fadein {
+    0%   {
+        opacity: 0;
+    }
+
+    100%   {
+        opacity: 1;
+    }
+}
+
+@keyframes fadein {
+    0%   {
+        opacity: 0;
+    }
+
+    100%   {
+        opacity: 1;
     }
 }
 
