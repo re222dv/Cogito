@@ -6,7 +6,7 @@
     </p>
     <ul ng-show="cmp.open">
         <li ng-repeat="value in cmp.values | prioritize:cmp.value" ng-click="cmp.value = value" value="{{ value }}">
-            <p ng-if="cmp.type == 'color'" style="background-color: {{ value }}">
+            <p ng-if="cmp.type == 'color'" style="background-color: {{ value }}" value="{{ value }}">
             </p>
             <p ng-if="cmp.type != 'color'">
                 {{ value }}

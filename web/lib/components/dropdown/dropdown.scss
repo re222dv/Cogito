@@ -1,0 +1,68 @@
+div {
+    display: inline-block;
+    padding: 4px;
+
+    background: rgba(0, 0, 0, 0.2);
+    border: #333;
+    border-radius: 5px;
+
+    height: 32px;
+    min-width: 32px;
+}
+
+p {
+    margin: 0;
+    padding: 4px;
+
+    height: 24px;
+    min-width: 24px;
+
+    cursor: pointer;
+    color: white;
+
+    font-family: Arial, sans-serif;
+    font-size: 1.2rem;
+    text-align: center;
+    vertical-align: middle;
+}
+
+div[data-open="true"] {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+ul {
+    position: absolute;
+    left: 0;
+    top: 38px;
+    margin: 0;
+    padding: 4px 0;
+
+    background: rgba(0, 0, 0, 0.8);
+    border: #333;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+
+    list-style: none;
+}
+
+li {
+    padding: 0 4px;
+}
+
+.ng-hide {
+    display: none;
+}
+
+div[data-type="color"] {
+    margin-bottom: -14px;
+}
+
+div:hover, li:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+div[data-type="color"][value="transparent"] > p, li p[value="transparent"] {
+    outline: 2px solid lightgray;
+    outline-offset: -2px;
+}

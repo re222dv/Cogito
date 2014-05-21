@@ -14,7 +14,8 @@ class PanelComponent implements ShadowRootAware {
 
     List<int> lineWidths = [];
     List<int> textSizes = [];
-    List<String> colors = ['black', 'white', 'red', 'green', 'blue', 'yellow'];
+    List<String> colors = ['transparent', 'black', 'grey', 'lightgray', 'white', 'maroon', 'red',
+                           'yellow', 'green', 'lime', 'navy', 'blue', 'aqua', 'purple', 'fuchsia'];
 
     bool get ShowAreaProperties => tool.selectedNode is AreaProperties;
     bool get ShowLineProperties => tool.selectedNode is LineProperties;
