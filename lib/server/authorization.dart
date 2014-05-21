@@ -4,7 +4,7 @@ part of cogito_server;
  * Route handlers for everything that have to do with authorization
  */
 class Authorization {
-    DB db;
+    final DB db;
 
     Authorization(this.db);
 
@@ -36,17 +36,11 @@ class Authorization {
             DbCollection users = db.collection('Users');
 
             return users.findOne({'email': user.email}).then((dbUser) {
-                db.close();
-
-                if (dbUser != null) {
-                    if (key != user.getKey(dbUser)) {
-                        throw new AuthorizationException('authFail', 'bad key');
-                    }
-                } else {
-                    throw new AuthorizationException('authFail', 'invalid email');
+                if (dbUser == null || key != user.getKey(dbUser)) {
+                    throw new AuthorizationException('authFail', 'auth failed');
                 }
             });
-        });
+        }).whenComplete(db.close);
     }
 
     /**
@@ -67,7 +61,6 @@ class Authorization {
             DbCollection users = db.collection('Users');
 
             return users.findOne({'email': user.email}).then((dbUser) {
-                db.close();
 
                 if (dbUser != null && user.verifyHash(dbUser)) {
                     return new Response(user.getKey(dbUser));
@@ -75,7 +68,7 @@ class Authorization {
                     throw new AuthorizationException('authFail', 'login failed');
                 }
             });
-        });
+        }).whenComplete(db.close);
     }
 
     /**
@@ -98,15 +91,13 @@ class Authorization {
                     user.strengthenHash();
 
                     return users.insert(user.toJson()).then((_) {
-                        db.close();
                         return new Response('user created');
                     });
                 } else {
-                    db.close();
                     return new Response('email exists', status: Status.ERROR);
                 }
             });
-        });
+        }).whenComplete(db.close);
     }
 
     /**

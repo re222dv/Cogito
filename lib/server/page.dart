@@ -4,7 +4,7 @@ part of cogito_server;
  * Route handlers for everything that have to do with [Page]s
  */
 class Page {
-    DB db;
+    final DB db;
 
     Page(this.db);
 
@@ -18,11 +18,8 @@ class Page {
         return db.open().then((_) {
             DbCollection pages = db.collection('Pages');
 
-            return pages.update({}, page.toJson()).then((json) {
-                db.close();
-                return new Response(json);
-            });
-        });
+            return pages.update({}, page.toJson()).then((json) => new Response(json));
+        }).whenComplete(db.close);
     }
 
     /**
@@ -32,10 +29,7 @@ class Page {
         return db.open().then((_) {
             DbCollection pages = db.collection('Pages');
 
-            return pages.findOne().then((json) {
-                db.close();
-                return new Response(json);
-            });
-        });
+            return pages.findOne().then((json) => new Response(json));
+        }).whenComplete(db.close);
     }
 }
