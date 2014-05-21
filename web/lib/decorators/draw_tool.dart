@@ -7,7 +7,7 @@ part of cogito_web;
 class DrawToolDecorator extends DrawingToolBase {
     final String tool = 'draw';
 
-    Path tempNode = new Path()
+    PathNode tempNode = new PathNode()
         ..color = 'black'
         ..width = 5;
 
@@ -36,7 +36,7 @@ class DrawToolDecorator extends DrawingToolBase {
         if (tempPath.freehand.split(', ').length > 2) {
             var simplePath = simplify.simplify(tempPath.freehand.trim());
 
-            var node = new Path()
+            var node = new PathNode()
                 ..color = tempPath.color
                 ..path = simplePath.path
                 ..width = tempPath.width

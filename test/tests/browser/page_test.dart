@@ -25,7 +25,7 @@ class PageServiceMock implements PageService {
         injectedPage = new Page()
             ..nodes = [
                 (
-                    new Line()
+                    new LineNode()
                         ..x = 10
                         ..y = 20
                         ..color = 'green'
@@ -34,7 +34,7 @@ class PageServiceMock implements PageService {
                         ..width = 10
                 ),
                 (
-                    new Arrow()
+                    new ArrowNode()
                         ..x = 30
                         ..y = 40
                         ..color = 'green'
@@ -43,7 +43,7 @@ class PageServiceMock implements PageService {
                         ..width = 10
                 ),
                 (
-                    new Path()
+                    new PathNode()
                         ..x = 50
                         ..y = 60
                         ..color = 'green'
@@ -51,7 +51,7 @@ class PageServiceMock implements PageService {
                         ..width = 10
                 ),
                 (
-                    new Text()
+                    new TextNode()
                         ..x = 70
                         ..y = 80
                         ..color = 'green'
@@ -59,7 +59,7 @@ class PageServiceMock implements PageService {
                         ..size = 10
                 ),
                 (
-                    new BasicList()
+                    new ListNode()
                         ..x = 90
                         ..y = 100
                         ..color = 'green'
@@ -195,7 +195,7 @@ main() {
             expect(page.nodes[1].type).toEqual('line');
             expect(page.nodes[2].type).toEqual('path');
             expect(page.nodes[3].type).toEqual('text');
-            expect(page.nodes[4].type).toEqual('basicList');
+            expect(page.nodes[4].type).toEqual('list');
         });
 
         it('should be able to lower a node', () {
@@ -205,7 +205,7 @@ main() {
             expect(page.nodes[1].type).toEqual('line');
             expect(page.nodes[2].type).toEqual('path');
             expect(page.nodes[3].type).toEqual('text');
-            expect(page.nodes[4].type).toEqual('basicList');
+            expect(page.nodes[4].type).toEqual('list');
         });
 
         it('should do nothing when raising the highest node', () {
@@ -215,7 +215,7 @@ main() {
             expect(page.nodes[1].type).toEqual('arrow');
             expect(page.nodes[2].type).toEqual('path');
             expect(page.nodes[3].type).toEqual('text');
-            expect(page.nodes[4].type).toEqual('basicList');
+            expect(page.nodes[4].type).toEqual('list');
         });
 
         it('should do nothing when lowering the lowest node', () {
@@ -225,7 +225,7 @@ main() {
             expect(page.nodes[1].type).toEqual('arrow');
             expect(page.nodes[2].type).toEqual('path');
             expect(page.nodes[3].type).toEqual('text');
-            expect(page.nodes[4].type).toEqual('basicList');
+            expect(page.nodes[4].type).toEqual('list');
         });
 
         it('should save the current page on save', () {
@@ -241,7 +241,7 @@ main() {
         });
 
         it('should deselect a node on click', () {
-            tool.selectedNode = new Line();
+            tool.selectedNode = new LineNode();
             tool.selectedTool = 'select';
 
             tb.triggerEvent(element, 'mousedown');

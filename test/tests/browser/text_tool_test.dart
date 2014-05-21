@@ -125,7 +125,7 @@ main() {
 
         it('should not remove the text node on click outside when filled', () {
             return whenAdded().then((_) {
-                (tool.page.page.nodes[0] as Text).text = 'FooBar';
+                (tool.page.page.nodes[0] as TextNode).text = 'FooBar';
                 tb.triggerEvent(svgElement, 'click');
 
                 expect(tool.page.page.nodes.length).toBe(2);

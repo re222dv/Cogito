@@ -7,7 +7,7 @@ part of cogito_web;
 class ListToolDecorator extends TempNode {
     final String tool = 'list';
 
-    var tempNode = new BasicList()
+    var tempNode = new ListNode()
         ..color = 'black'
         ..size = 24
         ..listType = 'unordered';
@@ -15,7 +15,7 @@ class ListToolDecorator extends TempNode {
     ListToolDecorator(Element element, ToolController toolCtrl) : super(toolCtrl) {
 
         toolCtrl.onToolDrag.where((draggedTool) => draggedTool == tool).listen((_) {
-            var node = new BasicList()
+            var node = new ListNode()
                 ..color = tempNode.color
                 ..rows = []
                 ..size = tempNode.size
@@ -48,7 +48,7 @@ class ListToolDecorator extends TempNode {
 
             var point = toolCtrl.page.getPoint(e);
 
-            var node = new BasicList()
+            var node = new ListNode()
                 ..color = tempNode.color
                 ..rows = []
                 ..x = point.x

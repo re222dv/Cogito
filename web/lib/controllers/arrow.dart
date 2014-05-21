@@ -3,7 +3,7 @@ part of cogito_web;
 @Controller(selector: '[arrow]', publishAs: 'arrow')
 class ArrowController {
 
-    Arrow node;
+    ArrowNode node;
 
     num get radians => math.atan2(node.end.y - node.start.y, node.end.x - node.start.x);
     num get quarterRadians => radians + math.PI / 2;

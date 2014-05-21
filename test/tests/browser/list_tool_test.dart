@@ -102,7 +102,7 @@ main() {
                 expect(tool.page.page.nodes.length).toBe(1);
 
                 expect(JSON.encode(tool.page.page.nodes[0].toJson())).toEqual(JSON.encode({
-                    'type': 'basicList',
+                    'type': 'list',
                     'x': 1,
                     'y': -10,
                     'scale': 1,
@@ -125,7 +125,7 @@ main() {
 
         it('should not remove the list on click outside when filled', () {
             return whenAdded().then((_) {
-                (tool.page.page.nodes[0] as BasicList).text = 'FooBar';
+                (tool.page.page.nodes[0] as ListNode).text = 'FooBar';
                 tb.triggerEvent(svgElement, 'click');
 
                 expect(tool.page.page.nodes.length).toBe(2);
@@ -140,7 +140,7 @@ main() {
                 tb.triggerEvent(svgElement, 'mousemove');
 
                 expect(JSON.encode(tool.page.page.nodes[0].toJson())).toEqual(JSON.encode({
-                    'type': 'basicList',
+                    'type': 'list',
                     'x': 1,
                     'y': 2,
                     'scale': 1,

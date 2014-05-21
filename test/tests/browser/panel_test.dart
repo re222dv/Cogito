@@ -167,7 +167,7 @@ main() {
             });
 
             test('should stop clicks', () {
-                tool.selectedNode = new Line();
+                tool.selectedNode = new LineNode();
                 tb.getScope(shadowRoot.querySelector('div')).apply();
 
                 expect(shadowRoot.querySelector('div>div[stop-clicks]')).toBeNotNull();
@@ -179,7 +179,7 @@ main() {
 
             group('for Line', () {
                 setUp(() {
-                    tool.selectedNode = new Line();
+                    tool.selectedNode = new LineNode();
                     tb.getScope(shadowRoot.querySelector('div')).apply();
                 });
 
@@ -206,7 +206,7 @@ main() {
 
             group('for Arrow', () {
                 setUp(() {
-                    tool.selectedNode = new Arrow();
+                    tool.selectedNode = new ArrowNode();
                     tb.getScope(shadowRoot.querySelector('div')).apply();
                 });
 
@@ -233,7 +233,7 @@ main() {
 
             group('for Path', () {
                 setUp(() {
-                    tool.selectedNode = new Path();
+                    tool.selectedNode = new PathNode();
                     tb.getScope(shadowRoot.querySelector('div')).apply();
                 });
 
@@ -260,7 +260,7 @@ main() {
 
             group('for Text', () {
                 setUp(() {
-                    tool.selectedNode = new Text();
+                    tool.selectedNode = new TextNode();
                     tb.getScope(shadowRoot.querySelector('div')).apply();
                 });
 
@@ -285,9 +285,9 @@ main() {
                 });
             });
 
-            group('for BasicList', () {
+            group('for List', () {
                 setUp(() {
-                    tool.selectedNode = new BasicList();
+                    tool.selectedNode = new ListNode();
                     tb.getScope(shadowRoot.querySelector('div')).apply();
                 });
 
@@ -327,21 +327,21 @@ main() {
                     tb.triggerEvent(element('selectedNode.listType = \'unordered\''), 'click');
 
                     expect(element('selectedNode.listType = \'unordered\'')).toHaveClass('active');
-                    expect((tool.selectedNode as BasicList).listType).toEqual('unordered');
+                    expect((tool.selectedNode as ListNode).listType).toEqual('unordered');
                 });
 
                 test('should choose the ol button when clicked', () {
                     tb.triggerEvent(element('selectedNode.listType = \'ordered\''), 'click');
 
                     expect(element('selectedNode.listType = \'ordered\'')).toHaveClass('active');
-                    expect((tool.selectedNode as BasicList).listType).toEqual('ordered');
+                    expect((tool.selectedNode as ListNode).listType).toEqual('ordered');
                 });
 
                 test('should choose the checked button when clicked', () {
                     tb.triggerEvent(element('selectedNode.listType = \'checked\''), 'click');
 
                     expect(element('selectedNode.listType = \'checked\'')).toHaveClass('active');
-                    expect((tool.selectedNode as BasicList).listType).toEqual('checked');
+                    expect((tool.selectedNode as ListNode).listType).toEqual('checked');
                 });
             });
 

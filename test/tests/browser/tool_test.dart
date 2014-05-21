@@ -36,7 +36,7 @@ main() {
             tool = ToolController.newInstance();
             tool.page = new MockPageComponent();
 
-            node = new Text()..editing = true;
+            node = new TextNode()..editing = true;
             tool.selectedNode = node;
         });
 

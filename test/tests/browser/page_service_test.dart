@@ -76,7 +76,7 @@ var pageJson = {
                 'text': 'Hello, Mongo!'
             },
             {
-                'type': 'basicList',
+                'type': 'list',
                 'x': 500,
                 'y': 200,
                 'scale': 3,
@@ -129,11 +129,11 @@ main() {
             http.whenGET('/api/page/1').respond(200, JSON.encode(pageJson));
 
             service.getPage().then(expectAsync((page) {
-                Line line = page.nodes[0];
-                Arrow arrow = page.nodes[1];
-                Path path = page.nodes[2];
-                Text text = page.nodes[3];
-                BasicList list = page.nodes[4];
+                LineNode line = page.nodes[0];
+                ArrowNode arrow = page.nodes[1];
+                PathNode path = page.nodes[2];
+                TextNode text = page.nodes[3];
+                ListNode list = page.nodes[4];
 
                 expect(line.x).toEqual(10);
                 expect(line.y).toEqual(20);
@@ -183,7 +183,7 @@ main() {
 
             service.savePage(new Page()
                 ..nodes = [
-                    new Line.fromJson({
+                    new LineNode.fromJson({
                         'x': 10,
                         'y': 20,
                         'scale': 3,
@@ -196,7 +196,7 @@ main() {
                         },
                         'width': 10
                     }),
-                    new Arrow.fromJson({
+                    new ArrowNode.fromJson({
                         'x': 10,
                         'y': 20,
                         'scale': 3,
@@ -209,7 +209,7 @@ main() {
                         },
                         'width': 10
                     }),
-                    new Path.fromJson({
+                    new PathNode.fromJson({
                         'x': 200,
                         'y': 300,
                         'scale': 3,
@@ -217,7 +217,7 @@ main() {
                         'color': 'yellow',
                         'path': 'M 0 0 L 100 100',
                     }),
-                    new Text.fromJson({
+                    new TextNode.fromJson({
                         'x': 30,
                         'y': 50,
                         'scale': 3,
@@ -225,7 +225,7 @@ main() {
                         'size': 20,
                         'text': 'Hello, Mongo!',
                     }),
-                    new BasicList.fromJson({
+                    new ListNode.fromJson({
                         'x': 500,
                         'y': 200,
                         'scale': 3,

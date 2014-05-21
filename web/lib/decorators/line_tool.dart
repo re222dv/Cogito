@@ -7,7 +7,7 @@ part of cogito_web;
 class LineToolDecorator extends DrawingToolBase {
     final String tool = 'line';
 
-    Line tempNode = new Line()
+    LineNode tempNode = new LineNode()
         ..color = 'black'
         ..width = 5
         ..start = new math.Point(0 ,0)
@@ -54,7 +54,7 @@ class LineToolDecorator extends DrawingToolBase {
 class ArrowToolDecorator extends LineToolDecorator {
     final String tool = 'arrow';
 
-    Arrow tempNode = new Arrow()
+    ArrowNode tempNode = new ArrowNode()
         ..color = 'black'
         ..width = 5
         ..start = new math.Point(0 ,0)

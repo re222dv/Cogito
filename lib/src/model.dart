@@ -1,7 +1,33 @@
 part of cogito;
 
 /**
- * A node is an object on a page. I.E. a Text or a Line
+ * Property mixin for line types nodes
+ */
+abstract class LineProperties {
+    String color;
+    num width;
+}
+
+/**
+ * Property mixin for text type nodes
+ */
+abstract class TextProperties {
+    String color;
+    num size;
+}
+
+/**
+ * Property mixin for area type nodes
+ */
+abstract class AreaProperties {
+    String fillColor;
+    String strokeColor;
+
+    num strokeWidth;
+}
+
+/**
+ * A node is an object on a page. I.E. a TextNode or a LineNode
  */
 abstract class Node {
     final bool editable = false;
@@ -18,6 +44,7 @@ abstract class Node {
     num nodeHeight;
 
     StreamController _onEdit = new StreamController();
+    /// onEdit events are fired when a node leaves and enters edit mode
     Stream get onEdit => _onEdit.stream;
 
     bool get editing => _editing;
@@ -48,23 +75,6 @@ abstract class Node {
     noSuchMethod(Invocation invocation) => null;
 }
 
-abstract class LineProperties {
-    String color;
-    num width;
-}
-
-abstract class TextProperties {
-    String color;
-    num size;
-}
-
-abstract class AreaProperties {
-    String fillColor;
-    String strokeColor;
-
-    num strokeWidth;
-}
-
 class Page {
     List<Node> nodes = [];
 
@@ -74,19 +84,19 @@ class Page {
         json['nodes'].forEach((Map json) {
             switch(json['type']) {
                 case 'line':
-                    nodes.add(new Line.fromJson(json));
+                    nodes.add(new LineNode.fromJson(json));
                     break;
                 case 'arrow':
-                    nodes.add(new Arrow.fromJson(json));
+                    nodes.add(new ArrowNode.fromJson(json));
                     break;
                 case 'path':
-                    nodes.add(new Path.fromJson(json));
+                    nodes.add(new PathNode.fromJson(json));
                     break;
                 case 'text':
-                    nodes.add(new Text.fromJson(json));
+                    nodes.add(new TextNode.fromJson(json));
                     break;
-                case 'basicList':
-                    nodes.add(new BasicList.fromJson(json));
+                case 'list':
+                    nodes.add(new ListNode.fromJson(json));
                     break;
                 case 'rect':
                     nodes.add(new Rect.fromJson(json));
@@ -124,15 +134,15 @@ class Freehand extends Node with LineProperties {
     });
 }
 
-class Line extends Node with LineProperties {
+class LineNode extends Node with LineProperties {
     final String type = 'line';
 
     math.Point start;
     math.Point end;
 
-    Line();
+    LineNode();
 
-    Line.fromJson(Map json) : super.fromJson(json) {
+    LineNode.fromJson(Map json) : super.fromJson(json) {
         color = json['color'];
         width = json['width'];
 
@@ -143,7 +153,7 @@ class Line extends Node with LineProperties {
                              json['end']['y']);
     }
 
-    Line clone() => new Line.fromJson(toJson());
+    LineNode clone() => new LineNode.fromJson(toJson());
 
     Map toJson() => super.toJson()..addAll({
         'color': color,
@@ -159,30 +169,30 @@ class Line extends Node with LineProperties {
     });
 }
 
-class Arrow extends Line {
+class ArrowNode extends LineNode {
     final String type = 'arrow';
 
-    Arrow();
+    ArrowNode();
 
-    Arrow.fromJson(Map json) : super.fromJson(json);
+    ArrowNode.fromJson(Map json) : super.fromJson(json);
 
-    Arrow clone() => new Arrow.fromJson(toJson());
+    ArrowNode clone() => new ArrowNode.fromJson(toJson());
 }
 
-class Path extends Node with LineProperties {
+class PathNode extends Node with LineProperties {
     final String type = 'path';
 
     String path;
 
-    Path();
+    PathNode();
 
-    Path.fromJson(Map json) : super.fromJson(json) {
+    PathNode.fromJson(Map json) : super.fromJson(json) {
         color = json['color'];
         path = json['path'];
         width = json['width'];
     }
 
-    Path clone() => new Path.fromJson(toJson());
+    PathNode clone() => new PathNode.fromJson(toJson());
 
     Map toJson() => super.toJson()..addAll({
         'color': color,
@@ -191,21 +201,21 @@ class Path extends Node with LineProperties {
     });
 }
 
-class Text extends Node with TextProperties {
+class TextNode extends Node with TextProperties {
     final bool editable = true;
     final String type = 'text';
 
     String text = '';
 
-    Text();
+    TextNode();
 
-    Text.fromJson(Map json) : super.fromJson(json) {
+    TextNode.fromJson(Map json) : super.fromJson(json) {
         color = json['color'];
         size = json['size'];
         text = json['text'];
     }
 
-    Text clone() => new Text.fromJson(toJson());
+    TextNode clone() => new TextNode.fromJson(toJson());
 
     Map toJson() => super.toJson()..addAll({
         'color': color,
@@ -214,9 +224,9 @@ class Text extends Node with TextProperties {
     });
 }
 
-class BasicList extends Node with TextProperties {
+class ListNode extends Node with TextProperties {
     final bool editable = true;
-    final String type = 'basicList';
+    final String type = 'list';
     String listType = 'unordered';
 
     List<String> rows = [];
@@ -227,15 +237,15 @@ class BasicList extends Node with TextProperties {
         rows = t.split('\n');
     }
 
-    BasicList();
+    ListNode();
 
-    BasicList.fromJson(Map json) : super.fromJson(json) {
+    ListNode.fromJson(Map json) : super.fromJson(json) {
         color = json['color'];
         size = json['size'];
         rows = json['rows'];
     }
 
-    BasicList clone() => new BasicList.fromJson(toJson());
+    ListNode clone() => new ListNode.fromJson(toJson());
 
     Map toJson() => super.toJson()..addAll({
         'color': color,

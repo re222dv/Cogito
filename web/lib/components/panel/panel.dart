@@ -20,7 +20,7 @@ class PanelComponent implements ShadowRootAware {
 
     bool get ShowAreaProperties => tool.selectedNode is AreaProperties;
     bool get ShowLineProperties => tool.selectedNode is LineProperties;
-    bool get ShowListProperties => tool.selectedNode is BasicList;
+    bool get ShowListProperties => tool.selectedNode is ListNode;
     bool get ShowTextProperties => tool.selectedNode is TextProperties;
 
     PanelComponent(this.tool, this.userService) {

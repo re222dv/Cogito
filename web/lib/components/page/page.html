@@ -52,7 +52,7 @@
                     </text>
                 </g>
 
-                <g ng-if="node.type == 'basicList'">
+                <g ng-if="node.type == 'list'">
                     <g ng-if="node.listType == 'unordered'">
                         <g ng-repeat="row in node.rows track by $index">
                             <circle ng-attr-r="{{ node.size * 0.2 }}" ng-attr-cx="{{ node.size * 0.3 }}"

@@ -61,7 +61,7 @@ main() {
                             'text': 'Hello, Mongo!'
                         },
                         {
-                            'type': 'basicList',
+                            'type': 'list',
                             'x': 500,
                             'y': 200,
                             'scale': 2,
@@ -97,11 +97,11 @@ main() {
                     ]
                 });
 
-                Line line = page.nodes[0];
-                Arrow arrow = page.nodes[1];
-                Path path = page.nodes[2];
-                Text text = page.nodes[3];
-                BasicList list = page.nodes[4];
+                LineNode line = page.nodes[0];
+                ArrowNode arrow = page.nodes[1];
+                PathNode path = page.nodes[2];
+                TextNode text = page.nodes[3];
+                ListNode list = page.nodes[4];
                 Rect rect = page.nodes[5];
                 Circle circle = page.nodes[6];
 
@@ -161,7 +161,7 @@ main() {
             });
 
             it('should be able to parse a Line', () {
-                var line = new Line.fromJson({
+                var line = new LineNode.fromJson({
                     'x': 10,
                     'y': 20,
                     'scale': 2,
@@ -185,7 +185,7 @@ main() {
             });
 
             it('should be able to parse an Arrow', () {
-                var arrow = new Arrow.fromJson({
+                var arrow = new ArrowNode.fromJson({
                     'x': 10,
                     'y': 20,
                     'scale': 2,
@@ -209,7 +209,7 @@ main() {
             });
 
             it('should be able to parse a Path', () {
-                var path = new Path.fromJson({
+                var path = new PathNode.fromJson({
                     'x': 10,
                     'y': 20,
                     'scale': 2,
@@ -227,7 +227,7 @@ main() {
             });
 
             it('should be able to parse a Text', () {
-                var text = new Text.fromJson({
+                var text = new TextNode.fromJson({
                     'x': 10,
                     'y': 20,
                     'scale': 2,
@@ -244,8 +244,8 @@ main() {
                 expect(text.size).toEqual(30);
             });
 
-            it('should be able to parse a BasicList', () {
-                var list = new BasicList.fromJson({
+            it('should be able to parse a List', () {
+                var list = new ListNode.fromJson({
                     'x': 10,
                     'y': 20,
                     'scale': 2,
@@ -310,7 +310,7 @@ main() {
                 var page = new Page()
                     ..nodes = [
                         (
-                            new Line()
+                            new LineNode()
                                 ..x = 10
                                 ..y = 20
                                 ..scale = 2
@@ -320,7 +320,7 @@ main() {
                                 ..width = 10
                         ),
                         (
-                            new Arrow()
+                            new ArrowNode()
                                 ..x = 10
                                 ..y = 20
                                 ..scale = 2
@@ -330,7 +330,7 @@ main() {
                                 ..width = 10
                         ),
                         (
-                            new Path()
+                            new PathNode()
                                 ..x = 10
                                 ..y = 20
                                 ..scale = 2
@@ -339,7 +339,7 @@ main() {
                                 ..width = 10
                         ),
                         (
-                            new Text()
+                            new TextNode()
                                 ..x = 10
                                 ..y = 20
                                 ..scale = 2
@@ -348,7 +348,7 @@ main() {
                                 ..size = 10
                         ),
                         (
-                            new BasicList()
+                            new ListNode()
                                 ..x = 10
                                 ..y = 20
                                 ..scale = 2
@@ -428,7 +428,7 @@ main() {
                             'text': 'FooBar'
                         },
                         {
-                            'type': 'basicList',
+                            'type': 'list',
                             'x': 10,
                             'y': 20,
                             'scale': 2,
@@ -462,7 +462,7 @@ main() {
             });
 
             it('Should be able to encode a Line', () {
-                var line = new Line()
+                var line = new LineNode()
                     ..x = 10
                     ..y = 20
                     ..scale = 2
@@ -488,7 +488,7 @@ main() {
             });
 
             it('Should be able to encode an Arrow', () {
-                var arrow = new Arrow()
+                var arrow = new ArrowNode()
                     ..x = 10
                     ..y = 20
                     ..scale = 2
@@ -514,7 +514,7 @@ main() {
             });
 
             it('Should be able to encode a Path', () {
-                var path = new Path()
+                var path = new PathNode()
                     ..x = 10
                     ..y = 20
                     ..scale = 2
@@ -534,7 +534,7 @@ main() {
             });
 
             it('Should be able to encode a Text', () {
-                var text = new Text()
+                var text = new TextNode()
                     ..x = 10
                     ..y = 20
                     ..scale = 2
@@ -553,8 +553,8 @@ main() {
                 });
             });
 
-            it('Should be able to encode a BasicList', () {
-                var list = new BasicList()
+            it('Should be able to encode a List', () {
+                var list = new ListNode()
                     ..x = 10
                     ..y = 20
                     ..scale = 2
@@ -563,7 +563,7 @@ main() {
                     ..size = 10;
 
                 expect(list.toJson()).toEqual({
-                    'type': 'basicList',
+                    'type': 'list',
                     'x': 10,
                     'y': 20,
                     'scale': 2,
@@ -622,7 +622,7 @@ main() {
 
         describe('Node', () {
             it('should fire an onEdit event', () {
-                var text = new Text();
+                var text = new TextNode();
 
                 text.onEdit.listen(expectAsync((editing) {
                     expect(editing).toEqual(true);

@@ -7,14 +7,14 @@ part of cogito_web;
 class TextToolDecorator extends TempNode {
     final String tool = 'text';
 
-    var tempNode = new Text()
+    var tempNode = new TextNode()
         ..color = 'black'
         ..size = 24;
 
     TextToolDecorator(Element element, ToolController toolCtrl) : super(toolCtrl) {
 
         toolCtrl.onToolDrag.where((draggedTool) => draggedTool == tool).listen((_) {
-            var node = new Text()
+            var node = new TextNode()
                 ..color = tempNode.color
                 ..text = ''
                 ..size = tempNode.size
@@ -46,7 +46,7 @@ class TextToolDecorator extends TempNode {
 
             var point = toolCtrl.page.getPoint(e);
 
-            var node = new Text()
+            var node = new TextNode()
                 ..color = tempNode.color
                 ..text = ''
                 ..x = point.x
