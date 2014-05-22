@@ -3,10 +3,10 @@ part of cogito_server;
 /**
  * Route handlers for everything that have to do with [Page]s
  */
-class Page {
+class PageRoutes {
     final Db db;
 
-    Page(this.db);
+    PageRoutes(this.db);
 
     /**
      * A route [Processor] to save a [Page] to the database.

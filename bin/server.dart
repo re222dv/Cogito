@@ -13,7 +13,7 @@ main() {
     var port = portEnv != null ? int.parse(portEnv) : 9000;
 
     var authorization = new Authorization(db);
-    var page = new Page(db);
+    var page = new PageRoutes(db);
 
     new RestServer()
         ..clientRoutes = ['/page']
