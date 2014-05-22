@@ -18,6 +18,8 @@ class DropDownComponent extends ShadowRootAware {
 
     var _oldValue;
     var _value;
+    bool _open = false;
+
     get value => _value;
     set value(val) {
         if (type == 'int' && val is String) {
@@ -28,7 +30,6 @@ class DropDownComponent extends ShadowRootAware {
         _ngModel.render(_ngModel.modelValue);
     }
 
-    bool _open = false;
     bool get open => _open;
     set open(bool open) {
         _open = open;
@@ -41,9 +42,7 @@ class DropDownComponent extends ShadowRootAware {
     }
 
     DropDownComponent(this._element, this._ngModel) {
-        _ngModel.render = (val) {
-            _value = val;
-        };
+        _ngModel.render = (val) =>_value = val;
     }
 
     onShadowRoot(ShadowRoot shadowRoot) {

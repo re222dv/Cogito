@@ -1,5 +1,8 @@
 part of cogito_web;
 
+/**
+ * A basic loading component that displays a spinner
+ */
 @Component(
     selector: 'loading',
     templateUrl: 'lib/components/loading/loading.html',

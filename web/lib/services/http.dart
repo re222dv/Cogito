@@ -10,42 +10,32 @@ class HttpService {
 
     HttpService(this._http, this._router);
 
+    bool _isAuthError(HttpResponse response) => response is HttpResponse && response.status == 401;
+
     /**
      * Shortcut method for GET requests.  See [Http.call] for a complete description
      * of parameters.
      */
-    Future<HttpResponse> get(String url, {
-    String data,
-    Map<String, dynamic> params,
-    Map<String, String> headers,
-    xsrfHeaderName,
-    xsrfCookieName,
-    interceptors,
-    cache,
-    timeout
-    }) => _http.get(url, data: data, params: params,
-                    headers: headers, xsrfHeaderName: xsrfHeaderName,
-                    xsrfCookieName: xsrfCookieName, interceptors: interceptors,
-                    cache: cache, timeout: timeout)
-               .catchError((_) => _router.go('login', {}),
-                           test: (HttpResponse response) => response is HttpResponse && response.status == 401);
+    Future<HttpResponse> get(String url, {String data, Map<String, dynamic> params,
+                                          Map<String, String> headers, xsrfHeaderName,
+                                          xsrfCookieName, interceptors, cache, timeout}
+    ) => _http.get(url, data: data, params: params,
+                   headers: headers, xsrfHeaderName: xsrfHeaderName,
+                   xsrfCookieName: xsrfCookieName, interceptors: interceptors,
+                   cache: cache, timeout: timeout)
+               .catchError((_) => _router.go('login', {}), test: _isAuthError);
 
     /**
      * Shortcut method for PUT requests.  See [Http.call] for a complete description
      * of parameters.
      */
-    Future<HttpResponse> put(String url, String data, {
-    Map<String, dynamic> params,
-    Map<String, String> headers,
-    xsrfHeaderName,
-    xsrfCookieName,
-    interceptors,
-    cache,
-    timeout
-    }) => _http.put(url, data, params: params,
-                    headers: headers, xsrfHeaderName: xsrfHeaderName,
-                    xsrfCookieName: xsrfCookieName, interceptors: interceptors,
-                    cache: cache, timeout: timeout)
-                .catchError((_) => _router.go('login', {}),
-                            test: (HttpResponse response) => response is HttpResponse && response.status == 401);
+    Future<HttpResponse> put(String url, String data, {Map<String, dynamic> params,
+                                                       Map<String, String> headers,
+                                                       xsrfHeaderName, xsrfCookieName,
+                                                       interceptors, cache, timeout}
+    ) => _http.put(url, data, params: params,
+                   headers: headers, xsrfHeaderName: xsrfHeaderName,
+                   xsrfCookieName: xsrfCookieName, interceptors: interceptors,
+                   cache: cache, timeout: timeout)
+               .catchError((_) => _router.go('login', {}), test: _isAuthError);
 }

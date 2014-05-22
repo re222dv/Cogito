@@ -7,7 +7,7 @@ part of cogito_web;
 class CircleToolDecorator extends DrawingToolBase {
     final String tool = 'circle';
 
-    Circle tempNode = new Circle()
+    CircleNode tempNode = new CircleNode()
         ..fillColor = 'black'
         ..strokeColor = 'red'
         ..strokeWidth = 5

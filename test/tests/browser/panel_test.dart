@@ -347,7 +347,7 @@ main() {
 
             group('for Rect', () {
                 setUp(() {
-                    tool.selectedNode = new Rect();
+                    tool.selectedNode = new RectNode();
                     tb.getScope(shadowRoot.querySelector('div')).apply();
                 });
 
@@ -378,7 +378,7 @@ main() {
 
             group('for Circle', () {
                 setUp(() {
-                    tool.selectedNode = new Circle();
+                    tool.selectedNode = new CircleNode();
                     tb.getScope(shadowRoot.querySelector('div')).apply();
                 });
 

@@ -2,6 +2,9 @@ part of cogito_web;
 
 typedef void LeaveCallback();
 
+/**
+ * Displays the page the user draws on.
+ */
 @Component(
     selector: 'page',
     templateUrl: 'lib/components/page/page.html',
@@ -216,7 +219,7 @@ class PageComponent extends ShadowRootAware {
     }
 
     /**
-     * Hides the model and calls leaveCallback
+     * Hides the modal and calls leaveCallback
      */
     void leave() {
         allowLeave = true;
@@ -225,7 +228,7 @@ class PageComponent extends ShadowRootAware {
     }
 
     /**
-     * Hides the model and clears leaveCallback
+     * Hides the modal and clears leaveCallback
      */
     void stay() {
         allowLeave = false;

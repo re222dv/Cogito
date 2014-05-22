@@ -1,5 +1,8 @@
 part of cogito_web;
 
+/**
+ * A basic modal component.
+ */
 @Component(
     selector: 'modal',
     templateUrl: 'lib/components/modal/modal.html',

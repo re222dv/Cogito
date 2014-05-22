@@ -1,5 +1,8 @@
 part of cogito_web;
 
+/**
+ * A basic panel component that displays a panel docked to a screen edge.
+ */
 @Component(
     selector: 'panel',
     templateUrl: 'lib/components/panel/panel.html',
@@ -24,10 +27,10 @@ class PanelComponent implements ShadowRootAware {
     bool get ShowTextProperties => tool.selectedNode is TextProperties;
 
     PanelComponent(this.tool, this.userService) {
-        // Create line widths from the fibonacci scale
-        for (var i = 1, first = 1, second = 1; i < 90; i = first + second, first = second, second = i) {
-            lineWidths.add(i);
-        }
+        // Create line widths using the fibonacci scale
+        var fib = () => lineWidths.add(lineWidths.last + lineWidths[lineWidths.length-2]);
+        for (lineWidths = [1, 2]; lineWidths.length < 10; fib()) {}
+        
         for (var i = 12; i <= 72; i+= 2) {
             textSizes.add(i);
         }
@@ -37,9 +40,9 @@ class PanelComponent implements ShadowRootAware {
         // TODO: Listen on a better event from angular so that Timer.run isn't needed
         // Wait a tick so Angular got time to digest the shadowRoot
         Timer.run(() {
-            List<Element> tools = shadowRoot.querySelectorAll('[data-draggable="true"]');
+            List<Element> draggableTools = shadowRoot.querySelectorAll('[data-draggable="true"]');
 
-            tools.forEach((toolButton) {
+            draggableTools.forEach((toolButton) {
                 var dragging = false;
 
                 toolButton.onMouseDown.listen((_) => dragging = true);
@@ -53,6 +56,12 @@ class PanelComponent implements ShadowRootAware {
         });
     }
 
+    /**
+     * Logout the user if there are no unsaved changed on the page.
+     *
+     * Workaround for [Angular route bug][]
+     * [Angular route bug]: https://github.com/angular/route.dart/issues/28
+     */
     void logout() {
         if (tool.page.checkUnsavedChanges() != null) {
             tool.page.leaveCallback = () => userService.logout();

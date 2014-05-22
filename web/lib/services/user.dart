@@ -16,13 +16,12 @@ class UserService {
      */
     Future<bool> isLoggedIn() {
         if (_cookies['email'] == null || _cookies['key'] == null) {
-            return new Future.sync(() => false);
+            return new Future.value(false);
         }
 
         return _http.get('/api/checkAuth')
-            .then((response) {
-                return response.data['status'] == 'success';
-            }).catchError((_) => false);
+            .then((response) => response.data['status'] == 'success')
+            .catchError((_) => false);
     }
 
     /**
@@ -32,7 +31,7 @@ class UserService {
      */
     Future<bool> login(User user) {
         if (!user.emailIsValid || !user.passwordIsValid) {
-            return new Future.sync(() => false);
+            return new Future.value(false);
         }
         user.calculateHash();
 
@@ -62,7 +61,7 @@ class UserService {
      */
     Future<String> register(User user) {
         if (!user.emailIsValid || !user.passwordIsValid) {
-            return new Future.sync(() => 'not valid');
+            return new Future.value('not valid');
         }
         user.calculateHash();
 

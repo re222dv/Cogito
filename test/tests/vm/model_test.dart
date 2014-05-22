@@ -102,8 +102,8 @@ main() {
                 PathNode path = page.nodes[2];
                 TextNode text = page.nodes[3];
                 ListNode list = page.nodes[4];
-                Rect rect = page.nodes[5];
-                Circle circle = page.nodes[6];
+                RectNode rect = page.nodes[5];
+                CircleNode circle = page.nodes[6];
 
                 expect(line.x).toEqual(10);
                 expect(line.y).toEqual(20);
@@ -263,7 +263,7 @@ main() {
             });
 
             it('should be able to parse a Rect', () {
-                var rect = new Rect.fromJson({
+                var rect = new RectNode.fromJson({
                     'x': 10,
                     'y': 20,
                     'scale': 2,
@@ -285,7 +285,7 @@ main() {
             });
 
             it('should be able to parse a Circle', () {
-                var circle = new Circle.fromJson({
+                var circle = new CircleNode.fromJson({
                     'x': 10,
                     'y': 20,
                     'scale': 2,
@@ -357,7 +357,7 @@ main() {
                                 ..size = 10
                         ),
                         (
-                            new Rect()
+                            new RectNode()
                                 ..x = 10
                                 ..y = 20
                                 ..scale = 2
@@ -368,7 +368,7 @@ main() {
                                 ..strokeWidth = 50
                         ),
                         (
-                            new Circle()
+                            new CircleNode()
                                 ..x = 10
                                 ..y = 20
                                 ..scale = 2
@@ -574,7 +574,7 @@ main() {
             });
 
             it('Should be able to encode a Rect', () {
-                var rect = new Rect()
+                var rect = new RectNode()
                     ..x = 10
                     ..y = 20
                     ..scale = 2
@@ -598,7 +598,7 @@ main() {
             });
 
             it('Should be able to encode a Circle', () {
-                var circle = new Circle()
+                var circle = new CircleNode()
                     ..x = 10
                     ..y = 20
                     ..scale = 2

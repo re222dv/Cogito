@@ -6,9 +6,14 @@ part of cogito_web;
 class ToolController {
     static final ToolController _singleton = new ToolController._internal();
 
+    Node _selectedNode;
+    String _selectedTool = 'select';
+
     PageComponent page;
 
-    Node _selectedNode;
+    StreamController _onToolChange = new StreamController.broadcast();
+    StreamController toolDrag = new StreamController.broadcast();
+
     Node get selectedNode => _selectedNode;
     set selectedNode(Node node) {
         if (node == _selectedNode) {
@@ -22,7 +27,6 @@ class ToolController {
         _selectedNode = node;
     }
 
-    String _selectedTool = 'select';
     String get selectedTool => _selectedTool;
     void set selectedTool(tool) {
         if (tool != _selectedTool) {
@@ -33,11 +37,9 @@ class ToolController {
         }
     }
 
-    StreamController _onToolChange = new StreamController.broadcast();
     ///Fired when the tool is changed
     Stream get onToolChange => _onToolChange.stream;
 
-    StreamController toolDrag = new StreamController.broadcast();
     /// Fired when a draggable tool is dragged
     Stream get onToolDrag => toolDrag.stream;
 

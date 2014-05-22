@@ -1,5 +1,8 @@
 part of cogito_web;
 
+/**
+ * A basic menu component that displays a simple floating menu designed to popup to the right of a button.
+ */
 @Component(
     selector: 'popup-menu',
     templateUrl: 'lib/components/popup_menu/popup_menu.html',

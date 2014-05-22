@@ -99,10 +99,10 @@ class Page {
                     nodes.add(new ListNode.fromJson(json));
                     break;
                 case 'rect':
-                    nodes.add(new Rect.fromJson(json));
+                    nodes.add(new RectNode.fromJson(json));
                     break;
                 case 'circle':
-                    nodes.add(new Circle.fromJson(json));
+                    nodes.add(new CircleNode.fromJson(json));
                     break;
             }
         });
@@ -256,15 +256,15 @@ class ListNode extends Node with TextProperties {
     });
 }
 
-class Rect extends Node with AreaProperties {
+class RectNode extends Node with AreaProperties {
     final String type = 'rect';
 
     num width;
     num height;
 
-    Rect();
+    RectNode();
 
-    Rect.fromJson(Map json) : super.fromJson(json) {
+    RectNode.fromJson(Map json) : super.fromJson(json) {
         width = json['width'];
         height = json['height'];
 
@@ -273,7 +273,7 @@ class Rect extends Node with AreaProperties {
         strokeWidth = json['strokeWidth'];
     }
 
-    Rect clone() => new Rect.fromJson(toJson());
+    RectNode clone() => new RectNode.fromJson(toJson());
 
     Map toJson() => super.toJson()..addAll({
         'width': width,
@@ -286,14 +286,14 @@ class Rect extends Node with AreaProperties {
 }
 
 
-class Circle extends Node with AreaProperties {
+class CircleNode extends Node with AreaProperties {
     final String type = 'circle';
 
     num radius;
 
-    Circle();
+    CircleNode();
 
-    Circle.fromJson(Map json) : super.fromJson(json) {
+    CircleNode.fromJson(Map json) : super.fromJson(json) {
         radius = json['radius'];
 
         fillColor = json['fillColor'];
@@ -301,7 +301,7 @@ class Circle extends Node with AreaProperties {
         strokeWidth = json['strokeWidth'];
     }
 
-    Circle clone() => new Circle.fromJson(toJson());
+    CircleNode clone() => new CircleNode.fromJson(toJson());
 
     Map toJson() => super.toJson()..addAll({
         'radius': radius,

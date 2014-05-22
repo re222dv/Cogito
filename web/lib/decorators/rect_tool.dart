@@ -7,7 +7,7 @@ part of cogito_web;
 class RectToolDecorator extends DrawingToolBase {
     final String tool = 'rect';
 
-    Rect tempNode = new Rect()
+    RectNode tempNode = new RectNode()
         ..fillColor = 'black'
         ..strokeColor = 'red'
         ..strokeWidth = 5
