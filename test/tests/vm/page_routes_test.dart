@@ -97,6 +97,16 @@ main() {
 
                 return page.save(request);
             });
+
+            it('should return the saved page on success', () {
+                var response = page.save(request);
+
+                return response.then(expectAsync((response) {
+                    expect(response.data).toEqual({'nodes': []});
+                    expect(response.status).toEqual(Status.SUCCESS);
+                }));
+            });
+
         });
 
         describe('serve', () {

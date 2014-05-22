@@ -52,4 +52,12 @@ class PanelComponent implements ShadowRootAware {
             });
         });
     }
+
+    void logout() {
+        if (tool.page.checkUnchangedChanges() != null) {
+            tool.page.leaveCallback = () => userService.logout();
+        } else {
+            userService.logout();
+        }
+    }
 }

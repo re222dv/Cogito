@@ -1,5 +1,7 @@
 part of cogito_web;
 
+typedef void LeaveCallback();
+
 @Component(
     selector: 'page',
     templateUrl: 'lib/components/page/page.html',
@@ -17,11 +19,18 @@ class PageComponent {
     ToolController tool;
 
     Page page = new Page();
+    Page savedPage = new Page();
 
     bool _loaded = false;
     bool dragging = false;
     bool loadingFailed = false;
     bool localFound = false;
+
+    bool allowLeave = false;
+    bool unsavedChanges = false;
+    bool onBeforeLeaveModal = false;
+
+    LeaveCallback leaveCallback = () {};
 
     bool get loaded => _loaded;
     set loaded(bool loaded) {
@@ -35,7 +44,9 @@ class PageComponent {
         }
     }
 
-    PageComponent(Element element, this.pages, this.tool) {
+    PageComponent(Element element, RouteProvider routeProvider, Router router, this.pages, this.tool) {
+        StreamSubscription onLeaveStream;
+
         tool.page = this;
 
         shadowRoot = element.shadowRoot;
@@ -54,6 +65,25 @@ class PageComponent {
                                 e.preventDefault();
                                 e.stopPropagation();
                             });
+
+        window.onBeforeUnload.listen((_) {
+            if (!onBeforeLeaveModal) {
+                var message = checkUnchangedChanges();
+
+                if (message != null) {
+                    leaveCallback = () => onBeforeLeaveModal = true;
+                }
+
+                return message;
+            }
+        });
+        onLeaveStream = routeProvider.route.onLeave.listen((e) {
+            if (checkUnchangedChanges() != null) {
+                e.allowLeave(new Future.value(allowLeave));
+
+                leaveCallback = () => router.go(e.path, e.parameters);
+            }
+        });
     }
 
     /**
@@ -72,6 +102,7 @@ class PageComponent {
         localFound = false;
         pages.getPage().then((page) {
             this.page = page;
+            savedPage = page.clone();
 
             loaded = true;
             loadingFailed = false;
@@ -162,5 +193,42 @@ class PageComponent {
     /**
      * Save the page to the server
      */
-    save() => pages.savePage(page);
+    save() => pages.savePage(page).then((savedPage) {
+        this.savedPage = savedPage;
+    });
+
+    /**
+     * Check if the page have unsaved changes, and if it does displays a modal
+     *
+     * Returns 'You have unsaved changes! if there are, null otherwise.
+     */
+    checkUnchangedChanges([_]) {
+        try {
+            if (JSON.encode(page.toJson()) != JSON.encode(savedPage.toJson())) {
+                pages.saveLocalPage(page);
+                unsavedChanges = true;
+                return 'You have unsaved changes!';
+            }
+        } catch (e) {
+            return e;
+        }
+    }
+
+    /**
+     * Hides the model and calls leaveCallback
+     */
+    void leave() {
+        allowLeave = true;
+        unsavedChanges = false;
+        leaveCallback();
+    }
+
+    /**
+     * Hides the model and clears leaveCallback
+     */
+    void stay() {
+        allowLeave = false;
+        unsavedChanges = false;
+        leaveCallback = () {};
+    }
 }

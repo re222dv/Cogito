@@ -135,4 +135,15 @@
             <p>Do you want a <a href ng-click="cmp.newPage()">new page instead</a>?</p>
         </div>
     </div>
+    <modal open="cmp.unsavedChanges">
+        <h1>Unsaved changes!</h1>
+        <h2>You have unsaved changes</h2>
+        <p>Do you really want to leave?<br />Leaving will make you loose your changes.</p>
+
+        <button ng-click="cmp.leave()">Leave</button><button ng-click="cmp.stay()">Stay</button>
+    </modal>
+    <modal open="cmp.onBeforeLeaveModal">
+        <h1>Please leave now</h1>
+        <p>Due to browser limitations you now have to leave manually.</p>
+    </modal>
 </div>

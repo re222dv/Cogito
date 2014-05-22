@@ -95,3 +95,19 @@ svg.select.dragging, svg.select.dragging [node-handler] {
       background-color: #bbb; }
     #loading div a {
       color: #3c3a30; }
+
+modal {
+  overflow: hidden; }
+  modal button {
+    display: inline-block;
+    margin: 2rem .21rem;
+    padding: 10px 50px;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(0, 0, 0, 0.3);
+    border: none;
+    border-radius: 10px;
+    font-size: 1.3rem;
+    transition: background-color 0.5s ease; }
+    modal button:hover {
+      background-color: rgba(0, 0, 0, 0.5); }

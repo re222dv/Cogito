@@ -18,7 +18,7 @@ class PageRoutes {
         return db.open().then((_) {
             DbCollection pages = db.collection('Pages');
 
-            return pages.update({}, page.toJson()).then((json) => new Response(json));
+            return pages.update({}, page.toJson()).then((_) => new Response(page.toJson()));
         }).whenComplete(db.close);
     }
 

@@ -136,3 +136,28 @@ svg.select.dragging, svg.select.dragging [node-handler] {
         }
     }
 }
+
+modal {
+    overflow: hidden;
+
+    button {
+        display: inline-block;
+
+        margin: 2rem .21rem;
+        padding: 10px 50px;
+
+        cursor: pointer;
+
+        color: rgba(255, 255, 255, 0.8);
+        background-color: rgba(0, 0, 0, 0.3);
+        border: none;
+        border-radius: 10px;
+
+        font-size: 1.3rem;
+        transition: background-color 0.5s ease;
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+    }
+}

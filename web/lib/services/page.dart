@@ -34,18 +34,30 @@ class PageService {
      *
      * Will notify the user of what happens.
      *
-     * Returns true when saving on the server succeeded.
+     * Returns the saved page when saving on the server succeeded, null otherwise
      */
-    Future<bool> savePage(Page page) {
+    Future<Page> savePage(Page page) {
         window.localStorage['page'] = JSON.encode(page.toJson());
 
-        return _http.put('/api/page/1', JSON.encode(page.toJson())).then((_) {
-            window.localStorage.remove('page');
-            _notification.notify('Saved');
+        return _http.put('/api/page/1', JSON.encode(page.toJson())).then((response) {
+            if (response is HttpResponse && response.data is Map && response.data.containsKey('data')) {
+                window.localStorage.remove('page');
+                _notification.notify('Saved');
+                return new Page.fromJson(response.data['data']);
+            } else {
+                throw 'Saving failed';
+            }
         }).catchError((_) {
             _notification.notify('Save Failed!');
 
-            return false;
+            return null;
         }, test: (response) => response is HttpResponse);
+    }
+
+    /**
+     * Saves a [Page] to localStorage.
+     */
+    void saveLocalPage(Page page) {
+        window.localStorage['page'] = JSON.encode(page.toJson());
     }
 }

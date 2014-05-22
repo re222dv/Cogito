@@ -111,6 +111,8 @@ class Page {
     Map toJson() => {
         'nodes': nodes.map((node) => node.toJson()).toList()
     };
+
+    Page clone() => new Page.fromJson(toJson());
 }
 
 class Freehand extends Node with LineProperties {
