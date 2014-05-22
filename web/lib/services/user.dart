@@ -20,11 +20,9 @@ class UserService {
         }
 
         return _http.get('/api/checkAuth')
-                    .then((response) {
-            print (response.data);
-            return response.data['status'] == 'success';
-        })
-                    .catchError((_) => false);
+            .then((response) {
+                return response.data['status'] == 'success';
+            }).catchError((_) => false);
     }
 
     /**
@@ -39,12 +37,12 @@ class UserService {
         user.calculateHash();
 
         return _http.put('/api/auth', JSON.encode(user.toJson()))
-                    .then((response) {
-                        _cookies['email'] = user.email;
-                        _cookies['key'] = response.data['data'];
-                        return true;
-                    }).catchError((_) => false,
-                                  test: (response) => response is HttpResponse && response.status == 401);
+            .then((response) {
+                _cookies['email'] = user.email;
+                _cookies['key'] = response.data['data'];
+                return true;
+            }).catchError((_) => false,
+                          test: (response) => response is HttpResponse && response.status == 401);
     }
 
     /**
@@ -69,6 +67,6 @@ class UserService {
         user.calculateHash();
 
         return _http.post('/api/auth', JSON.encode(user.toJson()))
-                    .then((response) => response.data);
+            .then((response) => response.data);
     }
 }

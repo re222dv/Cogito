@@ -53,7 +53,6 @@ class LoginController {
             } else if (result['message'] == 'email exists') {
                 emailExists = true;
             } else {
-                print(result);
                 unknownRegisterError = true;
             }
         });

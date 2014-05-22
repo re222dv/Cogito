@@ -115,7 +115,6 @@ main() {
 
             element = tb.compile('<page></page>');
 
-            print(element.shadowRoot);
             shadowRoot = element.shadowRoot;
             pageComponent.shadowRoot = shadowRoot;
 
