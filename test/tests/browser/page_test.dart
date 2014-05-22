@@ -2,6 +2,7 @@ library page_tests;
 
 import 'dart:async';
 import 'dart:html' hide Path, Text;
+import 'dart:math' as math;
 import 'package:angular/angular.dart';
 import 'package:angular/mock/module.dart';
 import 'package:unittest/unittest.dart' hide expect;
@@ -129,6 +130,7 @@ main() {
 
         it('should load a page', () {
             expect(page).toBeNotNull();
+            expect(page.nodes.length).not.toEqual(0);
         });
 
         it('should provide a top panel', () {
@@ -247,6 +249,40 @@ main() {
             tb.triggerEvent(element, 'mousedown');
 
             expect(tool.selectedNode).toBeNull();
+        });
+
+        describe('move', () {
+            beforeEach(() => new Future.delayed(Duration.ZERO));
+
+            it('should set dragging to true while moving a node', () {
+                pageComponent.move(page.nodes[1], new math.Point(0, 0));
+
+                expect(pageComponent.dragging).toEqual(true);
+            });
+
+            it('should select the moved node', () {
+                pageComponent.move(page.nodes[1], new math.Point(0, 0));
+
+                expect(tool.selectedNode).toEqual(page.nodes[1]);
+            });
+
+            it('should account for the offset when moving node', () {
+                pageComponent.move(page.nodes[1], new math.Point(0, 0));
+                tb.triggerEvent(shadowRoot.querySelector('div'), 'mousemove');
+
+                // Due to Dart Bug https://code.google.com/p/dart/issues/detail?id=16869
+                // mocked Events can't be dispatched and therefore offsetX and offsetY can't be set.
+                // By checking if NaN we can at least see if it's used in a calculation.
+                expect(page.nodes[1].x.isNaN).toEqual(true);
+                expect(page.nodes[1].y.isNaN).toEqual(true);
+            });
+
+            it('should set dragging to false after having moved a node', () {
+                pageComponent.move(page.nodes[1], new math.Point(0, 0));
+                tb.triggerEvent(shadowRoot.querySelector('div'), 'mouseup');
+
+                expect(pageComponent.dragging).toEqual(false);
+            });
         });
     });
 }

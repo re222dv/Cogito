@@ -140,7 +140,7 @@ class PageComponent {
         var events = [];
 
         events.add(svg.parent.onMouseMove.listen((MouseEvent e) {
-            var point = tool.page.getPoint(e);
+            var point = getPoint(e);
 
             node.x = point.x + offset.x;
             node.y = point.y + offset.y;
