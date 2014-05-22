@@ -39,7 +39,7 @@ class MockCollection extends Mock implements DbCollection {
 
     MockCollection() {
         fakedFind = null;
-        insertCallback = (_) => null;
+        updateCallback = (_) => null;
     }
 
     findOne([query]) => findOneSpy(query);
