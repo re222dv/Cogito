@@ -19,6 +19,7 @@ class PageComponent {
     Page page = new Page();
 
     bool _loaded = false;
+    bool dragging = false;
     bool loadingFailed = false;
     bool localFound = false;
 
@@ -55,12 +56,18 @@ class PageComponent {
                             });
     }
 
+    /**
+     * Creates a new page.
+     */
     void newPage() {
         page = new Page();
         loaded = true;
         loadingFailed = false;
     }
 
+    /**
+     * Get a [Page] from the server, ignoring the local version
+     */
     void getPage() {
         localFound = false;
         pages.getPage().then((page) {
@@ -68,11 +75,12 @@ class PageComponent {
 
             loaded = true;
             loadingFailed = false;
-        }).catchError((_) {
-            loadingFailed = true;
-        });
+        }).catchError((_) => loadingFailed = true);
     }
 
+    /**
+     * Gets the local [Page].
+     */
     void getLocalPage() {
         this.page = pages.getLocalPage();
         loaded = true;
@@ -119,9 +127,7 @@ class PageComponent {
     /**
      * Deletes a node
      */
-    void delete(Node node) {
-        page.nodes.remove(node);
-    }
+    void delete(Node node) => page.nodes.remove(node);
 
     /**
      * Initiates moving/dragging mode
@@ -129,7 +135,7 @@ class PageComponent {
     void move(Node node, math.Point offset) {
         tool.selectedNode = node;
 
-        svg.classes.add('dragging');
+        dragging = true;
 
         var events = [];
 
@@ -146,7 +152,7 @@ class PageComponent {
         events.add(svg.parent.onMouseUp.listen((Event e) {
             events.forEach((e) => e.cancel());
 
-            svg.classes.remove('dragging');
+            dragging = false;
 
             e.preventDefault();
             e.stopPropagation();

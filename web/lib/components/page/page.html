@@ -7,7 +7,7 @@
          preserveAspectRatio="xMidYMid meet"
          xmlns="http://www.w3.org/2000/svg" tool-controller
          draw-tool line-tool arrow-tool text-tool list-tool rect-tool circle-tool
-         class="{{ tool.selectedTool }}" ng-show="cmp.loaded">
+         class="{{ tool.selectedTool }}" ng-show="cmp.loaded" ng-class="{dragging: cmp.dragging}">
         <defs>
             <filter id="dropShadow" height="130%">
                 <feGaussianBlur in="SourceAlpha" stdDeviation="5"/> <!-- stdDeviation is how much to blur -->
