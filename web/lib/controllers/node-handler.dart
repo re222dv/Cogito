@@ -47,33 +47,11 @@ class NodeHandlerController extends AttachAware {
         scope.watch('node.text', calculateSize, canChangeModel: true);
 
         element.onMouseDown.where((_) => tool.selectedTool == 'select' && !node.editing).listen((MouseEvent e) {
-            tool.selectedNode = node;
 
             var offset = tool.page.getPoint(e);
             offset = new math.Point(node.x - offset.x, node.y - offset.y);
 
-            element.parent.classes.add('dragging');
-
-            var events = [];
-
-            events.add(element.parent.parent.onMouseMove.listen((MouseEvent e) {
-                var point = tool.page.getPoint(e);
-
-                node.x = point.x + offset.x;
-                node.y = point.y + offset.y;
-
-                e.preventDefault();
-                e.stopPropagation();
-            }));
-
-            events.add(element.parent.parent.onMouseUp.listen((Event e) {
-                events.forEach((e) => e.cancel());
-
-                element.parent.classes.remove('dragging');
-
-                e.preventDefault();
-                e.stopPropagation();
-            }));
+            tool.page.move(node, offset);
 
             e.preventDefault();
             e.stopPropagation();

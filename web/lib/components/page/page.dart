@@ -14,6 +14,7 @@ class PageComponent {
     Element svg;
     ShadowRoot shadowRoot;
     PageService pages;
+    ToolController tool;
 
     Page page = new Page();
 
@@ -33,7 +34,7 @@ class PageComponent {
         }
     }
 
-    PageComponent(Element element, ToolController tool, this.pages) {
+    PageComponent(Element element, this.pages, this.tool) {
         tool.page = this;
 
         shadowRoot = element.shadowRoot;
@@ -120,6 +121,36 @@ class PageComponent {
      */
     void delete(Node node) {
         page.nodes.remove(node);
+    }
+
+    /**
+     * Initiates moving/dragging mode
+     */
+    void move(Node node, math.Point offset) {
+        tool.selectedNode = node;
+
+        svg.classes.add('dragging');
+
+        var events = [];
+
+        events.add(svg.parent.onMouseMove.listen((MouseEvent e) {
+            var point = tool.page.getPoint(e);
+
+            node.x = point.x + offset.x;
+            node.y = point.y + offset.y;
+
+            e.preventDefault();
+            e.stopPropagation();
+        }));
+
+        events.add(svg.parent.onMouseUp.listen((Event e) {
+            events.forEach((e) => e.cancel());
+
+            svg.classes.remove('dragging');
+
+            e.preventDefault();
+            e.stopPropagation();
+        }));
     }
 
     /**

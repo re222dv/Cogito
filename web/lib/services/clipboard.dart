@@ -32,5 +32,7 @@ class ClipboardService {
         tool.selectedNode = clipboard;
 
         clipboard = clipboard.clone();
+
+        tool.page.move(tool.selectedNode, new math.Point(0, 0));
     }
 }
