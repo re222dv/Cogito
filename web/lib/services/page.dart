@@ -16,12 +16,12 @@ class PageService {
      * Gets a [Page] from the server and on success deletes the local version, if it exists.
      */
     Future<Page> getPage() => _http.get('/api/page/1').then((HttpResponse response) {
-        if (!response is HttpResponse || !response.data is Map || !response.data.containsKey('data')) {
+        if (response is HttpResponse && response.data is Map && response.data.containsKey('data')) {
+            window.localStorage.remove('page');
+            return new Page.fromJson(response.data['data']);
+        } else {
             throw 'Loading failed';
         }
-
-        window.localStorage.remove('page');
-        return new Page.fromJson(response.data['data']);
     });
 
     /**

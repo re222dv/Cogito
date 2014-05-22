@@ -4,7 +4,7 @@ part of cogito_server;
  * Route handlers for everything that have to do with [Page]s
  */
 class Page {
-    final DB db;
+    final Db db;
 
     Page(this.db);
 

@@ -4,7 +4,7 @@ part of cogito_server;
  * Route handlers for everything that have to do with authorization
  */
 class Authorization {
-    final DB db;
+    final Db db;
 
     Authorization(this.db);
 
