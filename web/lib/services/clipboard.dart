@@ -14,7 +14,7 @@ class ClipboardService {
     /**
      * Copies the currently selected node to the clipboard.
      */
-    void copy() => clipboard = tool.selectedNode.clone();
+    copy() => clipboard = tool.selectedNode.clone();
 
     /**
      * Cuts the currently selected node to the clipboard.

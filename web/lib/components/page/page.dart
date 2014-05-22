@@ -166,7 +166,7 @@ class PageComponent extends ShadowRootAware {
     /**
      * Deletes a node
      */
-    void delete(Node node) => page.nodes.remove(node);
+    delete(Node node) => page.nodes.remove(node);
 
     /**
      * Initiates moving/dragging mode
