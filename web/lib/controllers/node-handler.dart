@@ -29,9 +29,12 @@ class NodeHandlerController extends AttachAware {
         });
 
         var keyMap = [
-            new KeyBinding(null, 46),   // Delete
-            new KeyBinding(null, 107),  // +
-            new KeyBinding(null, 109),  // -
+            new KeyBinding(null, 46),              // Delete
+            new KeyBinding(null, 107),             // +
+            new KeyBinding(null, 109),             // -
+            new KeyBinding(null, 88, ctrl: true),  // Ctrl + X
+            new KeyBinding(null, 67, ctrl: true),  // Ctrl + C
+            new KeyBinding(null, 86, ctrl: true),  // Ctrl + V
         ];
 
         // Make sure keys used when typing doesn't do other stuff
@@ -93,11 +96,18 @@ class NodeHandlerController extends AttachAware {
      * Calculates the size of the node
      */
     calculateSize(_, __) {
-        // Wait a tick so that Angular have time to update the view
-        Timer.run(() {
-            var rect = nodeElement.getBoundingClientRect();
-            width = rect.width / node.scale;
-            height = rect.height / node.scale;;
-        });
+        if (nodeElement == null) {
+            attach();
+        }
+
+        if (nodeElement != null) {
+            // Wait a tick so that Angular have time to update the view
+            Timer.run(() {
+                var rect = nodeElement.getBoundingClientRect();
+                width = rect.width / node.scale;
+                height = rect.height / node.scale;
+                ;
+            });
+        }
     }
 }
