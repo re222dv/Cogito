@@ -92,6 +92,64 @@ var pageJson = {
     }
 };
 
+var pageObject = new Page()
+    ..nodes = [
+        new LineNode.fromJson({
+            'x': 10,
+            'y': 20,
+            'scale': 3,
+            'color': 'green',
+            'start': {
+                'x': 0, 'y': 0
+            },
+            'end': {
+                'x': 200, 'y': 200
+            },
+            'width': 10
+        }),
+        new ArrowNode.fromJson({
+            'x': 10,
+            'y': 20,
+            'scale': 3,
+            'color': 'green',
+            'start': {
+                'x': 0, 'y': 0
+            },
+            'end': {
+                'x': 200, 'y': 200
+            },
+            'width': 10
+        }),
+        new PathNode.fromJson({
+            'x': 200,
+            'y': 300,
+            'scale': 3,
+            'width': 20,
+            'color': 'yellow',
+            'path': 'M 0 0 L 100 100',
+        }),
+        new TextNode.fromJson({
+            'x': 30,
+            'y': 50,
+            'scale': 3,
+            'color': 'red',
+            'size': 20,
+            'text': 'Hello, Mongo!',
+        }),
+        new ListNode.fromJson({
+            'x': 500,
+            'y': 200,
+            'scale': 3,
+            'color': 'blue',
+            'size': 20,
+            'rows': [
+                'AngularDart',
+                'Dart',
+                'MongoDB'
+            ],
+        })
+    ];
+
 main() {
     unittestConfiguration.timeout = new Duration(seconds: 3);
 
@@ -179,66 +237,9 @@ main() {
         });
 
         test('should save a page correctly', () {
-            http.expectPUT('/api/page/1', JSON.encode(pageJson['data'])).respond();
+            http.expectPUT('/api/page/1', JSON.encode(pageJson['data'])).respond(pageJson);
 
-            service.savePage(new Page()
-                ..nodes = [
-                    new LineNode.fromJson({
-                        'x': 10,
-                        'y': 20,
-                        'scale': 3,
-                        'color': 'green',
-                        'start': {
-                            'x': 0, 'y': 0
-                        },
-                        'end': {
-                            'x': 200, 'y': 200
-                        },
-                        'width': 10
-                    }),
-                    new ArrowNode.fromJson({
-                        'x': 10,
-                        'y': 20,
-                        'scale': 3,
-                        'color': 'green',
-                        'start': {
-                            'x': 0, 'y': 0
-                        },
-                        'end': {
-                            'x': 200, 'y': 200
-                        },
-                        'width': 10
-                    }),
-                    new PathNode.fromJson({
-                        'x': 200,
-                        'y': 300,
-                        'scale': 3,
-                        'width': 20,
-                        'color': 'yellow',
-                        'path': 'M 0 0 L 100 100',
-                    }),
-                    new TextNode.fromJson({
-                        'x': 30,
-                        'y': 50,
-                        'scale': 3,
-                        'color': 'red',
-                        'size': 20,
-                        'text': 'Hello, Mongo!',
-                    }),
-                    new ListNode.fromJson({
-                        'x': 500,
-                        'y': 200,
-                        'scale': 3,
-                        'color': 'blue',
-                        'size': 20,
-                        'rows': [
-                            'AngularDart',
-                            'Dart',
-                            'MongoDB'
-                        ],
-                    })
-                ]
-            );
+            service.savePage(pageObject);
 
             return asyncExpectation(() {
                 http.flush();
@@ -246,6 +247,59 @@ main() {
                 return asyncExpectation(() {
                     expect(goSpy).not.toHaveBeenCalled();
                 });
+            });
+        });
+
+        test('should return saved page on success', () {
+            http.expectPUT('/api/page/1', JSON.encode(pageJson['data'])).respond(pageJson);
+
+            service.savePage(pageObject).then(expectAsync((page) {
+                LineNode line = page.nodes[0];
+                ArrowNode arrow = page.nodes[1];
+                PathNode path = page.nodes[2];
+                TextNode text = page.nodes[3];
+                ListNode list = page.nodes[4];
+
+                expect(line.x).toEqual(10);
+                expect(line.y).toEqual(20);
+                expect(list.scale).toEqual(3);
+                expect(line.color).toEqual('green');
+                expect(line.start).toEqual(new Point(0, 0));
+                expect(line.end).toEqual(new Point(200, 200));
+                expect(line.width).toEqual(10);
+
+                expect(arrow.x).toEqual(10);
+                expect(arrow.y).toEqual(20);
+                expect(list.scale).toEqual(3);
+                expect(arrow.color).toEqual('green');
+                expect(arrow.start).toEqual(new Point(0, 0));
+                expect(arrow.end).toEqual(new Point(200, 200));
+                expect(arrow.width).toEqual(10);
+
+                expect(path.x).toEqual(200);
+                expect(path.y).toEqual(300);
+                expect(list.scale).toEqual(3);
+                expect(path.color).toEqual('yellow');
+                expect(path.path).toEqual('M 0 0 L 100 100');
+                expect(path.width).toEqual(20);
+
+                expect(text.x).toEqual(30);
+                expect(text.y).toEqual(50);
+                expect(list.scale).toEqual(3);
+                expect(text.color).toEqual('red');
+                expect(text.text).toEqual('Hello, Mongo!');
+                expect(text.size).toEqual(20);
+
+                expect(list.x).toEqual(500);
+                expect(list.y).toEqual(200);
+                expect(list.scale).toEqual(3);
+                expect(list.color).toEqual('blue');
+                expect(list.rows).toEqual(['AngularDart', 'Dart', 'MongoDB']);
+                expect(list.size).toEqual(20);
+            }));;
+
+            return asyncExpectation(() {
+                http.flush();
             });
         });
 

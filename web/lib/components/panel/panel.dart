@@ -54,7 +54,7 @@ class PanelComponent implements ShadowRootAware {
     }
 
     void logout() {
-        if (tool.page.checkUnchangedChanges() != null) {
+        if (tool.page.checkUnsavedChanges() != null) {
             tool.page.leaveCallback = () => userService.logout();
         } else {
             userService.logout();

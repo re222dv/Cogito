@@ -147,7 +147,7 @@ main() {
             });
 
             test('should have a user menu', () {
-                expect(menu('user', "{'Logout': cmp.userService.logout}")).toBeNotNull();
+                expect(menu('user', "{'Logout': cmp.logout}")).toBeNotNull();
             });
         });
 

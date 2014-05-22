@@ -19,7 +19,7 @@ class PageServiceMock implements PageService {
     bool haveLocal = false;
 
     PageServiceMock() {
-        savePageSpy = guinness.createSpy('savePageSpy');
+        savePageSpy = guinness.createSpy('savePageSpy').andCallFake((page) => new Future.value(page));
     }
 
     Future<Page> getPage() => new Future.sync(() {
@@ -99,6 +99,7 @@ main() {
                     ..bind(PageService, toImplementation: PageServiceMock)
                     ..bind(RemoveLeadingFormatter)
                     ..bind(ToolController)
+                    ..bind(RouteInitializerFn, toValue: (_, __) {})
                     ..bind(TestBed));
 
             // Add required templates to the cache
@@ -113,9 +114,12 @@ main() {
             });
 
             element = tb.compile('<page></page>');
-            tb.rootScope.apply();
+
+            print(element.shadowRoot);
             shadowRoot = element.shadowRoot;
             pageComponent.shadowRoot = shadowRoot;
+
+            tb.rootScope.apply();
 
             // Make sure Angular get time to attach the shadow root
             return new Future.delayed(Duration.ZERO, () {

@@ -8,7 +8,7 @@ typedef void LeaveCallback();
     cssUrl: 'lib/components/page/page.css',
     publishAs: 'cmp'
 )
-class PageComponent {
+class PageComponent extends ShadowRootAware {
     final width = 1200;
     final height = 675;
 
@@ -28,7 +28,7 @@ class PageComponent {
 
     bool allowLeave = false;
     bool unsavedChanges = false;
-    bool onBeforeLeaveModal = false;
+    bool beforeLeaveModal = false;
 
     LeaveCallback leaveCallback = () {};
 
@@ -38,8 +38,10 @@ class PageComponent {
 
         if (loaded) {
             Timer.run(() {
-                paper = shadowRoot.querySelector('rect');
-                svg = shadowRoot.querySelector('svg');
+                if (shadowRoot != null) {
+                    paper = shadowRoot.querySelector('rect');
+                    svg = shadowRoot.querySelector('svg');
+                }
             });
         }
     }
@@ -48,8 +50,6 @@ class PageComponent {
         StreamSubscription onLeaveStream;
 
         tool.page = this;
-
-        shadowRoot = element.shadowRoot;
 
         if (pages.haveLocal) {
             localFound = true;
@@ -67,23 +67,26 @@ class PageComponent {
                             });
 
         window.onBeforeUnload.listen((_) {
-            if (!onBeforeLeaveModal) {
-                var message = checkUnchangedChanges();
+            if (!beforeLeaveModal) {
+                var message = checkUnsavedChanges();
 
                 if (message != null) {
-                    leaveCallback = () => onBeforeLeaveModal = true;
+                    leaveCallback = () => beforeLeaveModal = true;
                 }
 
                 return message;
             }
         });
-        onLeaveStream = routeProvider.route.onLeave.listen((e) {
-            if (checkUnchangedChanges() != null) {
-                e.allowLeave(new Future.value(allowLeave));
+        // routeProvider is null during tests.
+        if (routeProvider != null) {
+            onLeaveStream = routeProvider.route.onLeave.listen((e) {
+                if (checkUnsavedChanges() != null) {
+                    e.allowLeave(new Future.value(allowLeave));
 
-                leaveCallback = () => router.go(e.path, e.parameters);
-            }
-        });
+                    leaveCallback = () => router.go(e.path, e.parameters);
+                }
+            });
+        }
     }
 
     /**
@@ -116,6 +119,11 @@ class PageComponent {
         this.page = pages.getLocalPage();
         loaded = true;
     }
+
+    /**
+     * Save the page to the server
+     */
+    save() => pages.savePage(page).then((savedPage) => this.savedPage = savedPage);
 
     /**
      * Get the point of the [MouseEvent] scaled and moved appropriately to reflect the scaling of the paper
@@ -191,18 +199,11 @@ class PageComponent {
     }
 
     /**
-     * Save the page to the server
-     */
-    save() => pages.savePage(page).then((savedPage) {
-        this.savedPage = savedPage;
-    });
-
-    /**
      * Check if the page have unsaved changes, and if it does displays a modal
      *
      * Returns 'You have unsaved changes! if there are, null otherwise.
      */
-    checkUnchangedChanges([_]) {
+    checkUnsavedChanges([_]) {
         try {
             if (JSON.encode(page.toJson()) != JSON.encode(savedPage.toJson())) {
                 pages.saveLocalPage(page);
@@ -230,5 +231,13 @@ class PageComponent {
         allowLeave = false;
         unsavedChanges = false;
         leaveCallback = () {};
+    }
+
+    void onShadowRoot(ShadowRoot shadowRoot) {
+        this.shadowRoot = shadowRoot;
+        if (loaded) {
+            paper = shadowRoot.querySelector('rect');
+            svg = shadowRoot.querySelector('svg');
+        }
     }
 }
