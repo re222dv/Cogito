@@ -1,5 +1,5 @@
 <main login-controller>
-    <div id="registerBox" ng-class="{open: ctrl.showRegisterBox}">
+    <modal id="registerBox" open="ctrl.showRegisterModal">
         <div ng-if="!ctrl.isRegistering && !ctrl.registrationDone">
             <h1>Register</h1>
 
@@ -11,10 +11,10 @@
                 </div>
                 <div>
                     <label for="rPassword">Password</label>
-                    <input type="password" id="rPassword" ng-model="ctrl.newUser.password" required pattern=".{5}"
+                    <input type="password" id="rPassword" ng-model="ctrl.newUser.password" required pattern=".{5}.*"
                            title="Minimum 5 characters." />
                 </div>
-                <input type="submit" value="Register" />
+                <input type="submit" value="Register" ng-click="ctrl.register()" />
             </form>
         </div>
         <div ng-if="ctrl.isRegistering">
@@ -26,7 +26,27 @@
 
             <button ng-click="ctrl.closeRegisterBox()">Close</button>
         </div>
-    </div>
+    </modal>
+    <modal open="ctrl.showResetModal">
+        <h1>Reset Password</h1>
+        <p class="error">
+            Resetting passwords are not implemented, yet.
+        </p>
+    </modal>
+    <modal open="ctrl.showLicensesModal">
+        <h1>License information</h1>
+        <h2>CC BY SA content</h2>
+        <dl>
+            <dt><a href="../images/bg.jpg">Login screen background image</a></dt>
+                <dd>Compressed version of
+                    <a href="http://500px.com/photo/60590780/forever-by-shady-s-">Forever by Shady S</a>
+                </dd>
+            <dt><a href="../lib/components/panel/icons/user.svg">User menu icon</a></dt>
+                <dd>Different colored version of
+                    <a href="https://launchpad.net/ubuntu/+source/ubuntu-themes">Ubuntu mobile contact icon</a>
+                </dd>
+        </dl>
+    </modal>
     <section>
         <span id="loginError" ng-if="ctrl.loginError">Incorrect email or password.</span>
         <form id="loginForm" ng-submit="ctrl.login()">
@@ -36,7 +56,7 @@
             </div>
             <div>
                 <label for="password">Password</label>
-                <input type="password" id="password" ng-model="ctrl.user.password" required pattern=".{5}"
+                <input type="password" id="password" ng-model="ctrl.user.password" required pattern=".{5}.*"
                        title="Minimum 5 characters." />
                 <a onclick="document.querySelector('#loginSubmit').click();">
                     <svg xmlns="http://www.w3.org/2000/svg"
@@ -55,8 +75,8 @@
             </div>
         </form>
         <div id="registerButton">
-            <button ng-click="ctrl.showRegisterBox = true">Not a member?</button>
-            <p><a href="#">Reset Password</a></p>
+            <button ng-click="ctrl.showRegisterModal = true">Not a member?</button>
+            <p><a href ng-click="ctrl.showResetModal = true">Reset Password</a></p>
         </div>
         <a href="#more" ng-click="ctrl.scrollDown()">
             <svg id="down"
@@ -98,6 +118,6 @@
         <div>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lacinia fringilla odio vel mattis. Donec a elit a nibh porta ultrices venenatis in diam. Aenean at hendrerit tellus, et dapibus nisi. Integer vel risus tincidunt, tempor justo et, laoreet libero. Maecenas aliquam, metus a vestibulum cursus, lacus nisl lacinia libero, sit amet porttitor diam lectus ac urna. Vivamus at faucibus lorem. Aenean vehicula pharetra velit, id consequat ante cursus vitae. Nullam vel magna dapibus, egestas tellus sit amet, accumsan leo. Phasellus eleifend molestie diam ac consequat. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla posuere lacus eu ultricies malesuada.
         </div>
-        <p>Background image used under CC-BY-SA. Original work: <a href="http://500px.com/photo/60590780/forever-by-shady-s-">Forever by Shady S</a>.</p>
+        <p><a href ng-click="ctrl.showLicensesModal = true">Open Source Licenses</a></p>
     </footer>
 </main>

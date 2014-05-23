@@ -15,7 +15,9 @@ class LoginController {
     var isRegistering = false;
     var loginError = false;
     var registrationDone = false;
-    var showRegisterBox = false;
+    var showRegisterModal = false;
+    var showResetModal = false;
+    var showLicensesModal = false;
     var unknownRegisterError = false;
 
     LoginController(this.element, this.router, this.userService) {
@@ -28,7 +30,7 @@ class LoginController {
 
     closeRegisterBox() {
         registrationDone = false;
-        showRegisterBox = false;
+        showRegisterModal = false;
     }
 
     login() => userService.login(user).then((success) {

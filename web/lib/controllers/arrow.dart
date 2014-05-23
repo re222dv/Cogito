@@ -35,31 +35,31 @@ class ArrowController {
 
     String get points =>
         // Point A
-        '${ node.start.x + width * math.cos(quarterRadians) }'
-        '${ node.start.y + width * math.sin(quarterRadians) },'
+        '${ node.start.x + width * math.cos(quarterRadians) } '
+        '${ node.start.y + width * math.sin(quarterRadians) }, '
 
         // Point B
-        '${ node.end.x - headCut * math.cos(radians - math.atan(width / headLength)) }'
-        '${ node.end.y - headCut * math.sin(radians - math.atan(width / headLength)) },'
+        '${ node.end.x - headCut * math.cos(radians - math.atan(width / headLength)) } '
+        '${ node.end.y - headCut * math.sin(radians - math.atan(width / headLength)) }, '
 
         // Point C
-        '${ node.end.x - headHypotenuse * math.cos(radians - math.atan(headWidth / headLength) / 2) }'
-        '${ node.end.y - headHypotenuse * math.sin(radians - math.atan(headWidth / headLength) / 2) },'
+        '${ node.end.x - headHypotenuse * math.cos(radians - math.atan(headWidth / headLength) / 2) } '
+        '${ node.end.y - headHypotenuse * math.sin(radians - math.atan(headWidth / headLength) / 2) }, '
 
         // Point D
-        '${ node.end.x } ${ node.end.y },'
+        '${ node.end.x } ${ node.end.y }, '
 
         // Point E
-        '${ node.end.x - headHypotenuse * math.cos(radians + math.atan(headWidth / headLength) / 2) }'
-        '${ node.end.y - headHypotenuse * math.sin(radians + math.atan(headWidth / headLength) / 2) },'
+        '${ node.end.x - headHypotenuse * math.cos(radians + math.atan(headWidth / headLength) / 2) } '
+        '${ node.end.y - headHypotenuse * math.sin(radians + math.atan(headWidth / headLength) / 2) }, '
 
         // Point F
-        '${ node.end.x - headCut * math.cos(radians + math.atan(width / headLength)) }'
-        '${ node.end.y - headCut * math.sin(radians + math.atan(width / headLength)) },'
+        '${ node.end.x - headCut * math.cos(radians + math.atan(width / headLength)) } '
+        '${ node.end.y - headCut * math.sin(radians + math.atan(width / headLength)) }, '
 
         // Point G
-        '${ node.start.x - width * math.cos(quarterRadians) }'
-        '${ node.start.y - width * math.sin(quarterRadians) }';
+        '${ node.start.x - width * math.cos(quarterRadians) } '
+        '${ node.start.y - width * math.sin(quarterRadians) } ';
 
     ArrowController(Scope scope) {
         node = scope.context['node'];

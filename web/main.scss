@@ -32,7 +32,129 @@ main {
     background-color: #333;
     font-family: Arial, sans-serif;
 
-    #registerBox {
+    modal {
+        h1 {
+            text-align: center;
+        }
+
+        .error {
+            color: red;
+        }
+
+        form {
+            margin-top: 30px;
+            .error {
+                position: absolute;
+                top: 6.5rem;
+                right: 9rem;
+                color: red;
+            }
+
+            div {
+                display: table-row;
+
+                width: 100%;
+
+                label, input {
+                    display: table-cell;
+                }
+
+                label {
+                    position: relative;
+
+                    margin: 0;
+                    padding: 0 1rem;
+
+                    width: 5rem;
+
+                    text-align: right;
+                }
+
+                input {
+                    margin: 0.3rem 8px;
+                    padding: 0.3rem;
+
+                    width: 10rem;
+
+                    background-color: rgba(255, 255, 255, 0.8);
+                    border: 1px solid black;
+
+                    font-size: 1rem;
+                    transition: background-color 0.5s ease;
+                }
+
+                input.ng-touched:invalid:not(:focus):not(:active) {
+                    border-color: red;
+                    box-shadow: 0 0 3px red;
+                }
+            }
+
+            p {
+                margin-bottom: 3.8rem;
+
+                font-size: 1.3rem;
+                text-align: center;
+            }
+        }
+
+        input[type="submit"], button {
+            display: block;
+
+            margin: 2rem auto;
+            padding: 10px 50px;
+
+            cursor: pointer;
+
+            color: rgba(255, 255, 255, 0.8);
+            background-color: rgba(0, 0, 0, 0.3);
+            border: none;
+            border-radius: 10px;
+
+            font-size: 1.3rem;
+            transition: background-color 0.5s ease;
+
+            &:hover {
+                background-color: rgba(0, 0, 0, 0.5);
+            }
+        }
+
+        loading {
+            display: block;
+
+            margin: auto;
+            padding-top: 6rem;
+
+            width: 40px;
+            height: 40px;
+        }
+
+        dl {
+            dt {
+                padding-bottom: 0.5rem;
+                font-weight: bold;
+
+                a {
+                    color: #333;
+                    text-decoration: none;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+
+            dd {
+                text-align: right;
+
+                a {
+                    color: #3c3a30;
+                    white-space: nowrap;
+                }
+            }
+        }
+    }
+
+    /*#registerBox {
         display: flex;
         flex-direction: row;
         align-items: flex-start;
@@ -152,7 +274,7 @@ main {
 
     #registerBox.open {
         top: 0;
-    }
+    }*/
 
     section {
         display: flex;

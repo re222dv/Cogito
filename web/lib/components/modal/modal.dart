@@ -10,7 +10,7 @@ part of cogito_web;
     publishAs: 'cmp',
     map: const {'open': '<=>open'}
 )
-class ModalComponent {
+class ModalComponent extends ShadowRootAware {
     bool _open = true;
 
     bool get open => _open;
@@ -18,5 +18,19 @@ class ModalComponent {
         if (open is bool) {
             _open = open;
         }
+    }
+
+    onShadowRoot(ShadowRoot shadowRoot) {
+        shadowRoot.querySelector('#background').onClick.listen((e) {
+            open = false;
+
+            e.stopPropagation();
+            e.preventDefault();
+        });
+
+        shadowRoot.querySelector('#dialog').onClick.listen((e) {
+            e.stopPropagation();
+            e.preventDefault();
+        });
     }
 }
