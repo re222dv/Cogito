@@ -110,7 +110,7 @@
                         stroke="{{ node.strokeColor }}" stroke-width="{{ node.strokeWidth }}"
                         fill="{{ node.fillColor }}" ng-attr-r="{{ node.radius }}" />
             </g>
-            <g ng-if="tool.selectedNode == node" drag-handles>
+            <g ng-if="tool.selectedNode == node && node.type != 'circle'" drag-handles>
                 <circle ng-attr-r="{{ 5 / node.scale }}" class="nw"
                         cx="-5" cy="-5" />
                 <circle ng-attr-r="{{ 5 / node.scale }}" class="ne"
@@ -119,6 +119,17 @@
                         cx="-5" ng-attr-cy="{{ nodeHandler.height + 5 }}" />
                 <circle ng-attr-r="{{ 5 / node.scale }}" class="se"
                         ng-attr-cx="{{ nodeHandler.width + 5 }}" ng-attr-cy="{{ nodeHandler.height + 5 }}" />
+            </g>
+            <g ng-if="tool.selectedNode == node && node.type == 'circle'" drag-handles>
+                <circle ng-attr-r="{{ 5 / node.scale }}" class="nw"
+                        ng-attr-cx="{{ -5 - node.radius }}" ng-attr-cy="{{ -5 - node.radius }}" />
+                <circle ng-attr-r="{{ 5 / node.scale }}" class="ne"
+                        ng-attr-cx="{{ nodeHandler.width + 5 - node.radius }}" ng-attr-cy="{{ -5 - node.radius }}" />
+                <circle ng-attr-r="{{ 5 / node.scale }}" class="sw"
+                        ng-attr-cx="{{ -5 - node.radius }}" ng-attr-cy="{{ nodeHandler.height + 5 - node.radius }}" />
+                <circle ng-attr-r="{{ 5 / node.scale }}" class="se"
+                        ng-attr-cx="{{ nodeHandler.width + 5 - node.radius }}"
+                        ng-attr-cy="{{ nodeHandler.height + 5 - node.radius }}" />
             </g>
         </g>
     </svg>

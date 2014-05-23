@@ -42,9 +42,12 @@ class NodeHandlerController extends AttachAware {
     }
 
     NodeHandlerController(this.element, ToolController tool, Scope scope) {
+        scope.watch('node.editing', calculateSize, canChangeModel: true);
+        scope.watch('node.end', calculateSize, canChangeModel: true);
+        scope.watch('node.radius', calculateSize, canChangeModel: true);
         scope.watch('node.size', calculateSize, canChangeModel: true);
-        scope.watch('node.width', calculateSize, canChangeModel: true);
         scope.watch('node.text', calculateSize, canChangeModel: true);
+        scope.watch('node.width', calculateSize, canChangeModel: true);
 
         element.onMouseDown.where((_) => tool.selectedTool == 'select' && !node.editing).listen((MouseEvent e) {
 
@@ -84,7 +87,6 @@ class NodeHandlerController extends AttachAware {
                 var rect = nodeElement.getBoundingClientRect();
                 width = rect.width / node.scale;
                 height = rect.height / node.scale;
-                ;
             });
         }
     }
