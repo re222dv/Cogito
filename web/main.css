@@ -3,145 +3,24 @@ html, body {
   padding: 0;
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   background-color: #286C94; }
   html page, body page {
     display: block;
+    position: fixed;
     width: 100%;
     height: 100%; }
 
 main {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  overflow-x: hidden;
-  overflow-y: scroll;
   color: white;
   background-color: #333;
-  font-family: Arial, sans-serif;
-    /*#registerBox {
-        display: flex;
-        flex-direction: row;
-        align-items: flex-start;
-        justify-content: center;
-
-        position: absolute;
-        top: -21rem;
-        left: 0;
-        z-index: 5;
-
-        width: 100%;
-
-        transition: top 1s ease-in-out;
-
-        > div {
-            position: relative;
-            padding: 2rem;
-
-            width: 20rem;
-            height: 17rem;
-
-            color: rgba(0, 0, 0, 0.7);
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 0 0 10px 10px;
-
-            h1 {
-                margin-top: 1rem;
-                margin-bottom: 2.5rem;
-                text-align: center;
-            }
-
-            form div {
-                display: table-row;
-
-                width: 100%;
-
-                label, input {
-                    display: table-cell;
-                }
-
-                label {
-                    position: relative;
-
-                    margin: 0;
-                    padding: 0 1rem;
-
-                    width: 5rem;
-
-                    text-align: right;
-                }
-
-                input {
-                    margin: 0.3rem 8px;
-                    padding: 0.3rem;
-
-                    width: 10rem;
-
-                    background-color: rgba(255, 255, 255, 0.8);
-                    border: 1px solid black;
-
-                    font-size: 1rem;
-                    transition: background-color 0.5s ease;
-                }
-
-                input.ng-touched:invalid:not(:focus):not(:active) {
-                    border-color: red;
-                    box-shadow: 0 0 3px red;
-                }
-            }
-
-            .error {
-                position: absolute;
-                top: 6.5rem;
-                right: 9rem;
-                color: red;
-            }
-
-            p {
-                margin-bottom: 3.8rem;
-
-                font-size: 1.3rem;
-                text-align: center;
-            }
-
-            input[type="submit"], button {
-                display: block;
-
-                margin: 2rem auto;
-                padding: 10px 50px;
-
-                cursor: pointer;
-
-                color: rgba(255, 255, 255, 0.8);
-                background-color: rgba(0, 0, 0, 0.3);
-                border: none;
-                border-radius: 10px;
-
-                font-size: 1.3rem;
-                transition: background-color 0.5s ease;
-
-                &:hover {
-                    background-color: rgba(0, 0, 0, 0.5);
-                }
-            }
-        }
-
-        >div loading {
-            display: block;
-
-            margin: auto;
-            padding-top: 6rem;
-
-            width: 40px;
-            height: 40px;
-        }
-    }
-
-    #registerBox.open {
-        top: 0;
-    }*/ }
+  font-family: Arial, sans-serif; }
   main modal h1 {
     text-align: center; }
   main modal .error {
@@ -216,19 +95,21 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: relative;
+    position: fixed;
     padding-top: 100px;
     z-index: 2;
     box-sizing: border-box;
     width: 100%;
     height: 100%;
     background: url(images/bg.jpg) no-repeat center center fixed;
-    background-size: cover; }
+    background-size: cover;
+    pointer-events: none; }
     main section #loginError {
       margin-left: 25px; }
     main section #loginForm {
       position: relative;
-      padding-right: 50px; }
+      padding-right: 50px;
+      pointer-events: auto; }
       main section #loginForm div {
         display: table-row; }
       main section #loginForm label, main section #loginForm input, main section #loginForm p {
@@ -299,7 +180,8 @@ main {
         padding-right: 2px;
         text-align: right; }
     main section #registerButton {
-      margin-top: 100px; }
+      margin-top: 100px;
+      pointer-events: auto; }
       main section #registerButton button {
         display: block;
         padding: 10px 50px;
@@ -323,7 +205,8 @@ main {
       position: absolute;
       left: calc(50% - 65px / 2);
       bottom: 30px;
-      fill: rgba(255, 255, 255, 0.5); }
+      fill: rgba(255, 255, 255, 0.5);
+      pointer-events: auto; }
     main section #down:hover [cy] {
       fill: white;
       transition: fill 0.5s; }
@@ -335,6 +218,11 @@ main {
       transition-delay: 0.35s; }
     main section #down:hover [cy="35"] {
       transition-delay: 0.45s; }
+  main > div {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%; }
   main article:before {
     content: '';
     display: block;
@@ -369,6 +257,7 @@ main {
     background: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%);
     border-top: 1px solid #000000; }
   main footer {
+    position: relative;
     z-index: 1;
     height: 12rem;
     background-color: #333; }

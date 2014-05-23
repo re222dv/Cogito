@@ -21,12 +21,17 @@ class ModalComponent extends ShadowRootAware {
     }
 
     onShadowRoot(ShadowRoot shadowRoot) {
-        shadowRoot.querySelector('#background').onClick.listen((e) {
-            open = false;
+        shadowRoot.querySelector('#background')
+            ..onClick.listen((e) {
+                open = false;
 
-            e.stopPropagation();
-            e.preventDefault();
-        });
+                e.stopPropagation();
+                e.preventDefault();
+            })
+            ..onMouseWheel.listen((e) {
+                e.stopPropagation();
+                e.preventDefault();
+            });
 
         shadowRoot.querySelector('#dialog').onClick.listen((e) {
             e.stopPropagation();

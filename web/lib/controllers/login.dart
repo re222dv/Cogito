@@ -3,7 +3,7 @@ part of cogito_web;
 @Controller(
     selector: '[login-controller]',
     publishAs: 'ctrl')
-class LoginController {
+class LoginController extends AttachAware {
     Element element;
     Router router;
     UserService userService;
@@ -60,11 +60,28 @@ class LoginController {
         });
     }
 
+    /**
+     * Scroll past the login section.
+     */
     scrollDown() {
         var properties = {
             'scrollTop': element.querySelector('section').clientHeight
         };
 
-        animate(element, properties: properties, duration: 1000);
+        animate(document.body, properties: properties, duration: 1000);
+    }
+
+    attach() {
+        // Fix for the footer to come above the login section when scrolled down
+        var loginSectionHeight = element.querySelector('section').clientHeight;
+        var footer = element.querySelector('footer');
+
+        document.onScroll.listen((e) {
+            if (document.body.scrollTop > loginSectionHeight) {
+                footer.style.zIndex = '2';
+            } else {
+                footer.style.zIndex = '1';
+            }
+        });
     }
 }
