@@ -42,8 +42,18 @@ Med lite mer fokus på gränsnitt känns appen nu lite mer finputsad och på en 
 builden är nu [#24](https://travis-ci.org/re222dv/Cogito/builds/25400736) på Travis.
 
 Jag har den här Sprinten fått ändra på en ganska stor del av mitt fokus, nämligen Touchstöd.
-Varför gåt jag igenom mer ingående i [Touchstöd.md](https://github.com/re222dv/Cogito/blob/master/dokumentation/Touchst%C3%B6d.md)
+Varför gåt jag igenom mer ingående i
+[Touchstöd.md](https://github.com/re222dv/Cogito/blob/master/dokumentation/Touchst%C3%B6d.md)
 
 En uppdaterad build finns publicerad version på [re222dv-cogito.herokuapp.com](http://re222dv-cogito.herokuapp.com/)
 än så länge finns det inget stöd för inloggning så fältet för användarnamn och lösenord kan
 lämnas tomt.
+
+# Sprint 6
+Inga större saker finns att rapportera om veckan, jag har börjat med att runda av och se
+till att fixa det som ska fixas innan kursens slut. Den sista builden är nu
+[#50](https://travis-ci.org/re222dv/Cogito/builds/25909802).
+
+Den publicerade versionen är också uppdaterad och hittas som vanligt på
+[re222dv-cogito.herokuapp.com](http://re222dv-cogito.herokuapp.com/). Nu krävs användarnamn
+och lösenord. Avänd antingen a@a aaaaa eller registrera en användare (fungerande mail krävs inte).
