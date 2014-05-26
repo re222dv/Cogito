@@ -77,12 +77,13 @@ abstract class Node {
 
 class Page {
     List<Node> nodes = [];
+    var user;
 
     Page();
 
     Page.fromJson(Map json) {
         json['nodes'].forEach((Map json) {
-            switch(json['type']) {
+            switch (json['type']) {
                 case 'line':
                     nodes.add(new LineNode.fromJson(json));
                     break;
@@ -106,10 +107,13 @@ class Page {
                     break;
             }
         });
+
+        user = json['user'];
     }
 
     Map toJson() => {
-        'nodes': nodes.map((node) => node.toJson()).toList()
+        'nodes': nodes.map((node) => node.toJson()).toList(),
+        'user': user
     };
 
     Page clone() => new Page.fromJson(toJson());

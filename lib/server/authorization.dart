@@ -36,7 +36,10 @@ class Authorization {
             DbCollection users = db.collection('Users');
 
             return users.findOne({'email': user.email}).then((dbUser) {
-                if (dbUser == null || key != user.getKey(dbUser)) {
+
+                if (dbUser != null && key == user.getKey(dbUser)) {
+                    request.session['UID'] = dbUser['_id'];
+                } else {
                     throw new AuthorizationException('authFail', 'auth failed');
                 }
             });

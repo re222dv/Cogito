@@ -18,7 +18,10 @@ class PageRoutes {
         return db.open().then((_) {
             DbCollection pages = db.collection('Pages');
 
-            return pages.update({}, page.toJson()).then((_) => new Response(page.toJson()));
+            page.user = request.httpRequest.session['UID'];
+
+            return pages.update({'user': page.user}, page.toJson(), upsert: true)
+                .then((_) => new Response(page.toJson()));
         }).whenComplete(db.close);
     }
 
@@ -29,7 +32,17 @@ class PageRoutes {
         return db.open().then((_) {
             DbCollection pages = db.collection('Pages');
 
-            return pages.findOne().then((json) => new Response(json));
+            var uid = request.httpRequest.session['UID'];
+
+            return pages.findOne({'user': uid}).then((json) {
+                if (json == null) {
+                    json = new Page()
+                        ..user = uid
+                        ..toJson();
+                }
+
+                return new Response(json);
+            });
         }).whenComplete(db.close);
     }
 }
