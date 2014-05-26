@@ -80,7 +80,7 @@ class LoginController extends AttachAware {
             if (document.body.scrollTop > loginSectionHeight) {
                 footer.style.zIndex = '2';
             } else {
-                footer.style.zIndex = '1';
+                footer.style.zIndex = '0';
             }
         });
     }

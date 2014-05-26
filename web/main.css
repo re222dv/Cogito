@@ -78,7 +78,7 @@ main {
     width: 40px;
     height: 40px; }
   main modal dl dt {
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.3rem;
     font-weight: bold; }
     main modal dl dt a {
       color: #333;
@@ -87,6 +87,8 @@ main {
         text-decoration: underline; }
   main modal dl dd {
     text-align: right; }
+    main modal dl dd:not(:last-of-type) {
+      margin-bottom: 0.8rem; }
     main modal dl dd a {
       color: #3c3a30;
       white-space: nowrap; }
@@ -238,15 +240,29 @@ main {
     background: #eee; }
     main article div {
       margin: 0 auto;
-      padding: 3rem;
+      padding: 5rem;
       width: 960px; }
-      main article div p:nth-of-type(2n - 1) {
-        padding-right: 400px; }
-      main article div p:nth-of-type(2n) {
-        padding-left: 400px;
-        text-align: right; }
-      main article div h1:nth-of-type(2n) {
-        text-align: right; }
+      main article div h1 {
+        clear: both; }
+        main article div h1:nth-of-type(2n) {
+          text-align: right; }
+      main article div p {
+        width: 560px; }
+        main article div p:nth-of-type(2n - 1) {
+          float: left; }
+        main article div p:nth-of-type(2n) {
+          float: right;
+          text-align: right; }
+      main article div img {
+        margin-top: -4rem;
+        margin-bottom: 4rem;
+        width: 320px; }
+        main article div img:nth-of-type(2n - 1) {
+          float: right; }
+        main article div img:nth-of-type(2n) {
+          float: left; }
+      main article div .clear {
+        clear: both; }
   main article:after {
     content: '';
     display: block;
@@ -258,24 +274,30 @@ main {
     border-top: 1px solid #000000; }
   main footer {
     position: relative;
-    z-index: 1;
-    height: 12rem;
+    z-index: 0;
+    height: 10rem;
     background-color: #333; }
     main footer div {
       position: fixed;
       bottom: 0;
-      margin: 3rem;
+      margin: 3rem 10rem;
       padding: 0;
-      height: 6rem; }
-    main footer p {
+      height: 4rem; }
+      main footer div p {
+        width: 700px; }
+        main footer div p:first-child {
+          margin-top: 0; }
+        main footer div p:last-child {
+          margin-bottom: 0; }
+    main footer > p {
       position: fixed;
-      right: 2rem;
+      right: 10rem;
       bottom: 1rem;
       margin: 0;
       color: #666;
       font-style: italic;
       text-align: right; }
-      main footer p a {
+      main footer > p a {
         color: #666;
         text-decoration: none; }
   main footer:hover a {

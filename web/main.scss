@@ -129,7 +129,7 @@ main {
 
         dl {
             dt {
-                padding-bottom: 0.5rem;
+                padding-bottom: 0.3rem;
                 font-weight: bold;
 
                 a {
@@ -144,6 +144,10 @@ main {
 
             dd {
                 text-align: right;
+
+                &:not(:last-of-type) {
+                    margin-bottom: 0.8rem;
+                }
 
                 a {
                     color: #3c3a30;
@@ -407,21 +411,48 @@ main {
 
         div {
             margin: 0 auto;
-            padding: 3rem;
+            padding: 5rem;
 
             width: 960px;
 
-            p:nth-of-type(2n - 1) {
-                padding-right: 400px;
+            h1 {
+                clear: both;
+
+                &:nth-of-type(2n) {
+                    text-align: right;
+                }
             }
 
-            p:nth-of-type(2n) {
-                padding-left: 400px;
-                text-align: right;
+            p {
+                width: 560px;
+
+                &:nth-of-type(2n - 1) {
+                    float: left;
+                }
+
+                &:nth-of-type(2n) {
+                    float: right;
+                    text-align: right;
+                }
             }
 
-            h1:nth-of-type(2n) {
-                text-align: right;
+            img {
+                margin-top: -4rem;
+                margin-bottom: 4rem;
+
+                width: 320px;
+
+                &:nth-of-type(2n - 1) {
+                    float: right;
+                }
+
+                &:nth-of-type(2n) {
+                    float: left;
+                }
+            }
+
+            .clear {
+                clear: both;
             }
         }
     }
@@ -442,8 +473,8 @@ main {
 
     footer {
         position: relative;
-        z-index: 1;
-        height: 12rem;
+        z-index: 0;
+        height: 10rem;
 
         background-color: #333;
 
@@ -451,14 +482,26 @@ main {
             position: fixed;
             bottom: 0;
 
-            margin: 3rem;
+            margin: 3rem 10rem;
             padding: 0;
-            height: 6rem;
+            height: 4rem;
+
+            p {
+                width: 700px;
+
+                &:first-child {
+                    margin-top: 0;
+                }
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
         }
 
-        p {
+        > p {
             position: fixed;
-            right: 2rem;
+            right: 10rem;
             bottom: 1rem;
             margin: 0;
 
