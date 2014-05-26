@@ -69,12 +69,13 @@ class PageComponent extends ShadowRootAware {
                                 e.stopPropagation();
                             });
 
-        window.onBeforeUnload.listen((_) {
+        window.onBeforeUnload.listen((e) {
             if (!beforeLeaveModal) {
                 var message = checkUnsavedChanges();
 
                 if (message != null) {
                     leaveCallback = () => beforeLeaveModal = true;
+                    e.returnValue = message;
                 }
 
                 return message;
