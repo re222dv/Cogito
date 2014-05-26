@@ -20,6 +20,7 @@ class WebModule extends Module {
         bind(DropDownComponent);
         bind(LoadingComponent);
         bind(ModalComponent);
+        bind(NotificationsComponent);
         bind(PageComponent);
         bind(PanelComponent);
         bind(PopupMenuComponent);

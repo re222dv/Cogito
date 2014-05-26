@@ -23,7 +23,7 @@ class HttpService {
                    headers: headers, xsrfHeaderName: xsrfHeaderName,
                    xsrfCookieName: xsrfCookieName, interceptors: interceptors,
                    cache: cache, timeout: timeout)
-               .catchError((_) => _router.go('login', {}), test: _isAuthError);
+              .catchError((_) => _router.go('login', {}), test: _isAuthError);
 
     /**
      * Shortcut method for PUT requests.  See [Http.call] for a complete description
@@ -37,5 +37,5 @@ class HttpService {
                    headers: headers, xsrfHeaderName: xsrfHeaderName,
                    xsrfCookieName: xsrfCookieName, interceptors: interceptors,
                    cache: cache, timeout: timeout)
-               .catchError((_) => _router.go('login', {}), test: _isAuthError);
+              .catchError((_) => _router.go('login', {}), test: _isAuthError);
 }

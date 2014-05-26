@@ -14,6 +14,7 @@ part 'baseclasses/tool_decorators.dart';
 part 'components/dropdown/dropdown.dart';
 part 'components/loading/loading.dart';
 part 'components/modal/modal.dart';
+part 'components/notifications/notifications.dart';
 part 'components/page/page.dart';
 part 'components/panel/panel.dart';
 part 'components/popup_menu/popup_menu.dart';
