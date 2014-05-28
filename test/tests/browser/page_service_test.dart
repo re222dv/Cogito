@@ -88,7 +88,8 @@ var pageJson = {
                     'MongoDB'
                 ]
             }
-        ]
+        ],
+        'user': '123'
     }
 };
 
@@ -193,6 +194,8 @@ main() {
                 TextNode text = page.nodes[3];
                 ListNode list = page.nodes[4];
 
+                expect(page.user).toEqual('123');
+
                 expect(line.x).toEqual(10);
                 expect(line.y).toEqual(20);
                 expect(list.scale).toEqual(3);
@@ -259,6 +262,8 @@ main() {
                 PathNode path = page.nodes[2];
                 TextNode text = page.nodes[3];
                 ListNode list = page.nodes[4];
+
+                expect(page.user).toEqual('123');
 
                 expect(line.x).toEqual(10);
                 expect(line.y).toEqual(20);
