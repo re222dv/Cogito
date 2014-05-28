@@ -149,7 +149,8 @@ var pageObject = new Page()
                 'MongoDB'
             ],
         })
-    ];
+    ]
+    ..user = '123';
 
 main() {
     unittestConfiguration.timeout = new Duration(seconds: 3);
