@@ -65,6 +65,7 @@ class MockRequest extends Mock implements Request {
 
 class MockHttpRequest extends Mock implements HttpRequest {
     List<Cookie> cookies = [];
+    Map<String, String> session = {};
 
     // Ignore warnings about unimplemented methods
     noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);

@@ -94,7 +94,8 @@ main() {
                             'strokeColor': 'blue',
                             'strokeWidth': 40
                         }
-                    ]
+                    ],
+                    'user': '456'
                 });
 
                 LineNode line = page.nodes[0];
@@ -104,6 +105,8 @@ main() {
                 ListNode list = page.nodes[4];
                 RectNode rect = page.nodes[5];
                 CircleNode circle = page.nodes[6];
+
+                expect(page.user).toEqual('456');
 
                 expect(line.x).toEqual(10);
                 expect(line.y).toEqual(20);
@@ -377,7 +380,8 @@ main() {
                                 ..strokeColor = 'blue'
                                 ..strokeWidth = 40
                         )
-                    ];
+                    ]
+                    ..user = '123';
 
                 expect(page.toJson()).toEqual({
                     'nodes': [
@@ -457,7 +461,8 @@ main() {
                             'strokeColor': 'blue',
                             'strokeWidth': 40
                         }
-                    ]
+                    ],
+                    'user': '123'
                 });
             });
 

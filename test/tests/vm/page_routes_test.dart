@@ -51,7 +51,16 @@ class MockCollection extends Mock implements DbCollection {
 
 
 class MockRequest extends Mock implements Request {
+    var httpRequest = new MockHttpRequest();
     var json;
+
+    // Ignore warnings about unimplemented methods
+    noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+}
+
+
+class MockHttpRequest extends Mock implements HttpRequest {
+    Map<String, String> session = {};
 
     // Ignore warnings about unimplemented methods
     noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
@@ -76,6 +85,7 @@ main() {
         describe('save', () {
 
             beforeEach(() {
+                request.httpRequest.session['UID'] = '123';
                 request.json = new Page().toJson()
                     ..['invalid'] = 'invalid';
             });
@@ -92,7 +102,7 @@ main() {
 
             it('should save a validated page', () {
                 MockCollection.updateCallback = expectAsync((object) {
-                    expect(object).toEqual({'nodes': []});
+                    expect(object).toEqual({'nodes': [], 'user': '123'});
                 });
 
                 return page.save(request);
@@ -102,7 +112,7 @@ main() {
                 var response = page.save(request);
 
                 return response.then(expectAsync((response) {
-                    expect(response.data).toEqual({'nodes': []});
+                    expect(response.data).toEqual({'nodes': [], 'user': '123'});
                     expect(response.status).toEqual(Status.SUCCESS);
                 }));
             });
