@@ -114,3 +114,6 @@ modal {
     transition: background-color 0.5s ease; }
     modal button:hover {
       background-color: rgba(0, 0, 0, 0.5); }
+
+svg:not(.select) [node-handler] {
+  pointer-events: none; }

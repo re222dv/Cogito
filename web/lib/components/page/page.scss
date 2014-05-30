@@ -165,3 +165,7 @@ modal {
         }
     }
 }
+
+svg:not(.select) [node-handler] {
+    pointer-events: none;
+}

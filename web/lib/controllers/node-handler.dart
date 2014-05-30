@@ -46,6 +46,7 @@ class NodeHandlerController extends AttachAware {
         scope.watch('node.end', calculateSize, canChangeModel: true);
         scope.watch('node.radius', calculateSize, canChangeModel: true);
         scope.watch('node.size', calculateSize, canChangeModel: true);
+        scope.watch('node.strokeWidth', calculateSize, canChangeModel: true);
         scope.watch('node.text', calculateSize, canChangeModel: true);
         scope.watch('node.width', calculateSize, canChangeModel: true);
 
