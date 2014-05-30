@@ -13,6 +13,7 @@ class KeyboardListenerDecorator {
     KeyboardListenerDecorator(this.clipboard, this.tool) {
         keyMap = [
             new KeyBinding(tool.save, 83, ctrl: true),                          // Ctrl + S
+            new KeyBinding(tool.delete, 8),                                     // Backspace
             new KeyBinding(tool.delete, 46),                                    // Delete
             new KeyBinding(tool.delete, 46, ctrl: true),                        // Ctrl + Delete
             new KeyBinding(tool.raise, 107),                                    // +

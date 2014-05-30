@@ -4,7 +4,7 @@ packages:
   RestLibrary:
     description:
       ref: null
-      resolved-ref: b319384df92006ff108837f36dc605759d79532a
+      resolved-ref: "301abe9df77fbda10bfa2f09fb35bba5788e63ff"
       url: "https://github.com/Pajn/RestLibrary.git"
     source: git
     version: "0.2.0"
