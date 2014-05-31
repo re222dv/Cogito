@@ -189,13 +189,13 @@ main {
         padding: 10px 50px;
         cursor: pointer;
         color: rgba(0, 0, 0, 0.6);
-        background-color: rgba(255, 255, 255, 0.5);
+        background-color: rgba(255, 255, 255, 0.6);
         border: none;
         border-radius: 10px;
         font-size: 1.3rem;
         transition: background-color 0.5s ease; }
       main section #registerButton button:hover, main section #registerButton button:focus {
-        background-color: rgba(255, 255, 255, 0.8); }
+        background-color: rgba(255, 255, 255, 0.9); }
       main section #registerButton p {
         text-align: center; }
         main section #registerButton p a {

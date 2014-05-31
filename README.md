@@ -19,7 +19,8 @@ den första sidan så VM startar upp, efter det ska det dock gå snabbt.
 Det finns två sätt att köra applikationen lokalt, antingen som Javascript eller som Dart i Dartium.
 Servern måste alltid körs i Dart VM.
 
-Installera först [Dart SDK](https://www.dartlang.org/tools/download.html)
+Installera först [Dart SDK](https://www.dartlang.org/tools/download.html) kör sedan `pub get` i
+applikationsrooten för att installera beroenden (beroendena är specificerade i filen pubspec.yaml).
 
 Applikationen är redan förberedd för att köras som Dart men för att köra applikationen som Javascript
 måste den kompileras. Detta görs genom att köra `pub build` i applikationsrooten. Efter det måste
