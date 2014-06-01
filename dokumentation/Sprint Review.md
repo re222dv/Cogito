@@ -57,3 +57,10 @@ till att fixa det som ska fixas innan kursens slut. Den sista builden är nu
 Den publicerade versionen är också uppdaterad och hittas som vanligt på
 [re222dv-cogito.herokuapp.com](http://re222dv-cogito.herokuapp.com/). Nu krävs användarnamn
 och lösenord. Avänd antingen a@a aaaaa eller registrera en användare (fungerande mail krävs inte).
+
+# Sprint 7
+Lite buggfixar men främst dokumentationsarbete. Den sista builden är nu
+[#57](https://travis-ci.org/re222dv/Cogito/jobs/26450900).
+
+Den publicerade versionen är också uppdaterad och hittas som vanligt på
+[re222dv-cogito.herokuapp.com](http://re222dv-cogito.herokuapp.com/).
