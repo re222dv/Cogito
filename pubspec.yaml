@@ -22,8 +22,12 @@ transformers:
     html_files:
       - web/views/login.html
       - web/lib/components/dropdown/dropdown.html
+      - web/lib/components/loading/loading.html
+      - web/lib/components/modal/modal.html
+      - web/lib/components/notifications/notifications.html
       - web/lib/components/page/page.html
       - web/lib/components/panel/panel.html
+      - web/lib/components/popup_menu/popup_menu.html
 - $dart2js:
     checked: false
     minify: true
