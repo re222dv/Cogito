@@ -299,6 +299,11 @@ button:hover, popup-menu:hover, popup-menu.open {
     border-radius: 0 5px 5px 0;
 }
 
+[data-position="left"] popup-menu[tooltip]::before {
+    left: -5px;
+    margin-top: 2px;
+}
+
 [data-position="top"] [tooltip]:hover::before {
     top: -999px;
     margin-top: -999px;
@@ -342,3 +347,4 @@ button:hover, popup-menu:hover, popup-menu.open {
 [data-position="top"] dropdown[tooltip]:hover:not(.open)::after {
     margin-left: 10px;
 }
+
