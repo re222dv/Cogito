@@ -30,6 +30,7 @@ class NodeHandlerController extends AttachAware {
 
         var keyMap = [
             new KeyBinding(null, 46),              // Delete
+            new KeyBinding(null, 8),               // Backspace
             new KeyBinding(null, 107),             // +
             new KeyBinding(null, 109),             // -
             new KeyBinding(null, 88, ctrl: true),  // Ctrl + X
