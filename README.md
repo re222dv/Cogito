@@ -56,3 +56,6 @@ Historiken går att se på https://travis-ci.org/re222dv/Cogito/builds
 Tidigare (fram till och med Sprint #4) användes Drone som CI och det går att se dessa körningar på
 https://drone.io/github.com/re222dv/Cogito
 Drone körde dock endast testerna (d.v.s. ingen kompilering) samt endast på den stabila versionen av Dart.
+
+## Demonstrationsfilm
+[Finns på Youtube](http://youtu.be/XKqTwt-qIM0)
