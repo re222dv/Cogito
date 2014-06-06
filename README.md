@@ -59,3 +59,20 @@ Drone körde dock endast testerna (d.v.s. ingen kompilering) samt endast på den
 
 ## Demonstrationsfilm
 [Finns på Youtube](http://youtu.be/XKqTwt-qIM0)
+
+## Dokumentation
+Dokumentation finns i `/dokumentation`.
+`Google Docs.md` innehåller länkar till de dokument som är skrivna där, men det finns också en PDF-version
+av varje dokument direkt i `/dokumentation`.
+
+#### Product Backlog
+##### Priorit
+Basterat på en skala från 1 till 5 där 5 är högsta prioritet. Den är baserad på en uppskattad avvägning
+mellan nytta för applikationen och estimerad tid.
+
+##### Beroenden
+Betyder att den eller de listade kraven måste eller är starkt rekommenderade att implementeras först.
+
+##### Status
+Klart betyder att kravet är både implementerat och testat med automatiska tester.
+Implementerat betyder att kravet är implementerat i applikationen men att det inte ännu är testat.
