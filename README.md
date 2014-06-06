@@ -20,7 +20,7 @@ Det finns två sätt att köra applikationen lokalt, antingen som Javascript ell
 Servern måste alltid körs i Dart VM.
 
 Installera först [Dart SDK](https://www.dartlang.org/tools/download.html) kör sedan `pub get` i
-applikationsrooten för att installera beroenden (beroendena är specificerade i filen pubspec.yaml).
+applikationsroten för att installera beroenden (beroendena är specificerade i filen pubspec.yaml).
 
 Applikationen är redan förberedd för att köras som Dart men för att köra applikationen som Javascript
 måste den kompileras. Detta görs genom att köra `pub build` i applikationsrooten. Efter det måste
@@ -32,12 +32,12 @@ Starta servern genom att gå till `bin/` och köra `dart server.dart`. Nu kan du
 ### Webbläsarstöd
 Körs applikationen som Dart måste den köras i Dartium som följer med Dart SDK.
 Körs applikationen som Javascript måste den köras i Chrome då applikationen använder sig av Shadow Dom.
-Möjligtvis kan även Opera fungera (caniuse rapporterar tidigt stöd för Shadow Dom i Opera) men den är
-otestad. Firefox's stöd är ännu i ett tidigt stadie och dras med stora buggar som gör den oanvändbar.
+Möjligtvis kan även Opera fungera ([caniuse rapporterar tidigt stöd för Shadow Dom i Opera](http://caniuse.com/shadowdom)) men den är
+otestad. Firefox's stöd är ännu i ett tidigt stade och dras med stora buggar som gör den oanvändbar.
 
 Jag förväntar mig att denna punkten löser sig själv i framtiden då flera webbläsare får stöd. Möjligtvis
 kommer detta även att lösas i Angular Dart med en bättre polyfill innan det släpps i en stabil version,
-men det återstår att se. När man använder väldigt nya tekniker får man förvänta sig sämmre stöd.
+men det återstår att se. När man använder väldigt nya tekniker får man förvänta sig sämre stöd.
 
 Den publicerade versionen är kompilerad och ska därför köras i Chrome.
 
@@ -66,8 +66,8 @@ Dokumentation finns i `/dokumentation`.
 av varje dokument direkt i `/dokumentation`.
 
 #### Product Backlog
-##### Priorit
-Basterat på en skala från 1 till 5 där 5 är högsta prioritet. Den är baserad på en uppskattad avvägning
+##### Prioritet
+Baserat på en skala från 1 till 5 där 5 är högsta prioritet. Den är baserad på en uppskattad avvägning
 mellan nytta för applikationen och estimerad tid.
 
 ##### Beroenden
