@@ -2,7 +2,9 @@ name: cogito
 description: A web based tool for planing and design
 dependencies:
   angular:
-    git: https://github.com/angular/angular.dart.git
+    git:
+      url: https://github.com/angular/angular.dart.git
+      ref: 0c22a3b6d73ab6789dca7859ce3424e6018fa688
   animation: any
   browser: any
   crypto: any
