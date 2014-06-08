@@ -14,7 +14,7 @@ packages:
     version: "0.13.6"
   angular:
     description:
-      ref: null
+      ref: "0c22a3b6d73ab6789dca7859ce3424e6018fa688"
       resolved-ref: "0c22a3b6d73ab6789dca7859ce3424e6018fa688"
       url: "https://github.com/angular/angular.dart.git"
     source: git
